@@ -24,3 +24,9 @@ All notable changes to this project will be documented in this file
 
 [0.1.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.1.0
 ## [0.1.0]
+- __Added__
+  + :sparkles: KDL syntax
+  + add keymap to auto-pair quotes after string modifiers
+  + preferences for `//line`, `/*block*/`, and `/-slashdash` comments
+  + syntax test
+  + example document for a screenshot and screenshots
