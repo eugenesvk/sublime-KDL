@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.1.0...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.1.1...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,8 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
-[0.1.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.1.0
-## [0.1.0]
+[0.1.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.1.1
+## [0.1.1]
 - __Added__
   + :sparkles: KDL syntax
   + add keymap to auto-pair quotes after string modifiers
