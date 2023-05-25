@@ -1,0 +1,424 @@
+%YAML 1.2
+---
+name             : KDL
+file_extensions  : [kdl]
+scope            : source.kdl
+version          : 2
+
+
+# !!! sets don't allow whitespace even with (?x:), so watch out for [{{var}}] where var='(?x: abc)', 'x' will also be included
+  # _digit _char = set-safe [{{var_s}}], i.e. contains only characters, no conditional matching groups
+  # use syntax rules insteda of variables that can't be recursive
+# quote regexes with # : - { [ >
+# Oniguruma regex engine features
+  # rbuckton.github.io/regexp-features/engines/oniguruma.html
+  # raw.githubusercontent.com/kkos/oniguruma/v6.9.1/doc/RE  6.8.0 2018/07/26 (not sure which version ST uses)
+    # github.com/kkos/oniguruma/blob/master/doc/RE (latest)
+
+# Whitespace (Line breaking)
+  # Acronym	Name                         	Code Pt 	Oniguruma
+  # CRLF   	Carriage Return and Line Feed	   D + A	\r\n
+  # CR     	Carriage Return              	   D    	\r
+  # LF     	Line Feed                    	   A    	\n (newline)
+  # FF     	Form Feed                    	   C    	\f
+  # NEL    	Next Line                    	  85    	.
+  # LS     	Line Separator               	2028    	.
+  # PS     	Paragraph Separator          	2029    	.
+  # ∑= 000d+a d a c   85 2028 2029 (KDL)
+  # ∑= 000d+a d a c b 85 2028 2029 (oniguruma)
+  #                 \v vertical tab is excluded from KDL
+  # oniguruma: \R = "\r\n" or \n \v \f \r 85 2028 2029 (!!! can't be used in a character class !!!)
+  #        equiv= (?>\r\n?|[\x{A}-\x{C}\x{85}\x{2028}\x{2029}])
+  # (?>…) — Matches the provided pattern, but no backtracking is performed if the match fails
+  # \t           horizontal tab          9
+  # \v           vertical tab            B
+  # \b           backspace               8
+  # \a           bell                    7
+  # \e           escape                 1B
+
+# Whitespace (non-Newline)
+  # Name                     	Code Pt
+  # Character Tabulation     	   9
+  # Space                    	  20
+  # No-Break Space           	  A0
+  # Ogham Space Mark         	1680
+  # En Quad                  	2000
+  # Em Quad                  	2001
+  # En Space                 	2002
+  # Em Space                 	2003
+  # Three-Per-Em Space       	2004
+  # Four-Per-Em Space        	2005
+  # Six-Per-Em Space         	2006
+  # Figure Space             	2007
+  # Punctuation Space        	2008
+  # Thin Space               	2009
+  # Hair Space               	200A
+  # Narrow No-Break Space    	202F
+  # Medium Mathematical Space	205F
+  # Ideographic Space        	3000
+  # ∑=              9 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
+  # \s = 9 a b c d 85(nel) Line_Separator Paragraph_Separator Space_Separator (oniguruma)
+  # Unicode General_Category sets:
+    # Line_Separator  2028
+    # Paragraph_Separator	2029
+    # Space_Separator 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
+    # https://www.compart.com/en/unicode/category/Zl
+    # https://www.compart.com/en/unicode/category/Zs
+    # https://www.compart.com/en/unicode/category/Zp
+
+# ident = identifier #ss#=set safe #ss!# set safe with exception
+variables:
+  nodes:                 	'(?x: {{linespace_re}}*                                       	#
+    (?##)                	   ({{node}} {{nodes}}?)?                                     	#
+    (?##)                	      {{linespace_re}}*                                       	)' #
+  node:                  	'(?x:                                                         	#
+    (?##)                	 (/\- {{node_space}}*)?                                       	# Slashdash comment
+    (?##)                	                       {{type}} ? {{ident}}                   	#
+    (?##)                	      ({{node_space}}+ {{node_prop_or_arg}} )*                	#
+    (?##)                	      ({{node_space}}* {{node_children}} {{ws}}*)?            	#
+    (?##)                	       {{node_space}}* {{node_terminator}}                    	)' #
+  node_prop_or_arg:      	'(/\-{{node_space}}*)?({{prop}}|{{value}})'                   	#
+  node_children:         	'(/\-{{node_space}}*)?{{{nodes}}}'                            	#
+  node_space:            	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                           	#
+  node_terminator:       	'{{single_line_comment}}|{{newline}}|;|{{eof}}'               	#
+  #                      	                                                              	#
+  ident:                 	'{{string}}|{{bare_ident}}'                                   	#
+  bare_ident:            	'{{bare_ident_or_keyword}}(?!{{keyword}})'                    	# exclude keyword
+  bare_ident_or_keyword: 	'{{bare_ident_g_pre}}|[+-]({{bare_ident_g_pos}})?'            	#
+  bare_ident_g_pre:      	'{{ident_char_ex_dig_sign}}{{ident_char_rec}}*'               	# pre-sign: exclude digit/sign to avoid clashes
+  bare_ident_g_pos:      	'{{ident_char_ex_dig}}{{ident_char_rec}}*'                    	# pos-sign: exclude digit only
+  ident_char:            	'[[{{unicode_char}}]&&[^{{linesp_s}}]&&[^{{ident_char_non}}]]'	#
+  ident_char_rec:        	'{{ident_char}}(?!{{linespace_re}})'                          	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
+  ident_char_non:        	'[\/(){}<>;\[\]=,"]'                                          	#
+  ident_char_ex_dig:     	'[[{{ident_char_rec}}]&&[^{{d_dec}}]]'                        	#
+  ident_char_ex_dig_sign:	'[[{{ident_char_ex_dig}}]&&[^+-]]'                            	#
+  unicode_char:          	'[\x{0021}-\x{10FFFF}]'                                       	# invalid: ≤0x20 or >0x10FFF)
+  keyword:               	'{{boolean}}|null'                                            	#
+  prop:                  	'{{ident}}={{value}}'                                         	#
+  value:                 	'{{type}}?({{string}}|{{number}}|{{keyword}})'                	#
+  type:                  	'\({{ident}}\)'                                               	#
+  #                      	                                                              	#
+  escaped_string:        	'"{{character}}*"'                                            	#
+  character:             	'\\{{escape}}|[^"]'                                           	#
+  escape:                	'{{escape_char}}|{{escape_unicode}}'                          	#
+  escape_char:           	'["\\/bfnrt]'                                                 	#
+  escape_unicode:        	'u{{{d_hex}}{1,6}}'                                           	#
+  d_bin:                 	'[0-1]'                                                       	#
+  d_bin_:                	'[0-1_]'                                                      	#
+  d_oct:                 	'[0-7]'                                                       	#
+  d_oct_:                	'[0-7_]'                                                      	#
+  d_dec:                 	'[0-9]'                                                       	#
+  d_dec_:                	'[0-9_]'                                                      	#
+  d_hex:                 	'[0-9a-fA-F]'                                                 	#
+  #                      	                                                              	#
+  boolean:               	'true|false'                                                  	# data type 1/4
+  #null:                 	'null'                                                        	# data type 2/4
+  string:                	'{{raw_string}}|{{escaped_string}}'                           	# data type 3/4
+  number:                	'{{decimal}}|{{hex}}|{{octal}}|{{binary}}'                    	# data type 4/4
+  #    ↓string           	                                                              	#
+  raw_string:            	 'r{{raw_string_hash}}'                                       	#
+  raw_string_hash:       	'\#{{raw_string_hash}}\#|{{raw_string_quotes}}'               	#
+  raw_string_quotes:     	'".*"'                                                        	#
+  #    ↓number           	                                                              	#
+  decimal:               	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'     	#
+  exponent:              	'([eE])([+-])?({{integer}})'                                  	#
+  integer:               	'{{d_dec}}{{d_dec_}}*'                                        	# leading 0s are allowed
+  #sign:                 	'[+-]'                                                  #ss#  	# using [+-] is cleaner than {{sign}}
+  #                      	                                                              	#
+  hex:                   	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                           	#
+  octal:                 	'([+-])?(0o)({{d_oct}}{{d_oct_}}*)'                           	#
+  binary:                	'([+-])?(0b)({{d_bin}}{{d_bin_}}*)'                           	#
+  #                      	                                                              	#
+  escline:               	'\\{{ws}}*({{single_line_comment}}|{{newline_s}})'            	#
+  linespace_re:          	'{{newline_s}}|{{ws}}|{{single_line_comment}}'                	# set-unsafe; includes recursion: ws → multi_line_comment → commented_block🗘
+  linesp_s:              	'[{{newline_s}}{{ws_s}}{{comment_beg}}]'                #ss!# 	# ex / but not precisely //
+  newline:               	'(?>\r\n?|[\x{A}\x{C}\x{85}\x{2028}\x{2029}])'                	# \R without \v
+  newline_s:             	'[\x{A}\x{C}\x{D}\x{85}\x{2028}\x{2029}]'               #ss!# 	# not precisely ␤␊
+  ws:                    	'{{bom}}|{{unicode_space}}|{{multi_line_comment}}'            	#
+  ws_s:                  	'[{{bom}}{{unicode_space}}]' #|{{comment_block_beg}}    #ss!# 	# not precisely /*
+  bom:                   	'\x{FEFF}'                                                    	#
+  unicode_space:         	'[[\s]&&[^{{newline_s}}]]'                                    	#
+  single_line_comment:   	'{{comment_beg}}[^{{newline_s}}]+{{comment_end}}'       #ss#  	#
+  multi_line_comment:    	'{{comment_block_beg}}{{commented_block}}'                    	# set-unsafe; recursion: commented_block🗘
+  comment_beg:           	'//'                                                          	#
+  comment_end:           	'{{newline_s}}|{{eof}}'                                       	#
+  eof:                   	'{{newline_s}}'                                               	# !!! dummy since no eof symbol
+  comment_block_beg:     	'/\*'                                                         	#
+  comment_block_doc_beg: 	'{{comment_block_beg}}(!|\*(?!/))'                            	#
+  commented_block:       	'\*/|({{multi_line_comment}}|\*|/|[^*/]+){{commented_block}}' 	# !!! cant recurse vars, do via syntax
+  comment_block_end:     	'\*/'                                                         	#
+  comment_block_doc_end: 	'{{comment_block_end}}'                                       	#
+
+contexts:
+  main:
+    - meta_include_prototype: false
+    - match : ''
+      push  : [patterns]
+
+  patterns:
+    - include: keyword
+    - include: numbers
+    - include: strings
+    - include: type-annotation
+    - include: comments
+    - include: attribute
+    - include: child_block
+    - include: node_terminator
+    - include: node_name
+  strings:
+    - include: string-quoted-double
+    - include: string-quoted-double-raw
+  numbers:
+    - include: float_fraction
+    - include: float_exp
+    - include: decimal
+    - include: integer
+    - include: hexadecimal
+    - include: octal
+    - include: binary
+  comments:
+    - include: comment_block_doc
+    - include: comment_block
+    - include: comment_slashdash_block
+    - include: comment_slashdash
+    - include: comment_slashdash_node
+    - include: comment_line
+
+  keyword:
+    - include: boolean
+    - include: 'null'
+
+  property-value:
+    - match               : ''
+      push                :
+      - meta_scope        : meta.mapping.value.kdl
+      - include           : comments
+      - include           : type-annotation
+      - include           : strings
+      - include           : numbers
+      - include           : keyword
+      - match             : ''
+        pop               : 2
+
+  attribute               : # argument or property, but ↓ is only property? todo add argument
+    - match               : '(?!{{ident_char_non}}|\s)({{ident_char}}+)(=)'
+      captures            :
+        1:                  meta.mapping.key.kdl entity.other.attribute-name.kdl
+        2:                  meta.mapping.kdl punctuation.separator.key-value.kdl
+      push                : property-value
+
+  comment_block_doc       :                       # Block documentation comment
+    - match               : '({{comment_block_doc_beg}})'
+      captures            :
+        1:                  punctuation.definition.comment.begin.kdl
+      push                :
+      - meta_scope        : comment.block.documentation.kdl
+      - match             : '{{comment_block_end}}'
+        scope             : punctuation.definition.comment.end.kdl
+        pop               : 1
+      - include           : comment_block_doc
+      - include           : comment_block
+  comment_block           :                       # Block comment
+    - match               : '({{comment_block_beg}})'
+      captures            :
+        1:                  punctuation.definition.comment.begin.kdl
+      push                 :
+      - meta_scope        : comment.block.kdl
+      - match             : '{{comment_block_end}}'
+        scope             : punctuation.definition.comment.end.kdl
+        pop               : 1
+      - include           : comment_block_doc
+      - include           : comment_block
+
+  # Values
+  boolean                 :
+    - match               : \b(true|false)\b
+      scope               : constant.language.boolean.kdl
+
+  'null'                  :
+    - match               : '\bnull\b'
+      scope               : constant.language.null.kdl
+
+  # Values - Strings
+  string-quoted-double    :
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+      - include           : char-escaped
+  char-escaped            :
+    - match               : '(\\)(({{escape_char}})|({{escape_unicode}}))'
+      captures            :
+        1:                 constant.character.escape.kdl
+        3:                 constant.character.escape.kdl
+        4:                 constant.character.escape.unicode.16-bit-hex.kdl
+  string-quoted-double-raw:
+    - match               : '(r)(#*)(")'
+      captures            :
+        1:                 storage.type.string.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - match             : '"\2' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+
+  # Values - Numbers
+  integer                 :                       # Integer literal
+    - match               : '(([+-])?\b({{integer}}))\b' # leading zeros are allowed
+      scope               : meta.number.integer.decimal.kdl constant.numeric.value.kdl
+      captures            :
+        2:                  keyword.operator.arithmetic.kdl
+        3:                  constant.numeric.integer.kdl
+  decimal                 :                       # Integer literal (fraction)
+    - match               : '(([+-])?\b({{integer}})((\.)({{integer}})+))\b'
+      scope               : meta.number.decimal.kdl constant.numeric.value.kdl
+      captures            :
+        2:                  keyword.operator.arithmetic.kdl
+        3:                  constant.numeric.integer.kdl
+        5:                  punctuation.separator.decimal.kdl
+        6:                  constant.numeric.integer.kdl
+  float_exp               :                       # Floating point literal (exponent)
+    - match               : '([+-])?\b({{integer}})((\.)({{integer}}))?({{exponent}}+)\b'
+      scope               : meta.number.float.kdl constant.numeric.value.kdl
+      captures            :
+        1:                  keyword.operator.arithmetic.kdl
+        2:                  constant.numeric.mantissa.kdl constant.numeric.integer.kdl
+        3:                  constant.numeric.mantissa.kdl
+        4:                  punctuation.separator.decimal.kdl
+        5:                  constant.numeric.integer.kdl
+        6:                  constant.numeric.exponent.kdl       #↓6
+        7:                  punctuation.separator.exponent.kdl  #([eE])([+-])?({{integer}}) = exponent
+        8:                  keyword.operator.arithmetic.kdl     #      ↑7
+        9:                  constant.numeric.integer.kdl        #             ^8
+  float_fraction          :                       # Floating point literal (fraction)
+    - match               : '([+-])?\b({{integer}}*)((\.)({{integer}})*)+\b'
+      scope               : meta.number.float.kdl constant.numeric.value.kdl
+      captures            :
+        1:                  keyword.operator.arithmetic.kdl
+        2:                  constant.numeric.mantissa.kdl constant.numeric.integer.kdl
+        3:                  constant.numeric.mantissa.kdl
+        4:                  punctuation.separator.decimal.kdl
+        5:                  constant.numeric.integer.kdl
+  binary                  :                       # Integer literal (binary)
+    - match               : '\b(0b)([01_]+)\b'
+      scope               : meta.number.integer.binary.kdl
+      captures            :
+        1:                  constant.numeric.base.kdl
+        2:                  constant.numeric.value.kdl
+  octal                   :                       # Integer literal (octal)
+    - match               : '\b(0o)([0-7_]+)\b'
+      scope               : meta.number.integer.octal.kdl
+      captures            :
+        1:                  constant.numeric.base.kdl
+        2:                  constant.numeric.value.kdl
+  hexadecimal             :                       # Integer literal (hexadecimal)
+    - match               : '\b(0x)(\h+)\b'
+      scope               : meta.number.integer.hexadecimal.kdl
+      captures            :
+        1:                  constant.numeric.base.kdl
+        2:                  constant.numeric.value.kdl
+
+  node_terminator         :
+    - match               : '{{node_terminator}}'
+      scope               : punctuation.terminator.node.kdl
+
+  node_name               :
+    - match               : '(?!{{ident_char_non}}|\s|\\){{ident_char}}'
+      scope               : entity.name.tag.node
+    - include             : line-continuation
+
+  # line-continuation-or-pop:
+    # - include             : line-continuation
+    # - match               : (?=\s*($|;|#))
+      # pop                 : true
+  line-continuation       : # escline
+    - match               : (\\)({{ws_s}}*)
+      captures            :
+        1:                  punctuation.separator.continuation.line.kdl
+      push                :
+      - include           : comment_line
+      - match             : $
+        pop               : true
+
+
+  child_block             :
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl
+      push                : child_block-body
+  child_block-body        :
+    - meta_scope          : meta.mapping.kdl
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : true
+    - include             : patterns
+  /-comment_child_block1  : # within slashdash-ed blocks, just track {} without including any patterns
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl
+      push                : /-comment_child_block1-body
+  /-comment_child_block1-body: # 1st/last {} should pop 2 contexts on exit to allow nodes after the last }
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl punctuation.definition.comment.end punctuation.terminator.node.kdl
+      pop                 : 2
+    - include             : /-comment_child_block2
+  /-comment_child_block2  : # inner {} should just track opening/closing {}
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl
+      push                : /-comment_child_block2-body
+  /-comment_child_block2-body:
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 1
+    - include             : /-comment_child_block2
+
+  comment_line            :                       # Single-line comment
+    - match               : //
+      scope               : punctuation.definition.comment.kdl
+      push                :
+      - meta_scope        : comment.line.double-slash.kdl
+      - match             : $
+        pop               : true
+  comment_slashdash_block :                       # Slashdash block comment
+    - match               : '/-{'
+      scope               : punctuation.definition.comment.begin.kdl
+      push                :
+      - meta_scope        : comment.block.kdl
+      - match             : '}'
+        scope             : punctuation.definition.comment.end.kdl
+        pop               : true
+  comment_slashdash       :                       # Slashdash inline comment
+    - match               : '(?<!^)/-' # negative lookbehind
+      scope               : punctuation.definition.comment.begin.kdl
+      push                :
+      - meta_scope        : comment.line.slash-dash.kdl
+      - match             : \s
+        pop               : true
+  comment_slashdash_node  :                       # Slashdash node comment
+    - match               : '(?<=^)({{linesp_s}}*)(/-)' # positive lookbehind
+      captures            :
+        2:                  punctuation.definition.comment.begin.kdl comment.block.kdl
+      push                :
+      - meta_content_scope: comment.block.kdl
+      - match             : '}' # doesn't work before the comment child block
+        scope             : punctuation.definition.comment.end.kdl punctuation.terminator.node.kdl
+        pop               : 1
+      - include           : /-comment_child_block1 # tracks nested {}
+      - match             : '{{node_terminator}}'
+        scope             : punctuation.definition.comment.end.kdl punctuation.terminator.node.kdl
+        pop               : 1
+
+  type-annotation         :
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl
+      push                :
+      - meta_scope        : meta.annotation.kdl
+      - meta_content_scope: entity.name.type.kdl
+      - match             : \)
+        scope             : punctuation.separator.annotation.end.kdl
+        pop               : 1
+      - include           : attribute
+      - include           : strings
