@@ -1,0 +1,179 @@
+// SYNTAX TEST "Packages/KDL/KDL.sublime-syntax"
+
+// 1. Test overall source match
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.kdl
+
+// 2. Test Comments
+/**/ // avoid being parsed as a doc '/**' comment
+//<-   comment.block.kdl
+//^^   comment.block.kdl
+//^^   punctuation.definition.comment.end.kdl
+//<-   punctuation.definition.comment.begin.kdl
+ //<-  punctuation.definition.comment.begin.kdl
+
+/*!Doc block comment /* nested block comment */*/
+//                   ^^                              punctuation.definition.comment.begin.kdl
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^      comment.block.kdl
+//                                           ^^      punctuation.definition.comment.end.kdl
+//<-                                                 comment.block.documentation.kdl
+ //<-                                                comment.block.documentation.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    comment.block.documentation.kdl
+//<-                                                 punctuation.definition.comment.begin.kdl
+ //<-                                                punctuation.definition.comment.begin.kdl
+//^                                                  punctuation.definition.comment.begin.kdl
+//                                             ^^    punctuation.definition.comment.end.kdl
+
+node-with-slashdash-number /--1.0 +2.0
+//                         ^^           punctuation.definition.comment.begin.kdl
+//                         ^^^^^^       comment.line.slash-dash
+//                                ^     keyword.operator.arithmetic.kdl
+//                                 ^^^  constant.numeric.value.kdl
+//                                   ^  constant.numeric.integer.kdl
+//                                ^^^^  meta.number.float.kdl
+  /-nodeNestedSlashdashed "disabled" key=1 {
+//^^                                         punctuation.definition.comment.begin.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.kdl
+//                                         ^ punctuation.section.mapping.begin.kdl
+//<-                                         source.kdl
+ //<-                                        source.kdl
+  node_inner_disabled
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.kdl
+  r 1 {
+//    ^                                     punctuation.section.mapping.begin.kdl
+    r 2 { r 3 { r 4 { r 5 { r 6 } } } } }
+//                                      ^   punctuation.section.mapping.end.kdl
+} node_post_slashdashed key=1
+//<-                                    punctuation.section.mapping.end.kdl, punctuation.definition.comment.end, punctuation.terminator.node.kdl, comment.block.kdl
+ //<-                                   source.kdl
+//^^^^^^^^^^^^^^^^^^^^^                 entity.name.tag.node
+
+// 3. Test Numbers
+node-with-number +2.0
+//               ^                                keyword.operator.arithmetic.kdl
+//                ^^^                             constant.numeric.value.kdl
+//                  ^                             constant.numeric.integer.kdl
+//               ^^^^                             meta.number.float.kdl
+my-num    +1.234e-42 // decimal-radix numbers
+//        ^                                       keyword.operator.arithmetic.kdl
+//               ^                                keyword.operator.arithmetic.kdl
+//          ^                                     punctuation.separator.decimal.kdl
+//              ^                                 punctuation.separator.exponent.kdl
+//         ^^^^^                                  constant.numeric.mantissa.kdl
+//        ^^^^^^^^^                               meta.number.float.kdl, constant.numeric.value.kdl
+my-num    -1.234    //   with optional exponent
+//        ^                                       keyword.operator.arithmetic.kdl
+//          ^                                     punctuation.separator.decimal.kdl
+//        ^^^^^^                                  meta.number.decimal.kdl, constant.numeric.value.kdl
+my-num    -3        //   with optional decimal
+//        ^                                       keyword.operator.arithmetic.kdl
+//         ^                                      constant.numeric.integer.kdl
+//        ^^                                      meta.number.integer.decimal.kdl, constant.numeric.value.kdl
+my-hex    0xdeadbeef
+//        ^^                            constant.numeric.base.kdl
+//          ^^^^^^^^                    constant.numeric.value.kdl, meta.number.integer.hexadecimal.kdl
+my-octal  0o755
+//        ^^                            constant.numeric.base.kdl
+//          ^^^                         constant.numeric.value.kdl, meta.number.integer.octal.kdl
+my-binary 0b10101101
+//        ^^                            constant.numeric.base.kdl
+//          ^^^^^^^^                    constant.numeric.value.kdl, meta.number.integer.binary.kdl
+
+bignum 1_000_000 // Finally, all numbers can have underscores to help readability:
+
+// 4. Test Children
+node-outer {
+//         ^                                      punctuation.section.mapping.begin.kdl
+//<-                                              entity.name.tag, entity.name.tag.node
+ //<-                                             entity.name.tag, entity.name.tag.node
+//^^^^^^^^                                        entity.name.tag, entity.name.tag.node
+  node_inner;
+//^^^^^^^^^^                                      entity.name.tag, entity.name.tag.node
+}
+//<-                                              punctuation.section.mapping.end.kdl
+parent { terminate-child1; terminate-child2; }
+//       ^^^^^^^^^^^^^^^^                         entity.name.tag, entity.name.tag.node
+//                         ^^^^^^^^^^^^^^^^       entity.name.tag, entity.name.tag.node
+//                       ^                        punctuation.terminator.node.kdl
+//                                         ^      punctuation.terminator.node.kdl
+
+
+// 5. Test Strings
+title "Regular \b\\\/\u{AAAAAA}string"
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            meta.string.kdl, string.quoted.double.kdl
+//             ^^^^^^^                            constant.character.escape.kdl
+//                     ^^^^^^^^                   constant.character.escape.unicode.16-bit-hex.kdl
+//    ^                                           punctuation.definition.string.begin.kdl
+//                                   ^            punctuation.definition.string.end.kdl
+title r"Raw string"
+//    ^                                           storage.type.string.kdl
+//     ^                                          punctuation.definition.string.begin.kdl
+//                ^                               punctuation.definition.string.end.kdl
+title r###""""Rawest"""string""""###
+//    ^                                           storage.type.string.kdl
+//     ^^^                                        punctuation.definition.string.begin.kdl
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              meta.string.kdl, string.quoted.double.raw.kdl
+//                               ^^^              punctuation.definition.string.end.kdl
+
+// 6. Test Key=Value Mappings
+command "twitter" "tw" a=2 b=true url="https://twitter.com/" {
+//                     ^                                    meta.mapping.key.kdl
+//                      ^                                   punctuation.separator.key-value.kdl
+//                       ^                                  meta.mapping.value.kdl
+//                         ^                                meta.mapping.key.kdl
+//                          ^                               punctuation.separator.key-value.kdl
+//                           ^^^^                           meta.mapping.value.kdl
+//                                ^^^                       meta.mapping.key.kdl
+//                                   ^                      punctuation.separator.key-value.kdl
+//                                    ^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.kdl
+  match regexp="^@(?<username>[A-Za-z_]+$" url="https://twitter.com/{username}" encoding="path"
+  default url="https://twitter.com/search?q={}" encoding=(enc)"query" tst=true
+//                                                       ^^^^^        meta.annotation.kdl, meta.mapping.value.kdl
+//                                                       ^            punctuation.separator.annotation.begin.kdl
+//                                                           ^        punctuation.separator.annotation.end.kdl
+//                                                        ^^^         entity.name.type.kdl
+//        ^^^                                                          entity.other.attribute-name.kdl , meta.mapping.key.kdl
+//                                         ^                          -entity.other.attribute-name.kdl
+//           ^                                                        punctuation.separator.key-value.kdl
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                       meta.mapping.value.kdl
+//                                                       ^^^^^^^^^^^^ meta.mapping.value.kdl
+}
+
+// 7. Test various
+smile "😁"  // files must be utf8 encoded
+"!@#$@$%Q#$%~@!40" "1.2.3" "!!!!!"=true // Instead of anonymous nodes, nodes and properties can be wrapped in "" for arbitrary node names.
+foo123~!@#ÿ$%𐀀^‰†&*.:'|?+ "weeee"       // Legal bare identifier
+//<-                                    entity.name.tag, entity.name.tag.node
+ //<-                                   entity.name.tag, entity.name.tag.node
+//^^^^^^^^^^^^^^^^^^^^^^^               entity.name.tag, entity.name.tag.node
+//                        ^^^^^^^       meta.string.kdl, string.quoted.double.kdl
+ノード　お名前="☜(ﾟヮﾟ☜)" // use unicode!
+//  ^^^                                 meta.mapping.key.kdl
+//     ^                                punctuation.separator.key-value.kdl
+//      ^^^^^^^^^                       meta.mapping.value.kdl, meta.string.kdl, string.quoted.double.kdl
+//<-                                    entity.name.tag, entity.name.tag.node
+ //<-                                   entity.name.tag, entity.name.tag.node
+//^                                     entity.name.tag, entity.name.tag.node
+foo bar=true "baz" quux=4 false 1 2 3 // kdl specifically allows properties and values to be interspersed with each other, much like CLI commands
+
+
+// 9. Test Line continuation
+node-with-line-continuation \ // Nodes can be separated into multiple lines with a single-line comment
+//<-                                              entity.name.tag, entity.name.tag.node
+ //<-                                             entity.name.tag, entity.name.tag.node
+//^^^^^^^^^^^^^^^^^^^^^^^^^                       entity.name.tag, entity.name.tag.node
+//                          ^                     punctuation.separator.continuation.line.kdl
+//                            ^^                  punctuation.definition.comment.kdl
+//                            ^^^^^^^^^^^^^^^^^^^ comment.line.double-slash.kdl
+  "After line continuation"
+
+node-with-line-continuations \ // Multiple single-line comments
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                             ^^                 punctuation.definition.comment.kdl
+//                             ^^^^^^^^^^^^^^^^^^ comment.line.double-slash.kdl
+  +1.1 2                     \ // after
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                             ^^                 punctuation.definition.comment.kdl
+//                             ^^^^^^^^           comment.line.double-slash.kdl
+  3 4                          // line continuation
+//                             ^^                 punctuation.definition.comment.kdl
+//                             ^^^^^^^^^^^^^^^^^^ comment.line.double-slash.kdl
