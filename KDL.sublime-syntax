@@ -163,6 +163,7 @@ contexts:
     - include: comments
     - include: attribute
     - include: child_block
+    - include: empty_line
     - include: node_terminator
     - include: node_name
   strings:
@@ -326,6 +327,9 @@ contexts:
       captures            :
         1:                  constant.numeric.base.kdl
         2:                  constant.numeric.value.kdl
+
+  empty_line              :
+    - match               : '\n'
 
   node_terminator         :
     - match               : '{{node_terminator}}'
