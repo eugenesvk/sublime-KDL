@@ -17,3 +17,6 @@ test/    	export-ignore
 
 # Settings
 .editorconfig	export-ignore
+
+# Source files
+src/     export-ignore
