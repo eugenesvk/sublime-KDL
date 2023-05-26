@@ -23,13 +23,27 @@
 //^                                                  punctuation.definition.comment.begin.kdl
 //                                             ^^    punctuation.definition.comment.end.kdl
 
-node-with-slashdash-number /--1.0 +2.0
-//                         ^^           punctuation.definition.comment.begin.kdl
-//                         ^^^^^^       comment.line.slash-dash
-//                                ^     keyword.operator.arithmetic.kdl
-//                                 ^^^  constant.numeric.value.kdl
-//                                   ^  constant.numeric.integer.kdl
-//                                ^^^^  meta.number.float.kdl
+node-with-slashdash-number /--1.0 +2.0 \
+//                         ^^                        punctuation.definition.comment.begin.kdl
+//                           ^                     - punctuation.definition.comment.begin.kdl
+//                         ^^^^^^                    comment.line.slash-dash
+//                                ^                  keyword.operator.arithmetic.kdl
+//                                 ^^^               constant.numeric.value.kdl
+//                                   ^               constant.numeric.integer.kdl
+//                                ^^^^               meta.number.float.kdl
+1 /-"comment string" /-r"r aw" /-r#"Raw est"s"#
+//^^                                                 punctuation.definition.comment.begin.kdl
+//  ^                                              - punctuation.definition.comment.begin.kdl
+//^^^^^^^^^^^^^^^^^^                                 comment.line.slash-dash
+//                  ^                              - comment.line.slash-dash
+//                   ^^                              punctuation.definition.comment.begin.kdl
+//                     ^                           - punctuation.definition.comment.begin.kdl
+//                   ^^^^^^^^^                       comment.line.slash-dash
+//                            ^                    - comment.line.slash-dash
+//                             ^^                    punctuation.definition.comment.begin.kdl
+//                               ^                 - punctuation.definition.comment.begin.kdl
+//                             ^^^^^^^^^^^^^^^^      comment.line.slash-dash
+//                                             ^   - comment.line.slash-dash
   /-nodeNestedSlashdashed "disabled" key=1 {
 //^^                                         punctuation.definition.comment.begin.kdl
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.kdl
