@@ -138,7 +138,7 @@ variables:
   ws_s:                  	'[{{bom}}{{unicode_space}}]' #|{{comment_block_beg}}    #ss!# 	# not precisely /*
   bom:                   	'\x{FEFF}'                                                    	#
   unicode_space:         	'[[\s]&&[^{{newline_s}}]]'                                    	#
-  single_line_comment:   	'{{comment_beg}}[^{{newline_s}}]+{{comment_end}}'       #ss#  	#
+  single_line_comment:   	'{{comment_beg}}[^{{newline_s}}]*{{comment_end}}'       #ss#  	#
   multi_line_comment:    	'{{comment_block_beg}}{{commented_block}}'                    	# set-unsafe; recursion: commented_block🗘
   comment_beg:           	'//'                                                          	#
   comment_end:           	'{{newline_s}}|{{eof}}'                                       	#
