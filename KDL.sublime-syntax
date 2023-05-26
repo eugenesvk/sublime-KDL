@@ -179,10 +179,14 @@ contexts:
   comments:
     - include: comment_block_doc
     - include: comment_block
-    - include: comment_slashdash_block
     - include: comment_slashdash
-    - include: comment_slashdash_node
     - include: comment_line
+  comment_slashdash:
+    - include: comment_slashdash_block
+    - include: comment_slashdash_straw
+    - include: comment_slashdash_string
+    - include: comment_slashdash_space
+    - include: comment_slashdash_node
 
   keyword:
     - include: boolean
@@ -390,12 +394,28 @@ contexts:
       - match             : '}'
         scope             : punctuation.definition.comment.end.kdl
         pop               : true
-  comment_slashdash       :                       # Slashdash inline comment
+  comment_slashdash_space :                       # Slashdash inline comment
     - match               : '(?<!^)/-' # negative lookbehind
       scope               : punctuation.definition.comment.begin.kdl
       push                :
       - meta_scope        : comment.line.slash-dash.kdl
       - match             : \s
+        pop               : true
+  comment_slashdash_string:                       # Slashdash inline comment (strings)
+    - match               : '(?<!^)(/-)(")' # negative lookbehind
+      captures            :
+        1:                  punctuation.definition.comment.begin.kdl
+      push                :
+      - meta_scope        : comment.line.slash-dash.kdl
+      - match             : '"'
+        pop               : true
+  comment_slashdash_straw :                       # Slashdash inline comment (strings raw)
+    - match               : '(?<!^)(/-)(r)(#*)(")' # negative lookbehind
+      captures            :
+        1:                  punctuation.definition.comment.begin.kdl
+      push                :
+      - meta_scope        : comment.line.slash-dash.kdl
+      - match             : '"\3' # ↑match (#*)
         pop               : true
   comment_slashdash_node  :                       # Slashdash node comment
     - match               : '(?<=^)({{linesp_s}}*)(/-)' # positive lookbehind
