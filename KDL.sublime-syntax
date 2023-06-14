@@ -174,8 +174,8 @@ contexts:
     - include: string-quoted-double
     - include: string-quoted-double-raw
   numbers:
-    - include: float_fraction
     - include: float_exp
+    - include: float_fraction
     - include: decimal
     - include: integer
     - include: hexadecimal
@@ -284,7 +284,7 @@ contexts:
         2:                  keyword.operator.arithmetic.kdl
         3:                  constant.numeric.integer.kdl
   decimal                 :                       # Integer literal (fraction)
-    - match               : '(([+-])?\b({{integer}})((\.)({{integer}})+))\b'
+    - match               : '(([+-])?\b({{integer}})((\.)({{integer}}))+)\b'
       scope               : meta.number.decimal.kdl constant.numeric.value.kdl
       captures            :
         2:                  keyword.operator.arithmetic.kdl
@@ -305,7 +305,7 @@ contexts:
         8:                  keyword.operator.arithmetic.kdl     #      ↑7
         9:                  constant.numeric.integer.kdl        #             ^8
   float_fraction          :                       # Floating point literal (fraction)
-    - match               : '([+-])?\b({{integer}}*)((\.)({{integer}})*)+\b'
+    - match               : '([+-])?\b({{integer}}*)((\.)({{integer}}))+\b'
       scope               : meta.number.float.kdl constant.numeric.value.kdl
       captures            :
         1:                  keyword.operator.arithmetic.kdl
