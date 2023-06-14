@@ -1,0 +1,876 @@
+# too many bugs to finish, something fundamentally broken with
+  # regex literals behave differently depending on whether you include them inline or as a rule
+  # (rule)* is different from rule, rule:()*
+  # number of pops weirdly wrong, either 2 instead of 1 or vice versa, but then when you fix one, some other rule combo breaks, so even with manual tweaks fails
+  # can't have identical rules with different scopes depending on a prefix in complex situations (see composable1)
+# todo: try children and if it works, leave as is?
+# todo:
+  # make children parseable instead of dumb
+  # add slashdash context to elements
+  # replace with l━⎋ (was bugged since it's an either|or rule)
+# manual overrides: pop→2
+  # child-tst1|0|nnn@1:
+    # - meta_include_prototype: false
+    # - match: '/-'
+  # @{e-pv}
+ # match: '[\r\n\x{C}\x{85}\x{2028}\x{2029}]' (or older l━⎋|0:
+   # - match: '\n'
+     # push: l━⎋|1
+     # pop: 2
+
+# Can't append scope, so for c⁄-comments need to manually repeat all rules pending https://github.com/BenjaminSchaaf/sbnf/issues/42
+# property check for true=1 not needed since true is already argument, so = will be marked illegal? otherwise jsut hngs recursively
+# (?>\R) atomic groups are incompatible with the regex, test with 'syntax test regex comptibility'
+# \k is unsupported with the new regex
+
+main: (nnn); # nnn* masks illegal chars
+nnn{n}:
+ (c⁄- n-name-c⁄
+ (composablec⁄)*
+ (child-tst-c⁄-)?
+ # (c⁄-? `{`{#[S｛]} (nnn)* `}`{#[S｝]})?
+ # (child )? # temp del
+ # ((c⁄- child-c⁄-) | child )? # fails with ending ;; # of pops
+   # ↑requires manual adjustment of pop: true→2 @  scope: cchild.kdl2
+   # f@ c⁄-|2|nnn@2 branch point after match: '(?=/-)'
+  node-terminator  # ';|\n'{#[Z] c⁄}
+  )
+ |
+ (    n-name
+ (composable1)*
+ (child-tst1)?
+ # (c⁄-? `{`{#[S｛]} (nnn)* `}`{#[S｝]})?
+ # (nnn )? # infinite loop
+ # ((c⁄- child-c⁄-) | child )? # fails with ending ;; # of pops
+   # ↑requires manual adjustment of pop: true→2 @  scope: cchild.kdl2
+   # f@ c⁄-|2|nnn@2 branch point after match: '(?=/-)'
+  node-terminator  # ';|\n'{#[Z] normal}
+  )
+;
+
+child-tst1{}:(`/-`{xxx}? `{`{#[S｛]} (nnn)* `}`{#[S｝] ｝});
+child-tst-c⁄-{#[SC⁄—｛] yyy}:child-tst1;
+child-tst{}:(c⁄-? `{`{#[S｛]} (nnn)* `}`{#[S｝]});
+
+tst-child:
+ (    n-name
+ (composable1)*
+';|\n'{#[Z] normal})
+;
+
+# todo: Parse slash-dashed elements just like real ones, but append slashdash comment scope (avoids masking mistakes behind /-)
+child{       }            	: child-outer                                                  	;
+ child-outer{cho}         	:`{`{#[S｛]} (~child-inner    )* ~`}`{#[S｝] #[SPTERM]         } 	;# } is an opt node part, mark it as node end
+ child-inner{chi}         	:`{`{#[S｛]} (~child-inner    )* ~`}`{#[S｝]                   } 	;# inner {} should just track opening/closing {}
+child-c⁄-{       #[SC⁄—｛]}	: child-outer-c⁄-                                              	;
+ child-outer-c⁄-{#[SC⁄—｛]}	:`{`{#[S｛]} (~child-inner-c⁄-)* ~`}`{#[S｝] #[SPTERM]  #[S⁄—｝]} 	;# } is an opt node part, mark it as node end
+ child-inner-c⁄-{#[SC⁄—｛]}	:`{`{#[S｛]} (~child-inner-c⁄-)* ~`}`{#[S｝]                    }	;# inner {} should just track opening/closing {}
+
+# composablec⁄{#[SC⁄—]}:composable1; # need to label endings separately to pop→2 more granularly
+composable1{}: ( # -old-escseems to work with repeated and ending ;;;;, but then I can't set a separate scope for = vs !=
+  # p“⚿₌v” | a“arg”
+ (l━⎋*
+  (((c⁄-x l━⎋nonws*)? type?
+    # (string ((p₌ type? data)		# 1 p“⚿₌v”
+    ((str“” | STR_RAW{#[S_M_S],1:#[SRR]        ,2:#[S“]        ,3:#[S“]        ,4:#[SR“S”]        ,5:#[S”]        ,6:#[S”]        })
+     ((p₌ type? data)                                  # 1 p“⚿₌v”
+      |                                      	P₌¬)	# 2 a“arg”
+    |KEYWORD{#[SM_ARG],1:#[SBOOL],2:#[SNULL]}	P₌¬ 	# 3 a-keyword
+    |arg🔢                                    	P₌¬ 		# 4 arg🔢
+    )           '(?=;|\n)'{×e1}?)*           	#
+  # yet ↓ for some reason works even when separated! ↑ bugs when separated by '/-'
+  |(c⁄-y l━⎋*	p⚿₌v⁄-	'(?=;|\n)'{×e2a}?)*	# 5 p⚿₌v
+  |(         	p⚿₌v  	'(?=;|\n)'{×e2b}?)*	#
+  )*
+));
+composablec⁄{#[SC⁄—]}: ( # -old-escseems to work with repeated and ending ;;;;, but then I can't set a separate scope for = vs !=
+  # p“⚿₌v” | a“arg”
+ (l━⎋*
+  (((c⁄-x l━⎋nonws*)? type?
+    # (string ((p₌ type? data)		# 1 p“⚿₌v”
+    ((str“” | STR_RAW{#[S_M_S],1:#[SRR]        ,2:#[S“]        ,3:#[S“]        ,4:#[SR“S”]        ,5:#[S”]        ,6:#[S”]        })
+     ((p₌ type? data)                                  # 1 p“⚿₌v”
+      |                                      	P₌¬)	# 2 a“arg”
+    |KEYWORD{#[SM_ARG],1:#[SBOOL],2:#[SNULL]}	P₌¬ 	# 3 a-keyword
+    |arg🔢                                    	P₌¬ 		# 4 arg🔢
+    )           '(?=;|\n)'{×e1⁄}?)*          	#
+  # yet ↓ for some reason works even when separated! ↑ bugs when separated by '/-'
+  |(c⁄-y l━⎋*	p⚿₌v⁄-	'(?=;|\n)'{×e2a⁄}?)*	# 5 p⚿₌v
+  |(         	p⚿₌v  	'(?=;|\n)'{×e2b⁄}?)*	#
+  )*
+));
+# l━⎋nonws
+c⁄-x{xcom}:c⁄-;
+c⁄-y{ycom}:c⁄-;
+composable-lineesc{}: ( # "proper" line escape, but can't fix some pop errors by changing to 2
+  # p“⚿₌v” | a“arg”
+ (l━⎋*
+  ((c⁄- l━⎋*)? type?
+    # (string ((p₌ type? data)		# 1 p“⚿₌v”
+    ((str“” | STR_RAW{#[S_M_S],1:#[SRR]        ,2:#[S“]        ,3:#[S“]        ,4:#[SR“S”]        ,5:#[S”]        ,6:#[S”]        })
+     ((p₌ type? data)                                  # 1 p“⚿₌v”
+      |                                      	P₌¬)	# 2 a“arg”
+    |KEYWORD{#[SM_ARG],1:#[SBOOL],2:#[SNULL]}	P₌¬ 	# 3 a-keyword
+    |arg🔢                                    	P₌¬ 		# 4 arg🔢
+    )           '(?=;|\n)'?)*                	#
+  # yet ↓ for some reason works even when separated! ↑ bugs when separated by '/-'
+  |(c⁄- p⚿₌v⁄-	'(?=;|\n)'?)*	# 5 p⚿₌v
+  |(    p⚿₌v  	'(?=;|\n)'?)*	#
+));
+composable11{}: ( # test
+ ('(\\)'{1:#[S⯻━]} '[[^\\]&&[\S]]'{#[S🛑]}? l━∅⁄⁄? exp␤)*
+  (('#[C⁄—]'{#[S⁄—] X}?	arg🔢  	'(?=;|\n)'?)*
+  |('#[C⁄—]'{#[S⁄—] Y}?	p⚿₌v⁄-	'(?=;|\n)'?)*
+));
+
+nnn-some-progress-but-c{n}: c⁄-? n-name
+(
+   ( (c⁄- ((
+      (p“⚿₌v”⁄-        	      )     	#
+    |(type     ? a“val”	P₌¬ '(?=;)')	# todo remove when bug is fixed
+   ))
+   )* )
+  |
+  ( ( ((
+    (p“⚿₌v”            	      )     	#
+    |(type     ? a“val”	P₌¬ '(?=;)')	# todo remove when bug is fixed
+    |(p⚿₌v             	      )     	#
+    |(type     ? arg🔢  	P₌¬)        	#
+   ))*
+   ) )
+)*
+';|\n'{#[Z]} ;
+
+nnn3{n}: c⁄-? n-name # 'n+|a+|r?"a+|n+"'{#[Z] 🆔}
+(
+#   ( (c⁄- ((
+#      (p“⚿₌v”⁄-        	      )	#
+#    | (type⁄-? a“val”⁄-	P₌¬)   	#
+#    | (p⚿₌v⁄-          	      )	#
+#    | (type⁄-? arg🔢⁄-  	P₌¬)   	#
+#   ))
+#   )* )
+#  |
+  ( ( ((
+    (p“⚿₌v”            	      )	#
+    |(type     ? a“val”	P₌¬)   	#
+    |(p⚿₌v             	      )	#
+    |(type     ? arg🔢  	P₌¬)   	#
+   ))
+   )* )
+)*
+';|\n'{#[Z]} ;
+
+
+
+nnn1{n}: c⁄-? n-name (node-tests)* n-end ;
+node-tests:
+   ( (c⁄- ((
+      (p“⚿₌v”⁄-        	      )	#
+    | (type⁄-? a“val”⁄-	P₌¬)   	#
+    | (p⚿₌v⁄-          	      )	#
+    | (type⁄-? arg🔢⁄-  	P₌¬)   	#
+   ))*                 	       	# NO* breaks repeat "a" /-"a"=1 /-"a"=1
+   el-end)* )
+  |( ( ((
+     (p“⚿₌v”           	      )	#
+    |(           a“val”	P₌¬)   	# fixes ↓, but add a (a)"1"; ←🛑
+    |(type     ? a“val”	P₌¬)   	# a (a)1; ←🛑
+    |(p⚿₌v             	      )	#
+    |(type     ? arg🔢  	P₌¬)   	#
+   ))*                 	       	# * breaks "a" "a" ;←🛑
+   el-end)* )
+;
+  # |( (	(    p“⚿₌v”	|    type     ? NEXT“ a“val”	P₌¬	#
+  # single line with repeatable mix of two elements
+  # "a" /-"a"=1  /-"a"=1 /-"a" /-"a"=1;
+  # |( c⁄-( (	(    p“⚿₌v”⁄-	|    type⁄-? a“val”⁄-	P₌¬) 	el-end))* ) #works
+  # |( ( c⁄- 	(    p“⚿₌v”⁄-	|    type⁄-? a“val”⁄-	P₌¬)*	el-end)* ) # works
+  # |( ( (   	(c⁄- p“⚿₌v”⁄-	|c⁄- type⁄-? a“val”⁄-	P₌¬) 	el-end))* ) # works
+  # |( ( (c⁄-	(    p“⚿₌v”⁄-	|    type⁄-? a“val”⁄-	P₌¬) 	el-end))* ) #fails
+
+  # |( ( (c⁄- p“⚿₌v”⁄- )*     	el-end)* )
+  # |( ( (c⁄- type⁄-? a“val”⁄-	P₌¬)*	el-end)* )
+
+  # |( ( (c⁄-	(p“⚿₌v”⁄-	| type⁄-? a“val”⁄- 	P₌¬)	el-end))* )
+  # |( (     	(p“⚿₌v”  	| type     ? a“val”	P₌¬)	el-end )* )
+  # |( ( (c⁄-	(p⚿₌v⁄-  	| type⁄-? arg🔢⁄-   	P₌¬)	el-end))* )
+  # |( (     	(p⚿₌v    	| type     ? arg🔢  	P₌¬)	el-end )* )
+
+  # |( (	(c⁄- (p⚿₌v⁄-	|p“⚿₌v”⁄-)	      )	el-end )* )
+
+  # |( (	(c⁄- p“⚿₌v”⁄-	                      	      )	el-end )* )
+  # |( (	(c⁄- p“⚿₌v”⁄-	                      	      )	el-end )* )
+  # |( (	(    p“⚿₌v”  	                      	      )	el-end )* )
+  # |( (	(    p⚿₌v    	                      	      )	el-end )* )
+  # |( (	(            	     type     ? a“val”	P₌¬)   	el-end )* )
+  # |( (	(            	     type     ? arg🔢  	P₌¬)   	el-end )* )
+  # |( (	(            	 c⁄- type⁄-? a“val”⁄- 	P₌¬)   	el-end )* )
+  # |( (	(            	 c⁄- type⁄-? arg🔢⁄-   	P₌¬)   	el-end )* )
+
+
+# Meta clauses
+EXTENSIONS = 'KDL2' # space-separated list of file extensions = `file_extensions` @sublime-syntax
+
+# Rules
+#name[par]{opt}	: expr                                                         	;
+# prototype{}  	: (~(nodeb␠|comment))*                                         	;#
+prototype{}    	: (~comment)*                                                  	;#(~b␠ | comment )*	;# line␠ OR comment TODO: add n␠ including b␠ selects too much, might need to manually fix it in every scope
+ comment{}     	: c⁄line | c⁄∗block🗘doc                                        	;# |c⁄-element
+mmain{}        	: nodes                                                        	;# (~any)* masks illegal chars
+ # nodes{}     	: node n-child?                                                	;# ≠ line␠* (node nodes?)? line␠* (line␠ is @prototype)
+ #any{}        	: punctuation  | number | string | operator | identifier       	;
+ keyword{}     	: bool | null                                                  	;
+ data{}        	: bool | null | string | number                                	;# 4 Data Types
+ #identifier{} 	: keyword | param | ident-other                                	;
+ #number{}     	: number-float | number-int                                    	;
+ #punctuation{}	: dot | comma  | semi | parens | brackets | braces             	;
+ #operator{}   	: operator-cast | operator-star | operator-tilde | operator-any	;
+ #param{}      	: param-ordinal | param-named                                  	;
+ #atom{}       	: number | string | ident-other                                	;
+
+# todo: add c⁄-element
+# todo: add back c⁄- children
+
+# main          	: c⁄-nodes; #nodes |
+   # nodes{ns}  	:    node n-end;#(   n-child)?                                                               	;#
+   nodes{}      	:    n-name ('n-child'      )? (n-arg∨prop  )* n-end ;#'(;)|(\n)'{1:#[SPTERM]};#(   n-child)?	;#
+# c⁄-nodes{c-ns}	: c⁄- n-name-c⁄ ('n-child-blank')? (n-arg∨prop⁄-)* n-end ;#(n-child-blank)?                  	;#
+
+# c⁄-nodes{c-ns}	: c⁄-node (n-child-blank)? n-end 	;#bug ↓
+   # nodes      	:    node (n-child       )? n-end	;#bug ↓
+    # node{n}   	:    n-name (   n-arg∨prop)*     	;#bugs when added as a rule
+ # c⁄-node{c-n} 	: c⁄- n-name-c⁄ (n-arg∨prop⁄-)*  	;#bugs when added as a rule
+ n-name-c⁄{}    	: n␠? type? node🆔⁄-              	;#≈ (/- node-space*)? type? identifier
+ n-name{}       	: n␠? type? node🆔                	;# !!!chld todo node🆔 hangs, likely again due to bool/null repeat
+
+# c⁄-nodes{c-ns}: n-name (c⁄- p“⚿₌v” | c⁄- p⚿₌v) * (n-arg∨prop⁄-)* n-end ;
+ n-arg∨prop           	:(c⁄- p“⚿₌v” |  c⁄- p⚿₌v)| (p“⚿₌v” | p⚿₌v | argument)	;# ≠ (node-space+ node-prop-or-arg)*  TODO: moving * here bugs for some reason
+ n-arg∨prop⁄-{cnarg}  	:(c⁄- p“⚿₌v” |  c⁄- p⚿₌v |  p“⚿₌v” | p⚿₌v | argument)	;
+c⁄-arg∨prop    {sl}   	:(c⁄- p“⚿₌v”)| (c⁄- p⚿₌v)                            	;# some order sensitivity issues, args first deals with invalid keywords better by tagging them as args always and making = illegal
+   arg∨prop⁄-{in}     	:    (p“⚿₌v” | p⚿₌v)                                 	;# regular argprops inside a c⁄-node
+   arg∨prop           	:    (p“⚿₌v” | p⚿₌v | argument  )                    	;
+   # arg∨prop         	:     (argument      | prop-k₌v   )                  	;
+   #                  	  n␠? (c⁄-arg∨prop | arg∨prop)                       	;# todo del
+n-child{      #[SMAP]}	:`{`{#[S｛]} nodes*    `}`{#[S｝]}                     	;# ≠ (node-space* node-children ws*)?  node-children = (/- node-space*)? { nodes }
+n-child-blank{#[SMAP]}	:`{`{#[S｛]} ~ `}`{#[S｝]}                             	;
+n-end{}               	: node-terminator                                    	;# ≠ node-space* node-terminator
+ # n-child            	: (node-children           n␠?)                      	;# ≠ (node-space* node-children ws*)?
+             # (       n␠* node-children b␠c⁄∗)? # (node-space* node-children ws*)?
+
+node🆔{  #[S🆔🔖]node        }	: u🆔-n	;# todo: bug scope bleeds
+node🆔⁄-{#[S🆔🔖]node #[SC⁄—]}	: u🆔⁄-	;
+
+# node-children{#[SMAP]}	:`{`{#[S｛]} n-name (n-arg∨prop)* n-end     	node-children `}`{#[S｝]}	;# ≈ (/- node-space*)? { nodes }
+# node-children{#[SMAP]}	: c⁄-child |`{`{#[S｛]}nodes`}`{#[S｝]}      	;# ≈ (/- node-space*)? { nodes }
+# c⁄-element1           	: c⁄- (c⁄-child | argument⁄- | prop-k₌v⁄-)?	;# slash-dash       n␠*
+ # c⁄-node {#[SC⁄—]}    	:'#[C⁄—]'{#[S⁄—]}                          	;# TODO
+
+
+# arg/prop order affects whether children comments work or
+# n1ode-arg∨prop  	: (c⁄- '' argument⁄- | c⁄-2b prop-k₌v⁄- | argument | prop-k₌v)  	;# ≠('/-' node-space*)? (prop | p-value) ‹Recursion risk
+# node-arg∨prop{t}	: (c⁄- (argument⁄- | prop-k₌v⁄-)) | (argument | prop-k₌v)       	;# ≠('/-' node-space*)? (prop | p-value) ‹Recursion risk
+# node-arg∨prop{t}	: (c⁄- child¬ (argument⁄- | prop-k₌v⁄-)) | (argument | prop-k₌v)	;# ≠('/-' node-space*)? (prop | p-value) ‹Recursion risk
+  # c⁄-{#[SC⁄—]}  	:'#[C⁄—]'{#[S⁄—]}                                               	;
+
+
+# bare🆔           : keyword¬ | bare🆔∨keyword  ;# ≝bare-identifier = ((identifier-char - digit - sign) identifier-char* | sign ((identifier-char - digit) identifier-char*)?) - keyword
+ # bare🆔∨keyword  :'#[BARE🆔−±]' | '#[BARE🆔±]' ;
+ # BARE🆔          ='#[BARE🆔−±]|#[BARE🆔±]'            #
+  # BARE🆔−±       =     '(#[CHAR🆔−DIG±])(#[CHAR🆔])*'   #
+  # BARE🆔±        ='#[±]((#[CHAR🆔−DIG])(#[CHAR🆔])*)?'  #
+# u🆔⁄-           : string⁄-   | bare🆔⁄-      ;#todo temporary disable bool/null
+
+
+_ST='Type'
+ # bug: can't use a rule with multiple conditions,
+type{  #[SM🔖]}          	: `(`{#[S⯻🔖]begin        } t🆔   `)`{#[S⯻🔖]end        }	;
+type⁄-{#[SM🔖]}          	: `(`{#[S⯻🔖]begin #[SC⁄—]} t🆔⁄- `)`{#[S⯻🔖]end #[SC⁄—]}	;
+ t🆔{#[S🆔]type}          	:     u🆔                                              	;
+ t🆔⁄-{#[S🆔]type #[SC⁄—]}	:     u🆔⁄-                                            	;
+# type{#[SM🔖]}          	: t‹    t🆔     t›                                     	;
+#  t🆔{#[S🆔]type}        	:     u🆔                                              	;
+ t‹{ }                  	: `(`                  {#[S⯻🔖]begin}                  	;#todo bug as a rule
+ t›{  }                 	:                `)`   {#[S⯻🔖]end  }                  	;#todo bug as a rule
+# type⁄-{#[SM🔖]}        	: t‹⁄- t🆔⁄- t›⁄-                                      	; #[SC⁄—]
+ t‹⁄-{}                 	: `(`                  {#[S⯻🔖]begin #[SC⁄—]}          	;#todo bug as a rule
+ t›⁄-{}                 	:                `)`   {#[S⯻🔖]end   #[SC⁄—]}          	;#todo bug as a rule
+# |(`(`{#[S⯻🔖]begin} sstr-raw `)`{#[S⯻🔖]end}) # todo: use str-raw with more literal if bugs
+type-arg{   #[SM_ARG]         }	:type;
+type-arg⁄-{ #[SM_ARG]  #[SC⁄—]}	:type;
+type-prop{  #[SM_PROP]        }	:type;
+type-prop⁄-{#[SM_PROP] #[SC⁄—]}	:type;
+
+
+node-arg∨prop{t}        	: (c⁄- '' n␠* c⁄-elem) | (argument | prop-k₌v)                 	;# ≠('/-' node-space*)? (prop | p-value) ‹Recursion risk
+c⁄-elem{tc}             	: (c⁄-child-outer | argument⁄- | prop-k₌v⁄-)                   	;
+# node-arg∨prop{t}      	: (c⁄-child¬ (argument⁄- | prop-k₌v⁄-)) | (argument | prop-k₌v)	;# ≠('/-' node-space*)? (prop | p-value) ‹Recursion risk
+ # c⁄-child¬{#[SC⁄—]}   	: '#[C⁄—](?!\{)'{#[S⁄—]}                                       	;# todo: partically works, but this doesn't exclude n␠
+ c⁄-child¬{#[SC⁄—] noch}	: '#[C⁄—]'{a} '(?!\{)'{b #[S⁄—]} c⁄-child?                     	;# todo: partically works, but this doesn't exclude n␠
+
+ # c⁄-child¬{#[SC⁄—] noch}	: '#[C⁄—](?!\{)'{#[S⁄—]} | '\{'{#[S⁄—]} ~ '\}'{#[Z]}	;# todo: partically works, but this doesn't exclude n␠
+
+
+_SA='Argument'
+# todo:
+  # replace a“arg” etc with proper composable, though even it bugs when used as a rule!!!
+argument{    #[SM_ARG]}  	: type-arg  ? arg-value    P₌¬ ;#POP	;# ≝ value=type? (string | number | keyword)
+argument⁄-{  #[SM_ARG]}  	: type-arg⁄-? arg-value⁄-  P₌¬ ;#POP	;# SC⁄— appended at lower levels since meta scopes only prepend
+ # arg🔢{      #[SM_ARG]} 	:(type-arg  ? number     P₌¬)       	;
+ # arg🔢⁄-{    #[SM_ARG]} 	:(type-arg⁄-? number⁄-   P₌¬)       	;
+ # a-keyword{  #[SM_ARG]}	:(type-arg  ? KEYWORD{1:#[SBOOL]        ,2:#[SNULL]        } P₌¬);
+ # a-keyword⁄-{#[SM_ARG]}	:(type-arg⁄-? KEYWORD{1:#[SBOOL] #[SC⁄—],2:#[SNULL] #[SC⁄—]} P₌¬);
+ a“arg”{     #[SM_ARG]}  	: type-arg  ?         	 # todo: sometimes bugs without POP_END
+  (                      	  STR{#[S_M_S]        	 ,1:#[SRR],2:#[S“],3:#[S“],4:#[SR“S”]        ,5:#[S”],6:#[S”], 7:#[S“],8:#[S“S”]        ,9:#[S”]}
+  )                      	  P₌¬                 	;
+ a“arg”⁄-{   #[SM_ARG]}  	: type-arg⁄-?         	 # todo: sometimes bugs without POP_END
+  (                      	  STR{#[S_M_S] #[SC⁄—]	 ,1:#[SRR],2:#[S“],3:#[S“],4:#[SR“S”] #[SC⁄—],5:#[S”],6:#[S”], 7:#[S“],8:#[S“S”] #[SC⁄—],9:#[S”]}
+  )                      	  P₌¬                 	;
+
+argument-ns{    #[SM_ARG]}  	: arg-value-ns    P₌¬ ;
+ arg-value-ns{}             	:(           a-keyword   | arg🔢  )	;
+ arg-value{}                	:(a“val”   | a-keyword   | arg🔢  )	;#bugs as a composable rule
+ arg-value⁄-{}              	:(a“val”⁄- | a-keyword⁄- | arg🔢⁄-)	;#bugs as a composable rule
+  a“val”{    #[SM_ARG]}     	:(string  ) ;#'"[^"]*"(?!=)'      	;# todo: bugs without '' https://github.com/BenjaminSchaaf/sbnf/issues/39
+  a“val”⁄-{  #[SM_ARG]}     	:(string⁄-) ;#'"[^"]*"(?!=)'      	;
+  arg🔢{   #[SM_ARG]}        	:(number  )                       	;
+  arg🔢⁄-{ #[SM_ARG]}        	:(number⁄-)                       	;
+  a-keyword{    #[SM_ARG]}  	:(KEYWORD{1:#[SBOOL]        ,2:#[SNULL]        } );
+  a-keyword⁄-{  #[SM_ARG]}  	:(KEYWORD{1:#[SBOOL] #[SC⁄—],2:#[SNULL] #[SC⁄—]} );
+  # a-keyword{    #[SM_ARG]}	:(bool-arg   | null-arg  )	;# separated to allow '' in different places, othewise bugs
+  # a-keyword⁄-{  #[SM_ARG]}	:(bool-arg⁄- | null-arg⁄-)	;
+   bool-arg{    }           	:(bool  )                 	;# todo: bugs without '' https://github.com/BenjaminSchaaf/sbnf/issues/39
+   bool-arg⁄-{}             	:(bool⁄-)                 	;
+   null-arg{    }           	:(null  )                 	;# todo: bugs without '' https://github.com/BenjaminSchaaf/sbnf/issues/39
+   null-arg⁄-{}             	:(null⁄-)                 	;
+
+_SP='Property'
+# todo:
+  # exclude bool/null from props
+  # p“⚿” bugs when used as a rule
+  # p₌ bugs when used as a rule https://github.com/BenjaminSchaaf/sbnf/issues/37
+  # replace ruel⁄- with a reference to the main rule when scope appending is added
+prop-k₌v{}                   	: p“⚿₌v”   | p⚿₌v	; # prop¬kw check not needed since keywords are already parsed as arguments only (also recursive hang)
+ p“⚿₌v”{P”}                  	:((STR{#[SM⚿] #[S_M_S]        ,1:#[SRR],2:#[S“],3:#[S“],4:#[SR“S”] #[S⚿]        ,5:#[S”],6:#[S”], 7:#[S“],8:#[S“S”] #[S⚿]        ,9:#[S”]})
+  (                          	        P₌{#[SM₌],1:#[S🛑],3:#[S₌],4:#[S🛑]} p-value) );
+ p⚿₌v{}                      	:(BARE🆔{#[SM⚿] #[S⚿]} P₌{#[SM₌],1:#[S🛑],3:#[S₌],4:#[S🛑]} p-value)  ; #'k  k=1' errors only 1st space
+ # p⚿₌v{}                    	:(p⚿   P₌{#[SM₌],1:#[S🛑],3:#[S₌],4:#[S🛑]} p-value)  ; #'k  k=1' errors only 1st space
+  # p⚿{    #[SM⚿] #[S⚿]}     	: BARE🆔                	;#bugs when used as a rule in a rule
+  p-value{#[SM₌V]}           	  : type-prop?    data 	;# todo: meta scope bleeds into arg∨prop key₌ '='
+ # prop¬kw{}                 	: prop¬bool | prop¬null	;
+  # p⚿bool{  #[SM⚿] #[S⚿]}   	: bool                 	;#
+  # p⚿null{  #[SM⚿] #[S⚿]}   	: null                 	;#
+  # prop¬bool{}              	:(p⚿bool   p₌🛑 p-value)	;# match, but highlight = as illegal (todo: lookahead not supported)
+  # prop¬null{}              	:(p⚿null   p₌🛑 p-value)	;# ... not sure how to force NOT matching to pass to args
+prop-k₌v⁄-{}                 	: p“⚿₌v”⁄- | p⚿₌v⁄-    	;#
+ p“⚿₌v”⁄-{}                  	:((STR{#[SM⚿] #[S_M_S] #[SC⁄—],1:#[SRR],2:#[S“],3:#[S“],4:#[SR“S”] #[S⚿] #[SC⁄—],5:#[S”],6:#[S”], 7:#[S“],8:#[S“S”] #[S⚿] #[SC⁄—],9:#[S”]})
+  (                          	         P₌{#[SM₌],1:#[S🛑],3:#[S₌] #[SC⁄—],4:#[S🛑]} p-value⁄-) );
+ p⚿₌v⁄-{}                    	:(BARE🆔{#[SM⚿] #[S⚿] #[SC⁄—]} p␠﹖🛑 (p₌⁄- p-value⁄-))	; #'k k=1' errors only first space
+ # p⚿₌v⁄-{}                  	:(p⚿⁄- p␠﹖🛑 ((p₌⁄- p-value⁄-) | POP_S))             	; #'k k=1' errors only first space
+  p⚿⁄-{ #[SM⚿] #[S⚿] #[SC⁄—]}	: BARE🆔                                             	;#
+  p-value⁄-{#[SM₌V]}         	  : type⁄-?  data⁄-                                 	;
+ # todo: move ↓ back when ↑ todos are fixed and move scopes to append to clean existing data
+ #p“⚿₌v”{}            	:(p“⚿”   p₌ p-value  )	;
+ #p“⚿₌v”⁄-{}          	:(p“⚿”⁄- p₌ p-value⁄-)	;
+  p“⚿”{  #[SM⚿] #[S⚿]}	: string              	;
+  p“⚿”⁄-{#[SM⚿]      }	: string⚿             	;##[S⚿] #[SC⁄—]
+_SH='Property helpers'
+ # P₌L       	='(?<!\s)=(?!\s)'                     	# better match spaces as invalid to highlight key as key
+ PROP␠﹖      	='(#[B␠])?'                           	#  todo '(?<!#[B␠])=(?!#[B␠])'
+ P₌KW        	='(=)'                                	 # keyword check should ignore whitespace to avoid flashing 'true b'
+ # P₌¬       	='(#[B␠])*(?!=)'                      	# todo: del, this glues multiple args together, and not needed to mirror ↑ for a ⸙
+ P₌¬         	='(?!=)'                              	#
+ P₌          	='(#[B␠])?(#[B␠])*(=)(#[B␠])?(#[B␠])*'	# match 1st space make only it highlight red
+ STR₌        	='(r)(#*)(\")([^"]*)(\")(\k<2>)#[P₌]|(")([^"]*)(")#[P₌]'
+ p₌{  #[SM₌]}	: P₌{1:#[S🛑],3:#[S₌]       ,4:#[S🛑]} 	;# TODO: bugs when used as a rule
+ p₌⁄-{#[SM₌]}	: P₌{1:#[S🛑],3:#[S₌] #[SC⁄—],4:#[S🛑]}	;#
+ p₌🛑{#[SM₌]} 	: P₌{1:#[S🛑],3:#[S₌] #[S🛑],4:#[S🛑]}  	;
+ p␠﹖🛑{}      	: PROP␠﹖{1:#[S🛑]                 }   	;# TODO: bugs when used as a rule
+ p₌¬{}       	: P₌¬                                	;# helps differentiate key in property from argument
+
+n␠{n␠}	: l━⎋ b␠*                         	;# todo check if exp␤ is needed and check bsp is needed here del scope
+#     	  exp␤                            	;# ≠ ws* escline ws* | ws+
+ #    	                                  	     ws handled via prototype comment, it does include single-lines, but that's not an issue sine it requires line ending, so wouldn't match anything in-between?
+ #    	: b␠c⁄∗* l━⎋ b␠c⁄∗* | b␠c⁄∗ b␠c⁄∗*	;#   ws = bom | uni␠ | multiline-com
+ #    	:(b␠c⁄∗ b␠c⁄∗* l━⎋? | l━⎋) b␠c⁄∗* 	;#   escline = \ ws* (comment-line | ␤)
+
+ # l━⎋{}      	: `\`{#[S⯻━]} '#[PREC⁄⁄C⁄∗␤]'{2:#[S🛑]}* l━∅⁄⁄?	;# \ ws* (c⁄line | ␤)
+  # PREC⁄⁄C⁄∗␤	='(?<=\\)( *)(.*?)((?=#[C⁄⁄])|(?=#[C⁄∗])|(?=\R))'   ## non-whitespace before the first comment start/␤ (so non-greedy)
+ # ↑todo rewrite with a set to avoid lookarounds ↓
+ l━⎋{}  :'(\\)'{1:#[S⯻━]} ('#[B␠]'|c⁄∗block🗘doc|'\S'{#[S🛑]})* (c⁄line|'#[U␤S]')  l━∅⁄⁄? ;
+ # l━⎋{}           	: l━⎋blank | l━⎋nonws ;
+  # l━⎋blank{blank}	:'(\\)'{1:#[S⯻━]} '[[^\\]&&[\S]]'{#[S🛑]}? l━∅⁄⁄       ;
+  l━⎋nonws{nonws}  	:'(\\)'{1:#[S⯻━]} '[[^\\]&&[\S]]'{#[S🛑]}? l━∅⁄⁄? exp␤;
+
+# n␠{n␠}:`\`{#[S⯻━]} l━∅⁄⁄?;
+
+# ↓ fails with prototype (false doesn't help since it'll be part of the higher scope that will work on a newline)
+# todo: check if it's possible to just match a block comment first alone on a line before prototype?
+escline{include-prototype:false}:t0|t01;#|t4|t44|t1|t2|t3|t5|t6;
+  t0:('(\\)(\n)'{t0, 1:#[S⯻━],2:#[S🛑]}  `/**/` ); #← fails to match with a prototype, has lower priority
+    # a\
+    # /**/  ← this is matched as a prototype
+  t01:('(\\)(\n)'{t01, 1:#[S⯻━],2:t01nl}   ); #
+  t4:('(\\)(\n)'{t4, 1:#[S⯻━],2:#[S🛑]}  '(\/)'{#[Z] t4b} );
+  t44:('(\\)(\n)'{t44, 1:#[S⯻━],2:t44nl}  '(?!\/)' );
+  # t4:('(\\)(\n)'{t44, 1:#[S⯻━],2:#[S🛑]}  c⁄∗block );
+  t1:(`\`{#[S⯻━] a1}  c⁄∗block* '^(#[U␤S])'{#[S🛑] n1});
+  # a\/**/
+  #    ←🛑 no empty newline
+  t2:(`\`{#[S⯻━] a2}             '(#[U␤S])'{#[S🛑] n2} c⁄∗block);
+  # a\ ←🛑 no newline before comments
+  # /*
+  # */
+  t3:(`\`{#[S⯻━] a3}  c⁄∗block   '(#[U␤S])'{#[S🛑] n3} c⁄∗block);
+  # a\/**/ ←🛑 no newline beween comments
+  # /**/
+  # 1
+  t5:(`\`{#[S⯻━] a4}  c⁄∗block   '(#[U␤S])'{       n4} );
+  t6:(`\`{#[S⯻━] a5}  c⁄∗block*  '(#[U␤S])'{       n5} );
+
+
+el-end{}         	: ('#[B␠]' | POP_END); # continue on whitespace or pop if ending mark
+node-terminator{}	: TERM_ALONE{1:#[SPTERM]} | CHILD_ABORT{1:#[SPTERM] #[S🛑]} | CHILD_EXPECT | CHILD_END ;#  c⁄line | ␤ | ';' | eof
+ TERM_ALONE      	='(;)(?!\{)|(#[U␤S])|(#[EOF])'	# B␠ not needed as only one match is fine
+ CHILD_ABORT     	='(;)(?=\{)'                  	#   while B␠* produces many as it goes char-by-char
+ CHILD_EXPECT    	=   '(?=\{)'                  	#   (?=(#[B␠])*\{)
+ CHILD_END       	=   '(?=\})'                  	# todo: technically not per spec, clarify whether 'a {b}' is allowed or only 'a {b;}'
+ POP_END         	='(?=;|\{|\}|#[U␤S]|#[EOF])'  	# pop before terminator (useful to terminate repeating rules)
+# node-terminator{#[SPTERM]}: T1 ;#| TERM_ALONE{a,1:#[SPTERM]} | ABORT_CHILD{ab,1:#[SPTERM] #[S🛑]} | EXPECT_CHILD{ch};#  c⁄line | ␤ | ';' | eof
+ # T1 ='(;)|(#[U␤])|(#[EOF])'#
+
+ # c⁄line @ prototype  move {#[SPTERM]} to meta scope after bleeding bug is fixed https://github.com/BenjaminSchaaf/sbnf/issues/36
+line␠	: U␤ | b␠c⁄∗ | c⁄line	;# ≝linespace = newline | ws | single-line-comment
+
+##            	;
+u🆔            	: string   | bare🆔         	;# ≝identifier = str | bare-identifier
+u🆔-n          	: string-n | bare🆔         	;# make node scope come later
+bare🆔         	: keyword¬ | bare🆔∨keyword 	;# ≝bare-identifier = ((identifier-char - digit - sign) identifier-char* | sign ((identifier-char - digit) identifier-char*)?) - keyword
+ bare🆔∨keyword	:'#[BARE🆔−±]' | '#[BARE🆔±]'	;
+ BARE🆔        	='#[BARE🆔−±]|#[BARE🆔±]'            #
+  BARE🆔−±     	=     '(#[CHAR🆔−DIG±])(#[CHAR🆔])*'   #
+  BARE🆔±      	='#[±]((#[CHAR🆔−DIG])(#[CHAR🆔])*)?'  #
+u🆔⁄-          	: string⁄-   | bare🆔⁄-      	;#todo temporary disable bool/null
+bare🆔⁄-       	: keyword¬⁄- | bare🆔∨keyword	;
+
+# u🆔⁄-       	: '(#[CHAR🆔−DIG±])(#[CHAR🆔])*×?' | '#[±]((#[CHAR🆔−DIG])(#[CHAR🆔])*)?×?'	;#todo temporary disable bool/null
+# u🆔⁄-       	: BARE🆔| ('r(#+)?(\")([\s\S]*)?(\")(\1)') ; # adding last element bugs for some reason?
+ # C⁄_STR_RAW	= '(r)(#+)?(\")([\s\S]*)?(\")(\2)' #
+
+# U🆔🛑       	= '='	#
+# u🆔🛑{#[S🛑]}	: U🆔🛑	;
+
+## 4 Data           Types                #
+ data⁄-{}	: bool⁄- | null⁄- | string⁄- | number⁄- ;
+
+ BOOL                    	='\b(?:true|false)\b' 	# (?: Non-capturing groups)
+ NULL                    	='\b(?:null)\b'       	#
+ KEYWORD                 	='(#[BOOL])|(#[NULL])'	# (?>) atomic not supported
+ bool{  #[SBOOL]        }	: BOOL                	;#word[BOOL]
+ null{  #[SNULL]        }	: NULL                	;#word[NULL]
+ bool⁄-{#[SBOOL] #[SC⁄—]}	: BOOL                	;#word[BOOL]
+ null⁄-{#[SNULL] #[SC⁄—]}	: NULL                	;#word[NULL]
+
+ # todo include S_M_S and common S“S”/SR“S” as left-hand-side meta, but it's bleeding into others, so for now add to each RHS
+ # \1 backreferences can't be used in a literal regex, only within the following context that POPs. Older incompatible way is use \k<1>
+ # -n elements are "clean" without their content marked to allow meta contents to have a color effect override
+ string{    include-prototype:false}	: str-raw   | str“”  	;# data type 3/4
+ string⁄-{  include-prototype:false}	: str-raw⁄- | str“”⁄-	;
+ string⚿{  include-prototype:false} 	: str-raw⚿ | str“”⚿  	;
+ string-n{  include-prototype:false}	: str-raw-n | str“”-n	;
+  str-raw{  include-prototype:false}	: STR_RAW{#[S_M_S],1:#[SRR]        ,2:#[S“]        ,3:#[S“]        ,4:#[SR“S”]        ,5:#[S”]        ,6:#[S”]        };
+  str-raw⁄-{include-prototype:false}	: STR_RAW{#[S_M_S],1:#[SRR] #[SC⁄—],2:#[S“] #[SC⁄—],3:#[S“] #[SC⁄—],4:#[SR“S”] #[SC⁄—],5:#[S”] #[SC⁄—],6:#[S”] #[SC⁄—]};
+  str-raw-n{include-prototype:false}	: STR_RAW{#[S_M_S],1:#[SRR]        ,2:#[S“]        ,3:#[S“]                           ,5:#[S”]        ,6:#[S”]         };
+  str-raw⚿{include-prototype:false} 	: STR_RAW{#[S_M_S] a,1:#[SRR] #[SC⁄—],2:#[S“] #[SC⁄—],3:#[S“] #[SC⁄—],4:#[SR“S”] #[S⚿] #[SC⁄—],5:#[S”] #[SC⁄—],6:#[S”] #[SC⁄—]};
+  str“”{    include-prototype:false}	:`"`{#[S“S”] #[S“]        }  (chars“”  )*  `"`{#[S“S”] #[S”]        };
+  str“”⁄-{  include-prototype:false}	:`"`{#[S“S”] #[S“] #[SC⁄—]}  (chars“”⁄-)*  `"`{#[S“S”] #[S”] #[SC⁄—]};
+  str“”⚿{   include-prototype:false}	:`"`{#[S“S”] #[S“] #[SC⁄—]}  (chars“”⚿ )*  `"`{#[S“S”] #[S”] #[SC⁄—]};
+  str“”-n{  include-prototype:false}	:`"`{#[S“S”] #[S“]        }  (chars“”-n)*  `"`{#[S“S”] #[S”]        };
+  STR_RAW“”                         	='(r)#[ESTR“”]' # " .* "
+ # todo: replace back with char“”* when bug is fixed
+ str“test1”{include-prototype:false}:'(")([^"]*)(")'{#[S“S”], 1:#[S“],3:#[S”] };
+
+  STR_RAW	='(r)(?<h>#*)(\")([\s\S]*)(\")(\g<h>)' #todo try to tweak to the new system without \g (separate ending into a popping context to allow \2)
+  ESTR“” 	='(")([^"]*)(")' # " .* "
+  STR    	='#[STR_RAW]|#[ESTR“”]' #  bugs as a rule
+  _STR   	='((r)(?<h>#*))?(\")([^"]*)(\")(\g<h>)' #  test, fails since in raw strings ~ in strings [^"]
+  -str:STR{#[S_M_S],1:#[SRR],2:#[S“],3:#[S“],4:#[SR“S”],5:#[S”],6:#[S”], 7:#[S“],8:#[S“S”],9:#[S”]};
+  # splitting also bugs
+  r-test  :'(?x)(?<h>[#]+)(?<q> " )'{#[S“]} ~ '\g<q>\g<h>'{#[S”]}  ;# # raw-str-hash # | raw-str-quotes
+
+  # combine raw hashed and raw quoted into one ↑
+  sstr-raw{     include-prototype:false} 	: ( sstr-raw＃  |   sstr-raw“”)  ;#  r raw-str-hash
+   sstr-raw＃{  include-prototype:false}  	:'(r)(#+)(\")([\s\S]*)(\")(\2)'	{1:#[SRR]       ,2:#[S“]        ,3:#[S“]        ,4:#[SR“S”]       ,5:#[S”]         ,6:#[S”]}	;# # raw-str-hash # | raw-str-quotes
+   sstr-raw“”{  include-prototype:false} 	:STR_RAW“”                     	{1:#[SRR]       ,2:#[S“]        ,                3:#[SR“S”]       ,4:#[S”]                 };
+  # str-raw⁄-{   include-prototype:false}	:(str-raw⁄-＃| str-raw⁄-“”)  ;
+   # str-raw⁄-＃{include-prototype:false} 	:'(r)(#+)(\")([\s\S]*)?(\3)(\2)'    {1:#[SRR] #[SC⁄—],2:#[S“] #[SC⁄—],3:#[S“] #[SC⁄—],4:#[SR“S”] #[SC⁄—],5:#[S”] #[SC⁄—],6:#[S”] #[SC⁄—]}	;# # raw-str-hash # | raw-str-quotes
+   # str-raw⁄-“”{include-prototype:false}	:'(r)(")([^"]*)(")'                  {1:#[SRR] #[SC⁄—],2:#[S“] #[SC⁄—],                3:#[SR“S”] #[SC⁄—],4:#[S”] #[SC⁄—]        };# " .* "
+
+  # risky ↓ due to this bug →                        https://github.com/BenjaminSchaaf/sbnf/issues/37
+      # S_RAW＃                            	='(#+)(\")([\s\S]*)?(\2)(\1)'                                        # # raw-str-hash # | raw-str-quotes
+      # str-raw＃{include-prototype:false} 	: S_RAW＃ {1:#[S“],2:#[S“],3:#[SR“S”]        ,4:#[S”],5:#[S”]}	;# # raw-str-hash # | raw-str-quotes
+      # S_RAW“”                           	='(")([^"]*)(")'                                                      # " .* "
+      # str-raw“”{include-prototype:false}	: S_RAW“” {1:#[S“],        2:#[SR“S”]        ,3:#[S”]        };# " .* "
+  # ↓ bugged under certain combinations of rules, so stitched all into one regex
+   # str-raw＃ {include-prototype:false}  	:          r‹＃                    ~     r＃›            	;# # raw-str-hash # | raw-str-quotes
+   # str-raw＃   {include-prototype:false}	:'(?x)(?<h>[#]+)(?<q> " )'{#[S“]} ~ '\g<q>\g<h>'{#[S”]}	;# # raw-str-hash # | raw-str-quotes
+  # ↓ avoid lookarounds
+  # str-raw⁄-{   include-prototype:false}	:c⁄-r (str-raw⁄-＃| str-raw⁄-“”)  ;
+
+ number{}  	: hex   | octal   | binary   | decimal  	;# data type 4/4 (dec last to avoid 0 in 0b parsed by it)
+ number⁄-{}	: hex⁄- | octal⁄- | binary⁄- | decimal⁄-	;
+
+  ## 4 Number                       Syntaxes
+   -boh[b,v]                   	:'([+-])?\b(#[b])(#[v])\b' {1:#[S±]        ,2:#[S_C]base        ,3:#[S_C]value        }	;
+   -boh⁄-[b,v]                 	:'([+-])?\b(#[b])(#[v])\b' {1:#[S±] #[SC⁄—],2:#[S_C]base #[SC⁄—],3:#[S_C]value #[SC⁄—]}	;
+   binary{   #[SMℤ]binary     }	: -boh[  '0b','#[D_BIN]']                                                              	;
+   octal{    #[SMℤ]octal      }	: -boh[  '0o','#[D_OCT]']                                                              	;
+   hex{      #[SMℤ]hexadecimal}	: -boh[  '0x','#[D_HEX]']                                                              	;
+   binary⁄-{ #[SMℤ]binary     }	: -boh⁄-['0b','#[D_BIN]']                                                              	;
+   octal⁄-{  #[SMℤ]octal      }	: -boh⁄-['0o','#[D_OCT]']                                                              	;
+   hex⁄-{    #[SMℤ]hexadecimal}	: -boh⁄-['0x','#[D_HEX]']                                                              	;
+
+
+   # todo: bug bites again, inline or add '' to the rule, https://github.com/BenjaminSchaaf/sbnf/issues/37
+   FLOATℯ                	='(#[±])?\b#[ℤ．ℤ﹖](#[ℯXP])?\b'	#
+   DEC                   	='(#[±])?\b#[ℤ．ℤ]\b'          	#
+   INTEGER               	='(#[±])?\b(#[ℤ])\b'          	#
+   decimal{#[S_C]value}  	: #floatℯ | dec | integer     	;# = sign? integer ('.' integer)? exponent?
+    (FLOATℯ              	{#[SMℯ]       ,1:#[S±]        ,2:#[S_Cℤ] #[S_C]significand        ,4:#[S⯻]decimal
+      ,                  	                               5:#[S_Cℤ] #[S_C]significand
+      ,                  	                               6:#[S_Cℯ]       ,7:#[S⯻ℯ]         ,8:#[S±]        ,9:#[S_Cℤ]}	# Floating point literal (exponent) 7,8,9 see ℯXP
+    |DEC                 	{#[SMℤ]decimal,1:#[S±]        ,2:#[S_Cℤ]                          ,3:#[S⯻]decimal       ,4:#[S_Cℤ]}
+    |INTEGER             	{#[SMℤ]decimal,1:#[S±]        ,2:#[S_Cℤ]}
+    )                    	'';
+   decimal⁄-{#[S_C]value}	: #floatℯ⁄- | dec⁄- | integer⁄-	;
+    (FLOATℯ              	{#[SMℯ]       ,1:#[S±] #[SC⁄—],2:#[S_Cℤ] #[S_C]significand #[SC⁄—],4:#[S⯻]decimal #[SC⁄—]
+      ,                  	                               5:#[S_Cℤ] #[S_C]significand #[SC⁄—]
+      ,                  	                               6:#[S_Cℯ] #[SC⁄—],7:#[S⯻ℯ] #[SC⁄—],8:#[S±] #[SC⁄—],9:#[S_Cℤ] #[SC⁄—]}
+    |DEC                 	{#[SMℤ]decimal,1:#[S±] #[SC⁄—],2:#[S_Cℤ]                   #[SC⁄—],3:#[S⯻]decimal #[SC⁄—],4:#[S_Cℤ] #[SC⁄—]}
+    |INTEGER             	{#[SMℤ]decimal,1:#[S±] #[SC⁄—],2:#[S_Cℤ]                   #[SC⁄—]}
+    )                    	'';
+
+   # todo: ↓ prebugged version, replace back when it's fixed
+   -decimal{#[S_C]value}    	: floatℯ | dec | integer      	;# = sign? integer ('.' integer)? exponent?
+    integer{#[SMℤ]decimal}  	:'(#[±])?\b(#[ℤ])\b'          	{1:#[S±]        ,2:#[S_Cℤ]} ;
+    dec    {#[SMℤ]decimal}  	:'(#[±])?\b#[ℤ．ℤ]\b'          	{1:#[S±]        ,2:#[S_Cℤ]                          ,3:#[S⯻]decimal       ,4:#[S_Cℤ]};
+    floatℯ {#[SMℯ]}         	:'(#[±])?\b#[ℤ．ℤ﹖](#[ℯXP])?\b'	{1:#[S±]        ,2:#[S_Cℤ] #[S_C]significand        ,4:#[S⯻]decimal
+      ,                     	                              	                 5:#[S_Cℤ] #[S_C]significand
+      ,                     	                              	 6:#[S_Cℯ]       ,7:#[S⯻ℯ]        ,8:#[S±]        ,9:#[S_Cℤ]};# Floating point literal (exponent) 7,8,9 see ℯXP
+   -decimal⁄-{#[S_C]value}  	: floatℯ⁄- | dec⁄- | integer⁄-	;
+    integer⁄-{#[SMℤ]decimal}	:'(#[±])?\b(#[ℤ])\b'          	{1:#[S±] #[SC⁄—],2:#[S_Cℤ]                   #[SC⁄—]}                                         	;
+    dec⁄-    {#[SMℤ]decimal}	:'(#[±])?\b#[ℤ．ℤ]\b'          	{1:#[S±] #[SC⁄—],2:#[S_Cℤ]                   #[SC⁄—],3:#[S⯻]decimal #[SC⁄—],4:#[S_Cℤ] #[SC⁄—]}	;
+    floatℯ⁄- {#[SMℯ]}       	:'(#[±])?\b#[ℤ．ℤ﹖](#[ℯXP])?\b'	{1:#[S±] #[SC⁄—],2:#[S_Cℤ] #[S_C]significand #[SC⁄—],4:#[S⯻]decimal #[SC⁄—]
+      ,                     	                              	                 5:#[S_Cℤ] #[S_C]significand #[SC⁄—]
+      ,                     	                              	 6:#[S_Cℯ] #[SC⁄—],7:#[S⯻ℯ] #[SC⁄—],8:#[S±] #[SC⁄—],9:#[S_Cℤ] #[SC⁄—]};
+
+   # decimal⁄- {#[SMℤ]decimal    } :'(#[±])?\b#[ℤ](#[．])?(#[ℤ])?(#[ℯXP])*\b' ''  ;
+   #decimal{#[SMℤ]decimal}	:'(#[±])?#[ℤ]((#[．])(#[ℤ]))?#[ℯXP]?'	#
+   # {#[S_C]value           ,1:#[S±],2:#[S_Cℤ],4:#[S⯻]decimal,5:#[S_Cℤ]
+   # ,6	:                             #[S_Cℯ] };
+
+## Helpers                                           #
+    keyword¬    	: bool¬  | null¬    	;
+ keyword¬⁄-     	: bool⁄-¬  | null⁄-¬	;
+    keyword₌¬   	: bool₌¬ | null₌¬   	;
+   bool¬{ #[S🛑]}	: bool       ;# todo: replace with literal if bugs
+   null¬{ #[S🛑]}	: null	;
+ bool⁄-¬{ #[S🛑]}	: bool⁄-       ;
+ null⁄-¬{ #[S🛑]}	: null⁄-  	;
+   bool₌¬{#[S🛑]}	: bool p₌🛑	;
+   null₌¬{#[S🛑]}	: null p₌🛑	;
+
+ POP_S	='(?=\S)'	# return early
+ POP  	=''      	# return early
+
+ ### Functions            	                        	#
+ word[    pattern]{}      	:'\b(?:#[pattern])\b'   	;# (?: Non-capturing groups)
+ word⁄-[pattern]{#[SC⁄—]} 	:'\b(?:#[pattern])\b' ''	;# todo: not sure why bugs in slashdash comments without ''
+ word⚿[  pattern]{keyword}	: word[pattern]         	;
+
+ ### Identifier	  Parts                              #
+  U🔣           	='[\x{0021}-\x{10FFFF}]'            	# invalid: ≤0x20 or >0x10FFF)
+  CHAR🆔¬       	=`\/(){}<>;[]=,"`                   	# ! enclose in a [SET] to use
+  CHAR🆔        	='[#[U🔣]&&[^#[CHAR🆔¬]]&&[^#[W␠␤S]]]'	# ≠ identifier-char = u🔣 - line␠ - CHAR🆔¬  since line␠ has rec comments
+  CHAR🆔−DIG    	='[#[CHAR🆔]&&[^#[DIGIT]]]'          	#
+  CHAR🆔−DIG±   	='[#[CHAR🆔−DIG]&&[^#[±]]]'          	#
+
+ #todo: (char“”)* bugs, workaround is to use * inside groups or even inside '[^\"]'
+
+ ### String	  Parts	#
+  char“∞”{}	:CHAR“∞”{#[S“S”],2:#[S⎋],4:#[S⎋H]};
+
+  chars“”{}  	:((`\`{#[S“S”]  #[S⎋]        } u⎋  ) | ('[^\"]*'{#[S“S”]               }))	;
+  chars“”⁄-{}	:((`\`{#[S“S”]  #[S⎋] #[SC⁄—]} u⎋⁄-) | ('[^\"]*'{#[S“S”]        #[SC⁄—]}))	;
+  chars“”⚿{} 	:((`\`{#[S“S”]  #[S⎋] #[SC⁄—]} u⎋⁄-) | ('[^\"]*'{#[S“S”] #[S⚿] #[SC⁄—]})) 	;
+  chars“”-n{}	:((`\`{#[S_M_S] #[S⎋]        } u⎋-n) | ('[^\"]*'{#[S_M_S]              }))	;
+  char“”{}   	:  `\`{#[S“S”]  #[S⎋]        } u⎋    |  '[^\"]'{ #[S“S”]               }  	;
+  char“”⁄-{} 	:  `\`{#[S“S”]  #[S⎋] #[SC⁄—]} u⎋⁄-  |  '[^\"]'{ #[S“S”]        #[SC⁄—]}  	;
+  char“”-n{} 	:  `\`{#[S_M_S] #[S⎋]        } u⎋-n  |  '[^\"]'{ #[S_M_S]              }  	;
+  u⎋{}       	: char⎋   | char⎋u                                                        	;
+  u⎋⁄-{}     	: char⎋⁄- | char⎋u⁄-                                                      	;
+  u⎋-n{}     	: char⎋-n | char⎋u-n                                                      	;
+   CHAR“∞”   	='((\\([#[CHAR⎋]]|(#[CHAR⎋U])))|[^\"])*'
+   CHAR⎋     	=`"\/bfnrt`                          	#
+   CHAR⎋U    	='u\{#[D1HEX]{1,6}\}'                	#
+   char⎋{}   	:'[#[CHAR⎋]]'{#[S“S”] #[S⎋]         }	;
+   char⎋⁄-{} 	:'[#[CHAR⎋]]'{#[S“S”] #[S⎋]  #[SC⁄—]}	;
+   char⎋-n{} 	:'[#[CHAR⎋]]'{#[S_M_S] #[S⎋]        }	;
+   char⎋u{}  	:'#[CHAR⎋U]' {#[S“S”] #[S⎋H]        }	;
+   char⎋u⁄-{}	:'#[CHAR⎋U]' {#[S“S”] #[S⎋H] #[SC⁄—]}	;
+   char⎋u-n{}	:'#[CHAR⎋U]' {#[S_M_S] #[S⎋H]       }	;
+
+  chars“tst”{}	:(('\\'{#[S“S”]  #[S⎋]        } ('[#[CHAR⎋]]'{#[S“S”] #[S⎋]         }   | '#[CHAR⎋U]' {#[S“S”] #[S⎋H]        })  ) | ('[^"]*'{#[S“S”]               }))	;
+
+  r{      include-prototype:false}	: 'r(?=#|")' {#[SRR]}        	;
+  r‹＃{   include-prototype:false} 	: '(#+)(")'  {#[S“]}         	;
+  r＃›{   include-prototype:false} 	:'(")(\1)'  {#[S”]}          	;
+  r⁄-{  include-prototype:false}  	: 'r(?=#|")' {#[SRR] #[SC⁄—]}	;
+  r‹＃⁄-{include-prototype:false}  	: '(#+)(")'  {#[S“]  #[SC⁄—]}	;
+  r＃›⁄-{include-prototype:false}  	:'(")(\1)'  {#[S”]  #[SC⁄—]} 	;
+
+
+ ### Number	  Parts                  	#
+  ±        	='[+-]'                  	#
+  ．        	=`.`                     	#
+  ℯ        	='e|E'                   	#
+  ℯXP      	='(#[ℯ])(#[±])?(#[ℤ])'   	# ≝ (e|E) sign? integer
+  ℤ        	='#[D_DEC]'              	# leading 0s are allowed
+  ℤ．ℤ      	='(#[ℤ])(#[．])(#[ℤ])+'   	#
+  ℤ．ℤ﹖     	='(#[ℤ])((#[．])(#[ℤ])+)?'	#
+ ### Number	  Digits                 	#
+  DIGIT    	='[0-9]'                 	#
+  D_BIN    	='[0-1][0-1_]*'          	#
+  D_OCT    	='[0-7][0-7_]*'          	#
+  D_DEC    	='[0-9][0-9_]*'          	#
+  D1HEX    	='[0-9a-fA-F]'           	#
+  D_HEX    	='[#[D1HEX]][#[D1HEX]_]*'	#
+
+# FAIL due to SBNF limits can't use rules in interpolation  #
+ ### Number parts                                            #
+  #±                	:'[+-]'  {#[S±]}       	;
+  #base[B]          	:'0#[B]' {#[S_C]base}  	;
+  #ddot             	:`.`     {#[S⯻]decimal}	;
+  #e                	:'e|E'   {#[S⯻ℯ]}      	;
+  #exponent{#[S_Cℯ]}	: e sign? integer      	;
+  #integer{#[S_Cℤ]} 	: d-dec                	;# leading 0s are allowed
+
+
+## Comments                                                  #
+ c⁄-n␠{}               	: c⁄-         n␠*                      	;# slash-dash
+ c⁄line{     #[SC⁄⁄] } 	: c⁄⁄                          ~c⁄end━ 	;# ~lazy match anything up to ␤
+ c⁄∗block{   #[S⁄∗C∗⁄]}	: c⁄∗                           ~c∗⁄   	; # no 🗘 version
+ c⁄∗block🗘doc{}        	:     ( c⁄∗﹗doc🗘 |  c⁄∗block🗘)         	;# →🗘 commented_block|doc
+  c⁄∗block🗘{#[S⁄∗C∗⁄]} 	: c⁄∗ (~c⁄∗﹗doc🗘 | ~c⁄∗block🗘)* ~c∗⁄   	;#  🗘 commented_block
+  c⁄∗﹗doc🗘{ #[S⁄∗﹗C∗⁄]}	:   c⁄∗﹗ (~c⁄∗﹗doc🗘 | ~c⁄∗block🗘)* ~c∗⁄	;#  🗘 commented_block_doc
+ #c⁄∗block{#[S⁄∗C∗⁄]}  	: (`/*`{#[S⁄∗]} ~'\*/'{#[S∗⁄]})        	; # backup
+ #c⁄∗block{ #[S⁄∗C∗⁄]} :'(\/\*)([\s\S]*?)(\*\/)'{1:#[S⁄∗],3:#[S∗⁄]}; # single-regex FAILs since matches are by line, so blocks can't match newlines inside
+
+ ## Comment atoms                                            #
+  C⁄⁄∨⁄∗       	='#[C⁄⁄]|#[C⁄∗]'	#
+  C⁄⁄          	=`//`           	#
+  C⁄∗          	=`/*`           	#
+  C⁄∗﹗         	=`/*!`          	#
+  C∗⁄          	= `*/`          	#
+  C⁄—          	=`/-`           	#
+  C⁄—2         	='\/-'          	#
+  c⁄-{#[SC⁄—]} 	:C⁄—{ #[S⁄—]}   	;
+  c⁄-2{#[SC⁄—]}	:C⁄—2{ #[S⁄—]}  	;# todo: investigate why crashes
+  c⁄⁄          	:C⁄⁄{ #[S⁄⁄]}   	;
+  c⁄end━       	: 🔚{#[S⁄⁄E━]}   	;# lookahead needed to pop two contexts
+  c⁄∗          	: C⁄∗{  #[S⁄∗]} 	;
+  c⁄∗﹗         	: C⁄∗﹗{ #[S⁄∗﹗]}	;
+  c∗⁄          	: C∗⁄{ #[S∗⁄]}  	;
+
+# todo: matching spec grammar
+nodeb␠{}	: (b␠* l⎋ b␠*) | b␠ b␠*	;#≝ ws* escline ws* | ws+
+node␠{} 	: (ws* l⎋ ws*) | ws ws*	;#≝ ws* escline ws* | ws+
+ws{}    	: b␠c⁄∗                	;#≝ bom | unicode-space | multi-line-comment
+l⎋{}    	: l⧵ ws* (c⁄line | u␤) 	;#≝ \ ws* (single-line-comment | newline)
+l⧵{}    	:`\`{#[S⯻━]}           	;
+l␠{}    	: u␤ | ws | c⁄line     	;#≝ newline | ws | single-line-comment
+
+# todo: comment is not needed as it's part of a prototype? Exclude prototype to highlight illegal lines? (though works fine as is)
+W␠␤    	='[#[B␠]#[U␤]]'      # #no-recur#
+W␠␤S   	='[#[B␠]#[U␤S]]'     # #ss# !!! but doesn't do \r\n as an atom?
+b␠c⁄∗{}	: b␠ | c⁄∗block🗘doc	;
+EOF    	='$(?!#[U␤S])'       # use #ss#
+BOM    	='[\x{FEFF}]'        #
+U␤     	='(?>\R)'           # '(?>\r\n?|[\n\x{C}\x{85}\x{2028}\x{2029}])'
+U␠     	='[\x{9}\x{20}\x{A0}\x{1680}\x{2000}\x{2001}\x{2002}\x{2003}\x{2004}\x{2005}\x{2006}\x{2007}\x{2008}\x{2009}\x{200A}\x{202F}\x{205F}\x{3000}]' ## #ss#
+B␠     	='[#[BOM]#[U␠]]'                            	# #ss#
+L━∅    	='^(#[B␠])*#[U␤S]'                          	#     empty line's ␤ (use #ss#)
+L━∅⁄⁄  	='^(#[B␠])?(#[B␠])*((#[C⁄⁄])[\s\S]*)?#[U␤S]'	#     empty line's ␤ with single line comment (use #ss#)
+L━∅¬   	=   '(?<=.)#[U␤S]'                          	# non empty line's ␤ (use #ss#)
+EXP␤   	=      '(?=#[U␤S])'                         	# lookahead needed to pop two contexts, todo: fails with (?=(?>\R))
+🔚      	=    '(?=#[U␤S]|#[EOF])'                    	# lookahead needed to pop two contexts, todo: fails with (?=(?>\R))
+CHILD¬ 	='(?=\{)'                                   	# the following element is not a {child}
+U␤S    	='[\r\n\x{C}\x{85}\x{2028}\x{2029}]'        	# #ss# !!! but doesn't do \r\n as an atom?
+
+#WS   	='(#[B␠])|((?>(#[C⁄∗])(.*)(#[C∗⁄])))'    # ! fails marking nested blocks, otherwise rule:'#[WS]*'{1:uspb,2:#[S⁄∗C∗⁄],3:#[S⁄∗],4:inside,5:#[S∗⁄]};
+#LINE␠	='#[U␤]|#[WS]|(?>#[C⁄⁄][^#[U␤]]*#[U␤])'  # #no-recur#
+
+# Convert ↑ to rules ↓ with scope
+u␠{}    	:'#[U␠]'       	;
+b␠{}    	:'#[B␠]'       	;
+w␠␤{}   	:'[#[B␠]#[U␤]]'	;
+u␤{}    	:'#[U␤S]'      	;# \R without \v, use #ss#
+exp␤{}  	: '#[EXP␤]'    	;
+child¬{}	: '#[CHILD¬]'  	;
+
+b␠2{include-prototype:false}	:'#[B␠]'	;
+
+l━∅{  include-prototype:false}	:  '#[L━∅]'  {#[S🛑]}                      	;
+l━∅⁄⁄{include-prototype:false}	:  '#[L━∅⁄⁄]'{1:#[S🛑], 3:#[SC⁄⁄],4:#[S⁄⁄]}	;
+l━∅¬{ include-prototype:false}	:  '#[L━∅¬]'{#[S🛑]}                       	;
+
+
+## Global Scope vars
+S🆔     	='entity.name.'
+S🆔🔖    	='#[S🆔]tag.'
+SMAP   	='meta.mapping'
+SM⚿    	='#[SMAP].key meta.property-name'
+S⚿     	='entity.other.attribute-name'
+SM₌    	='#[SMAP]'
+S₌     	='punctuation.separator.key-value'
+SM₌V   	='#[SMAP].value meta.property-value'
+SM_ARG 	='meta.argument'
+SM_PROP	='meta.property'
+SP     	='punctuation.definition.'
+ SPTERM	='punctuation.terminator.node'
+ S｛    	='punctuation.section.mapping.begin' #❴❵⎨⎬｛｝
+ S｝    	='punctuation.section.mapping.end'
+SM🔖    	='meta.annotation'
+S🛑     	='invalid.illegal.position' # invalid.illegal.unexpected-text
+## Data
+SNULL	='constant.language.null'
+SBOOL	='constant.language.boolean'
+## Number
+ S±  	='keyword.operator.arithmetic'
+ SMℤ 	='meta.number.integer.'
+ SMℯ 	='meta.number.float'
+ S_C 	='constant.numeric.'
+ S_Cℤ	='#[S_C]integer'
+ S_Cℯ	='#[S_C]exponent'
+ S⯻  	='punctuation.separator.'
+  S⯻ℯ	='#[S⯻]exponent'
+  S⯻🔖	='#[S⯻]annotation.'
+  S⯻━	='#[S⯻]continuation.line'
+## String
+ S_P_STR	='#[SP]string.'
+ S“     	='#[SP]string.begin'
+ S”     	='#[SP]string.end'
+ S_M_S  	='meta.string'
+ SRR    	='storage.type.string'
+ S“S”   	='#[S_M_S] string.quoted.double'
+ SR“S”  	='#[S_M_S] string.quoted.double.raw'
+ S⎋     	='constant.character.escape'
+ S⎋H    	='constant.character.escape.unicode.16-bit-hex'
+## Comment
+ S⁄∗C∗⁄ 	='comment.block'
+ S⁄∗﹗C∗⁄	='#[S⁄∗C∗⁄].documentation'
+ SC⁄—   	='comment.line.slash-dash'
+ SC⁄—｛  	='comment.block.slash-dash'
+ SC⁄⁄   	='comment.line.double-slash'
+ S⁄     	='#[SP]comment.'
+  S⁄—   	='#[S⁄]begin'
+  S⁄⁄   	='#[S⁄]begin'
+  S⁄∗   	='#[S⁄]begin'
+  S⁄∗﹗  	='#[S⁄]begin'
+  S⁄⁄E━ 	='#[S⁄]end'
+  S∗⁄   	='#[S⁄]end'
+  S⁄—｝  	='#[S⁄]end'
+
+# todo delete
+#CHAR🆔REC     	='[#[CHAR🆔](?!#[LINE␠])]'              # recursion: line␠ → b␠c⁄∗ → multi_line_comment → commented_block🗘
+#char🆔rec     	: char🆔 (?!line␠)                    	;# recursion: line␠ → b␠c⁄∗ → multi_line_comment → commented_block🗘
+#bare🆔∨keyword	: bare🆔-g-pre | '#[±]' (bare🆔-g-pos)?	;
+#bare🆔-g-pre  	: char🆔−dig± char🆔rec*               	;# pre-sign: exclude digit/sign to avoid clashes
+#bare🆔-g-pos  	: char🆔−dig  char🆔rec*               	;# pos-sign: exclude digit only
+#char🆔−dig    	:'[[#[CHAR🆔]]&&[^#[DIGIT]]]'         	;
+#char🆔−dig±   	:'[[#[CHAR🆔−DIG]]&&[^#[±]]]'         	;
+#char🆔rec     	:'#[CHAR🆔]'                          	;# recursion: line␠ → b␠c⁄∗ → multi_line_comment → commented_block🗘
+# comments
+ ## todo?	del?               	#
+  #C⁄⁄   	=`//`              	#
+  #C⁄∗   	=`/*`              	#
+  #C∗⁄   	= `*/`             	#
+#eof     	: '#[EOF]'         	;
+#u␠      	:'#[U␠]'           	;
+#b␠      	:'#[B␠]'           	;
+#bom     	:'#[BOM]'          	;
+NEXT“    	='(?=r\"|r#*\"|\")'	# not sure why needed as a workaround
+next“    	: NEXT“            	; #r###"
+
+
+Z 	='#[SP]string.DEBUG'  #
+ZR	='#[S🛑].DBG'
+ZB	='#[S🆔🔖]DBG'
+ZG	='#[S“S”]DBG'
+ZN	='#[S_C]DBG'
+ZO	='#[S⚿].DBG'
+
+
+
+_S_S='Stringify everything'
+# but for stringify I'd need capturing groups
+_1 = '()'
+_2 = '()()'
+_3 = '()()()'
+_4 = '()()()()'
+_5 = '()()()()()'
+_6 = '()()()()()()'
+_7 = '()()()()()()()'
+_8 = '()()()()()()()()'
+_9 = '()()()()()()()()()'
+NNM='("?[a-z]"?)+' #NNM='(#[BARE🆔])+'
+TTYP='\(r?"?[a-zA-Z\d]+"?\)' TVAL='"?[a-zA-Z\d]+"?'
+TBOOL      	='()(?<t>true)|false|null'
+C⁄–TBOOL   	='\/-\ *(#[TBOOL])'
+C⁄–T_BOOL  	='\/-\ *((#[TTYP])(#[TBOOL]))'
+T_BOOL     	=    '(#[TTYP])(#[TBOOL])'
+TDIG       	='[e_\d\+\-\.]+'
+C⁄–TDIG    	='\/-\ *(#[TDIG])'
+C⁄–T_DIG   	='\/-\ *((#[TTYP])(#[TDIG]))'
+T_DIG      	=    '(#[TTYP])(#[TDIG])'
+P_STR₌V    	=           '#[STR]#[P₌]#[TVAL]'
+C⁄—P_STR₌V 	='\/-\ *(#[P_STR₌V])'
+STR₌TYPV   	=           '#[STR]#[P₌]#[TTYP]#[TVAL]'
+C⁄—STR₌TYPV	='\/-\ *(#[STR₌TYPV])'
+T_STR      	=    '#[TTYP]#[STR]'
+C⁄–T_STR   	='\/-\ *#[T_STR]'
+C⁄—STR     	='\/-\ *(#[STR_E])'
+
+P⚿₌V     	=    '#[P⚿]#[P₌]#[TVAL]'
+C⁄—P⚿₌V  	= '\/-#[P⚿]#[P₌]#[TVAL]'
+P⚿₌T_V   	=    '#[P⚿]#[P₌]#[TTYP]#[TVAL]'
+C⁄—P⚿₌T_V	= '\/-#[P⚿]#[P₌]#[TTYP]#[TVAL]'
+
+P⚿='#[NNM]'
+# STR_RAW uses named groups not to depend on relative position
+STR_E	='#[STR_RAW]|#[ESTR“”]' #  bugs as a rule
+
+T_END=';|\n' TPOP_END='(?=#[T_END])'
+# NOTYP='(?!\()' # not needed since values are forbidden to start with (
+el-stringify{}: n␠
+  |(C⁄–T_STR{ ⁄–()“arg”                   })
+  |(C⁄–T_BOOL{a()kw #[SBOOL]              })
+  |(C⁄–T_DIG{ a()🔢 #[S_C]value            })
+  |(C⁄—STR₌TYPV{⁄–()“⚿”                   })
+  |(C⁄—P_STR₌V{ ⁄–“⚿”                     })
+  |(C⁄—P⚿₌V{   C⁄—⚿                       })
+  |(C⁄—P⚿₌T_V{ C⁄—⚿()                     })
+  |(C⁄—STR{     ⁄–“arg”                   })
+  |(C⁄–TBOOL{   a-kw #[SBOOL]             })
+  |(C⁄–TDIG{    a🔢 #[S_C]value            })
+  |(   T_STR{ ()“arg”                     })
+  |(   T_BOOL{a-kw #[SBOOL]               })
+  |(   T_DIG{ at🔢 #[S_C]value             })
+  |(   STR₌TYPV{ “⚿”()                    })
+  |(   P_STR₌V{  “⚿”                      })
+  |(   P⚿₌V{    ⚿                         })
+  |(   P⚿₌T_V{  ⚿()                       })
+  |(   STR{     “arg”                     })
+  |(   TBOOL{   #[SBOOL],1:b,2:b2 })
+  |(   TDIG{    a🔢 #[S_C]value })
+  ;
