@@ -35,7 +35,7 @@ Open any `kdl` file (e.g. [syntax_example_screen.kdl](./test/syntax_example_scre
   | KDL construct	| Scope name
   | :------------	| :----------
   | Mappings     	| `meta.mapping` `.key`/`.value` <br> `punctuation.separator.key-value` `punctuation.section.mapping` `.begin`/`.end` `.kdl`
-  | Number       	| `meta.number` `.decimal`/`.float` <br> `.integer` `.binary`/`.decimal`/`.hexadecimal`/`.octal` <br> `constant.numeric` `.base`/`.exponent`/`.integer`/`.mantissa`/`.value` <br> `punctuation.separator` `.decimal`/`.exponent` `.kdl`
+  | Number       	| `meta.number` `.decimal`/`.float` <br> `.integer` `.binary`/`.decimal`/`.hexadecimal`/`.octal` <br> `constant.numeric` `.base`/`.exponent`/`.integer`/`.significand`/`.value` <br> `punctuation.separator` `.decimal`/`.exponent` `.kdl`
   | String       	| `meta.string` `storage.type.string` `string.quoted.double` `string.quoted.double.raw` <br> `punctuation.definition.string` `.begin`/`.end` `.kdl`
   | Comment      	| `comment.block` `comment.block.documentation` `comment.line.double-slash` <br> `punctuation.definition.comment` `begin`/`end` `.kdl`
   | Annotation   	| `meta.annotation` `punctuation.separator.annotation` `.begin`/`.end` `.kdl`

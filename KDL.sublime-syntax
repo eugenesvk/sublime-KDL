@@ -296,8 +296,8 @@ contexts:
       scope               : meta.number.float.kdl constant.numeric.value.kdl
       captures            :
         1:                  keyword.operator.arithmetic.kdl
-        2:                  constant.numeric.mantissa.kdl constant.numeric.integer.kdl
-        3:                  constant.numeric.mantissa.kdl
+        2:                  constant.numeric.significand.kdl constant.numeric.integer.kdl
+        3:                  constant.numeric.significand.kdl
         4:                  punctuation.separator.decimal.kdl
         5:                  constant.numeric.integer.kdl
         6:                  constant.numeric.exponent.kdl       #↓6
@@ -309,8 +309,8 @@ contexts:
       scope               : meta.number.float.kdl constant.numeric.value.kdl
       captures            :
         1:                  keyword.operator.arithmetic.kdl
-        2:                  constant.numeric.mantissa.kdl constant.numeric.integer.kdl
-        3:                  constant.numeric.mantissa.kdl
+        2:                  constant.numeric.significand.kdl constant.numeric.integer.kdl
+        3:                  constant.numeric.significand.kdl
         4:                  punctuation.separator.decimal.kdl
         5:                  constant.numeric.integer.kdl
   binary                  :                       # Integer literal (binary)
