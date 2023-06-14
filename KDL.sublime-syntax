@@ -394,10 +394,12 @@ contexts:
         2:                  comment.line.double-slash.kdl
         3:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
   comment_slashdash_block :                       # Slashdash block comment
-    - match               : '/-{'
-      scope               : punctuation.definition.comment.begin.kdl
+    - match               : '(/-)({)'
+      captures            :
+        1:                  punctuation.definition.comment.begin.kdl
+        2:                  punctuation.section.mapping.begin
       push                :
-      - meta_scope        : comment.block.kdl
+      - meta_scope        : comment.block.double-slash.kdl
       - match             : '}'
         scope             : punctuation.definition.comment.end.kdl
         pop               : true
