@@ -94,6 +94,12 @@ my-binary 0b10101101
 //          ^^^^^^^^                    constant.numeric.value.kdl, meta.number.integer.binary.kdl
 
 bignum 1_000_000 // Finally, all numbers can have underscores to help readability:
+//     ^^^^^^^^^                        meta.number.integer.decimal.kdl
+//     ^                                constant.numeric.value.kdl
+//      ^                               punctuation.separator.number.kdl
+//       ^^^                            constant.numeric.value.kdl
+//          ^                           punctuation.separator.number.kdl
+//           ^^^                        constant.numeric.value.kdl
 
 // 4. Test Children
 node-outer {
