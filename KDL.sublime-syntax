@@ -218,9 +218,9 @@ contexts:
     - include: comment_slashdash_space
     - include: comment_slashdash_node
 
-  keyword:
-    - include: boolean
-    - include: 'null'
+  keyword                 :
+    - include             : boolean
+    - include             : 'null'
   # keyword-illegal         : # todo: remove? since matching subsequent = in true=1 as illegal instead
     # - include             : boolean-illegal
     # - include             : null-illegal
@@ -270,11 +270,11 @@ contexts:
   # Values
   boolean                 :
     - match               : \b(true|false)\b
-      scope               : constant.language.boolean.kdl
+      scope               : meta.argument keyword.other.kdl constant.language.boolean.kdl
 
   'null'                  :
     - match               : '\bnull\b'
-      scope               : constant.language.null.kdl
+      scope               : meta.argument keyword.other.kdl constant.language.null.kdl
 
   # boolean-illegal         :
     # - match               : \b(true|false)\b
