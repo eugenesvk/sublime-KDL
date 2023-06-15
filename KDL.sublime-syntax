@@ -221,6 +221,9 @@ contexts:
   keyword:
     - include: boolean
     - include: 'null'
+  # keyword-illegal         : # todo: remove? since matching subsequent = in true=1 as illegal instead
+    # - include             : boolean-illegal
+    # - include             : null-illegal
 
   property-value:
     - match               : ''
@@ -272,6 +275,15 @@ contexts:
   'null'                  :
     - match               : '\bnull\b'
       scope               : constant.language.null.kdl
+
+  # boolean-illegal         :
+    # - match               : \b(true|false)\b
+      # scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl
+
+  # null-illegal            :
+    # - match               : '\bnull\b'
+      # scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl
+
 
   # Values - Strings
   string-quoted-double    :
