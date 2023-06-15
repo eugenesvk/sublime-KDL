@@ -190,6 +190,21 @@ node-with-line-continuations \ // Multiple single-line comments
 //                           ^                    punctuation.separator.continuation.line.kdl
 //                             ^^                 punctuation.definition.comment.kdl
 //                             ^^^^^^^^           comment.line.double-slash.kdl
-  3 4                          // line continuation
+  3 4                        \ // line continuation
+//                           ^                    punctuation.separator.continuation.line.kdl
 //                             ^^                 punctuation.definition.comment.kdl
 //                             ^^^^^^^^^^^^^^^^^^ comment.line.double-slash.kdl
+  3 4                        \/*
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                            ^^                  punctuation.definition.comment.begin.kdl, comment.block
+  or block comments /* even nested */ */ //
+//                  ^^                          punctuation.definition.comment.begin.kdl, comment.block
+//                                 ^^           punctuation.definition.comment.end.kdl, comment.block
+//                                    ^^        punctuation.definition.comment.end.kdl, comment.block
+//<-                                            comment.block.kdl
+ //<-                                           comment.block.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        comment.block.kdl
+//                  ^^^^^^^^^^^^^^^^^           comment.block.kdl comment.block.kdl
+//                                       ^^     punctuation.definition.comment, comment.line.double-slash.kdl
+  5 6
+// TODO add block comments for line unresolved conflict https://github.com/kdl-org/kdl/issues/322
