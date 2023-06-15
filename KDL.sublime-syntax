@@ -372,15 +372,22 @@ contexts:
     # - include             : line-continuation
     # - match               : (?=\s*($|;|#))
       # pop                 : true
-  line-continuation       : # escline
-    - match               : (\\)({{ws_s}}*)
-      captures            :
-        1:                  punctuation.separator.continuation.line.kdl
-      push                :
-      - include           : comment_line
-      - match             : $
-        pop               : true
-
+  line-continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
+                          #                  =↑single-line-comment_no_nl newline
+    - match               : \\
+      scope               : punctuation.separator.continuation.line.kdl
+      set                 : line_continuation-line1
+  line_continuation-line1:
+    - include             : ws                          # ≝ ... ws*
+    - include             : comment_line_no_nl          # ≝ ... single-line-comment (without newline, so ↓ captures)
+    - match               : '({{nl_s}})'                # ≝ ... newline
+      set                 : line_continuation-line_next
+    - include             : non_ws_illegal
+  line_continuation-line_next:
+    - include             : ws
+    - include             : comment_line_no_nl
+    - include             : newline_illegal
+    - include             : pop_before-non_ws
 
   child_block             :
     - match               : '{'
