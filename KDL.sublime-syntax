@@ -417,6 +417,11 @@ contexts:
         1:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
         2:                  comment.line.double-slash.kdl
         3:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
+  comment_line_no_nl      :                       # Single-line comment without capturing ending ␤
+    - match               : '{{single_line_comment_no_nl}}'
+      captures            :
+        1:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
+        2:                  comment.line.double-slash.kdl
   comment_slashdash_block :                       # Slashdash block comment
     - match               : '(/-)({)'
       captures            :
