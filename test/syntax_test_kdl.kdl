@@ -72,7 +72,8 @@ my-num    +1.234e-42 // decimal-radix numbers
 //               ^                                keyword.operator.arithmetic.kdl
 //          ^                                     punctuation.separator.decimal.kdl
 //              ^                                 punctuation.separator.exponent.kdl
-//         ^^^^^                                  constant.numeric.mantissa.kdl
+//         ^                                      constant.numeric.significand.kdl
+//           ^^^                                  constant.numeric.significand.kdl
 //        ^^^^^^^^^                               meta.number.float.kdl, constant.numeric.value.kdl
 my-num    -1.234    //   with optional exponent
 //        ^                                       keyword.operator.arithmetic.kdl
