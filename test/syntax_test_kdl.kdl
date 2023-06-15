@@ -1,7 +1,7 @@
 // SYNTAX TEST "Packages/KDL/KDL.sublime-syntax"
 
 // 1. Test overall source match
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.kdl
 
 // 2. Test Comments
 /**/ // avoid being parsed as a doc '/**' comment
@@ -12,9 +12,9 @@
  //<-  punctuation.definition.comment.begin.kdl
 
 /*!Doc block comment /* nested block comment */*/
-//                   ^^                              punctuation.definition.comment.begin.kdl
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^      comment.block.kdl
-//                                           ^^      punctuation.definition.comment.end.kdl
+//                   ^^                              comment.block.documentation.kdl punctuation.definition.comment.begin.kdl
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^      comment.block.documentation.kdl comment.block.kdl
+//                                           ^^      comment.block.documentation.kdl punctuation.definition.comment.end.kdl
 //<-                                                 comment.block.documentation.kdl
  //<-                                                comment.block.documentation.kdl
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    comment.block.documentation.kdl
@@ -180,6 +180,7 @@ node-with-line-continuation \ // Nodes can be separated into multiple lines with
 //                            ^^                  punctuation.definition.comment.kdl
 //                            ^^^^^^^^^^^^^^^^^^^ comment.line.double-slash.kdl
   "After line continuation"
+//^                                               punctuation.definition.string.begin.kdl
 
 node-with-line-continuations \ // Multiple single-line comments
 //                           ^                    punctuation.separator.continuation.line.kdl
