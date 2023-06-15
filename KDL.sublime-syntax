@@ -204,10 +204,12 @@ contexts:
     - include: octal
     - include: binary
   comments:
-    - include: comment_block_doc
-    - include: comment_block
+    - include: comment_blocks
     - include: comment_slashdash
     - include: comment_line
+  comment_blocks:
+    - include: comment_block_doc
+    - include: comment_block
   comment_slashdash:
     - include: comment_slashdash_block
     - include: comment_slashdash_straw
