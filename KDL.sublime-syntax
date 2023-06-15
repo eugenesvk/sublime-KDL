@@ -183,6 +183,7 @@ contexts:
 
   patterns:
     - include: keyword
+    - include: argument_typed
     - include: numbers
     - include: strings
     - include: type-annotation
@@ -475,6 +476,24 @@ contexts:
       - match             : '{{node_terminator}}'
         scope             : punctuation.definition.comment.end.kdl punctuation.terminator.node.kdl
         pop               : 1
+
+  argument_typed          :
+    - match               : (?=\()
+      set                 :
+      - meta_scope        : meta.argument.kdl
+      - include           : argument_untyped
+  argument_untyped        :
+    - include             : type-annotation
+    - include             : argument_value
+  argument_value          :
+    - match               : ''
+      set                 :
+      - meta_scope        : argument.value.kdl # allows styling arguments differently
+      - include           : keywords
+      - include           : strings
+      - include           : number
+      - include           : pop_before␠
+      - include           : pop_before🆔¬
 
   type-annotation         :
     - match               : \(
