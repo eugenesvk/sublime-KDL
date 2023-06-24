@@ -1,25 +1,25 @@
-node_parent "argument1" +5 property1=1 p2=true p3="www.com/?q={}" "arg3😁utf8"  {
-  node_child p1=(type_annotation)"query" // intersperse arguments and properties
-  terminate-child1; terminate-child2; // ␤ ; eof
+node_parent "argument" +5 property⚿=1 p⚿=true p⚿="www.com/?q={}" "arg3😁utf8"  {
+  node_child p⚿=(type_annotation)"query" // intersperse arguments and properties
+  terminate-node1; node2␤
+  node3// line comment ; ␤ eof
 }
-4_value⁄data_types {
-  1_bool=true
-  2_null=null
-  3_string="Regular with escapes \b \\ \/ \u{FF}
-    and multiline support" raw=r"Raw" rawest=r##""Multiple ""#"" to allow anything inside""##
-  4_numbers=4_types n1=(int)-3 n1=(dec)-1.234 n1=(float)+1.234e-42
-    n2=(hex)0xFF n3=(octal)0o755 n4=(binary)0b101
-    (bignum)1_000_000
+"4 value⁄data types" {
+  • 1 •bool=true false
+  • 2 •null=null
+  • 3 •string="Regular with escapes \b \\ \/ \u{FF} and multiline
+      support" •raw=r"Raw" •rawest=r##"Multiple "#" to allow " and #"##
+  • 4 •numbers=(decimal)-3 (decimal)-1.234 (decimal)+1.234e-42\
+    (hex)0xFF (octal)0o755 (binary)0b101 with_digit_separator_=1_000_000
 }
-
 "node quoted for (arbitrary) names|!@#$@$%Q#$%~@!40" "1.2.3" "!prop quoted!"=true
-𐀀ノード1~!@#ÿ$%^‰&*.:'|?+† お名前="bare (non-quoted) identifiers also support many symbols"
-
-/* block comment */   /*!doc block comment /*nested block comment*/*/  // commment
+nodeーbare𐀀ノド1~!@#ÿ$%^‰&*.:'|?+† p⚿ーbareお名前="non-quoted names support many symbols"
+/* comment: block*/ /*!doc block /*nested block*/*/ // line
   /-nodeNestedSlashdashed "disabled" key=1 { node_inner_disabled
-  r 1 { r 2 { r 3 { r 4 { r 5 { r 6 } } } } }
-} node_post_slashdashed_with-slashdash-number /--1.0 +2.0 key=1 /-p2=2
-
+  but retain="all" (the)"scopes" /-(of)"its elements" {
+    including children=true 1 ; } // mute commented style colors in color scheme
+  r 1 { r 2 { r 3 { r 4 { r 5 { r 6; }; }; }; }; }
+}; node_post_slashdashed_with-slashdash-number /--1.0 +2.0 key=1 /-p2=2
 node-with-line-continuations \ // Split node into multiple lines
   +1.1 2                     \ // with multiple //single-line comments
   "After line continuation"
+
