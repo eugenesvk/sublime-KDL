@@ -6,7 +6,7 @@ A Sublime Text 4 syntax highlighting package for the <a href="https://kdl.dev"><
 
 This package adds support for the `KDL` document language (for files with `.kdl` extension)
 
-## Installation
+## Install
 
 - __Via [Package Control](https://packagecontrol.io)__: open `Command Palette` → `Package Control: Install Package` → `kdl`<br>
                                           <kbd>^Ctrl</kbd>/<kbd>⌘Cmd</kbd><kbd>⇧Shift</kbd><kbd>P</kbd>
@@ -18,7 +18,7 @@ git clone https://github.com/eugenesvk/sublime-kdl.git
 mv sublime-kdl KDL
 ```
 
-## Usage
+## Uses
 
 Open any `kdl` file (e.g. [syntax_example_screen.kdl](./test/syntax_example_screen.kdl)) and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped[^1] and highlighted, maybe like so (depending on your color scheme):
 
