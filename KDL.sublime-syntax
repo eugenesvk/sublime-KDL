@@ -198,8 +198,6 @@ contexts:
         2:                  meta.mapping.kdl punctuation.separator.key-value.kdl
       push                : property-value
 
-  comment_block_doc       :                       # Block documentation comment
-    - match               : '({{comment_block_doc_beg}})'
 #——— 2 Node Element: 2 Argument
   “arg”-⸙1:               #✗⁴
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴“arg”⸙1
