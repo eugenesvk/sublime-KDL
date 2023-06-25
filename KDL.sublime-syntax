@@ -401,30 +401,148 @@ contexts:
       captures            :
         1:                  punctuation.definition.comment.begin.kdl
         2:                  punctuation.section.mapping.begin
-      push                :
-      - meta_scope        : comment.block.double-slash.kdl
-      - match             : '}'
-        scope             : punctuation.definition.comment.end.kdl
-        pop               : true
-  comment_slashdash_space :                       # Slashdash inline comment
-    - match               : '(?<!^)/-' # negative lookbehind
+#——— Comments
+  comment_block_doc       :                       # Block documentation comment
+    - match               : '({{comment_block_doc_beg}})'
       scope               : punctuation.definition.comment.begin.kdl
       push                :
-      - meta_scope        : comment.line.slash-dash.kdl
-      - match             : \s
-        pop               : true
-  comment_slashdash_string:                       # Slashdash inline comment (strings)
-    - match               : '(?<!^)(/-)(")' # negative lookbehind
-      captures            :
-        1:                  punctuation.definition.comment.begin.kdl
+      - meta_scope        : comment.block.documentation.kdl
+      - match             : '{{comment_block_end}}'
+        scope             : punctuation.definition.comment.end.kdl
+        pop               : 1
+      - include           : comment_block_doc
+      - include           : comment_block
+  comment_block           :                       # Block comment
+    - match               : '({{comment_block_beg}})'
+      scope               : punctuation.definition.comment.begin.kdl
       push                :
-      - meta_scope        : comment.line.slash-dash.kdl
-      - match             : '"'
-        pop               : true
-  comment_slashdash_straw :                       # Slashdash inline comment (strings raw)
-    - match               : '(?<!^)(/-)(r)(#*)(")' # negative lookbehind
-      captures            :
-        1:                  punctuation.definition.comment.begin.kdl
+      - meta_scope        : comment.block.kdl
+      - match             : '{{comment_block_end}}'
+        scope             : punctuation.definition.comment.end.kdl
+        pop               : 1
+      - include           : comment_block_doc
+      - include           : comment_block
+  comment_line:                                   # Single-line comment
+    - match               : // # better than {{single_line_comment}} as doesn't consume the whole line and allows embedding with early popping
+      scope               : punctuation.definition.comment.begin.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})? # consume ␤ not to show completions when typing comments
+          pop             : 2
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line🛑:
+    - match               : //
+      scope               : invalid.illegal.position.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 2
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line🛑2:
+    - match               : //
+      scope               : invalid.illegal.position.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 3
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line🛑3:
+    - match               : //
+      scope               : invalid.illegal.position.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 4
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line2_term:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 3
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line3_term:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 4
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line4_term:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 5
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
+  comment_line⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 2
+          captures        :
+            1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+  comment_line2_term⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 4
+          captures        :
+            1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+  comment_line3_term⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 4
+          captures        :
+            1:              punctuation.definition.comment.end.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+  comment_line4_term⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 5
+          captures        :
+            1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+  comment_line_no␤:                             # Single-line comment without capturing ending ␤
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl dbg✗cline_no␤
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $
+          pop             : 1
+  comment_line2_no␤:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl dbg✗cline_no␤
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $
+          pop             : 2
+  comment_lines_no␤:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl dbg✗cline_no␤
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $
+          pop             : 1
+
 # Primitives, with some ~matching KDL Spec elements
   linesp:                 # ≝ linespace : newline | ws | single-line-comment
     - include             : ␤
