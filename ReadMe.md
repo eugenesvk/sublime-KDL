@@ -19,15 +19,15 @@ mv sublime-kdl KDL
 ```
 
 - Your color scheme likely needs to be patched to ignore or take full advantages of the /-slashdashed comment blocks:
+  <br>Patched examples used for the screenshots below: [solarized](./src/ESCombo.sublime-color-scheme) [default](./src/Mariana.sublime-color-scheme)
   - to style /-slashdashed elements with muted colors:
     - add ` -comment` to your scopes, e.g.,
       `{"name":"Tag name","foreground":"var(blue6)","scope":"entity.name.tag -comment"},`
     - add a copy of the same rule with an extra ` comment` scope and a blending color function, e.g.,
       `{"name":"Tag name C","foreground":"color(var(blue6) blend(#000 60% hsl))","scope":"entity.name.tag comment"},`
   - to style /-slashdashed elements like regular comments add `comment.line.slash-dash.kdl` scope to your __Comment__ rule (e.g., `{"name":"Comment","foreground":"black","scope":"comment, comment.line.slash-dash.kdl"},`) so that its 4 level specificity overrides other rules like `entity.other.attribute-name`
-  Patched examples used for the screenshots below: [solarized](./src/ESCombo.sublime-color-scheme) [default](./src/Mariana.sublime-color-scheme)
 
-## Uses
+## Use
 
 Open any `kdl` file (e.g. [syntax_example_screen.kdl](./test/syntax_example_screen.kdl)) and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped[^1] and highlighted, maybe like so (depending on your color scheme):
 
