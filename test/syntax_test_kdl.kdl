@@ -169,6 +169,9 @@ parent { terminate-child1; terminate-child2; }
 //                         ^^^^^^^^^^^^^^^^       entity.name.tag, entity.name.tag.node
 //                       ^                        punctuation.terminator.node.kdl
 //                                         ^      punctuation.terminator.node.kdl
+nnn {//ending} doesn't break the following}
+}
+//<- meta.node.kdl punctuation.section.mapping.end.kdl
 
 // 2 Node Element: 5 End
 nnn

@@ -1292,8 +1292,9 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    # - match               : '}'
-    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    - match               : '}'
+    # - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    # - match               : '}|(?!{{nl_s}})(?<=})' # better alternative to avoid end} breaking next }
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
@@ -1306,8 +1307,8 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    # - match               : '}'
-    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 2
       push                :
@@ -1320,8 +1321,8 @@ contexts:
     - meta_scope          : meta.block.child.kdl #✗chblock4_body
     - include             : wss
     - include             : comment_line_no␤
-    # - match               : '}'
-    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
@@ -1334,8 +1335,8 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    # - match               : '}'
-    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
@@ -1348,8 +1349,8 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    # - match               : '}'
-    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 2
       push                :
@@ -1362,8 +1363,8 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    # - match               : '}'
-    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
@@ -1475,10 +1476,19 @@ contexts:
     - match               : \}
       scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
       pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
+
   ｝🛑4:
     - match               : \}
       scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
       pop                 : 4
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
   ｝:
     - match               : '(?=\})'
       pop                 : 1
