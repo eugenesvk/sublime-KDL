@@ -191,8 +191,6 @@ contexts:
       - match             : ''
         pop               : 2
 
-  attribute               : # argument or property, but ↓ is only property? todo add argument
-    - match               : '(?!{{ident_char_non}}|\s)({{ident_char}}+)(=)'
 #——— 2 Node Element: 1 Name
   nodeID:                 #✗¹
     - include             : keywords🛑
