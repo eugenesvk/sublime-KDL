@@ -43,13 +43,14 @@ Open any `kdl` file (e.g. [syntax_example_screen.kdl](./test/syntax_example_scre
 
   | KDL construct	| Scope name
   | :------------	| :----------
-  | Mappings     	| `meta.mapping` `.key`/`.value` <br> `punctuation.separator.key-value` `punctuation.section.mapping` `.begin`/`.end` `.kdl`
-  | Number       	| `meta.number` `.decimal`/`.float` <br> `.integer` `.binary`/`.decimal`/`.hexadecimal`/`.octal` <br> `constant.numeric` `.base`/`.exponent`/`.integer`/`.significand`/`.value` <br> `punctuation.separator` `.decimal`/`.exponent` `.kdl`
-  | String       	| `meta.string` `storage.type.string` `string.quoted.double` `string.quoted.double.raw` <br> `punctuation.definition.string` `.begin`/`.end` `.kdl`
-  | Comment      	| `comment.block` `comment.block.documentation` `comment.line.double-slash` <br> `punctuation.definition.comment` `begin`/`end` `.kdl`
-  | Annotation   	| `meta.annotation` `punctuation.separator.annotation` `.begin`/`.end` `.kdl`
-  | Entity       	| `entity.name` `.tag`/`.type`/`.tag.node` <br> `entity.other.attribute-name` `.kdl`
-  | Others       	| `constant.character` `.escape`/`.escape.unicode.16-bit-hex` <br> `constant.language` `.boolean`/`.null` <br> `keyword.operator.arithmetic` `punctuation.separator.continuation.line` `punctuation.terminator.node` `.kdl`
+  | Entity       	| `entity.name.` `tag.node`¦`type` <br> `entity.other.attribute-name` `.kdl`
+  | Elemens      	| `meta.` `node`¦`block.child`¦`argument.value`¦`property.` ` `¦`name`¦`separator`¦`value` `.kdl`
+  | Mappings     	| `meta.mapping.` `key`¦`separator`¦`value` <br> `punctuation.separator.key-value` `punctuation.section.mapping.` `begin`¦`end` `.kdl`
+  | Number       	| `constant.numeric.` `decimal`¦`float`¦`integer.` ` `¦`binary`¦`octal`¦`hexadecimal` <br> `constant.numeric.` `base`¦`exponent`¦`significand`¦`value`  <br> `punctuation.separator.` `decimal`¦`exponent`¦`number` `.kdl`
+  | String       	| `meta.string` `storage.type.string` `string.quoted.double.` ` `¦`raw` <br> `punctuation.definition.string.` `begin`¦`end` `.kdl`
+  | Comment      	| `comment.block` `comment.block.documentation` `comment.` `block`¦`line.` `double-slash` <br> `punctuation.definition.comment.` `begin`¦`end` `.kdl`
+  | Annotation   	| `meta.annotation` `punctuation.separator.annotation.` `begin`¦`end` `.kdl`
+  | Others       	| `constant.character.` `escape`¦`escape.unicode.16-bit-hex` <br> `constant.language.` `boolean`¦`null` <br> `keyword.` `other`¦`operator.arithmetic` `punctuation.separator.continuation.line` `punctuation.terminator.node` <br> `invalid.illegal.` ` `¦`muted`¦`position`¦`muted.position` `.kdl`
 
 </details>
 
