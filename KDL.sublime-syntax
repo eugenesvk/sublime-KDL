@@ -197,6 +197,38 @@ contexts:
         1:                  meta.mapping.key.kdl entity.other.attribute-name.kdl
         2:                  meta.mapping.kdl punctuation.separator.key-value.kdl
       push                : property-value
+#——— 2 Node Element: 2 Argument or 3 Property
+  arg∨prop:               #✗³
+    # - include           : node␠
+    - include             : arg_typed
+    - include             : arg_untyped∨prop
+  arg∨prop⁄-:             #✗³
+    # - include           : node␠⁄-
+    - include             : arg_typed⁄-
+    - include             : arg_untyped∨prop⁄-
+
+  arg_untyped∨prop:       #✗³
+    - match               : '(?={{string_beg}})'
+      branch_point        : ⸙1“arg∨prop”
+      branch              : #✗⁴⸙
+        - “arg”-⸙1
+        - “⚿”₌v-⸙1
+    - match               : '(?={{charID}})'
+      branch_point        : ⸙2arg∨prop
+      branch              : #✗⁴⸙
+        - arg-⸙2
+        - ⚿₌v-⸙2
+  arg_untyped∨prop⁄-:     #✗³
+    - match               : '(?={{string_beg}})'
+      branch_point        : ⸙1“arg∨prop”⁄-
+      branch              : #✗⁴⸙
+        - “arg”⁄-⸙1
+        - “⚿”₌v⁄-⸙1
+    - match               : '(?={{charID}})'
+      branch_point        : ⸙2arg∨prop⁄-
+      branch              : #✗⁴⸙
+        - arg⁄-⸙2
+        - ⚿₌v⁄-⸙2
 
 #——— 2 Node Element: 2 Argument
   “arg”-⸙1:               #✗⁴
