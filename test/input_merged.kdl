@@ -1,0 +1,314 @@
+node "\"\\\/\b\f\n\r\t"
+
+node "arg" prop="val" {
+    inner_node 
+}
+node "arg" arg="val"
+node (type)false
+
+node (type)2.5
+node (type)0x10
+
+node (type)null
+
+node (type)"str"
+
+node (type)"str"
+node (type)true
+
+node (type)"arg"
+
+node (type)0
+
+node /* * */
+😁 "happy!"
+
+node 0b10
+node 0b10_
+node 0b1_0
+
+node ("")10
+("")node
+
+node key=("")true
+node /* comment */ "arg"
+node /* hey */ "arg"
+
+/* hey */ node
+/* hey*/node
+
+/* hey */
+
+node false true
+node prop1=true prop2=false
+node /- "arg1" "arg2"
+node "arg" /- {
+     inner_node
+}
+// node_1
+node_2
+/- node_1
+node_2
+
+node /- prop="val" "arg"
+node1
+node2
+node "😀"
+
+
+node {
+}
+node {
+}
+node {}
+node {
+
+     }
+"" "arg"
+node ""="empty"
+
+node ""
+
+node "hello\nworld"
+node "hello\u{0a}world"
+
+node \
+    "arg"
+node \   // comment
+    "arg" \// comment
+    "arg2
+"
+node1
+node2
+
+false_id
+
+node false_id=1
+
+node 0xabcdef1234567890
+node 0xABCDEF0123456789abcdef
+
+node 0xABC_def_0123
+node 0x01
+node 1_2_3_4
+/* hey */
+node {
+    inner_node     
+}
+
+
+node
+ 
+
+node
+node 0b01
+
+node 011
+
+node 0o01
+
+node /*
+some
+comments
+*/ "arg"
+node \
+    "arg1" \// comment
+    "arg2"
+node " hey
+everyone
+how goes?
+"
+node 1.0e-10
+node -1.0 key=-10.0
+node -10 prop=-15
+node /* hi /* there */ everyone */ "arg"
+node1 {
+    node2 {
+        node
+    }
+}
+node /*/* nested */*/ "arg"
+node /*
+hey /*
+how's
+*/
+    it going
+    */ "arg"
+    
+node1
+node2
+
+node /* hey so
+I was thinking
+about newts */ "arg"
+node 1e10
+node false
+
+node true
+
+(type)node
+node null
+null_id
+
+node null_id=1
+
+node prop=null
+node 15.7
+node prop=10.0
+node 0o76543210
+
+
+// hi
+// comment
+
+// hiiii
+
+node 1 1.0 1.0e10 1.0e-10 0x01 0o07 0b10 "arg" r"arg\\" true false null
+node 1.0e+10
+node +10
+node
+node
+
+node2
+node5
+node1
+node key=(type)false
+
+node key=(type)2.5E10
+
+node key=(type)0x10
+
+node key=(type)null
+
+node key=(type)r"str"
+
+node key=(type)"str"
+
+node key=(type)true
+
+node key=(type)true
+node key=(type)0
+
+node ("type/")10
+"0node"
+("type/")node
+
+node prop="10.0"
+node "0prop"="val"
+node key=("type/")true
+
+r "arg"
+
+node (type)true
+r"\node"
+(type)node
+node key=(type)true
+node_1 r"arg\n"
+node_2 r#""arg\n"and stuff"#
+node_3 r##"#"arg\n"#and stuff"##
+node r"\n"
+
+node r"#"
+
+node r"\"
+
+node r#"""#
+
+node r###""#"##"###
+
+node r"
+hello
+world
+"
+
+node_1 prop=r"arg\n"
+node_2 prop=r#""arg"\n"#
+node_3 prop=r##"#"arg"#\n"##
+node r#"a"b"#
+node "arg" "arg"
+node prop=10 prop=11
+node "whee" "whee"
+node
+node
+
+node prop=1.23E+1000
+node prop=1.23E-1000
+node {
+     childnode
+};
+
+node1 {
+      node2;
+}
+node1;node2
+node1; node2; 
+node1;
+node "arg"
+node prop="val"
+node \
+    /- "arg" "arg2"
+
+node /-    \
+    "arg"
+
+node /- {
+    node2
+}
+
+node /- {
+}
+
+/- node 1.0 "a" b="b
+"
+/- node1 /- 1.0
+node2
+node /--1.0 2.0
+node1 {
+    /- node2
+}
+/- node {
+   node2
+}
+/-node
+
+/- node
+node /- key="value" "arg"
+
+node /- key="value"
+
+node arg="correct" /- arg="wrong"
+
+node "arg"
+node prop="val"
+node
+
+node
+
+node 0x123abc_
+node 0o123_
+
+true_id
+
+node true_id=1
+
+node1
+node2
+
+node 1.0e-10_0
+
+node 1_1.0
+
+node 1.0_2
+node 1_0
+
+node 0o012_3456_7
+"foo123~!@#$%^&*.:'|?+" "weeee"
+foo123~!@#$%^&*.:'|?+ "weeee"
+
+node 0
+
+node 0.0
+
+node 0
+
+
