@@ -193,7 +193,69 @@ contexts:
 
   attribute               : # argument or property, but ↓ is only property? todo add argument
     - match               : '(?!{{ident_char_non}}|\s)({{ident_char}}+)(=)'
+#——— 2 Node Element: 1 Name
+  nodeID:                 #✗¹
+    - include             : keywords🛑
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                : #✗²
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl #²
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        set               : #✗²
+        - include         : node-elements
+        - include         : node_terminator3
+      - include           : char-escaped
+    - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)' # separate \3 backref only works in a popping context
       captures            :
+        1:                 storage.type.string.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        5:                 punctuation.definition.string.end.kdl
+      push                : #✗²
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl #²
+      - match             : '' # ← resets ↑
+        set               :
+        - include         : node-elements
+        - include         : node_terminator3
+    - match               : '{{bareID}}'
+      scope               : entity.name.tag.node.kdl
+      push                : #✗²
+      #- meta_scope        : dbg✗²_nodeID→node_elements
+      - include           : node-elements
+      - include           : node_terminator3
+      - include           : S🛑s
+  nodeID⁄-:               #✗¹
+    - include             : keywords⁄-🛑
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                : #✗²
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl #✗²
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        set               : #✗²
+        - include         : node-elements⁄-
+        - include         : node_terminator3⁄-
+      - include           : char-escaped⁄-
+    - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)' # separate \3 backref only works in a popping context
+      captures            :
+        1:                 storage.type.string.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        5:                 punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      push                : #✗²
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl #✗²
+      - match             : '' # ← resets ↑
+        set               : #✗²
+        - include         : node-elements⁄-
+        - include         : node_terminator3⁄-
+    - match               : '{{bareID}}'
+      scope               : entity.name.tag.node.kdl comment.line.slash-dash.kdl
+      push                : #✗²
+      #- meta_scope        : dbg✗²_nodeID→node-elements⁄–
+      - include           : node-elements⁄-
+      - include           : node_terminator3⁄-
+      - include           : S🛑s
+
 #——— 2 Node Element: 2 Argument or 3 Property
   arg∨prop:               #✗³
     # - include           : node␠
