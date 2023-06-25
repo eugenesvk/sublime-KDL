@@ -1662,21 +1662,21 @@ contexts:
             1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
   comment_line_no␤:                             # Single-line comment without capturing ending ␤
     - match               : //
-      scope               : punctuation.definition.comment.begin.kdl dbg✗cline_no␤
+      scope               : punctuation.definition.comment.begin.kdl #✗cline_no␤
       push                :
         - meta_scope      : comment.line.double-slash.kdl
         - match           : $
           pop             : 1
   comment_line2_no␤:
     - match               : //
-      scope               : punctuation.definition.comment.begin.kdl dbg✗cline_no␤
+      scope               : punctuation.definition.comment.begin.kdl #✗cline_no␤
       push                :
         - meta_scope      : comment.line.double-slash.kdl
         - match           : $
           pop             : 2
   comment_lines_no␤:
     - match               : //
-      scope               : punctuation.definition.comment.begin.kdl dbg✗cline_no␤
+      scope               : punctuation.definition.comment.begin.kdl #✗cline_no␤
       push                :
         - meta_scope      : comment.line.double-slash.kdl
         - match           : $
