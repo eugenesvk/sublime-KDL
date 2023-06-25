@@ -133,7 +133,20 @@ contexts:
   main:
     - meta_include_prototype: false
     - match : ''
-      push  : [patterns]
+      push  : #✗⁰
+      #- meta_scope        : dbg✗¹
+      - include: nodes
+
+  nodes: #✗⁰ ≈ linespace* (node nodes?)? linespace*
+    - include: linesp
+    - include: ⁄-∨node
+    - include: any🛑 # todo disable? strict mode
+    # - include: any-pop
+  nodes⁄-: #✗⁰
+    - include: linesp
+    - include: ⁄-∨node⁄-
+    - include: any🛑 # todo disable? strict mode
+    # - include: any-pop
 
 #——— 0 Groups
   node-elements:          #✗²
