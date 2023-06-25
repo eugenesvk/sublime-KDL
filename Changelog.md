@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Fixed__
+  + :beetle: ending} breaking the following } in children
+
 [0.9.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.0
 ## [0.9.0]
 - __Added__
