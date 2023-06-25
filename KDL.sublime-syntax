@@ -336,32 +336,117 @@ contexts:
     - include             : line-continuation
 
 
-  child_block             :
+#——— 2 Node Element: 4 Child
+  child_block:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
       push                : child_block-body
-  child_block-body        :
-    - meta_scope          : meta.mapping.kdl
-    - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl
-      pop                 : true
-    - include             : patterns
-  /-comment_child_block1  : # within slashdash-ed blocks, just track {} without including any patterns
+  child_block1:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
-      push                : /-comment_child_block1-body
-  /-comment_child_block1-body: # 1st/last {} should pop 2 contexts on exit to allow nodes after the last }
-    - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl punctuation.definition.comment.end punctuation.terminator.node.kdl
+      push                : child_block1-body
+  child_block4:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl #✗chblock4
+      push                : child_block4-body
+  child_block⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block-body⁄-
+  child_block1⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block1-body⁄-
+  child_block4⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block4-body⁄-
+  child_block-body:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    # - match               : '}'
+    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes
+  child_block1-body:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    # - match               : '}'
+    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
       pop                 : 2
-    - include             : /-comment_child_block2
-  /-comment_child_block2  : # inner {} should just track opening/closing {}
-    - match               : '{'
-      scope               : punctuation.section.mapping.begin.kdl
-      push                : /-comment_child_block2-body
-  /-comment_child_block2-body:
-    - match               : '}'
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes
+  child_block4-body:
+    - meta_scope          : meta.block.child.kdl #✗chblock4_body
+    - include             : wss
+    - include             : comment_line_no␤
+    # - match               : '}'
+    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
       scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator4
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes
+  child_block-body⁄-:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    # - match               : '}'
+    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator3⁄-
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes⁄-
+  child_block1-body⁄-:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    # - match               : '}'
+    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 2
+      push                :
+      - include           : wss
+      - include           : node_terminator3⁄-
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes⁄-
+  child_block4-body⁄-:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    # - match               : '}'
+    - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator4⁄-
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes⁄-
+
+
 #——— 2 Node Element: 5 End
   node_terminator:        # ≝ node-terminator : single-line-comment | newline | ";" | eof
     - include             : comment_line
