@@ -202,6 +202,101 @@ contexts:
     - match               : '({{comment_block_doc_beg}})'
       captures            :
         1:                  punctuation.definition.comment.begin.kdl
+#——— 2 Node Element: 3 Property
+  ⚿₌v-⸙2:                 #✗⁴
+    - meta_scope          : meta.property.kdl #✗⁴⚿₌v⸙
+    - include             : ⚿
+  ⚿₌v⁄-⸙2:                #✗⁴
+    - meta_scope          : meta.property.kdl #✗⁴⚿₌v⁄–⸙
+    - include             : ⚿⁄-
+  ⚿:                      #✗⁴
+    - include             : keyword🛑
+    - match               : '({{charID}}+)'
+      scope               : entity.other.attribute-name.kdl
+      pop                 : 1 # ↑⸙
+      push                :
+        - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
+        - include         : property₌
+        - include         : pop_pre-term # unblock errors from spoiling the whole line
+  ⚿⁄-:                    #✗⁴
+    - include             : keyword🛑⁄-
+    - match               : '({{charID}}+)'
+      scope               : entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+      pop                 : 1 # ↑⸙
+      set                 :
+        - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
+        - include         : property₌⁄-
+        - include         : pop_pre-term
+
+  “⚿”₌v-⸙1:
+    - meta_scope          : meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+    - include             : “⚿”
+  “⚿”₌v⁄-⸙1:
+    - meta_scope          : meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+    - include             : “⚿”⁄-
+  “⚿”:
+    - include             : strings # allows ↓ check to go through while 2nd consecutive string not possible since it'll be treated as a second argument and there is a condition that errors that
+    - include             : property₌
+  “⚿”⁄-:
+    - include             : strings⁄-
+    - include             : property₌⁄-
+  property₌:              #✗⁴
+    - match               : '{{prop_eq}}'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+        3:                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+        4:                  invalid.illegal.position.kdl
+        5:                  invalid.illegal.muted.position.kdl
+      pop                 : 1
+      push                : property-value # todo: set bugs to clear
+  property₌⁄-:            #✗⁴
+    - match               : '{{prop_eq}}'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+        3:                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
+        4:                  invalid.illegal.position.kdl
+        5:                  invalid.illegal.muted.position.kdl
+      pop                 : 1
+      push                : property-value⁄- # todo: set bugs to clear
+  property-value:         #✗⁴
+    # - meta_scope          : # gets misapplied to =
+    # - meta_content_scope  : # gets miremoved from some values that pop immediately like boolean #meta.property.value.kdl meta.mapping.value.kdl ✗⁴
+    - include             : comments
+    - match               : (?=\()
+      pop                 : 2 # ↑⸙ to reach ³ like arg_typed
+      push                : #✗³
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop_val_typ
+      - include           : type-value
+    - match               : (?!\() # required to apply proper context to value
+      set                 : #✗⁴
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
+      - include           : value
+      - include           : value🛑
+    - include             : property🛑
+  property-value⁄-:       # ✗⁴
+    - meta_content_scope  : meta.property.value.kdl meta.mapping.value.kdl #✗⁴
+    - include             : comments⁄-
+    - match               : (?=\()
+      pop                 : 2 # ⚿₌v⁄-⸙2 to reach ³ like arg_typed⁄-
+      push                : #✗³
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop⁄–_typ_val
+      - include           : type-value⁄-
+    - match               : (?!\() # required to apply proper context to value
+      set                 : #✗⁴
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop⁄–_val_untyp
+      - include           : value⁄-
+      - include           : value🛑
+    - include             : property🛑
+  property🛑:
+      - include           : pop_pre␠
+      - include           : pop_pre␤
+      - include           : pop_pre🆔¬     # let previous layers deal with invalid chars
+      - include           : ch🛑pre␠ # todo: or just scrap illegals? let unstyled content be the indicator
+      - include           : S🛑pre␤
+      - include           : S🛑s
+
 #——— Type-values
   type-value:             #✗³
     - match               : \(
