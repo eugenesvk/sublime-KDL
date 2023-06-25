@@ -21,6 +21,13 @@ All notable changes to this project will be documented in this file
 <!-- - __Security__ -->
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
+- __Added__
+  + :sparkles: scopes to `/-`slashdashed commented blocks to allow coloring them, e.g., in muted colors
+  + color schemes used for the screenshots and illustrating the `/-`slashdashed commented blocks highlights
+- __Changed__
+  + :recycle: substantially improve spec compliance by differentiating between node elements (property vs. argument) and mandating spaces where necessary
+  + expand syntax test
+  + example document for a screenshot and screenshots
 
 [0.1.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.1.1
 ## [0.1.1]
