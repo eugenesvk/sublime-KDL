@@ -200,7 +200,128 @@ contexts:
 
   comment_block_doc       :                       # Block documentation comment
     - match               : '({{comment_block_doc_beg}})'
+#——— 2 Node Element: 2 Argument
+  “arg”-⸙1:               #✗⁴
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴“arg”⸙1
+    - include             : “arg”
+    - include             : “arg”🛑
+    - include             : pop⸙
+  “arg”⁄-⸙1:               #✗⁴
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴“arg”⁄⸙1
+    - include             : “arg”⁄-
+    - include             : “arg”🛑
+    - include             : pop⸙
+  arg-⸙2:                 #✗⁴
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⸙2
+    - match               : '{{prop_eq}}'
+      fail                : ⸙2arg∨prop
+    - match               : '(\S*)(?==)'
+      fail                : ⸙2arg∨prop
+    - include             : value
+    - include             : value🛑
+    - include             : pop_pre␤
+    - include             : pop⸙
+  arg⁄-⸙2:                #✗⁴
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⁄_⸙2
+    - match               : '{{prop_eq}}'
+      fail                : ⸙2arg∨prop⁄-
+    - match               : '(\S*)(?==)'
+      fail                : ⸙2arg∨prop⁄-
+    - include             : value⁄-
+    - include             : value🛑
+    - include             : pop_pre␤
+    - include             : pop⸙
+
+  arg_typed:              #✗³
+    - match               : (?=\()
+      set                 :
+      - meta_scope        : meta.argument.value.kdl meta.mapping.value.kdl #✗³typed
+      - include           : type-value
+  arg_typed⁄-:            #✗³
+    - match               : (?=\()
+      set                 :
+      - meta_scope        : meta.argument.value.kdl meta.mapping.value.kdl #✗³typed⁄-
+      - include           : type-value⁄-
+  “arg”:                  #✗⁴
+    # - include             : string  # can't use as is since branch check comes after we're inside a string!
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                : #✗⁵
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl #✗⁵
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1 # ↑ string (pop+push remove meta from ")
+        set               :
+        - match           : '{{prop_eq}}'
+          fail            : ⸙1“arg∨prop”
+        - include         : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
+      - include           : char-escaped
+    - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)' # separate \3 backref only works in a popping context
       captures            :
+        1:                 storage.type.string.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        5:                 punctuation.definition.string.end.kdl
+      push                : #✗⁵
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl #✗⁵
+      - match             : '{{prop_eq}}'
+        fail              : ⸙1“arg∨prop”
+      - include           : pop3
+  “arg”⁄-:                #✗⁴
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                : # push²
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl comment.line.slash-dash.kdl #✗⁵
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1 # ↑ string (pop+push remove meta from ")
+        set               :
+        - match           : '{{prop_eq}}'
+          fail            : ⸙1“arg∨prop”⁄-
+        - include         : pop3
+      - include           : char-escaped
+    - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)' # separate \3 backref only works in a popping context
+      captures            :
+        1:                 storage.type.string.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        5:                 punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      push                : # push²
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl comment.line.slash-dash.kdl #✗⁵
+      - match             : '{{prop_eq}}'
+        fail              : ⸙1“arg∨prop”⁄-
+      - include           : pop3
+  # arg:                    #✗⁴
+  #   - include             : type-value
+  #   - include             : value
+  #   - include             : value🛑
+  # arg⁄-:                  #✗⁴
+  #   - include             : type-value⁄-
+  #   - include             : value⁄-
+  #   - include             : value🛑
+
+  value:                  #✗⁴
+    - include             : keyword
+    - include             : string
+    - include             : number
+  value⁄-:                #✗⁴
+    - include             : keyword⁄-
+    - include             : string⁄-
+    - include             : number⁄-
+  val🛑: # todo: combine?
+    - include             : pop2_pre␠
+    - include             : pop2_pre␤
+    - include             : pop2_pre-term
+    # - include             : pop2_pre-str
+    # - include             : char🆔¬
+    # - include             : pop_pre🆔¬  # let previous layers deal with invalid chars
+    - include             : ch🛑pre␠   # todo: or just scrap illegals? let unstyled content be the indicator
+  value🛑:
+    - include             : val🛑
+    - include             : ch🛑pre_term
+    - include             : ch🛑pre-str
+  “arg”🛑:
+    - include             : val🛑
+    - include             : S🛑pre␤
+
 #——— 2 Node Element: 3 Property
   ⚿₌v-⸙2:                 #✗⁴
     - meta_scope          : meta.property.kdl #✗⁴⚿₌v⸙
