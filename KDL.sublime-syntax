@@ -6,15 +6,17 @@ scope            : source.kdl
 version          : 2
 # See Whitespace (Line breaking and non-Newline) at file end
 
-
-# !!! sets don't allow whitespace even with (?x:), so watch out for [{{var}}] where var='(?x: abc)', 'x' will also be included
+# !sets don't allow whitespace even with (?x:), so watch out for [{{var}}] where var='(?x: abc)', 'x' will also be included
   # _digit _char = set-safe [{{var_s}}], i.e. contains only characters, no conditional matching groups
-  # use syntax rules insteda of variables that can't be recursive
+  # use syntax rules instead of variables that can't be recursive
+  # lookaheads skip meta scopes, so might need to repeat them
 # quote regexes with # : - { [ >
 # Oniguruma regex engine features
   # rbuckton.github.io/regexp-features/engines/oniguruma.html
   # raw.githubusercontent.com/kkos/oniguruma/v6.9.1/doc/RE  6.8.0 2018/07/26 (not sure which version ST uses)
     # github.com/kkos/oniguruma/blob/master/doc/RE (latest)
+# \k<> named group, while \g<> is recursion!
+# include ignores meta patterns in the included contexts
 
 # ident = identifier #ss#=set safe #ss!# set safe with exception
 # _var = var rules can't be expressed within literal regexes, e.g., excluding keywords
