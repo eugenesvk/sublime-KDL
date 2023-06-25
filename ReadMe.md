@@ -19,7 +19,7 @@ mv sublime-kdl KDL
 ```
 
 - Your color scheme likely needs to be patched to ignore or take full advantages of the /-slashdashed comment blocks:
-  <br>Patched examples used for the screenshots below: [solarized](./src/ESCombo.sublime-color-scheme) [default](./src/Mariana.sublime-color-scheme)
+  <br>Patched examples used for the screenshots below: [solarized](./src/ESCombo.sublime-color-scheme), [default](./src/Mariana.sublime-color-scheme)
   - to style /-slashdashed elements with muted colors:
     - add ` -comment` to your scopes, e.g.,
       `{"name":"Tag name","foreground":"var(blue6)","scope":"entity.name.tag -comment"},`
@@ -29,7 +29,7 @@ mv sublime-kdl KDL
 
 ## Use
 
-Open any `kdl` file (e.g. [syntax_example_screen.kdl](./test/syntax_example_screen.kdl)) and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped[^1] and highlighted, maybe like so (depending on your color scheme):
+Open any `kdl` file (e.g., [syntax_example_screen.kdl](./test/syntax_example_screen.kdl)) and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped[^1] and highlighted, maybe like so (depending on your color scheme):
 
 ![KDL syntax screenshot solarized](https://github.com/eugenesvk/sublime-KDL/blob/main/doc/KDL_syntax_dark.png?raw=true "Custom solarized scheme")
 
