@@ -239,8 +239,27 @@ contexts:
       # scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl
 
 
-  # Values - Strings
-  string-quoted-double    :
+#——— Values - Strings
+  string-quoted-double:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 3
+      - include           : char-escaped
+  string-quoted-double⁄-:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+      - include           : char-escaped⁄-
+  strings-quoted-double:
     - match               : '"'
       scope               : punctuation.definition.string.begin.kdl
       push                :
@@ -249,12 +268,28 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : char-escaped
-  char-escaped            :
+  strings-quoted-double⁄-:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+      - include           : char-escaped⁄-
+  char-escaped:
     - match               : '(\\)(({{escape_char}})|({{escape_unicode}}))'
       captures            :
         1:                 constant.character.escape.kdl
         3:                 constant.character.escape.kdl
         4:                 constant.character.escape.unicode.16-bit-hex.kdl
+  char-escaped⁄-:
+    - match               : '(\\)(({{escape_char}})|({{escape_unicode}}))'
+      captures            :
+        1:                 constant.character.escape.kdl comment.line.slash-dash.kdl
+        3:                 constant.character.escape.kdl comment.line.slash-dash.kdl
+        4:                 constant.character.escape.unicode.16-bit-hex.kdl comment.line.slash-dash.kdl
   string-quoted-double-raw:
     - match               : '(r)(#*)(")'
       captures            :
@@ -265,10 +300,44 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
+        pop               : 3
+  string-quoted-double-raw⁄-:
+    - match               : '(r)(#*)(")'
+      captures            :
+        1:                 storage.type.string.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"\2' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+  strings-quoted-double-raw:
+    - match               : '(r)(#*)(")'
+      captures            :
+        1:                 storage.type.string.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - match             : '"\2' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
         pop               : 1
+  strings-quoted-double-raw⁄-:
+    - match               : '(r)(#*)(")'
       captures            :
-      captures            :
-      captures            :
+        1:                 storage.type.string.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"\2' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+
+
 #——— Values - Numbers
   int∨dec∨float:
     - match               : '([+-])?([0-9])' # leading zeros are allowed
