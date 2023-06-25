@@ -179,8 +179,6 @@ contexts:
     # - include             : boolean-illegal
     # - include             : null-illegal
 
-  property-value:
-    - match               : ''
 #——— 1 Node: \- type
   ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
     - match               : '{{c_slashdash}}'
@@ -285,14 +283,6 @@ contexts:
     - match               : '"' # string can't use to ban "a""b"
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
       push                :
-      - meta_scope        : meta.mapping.value.kdl
-      - include           : comments
-      - include           : type-annotation
-      - include           : strings
-      - include           : numbers
-      - include           : keyword
-      - match             : ''
-        pop               : 2
       - meta_scope        : meta.string.kdl string.quoted.double.kdl #✗³type-content-node⁄–
       - meta_content_scope: comment.line.slash-dash.kdl
       - include           : char-escaped
