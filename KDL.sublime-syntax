@@ -1470,11 +1470,11 @@ contexts:
       pop                 : 1
   ｝🛑2:
     - match               : \}
-      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑2
       pop                 : 2
   ｝🛑3:
     - match               : \}
-      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑3
       pop                 : 3
       push                :
       - include           : wss
@@ -1483,7 +1483,7 @@ contexts:
 
   ｝🛑4:
     - match               : \}
-      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑4
       pop                 : 4
       push                :
       - include           : wss
