@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.1.1...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.9.0...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -21,6 +21,9 @@ All notable changes to this project will be documented in this file
 <!-- - __Security__ -->
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
+
+[0.9.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.0
+## [0.9.0]
 - __Added__
   + :sparkles: scopes to `/-`slashdashed commented blocks to allow coloring them, e.g., in muted colors
   + color schemes used for the screenshots and illustrating the `/-`slashdashed commented blocks highlights
