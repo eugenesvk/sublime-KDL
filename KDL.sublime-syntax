@@ -1492,6 +1492,15 @@ contexts:
   ｝:
     - match               : '(?=\})'
       pop                 : 1
+  ｝2:
+    - match               : '(?=\})'
+      pop                 : 2
+  ｝3:
+    - match               : '(?=\})'
+      pop                 : 3
+  ｝4:
+    - match               : '(?=\})'
+      pop                 : 4
 
   line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
                           #                  =↑single-line-comment_no_nl newline
