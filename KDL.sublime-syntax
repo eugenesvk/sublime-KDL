@@ -425,53 +425,212 @@ contexts:
     - match               : '(?<!^)(/-)(r)(#*)(")' # negative lookbehind
       captures            :
         1:                  punctuation.definition.comment.begin.kdl
+# Various helpers
+  ␤🛑s:
+    - match               : '{{nl_s}}'
+      scope               : invalid.illegal.position.kdl #✗delnl
+  ␤🛑:
+    - match               : '{{nl_s}}'
+      scope               : invalid.illegal.position.kdl #✗delnl1
+      pop                 : 1
+  ␤🛑2:
+    - match               : '{{nl_s}}'
+      scope               : invalid.illegal.position.kdl #✗delnl2
+      pop                 : 2
+  ␤🛑3:
+    - match               : '{{nl_s}}'
+      scope               : invalid.illegal.position.kdl #✗delnl3
+      pop                 : 3
+  ␤🛑¹s:                 # make only the first contiguous ␤ red
+    - match               : '({{nl_s}})'
+      scope               : invalid.illegal.position.kdl #✗1
       push                :
-      - meta_scope        : comment.line.slash-dash.kdl
-      - match             : '"\3' # ↑match (#*)
-        pop               : true
-  comment_slashdash_node  :                       # Slashdash node comment
-    - match               : '(?<=^)({{linesp_s}}*)(/-)' # positive lookbehind
+      - match             : '({{nl_s}})'
+        scope             : invalid.illegal.muted.position.kdl #✗1b
+      - include           : else-pop
+  any🛑s:
+    - match               : '[\S\s]'
+      scope               : invalid.illegal.position.kdl #✗DelAny🛑s
+  any🛑:
+    - match               : '[\S\s]'
+      scope               : invalid.illegal.position.kdl #✗DelAny🛑
+      pop                 : 1
+  s🛑¹:                   # make only the first contiguous \s red
+    - match               : '(\s)'
+      scope               : invalid.illegal.position.kdl #✗s🛑¹s
+      push                :
+      - match             : '(\s)'
+        scope             : invalid.illegal.muted.position.kdl #✗s🛑¹s
+        pop               : 2    # bail out after 2nd space
+      - include           : pop2 # bail out after 1st space
+  s🛑¹s:                  # make only the first contiguous \s red
+    - match               : '(\s)'
+      scope               : invalid.illegal.position.kdl #✗s🛑¹s
+      push                :
+      - match             : '(\s)'
+        scope             : invalid.illegal.muted.position.kdl #✗s🛑¹s
+      - include           : pop # repeat 2nd space
+  bsp🛑¹s:                  # make only the first contiguous b_sp red
+    - match               : '({{b_sp}})'
+      scope               : invalid.illegal.position.kdl #✗bsp🛑¹s
+      push                :
+      - match             : '({{b_sp}})'
+        scope             : invalid.illegal.muted.position.kdl #✗bsp🛑¹s
+      - include           : pop # repeat 2nd space
+  s🛑s:
+    - match               : '(\s)'
+      scope               : invalid.illegal.position.kdl #✗2
+  s🛑:
+    - match               : '(\s)'
+      scope               : invalid.illegal.position.kdl #✗3
+    - include             : else-pop
+  S🛑s:
+    - match               : '(\S)'
+      scope               : invalid.illegal.position.kdl #✗S🛑
+  S🛑:
+    - match               : '(\S)'
+      scope               : invalid.illegal.position.kdl #✗S🛑
+      pop                 : 1
+  S🛑pre␠:               # mark without red highlight
+    - match               : '(\S*)(?={{b_sp}})'
       captures            :
-        2:                  punctuation.definition.comment.begin.kdl comment.block.kdl
+        2:                  invalid.illegal.muted.position.kdl #✗S🛑pre␠
+  ch🛑pre␠:              # to avoid red flashes, mark last char as illegal before ␠
+    - match               : '({{charID}}*)({{charID}})(?={{b_sp}})'
+      captures            :
+        1:                  invalid.illegal.muted.position.kdl #✗ch🛑pre␠
+        2:                  invalid.illegal.position.kdl #✗ch🛑pre␠
+  ch🛑pre-str:
+    - match               : '({{charID}}*?)({{charID}})(?={{string_beg}})'
+      captures            :
+        1:                  invalid.illegal.muted.position.kdl #✗ch🛑pre-str
+        2:                  invalid.illegal.position.kdl #✗ch🛑pre-str
+  ch🛑pre_term:           # to avoid red flashes, mark last char as illegal before node terminator
+    - match               : '({{charID}}*)({{charID}})(?={{node_term_beg_no_nl}})'
+      captures            :
+        1:                  invalid.illegal.muted.position.kdl #✗ch🛑pre_term
+        2:                  invalid.illegal.position.kdl #✗ch🛑pre_term
+  S🛑pre␤:               # to avoid red flashes, mark as invalid, not illegal
+    - match               : '(\S*)(\S)(?=\n)'
+      captures            :
+        1:                  invalid.illegal.muted.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+  S🛑¹pre␤:              # make only the first char before ␤ red
+    - match               : '(\S)'
+      scope               : invalid.illegal.position.kdl #✗S🛑¹pre␤
       push                :
-      - meta_content_scope: comment.block.kdl
-      - match             : '}' # doesn't work before the comment child block
-        scope             : punctuation.definition.comment.end.kdl punctuation.terminator.node.kdl
-        pop               : 1
-      - include           : /-comment_child_block1 # tracks nested {}
-      - match             : '{{node_terminator}}'
-        scope             : punctuation.definition.comment.end.kdl punctuation.terminator.node.kdl
-        pop               : 1
+      - include           : pop_pre␤
+      - match             : '(\S)'
+        scope             : invalid.illegal.muted.position.kdl #✗S🛑¹pre␤
+  S🛑¹pre_ws:             # ... ␠ ␤
+    - match               : '(\S)'
+      scope               : invalid.illegal.position.kdl #✗S🛑¹pre␤
+      push                :
+      - include           : pop_pre␠
+      - include           : pop_pre␤
+      - match             : '(\S)'
+        scope             : invalid.illegal.muted.position.kdl #✗S🛑¹pre␤
+  S🛑¹pre_s∨c∨t:          # ... child start or node terminator or ws
+    - match               : '(\S)'
+      scope               : invalid.illegal.position.kdl #✗S🛑¹pre_s∨c∨t
+      push                :
+      - include           : pop_pre-ch
+      - include           : pop_pre-term
+      - include           : pop_pre-node␠
+      - match             : '(\S)'
+        scope             : invalid.illegal.muted.position.kdl #✗S🛑¹pre_s∨c∨t
 
-  argument_typed          :
-    - match               : (?=\()
-      set                 :
-      - meta_scope        : meta.argument.kdl
-      - include           : argument_untyped
-  argument_untyped        :
-    - include             : type-annotation
-    - include             : argument_value
-  argument_value          :
+
+  char🆔¬:
+    - match               : '{{charID_not}}'
+      scope               : invalid.illegal.kdl #✗chID
+  pop_pre␠:
+    - match               : '(?={{b_sp}})'
+      pop                 : 1
+  pop_pre-ch:
+    - match               : '(?=\{)'
+      pop                 : 1
+  pop_pre-term:
+    - match               : '(?={{node_term_beg}})'
+      pop                 : 1
+  pop_pre␤:
+    - match               : '(?={{nl_s}})'
+      pop                 : 1
+  pop_pre-node␠:
+    - match               : '(?={{node_sp_beg}})'
+      pop                 : 1
+  pop_pre🆔¬:
+    - match               : '(?={{charID_not}})'
+      pop                 : 1
+  pop_pre-ws:
+    - match               : '(?={{ws_beg}})'
+      pop                 : 1
+  pop_pre-str:
+    - match               : '(?=\"|r\")'
+      pop                 :
+  pop2_pre␠:
+    - match               : '(?={{b_sp}})'
+      pop                 : 2
+  pop2_pre-ch:
+    - match               : '(?=\{)'
+      pop                 : 2
+  pop2_pre-term:
+    - match               : '(?={{node_term_beg}})'
+      pop                 : 2
+  pop3_pre-term:
+    - match               : '(?={{node_term_beg}})'
+      pop                 : 3
+  pop2_pre␤:
+    - match               : '(?={{nl_s}})'
+      pop                 : 2
+  pop2_pre-node␠:
+    - match               : '(?={{node_sp_beg}})'
+      pop                 : 2
+  pop2_pre-str:
+    - match               : '(?=\"|r\")'
+      pop                 : 2
+  pop2_pre🆔¬:
+    - match               : '(?={{charID_not}})'
+      pop                 : 2
+  pop2_pre-ws:
+    - match               : '(?={{ws_beg}})'
+      pop                 : 2
+  pop3_pre-str:
+    - match               : '(?=\"|r\")'
+      pop                 : 3
+
+
+  else-pop:               # pop_pre-non_ws
+    - match               : '(?=\S)'
+      pop                 : 1
+  else-pop2:
+    - match               : '(?=\S)'
+      pop                 : 2
+  else-pop3:
+    - match               : '(?=\S)'
+      pop                 : 3
+  pop:
     - match               : ''
-      set                 :
-      - meta_scope        : argument.value.kdl # allows styling arguments differently
-      - include           : keywords
-      - include           : strings
-      - include           : number
-      - include           : pop_before␠
-      - include           : pop_before🆔¬
+      pop                 : 1
+  pop2:
+    - match               : ''
+      pop                 : 2
+  pop3:
+    - match               : ''
+      pop                 : 3
+  pop4:
+    - match               : ''
+      pop                 : 4
+  pop5:
+    - match               : ''
+      pop                 : 5
+  pop⸙:
+    - include             : pop
+  pop2⸙:
+    - include             : pop2
+  pop3⸙:
+    - include             : pop3
 
-  type-annotation         :
-    - match               : \(
-      scope               : punctuation.separator.annotation.begin.kdl
-      push                :
-      - meta_scope        : meta.annotation.kdl
-      - meta_content_scope: entity.name.type.kdl
-      - match             : \)
-        scope             : punctuation.separator.annotation.end.kdl
-        pop               : 1
-      - include           : attribute
-      - include           : strings
 
 # Whitespace (Line breaking)
   #  Acronym	Name                         	Code Pt 	Oniguruma
