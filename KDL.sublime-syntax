@@ -135,49 +135,111 @@ contexts:
     - match : ''
       push  : [patterns]
 
-  patterns:
-    - include: keyword
-    - include: argument_typed
-    - include: numbers
-    - include: strings
-    - include: type-annotation
-    - include: comments
-    - include: attribute
-    - include: child_block
-    - include: empty_line
-    - include: node_terminator
-    - include: node_name
-  strings:
+#——— 0 Groups
+  node-elements:          #✗²
+    - match               : (?={{node_sp_beg}}) # mandatory whitespace
+      push                : #✗³ push to require ws before each element
+      #- meta_scope        : dbg✗³node␠arg∨prop∨child
+      - include           : node␠s
+      - match             : '({{c_slashdash}})'
+        scope             : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+        pop               : 1
+        set               :
+        #- meta_scope      : dbg✗³node␠⁄−arg∨prop∨child
+        - include         : node␠s
+        - include         : pop_pre␤
+        - include         : node_terminator🛑3
+        - include         : arg∨prop⁄-
+        - include         : child_block⁄-
+        - include         : pop # todo not style /- empty via branches above ↑
+        # - include         : S🛑¹pre_s∨c∨t
+      - include           : arg∨prop
+      - include           : child_block
+      - include           : node_terminator4  # ... but then an extra pop is needed
+    - include             : child_block1
+    - include             : node_terminator3
+    - include             : S🛑¹pre_s∨c∨t
+    # - include: comments
+    # - include: char🆔¬
+  node-elements⁄-:        #✗²
+    - match               : (?={{node_sp_beg}}) # mandatory whitespace
+      push                : #✗³ push to require ws before each element
+      #- meta_scope        : dbg✗³node␠_arg∨prop∨child⁄-
+      - include           : node␠s
+      - match             : '({{c_slashdash}})'
+        scope             : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+        pop               : 1
+        set               : # no terminator, /-; illegal
+        #- meta_scope      : dbg✗node␠⁄−arg∨prop∨child⁄−
+        - include         : node␠s
+        - include         : pop_pre␤
+        - include         : node_terminator🛑3
+        - include         : arg∨prop⁄-
+        - include         : child_block⁄-
+        - include         : pop # todo not style /- empty via branches above ↑
+
+      - include           : arg∨prop⁄-
+      - include           : child_block⁄-
+      - include           : node_terminator4⁄-
+    - include             : child_block1⁄-
+    - include             : node_terminator3⁄-
+    - include             : S🛑¹pre_s∨c∨t
+
+  string:
     - include: string-quoted-double
     - include: string-quoted-double-raw
-  numbers:
-    - include: float_exp
-    - include: float_fraction
-    - include: decimal
-    - include: integer
+  strings:
+    - include: strings-quoted-double
+    - include: strings-quoted-double-raw
+  string⁄-:
+    - include: string-quoted-double⁄-
+    - include: string-quoted-double-raw⁄-
+  strings⁄-:
+    - include: strings-quoted-double⁄-
+    - include: strings-quoted-double-raw⁄-
+  number:
+    - include: bin¦oct¦hex-partial
     - include: hexadecimal
     - include: octal
     - include: binary
+    - include: int∨dec∨float
+  number⁄-:
+    - include: bin¦oct¦hex⁄-partial
+    - include: hexadecimal⁄-
+    - include: octal⁄-
+    - include: binary⁄-
+    - include: int∨dec∨float⁄-
   comments:
-    - include: comment_blocks
-    - include: comment_slashdash
+    - include: comment_block∨doc
+    # - include: comment_slashdash
     - include: comment_line
-  comment_blocks:
+  comment_block∨doc:
     - include: comment_block_doc
     - include: comment_block
-  comment_slashdash:
-    - include: comment_slashdash_block
-    - include: comment_slashdash_straw
-    - include: comment_slashdash_string
-    - include: comment_slashdash_space
-    - include: comment_slashdash_node
+  keyword:
+    - include: keyword-partial
+    - include: boolean
+    - include: nil
+  keyword⁄-:
+    - include: keyword-partial⁄-
+    - include: boolean⁄-
+    - include: nil⁄-
+  keyword🛑:
+    - include: boolean🛑
+    - include: null🛑
+  keyword🛑⁄-:
+    - include: boolean🛑⁄-
+    - include: null🛑⁄-
+  keyword-partial: # avoid red flashes with unfinished typing
+    - include: true-partial
+    - include: false-partial
+    - include: null-partial
+  keyword-partial⁄-:
+    - include: true-partial⁄-
+    - include: false-partial⁄-
+    - include: null-partial⁄-
 
-  keyword                 :
-    - include             : boolean
-    - include             : 'null'
-  # keyword-illegal         : # todo: remove? since matching subsequent = in true=1 as illegal instead
-    # - include             : boolean-illegal
-    # - include             : null-illegal
+
 
 #——— 1 Node: \- type
   ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
