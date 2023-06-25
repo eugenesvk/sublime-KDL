@@ -124,6 +124,12 @@ variables:
   # ↑ excludes keywords, but string would be a pain to style
 
 contexts:
+  # prototype:
+    # - include: wss
+    # - include: comment_block∨doc
+    # - meta_include_prototype: false
+    # todo: bugs e.g. (a)/**/1 is a comment even if you exclude everywhere
+
   main:
     - meta_include_prototype: false
     - match : ''
