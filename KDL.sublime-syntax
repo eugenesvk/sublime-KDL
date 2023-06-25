@@ -425,6 +425,137 @@ contexts:
     - match               : '(?<!^)(/-)(r)(#*)(")' # negative lookbehind
       captures            :
         1:                  punctuation.definition.comment.begin.kdl
+# Primitives, with some ~matching KDL Spec elements
+  linesp:                 # ≝ linespace : newline | ws | single-line-comment
+    - include             : ␤
+    - include             : ws
+    - include             : comment_line #todo: bugs with } on a line after //
+    # - include             : comment_line_no␤
+  ␤s:
+    - match               : '{{newline}}'
+      #scope               : dbg✗␤s
+  ␤:
+    - match               : '{{newline}}'
+      #scope               : dbg✗␤
+      pop                 : 1
+  ␤term2:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl #✗␤2
+      pop                 : 2
+  ␤term3:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl #✗␤3
+      pop                 : 3
+  ␤term4:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl #✗␤4
+      pop                 : 4
+  eof:
+    - match               : '{{eof}}'
+      #scope               : dbg✗eof
+      pop                 : 1
+  eof2:
+    - match               : '{{eof}}'
+      #scope               : dbg✗eof
+      pop                 : 2
+  eof3:
+    - match               : '{{eof}}'
+      #scope               : dbg✗eof
+      pop                 : 3
+  eof4:
+    - match               : '{{eof}}'
+      #scope               : dbg✗eof
+      pop                 : 4
+
+  ws:                     # ≝ bom | unicode-space | multi-line-comment
+    - include             : bom
+    - include             : u_sp
+    - include             : comment_block∨doc
+  wss:
+    - include             : boms
+    - include             : u_sps
+    - include             : comment_block∨doc
+  bom:
+    - match               : '{{bom}}'
+      #scope               : dbg✗bom
+      pop                 : 1
+  boms:
+    - match               : '{{bom}}'
+      #scope               : dbg✗boms
+  u_sp:
+    - match               : '{{u_sp}}'
+      #scope               : dbg✗␠
+      pop                 : 1
+  u_sps:
+    - match               : '{{u_sp}}'
+      #scope               : dbg✗␠s
+  b_sp:
+    - match               : '{{b_sp}}'
+      #scope               : dbg✗b␠
+      pop                 : 1
+  b_sps:
+    - match               : '{{b_sp}}'
+      #scope               : dbg✗b␠s
+
+  node␠:                 # ≝ node-space: ws* escline ws* | ws+
+    - include             : line_continuation
+    - include             : ws+∨ws-line⎋-ws
+  node␠s:
+    - include             : line_continuations
+    - include             : wss # todo: don't need branching?
+  node␠⁄-:                #
+    - include             : line_continuation⁄-
+    - include             : ws+∨ws-line⎋-ws
+  ws+∨ws-line⎋-ws:
+    - match               : '(?={{ws_beg}})'
+      branch_point        : ⸙ws+∨ws-line⎋-ws
+      branch              :
+        - ws+⸙1
+        - ws-line⎋-ws⸙1
+  ws+∨ws-line⎋-ws⁄-:
+    - match               : '(?={{ws_beg}})'
+      branch_point        : ⸙ws+∨ws-line⎋-ws⁄-
+      branch              :
+        - ws+⁄-⸙1
+        - ws-line⎋-ws⁄-⸙1
+  ws+⸙1:
+    #- meta_scope          : dbg✗node␠_ws+∨ws-line⎋-ws_ws+⸙1
+    - match               : '(?={{escline_beg}})'
+      fail                : ⸙ws+∨ws-line⎋-ws
+    - include             : wss
+    - include             : pop⸙
+    # - meta_scope          : ✗ws+⸙1
+    # - match               : '{{b_sp}}'
+      # scope               : bsp✗ws+⸙1
+    # - include             : comment_block∨doc
+    # - include             : node-elements
+    # - match               : '(?={{ws_beg}})'
+      # push                :
+      # - include           : ws-pop2
+    # - include             : any🛑
+  ws+⁄-⸙1:
+    - match               : '(?={{escline_beg}})'
+      fail                : ⸙ws+∨ws-line⎋-ws⁄-
+    - include             : wss
+    - include             : pop⸙
+  ws-line⎋-ws⸙1:
+    - include             : wss
+    - include             : line_continuation
+    - include             : pop⸙
+    # - meta_scope          : ✗ws-line⎋-ws⸙1
+    # - match               : '{{b_sp}}'
+    #   scope               : bsp✗ws-line⎋-ws⸙1
+    # - include             : comment_block∨doc
+  ws-line⎋-ws⁄-⸙1:
+    - include             : wss
+    - include             : line_continuation⁄-
+    - include             : pop⸙
+  node␠+:
+    - include             : node␠
+    - include             : any🛑
+
+
+
 # Various helpers
   ␤🛑s:
     - match               : '{{nl_s}}'
