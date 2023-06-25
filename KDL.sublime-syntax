@@ -266,74 +266,310 @@ contexts:
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
-
-  # Values - Numbers
-  integer                 :                       # Integer literal
-    - match               : '(([+-])?\b({{integer}}))\b' # leading zeros are allowed
-      scope               : meta.number.integer.decimal.kdl constant.numeric.value.kdl
       captures            :
-        2:                  keyword.operator.arithmetic.kdl
-        3:                  constant.numeric.integer.kdl
-  decimal                 :                       # Integer literal (fraction)
-    - match               : '(([+-])?\b({{integer}})((\.)({{integer}}))+)\b'
-      scope               : meta.number.decimal.kdl constant.numeric.value.kdl
       captures            :
-        2:                  keyword.operator.arithmetic.kdl
-        3:                  constant.numeric.integer.kdl
-        5:                  punctuation.separator.decimal.kdl
-        6:                  constant.numeric.integer.kdl
-  float_exp               :                       # Floating point literal (exponent)
-    - match               : '([+-])?\b({{integer}})((\.)({{integer}}))?({{exponent}}+)\b'
-      scope               : meta.number.float.kdl constant.numeric.value.kdl
+      captures            :
+#——— Values - Numbers
+  int∨dec∨float:
+    - match               : '([+-])?([0-9])' # leading zeros are allowed
       captures            :
         1:                  keyword.operator.arithmetic.kdl
-        2:                  constant.numeric.significand.kdl constant.numeric.integer.kdl
-        3:                  constant.numeric.significand.kdl
-        4:                  punctuation.separator.decimal.kdl
-        5:                  constant.numeric.integer.kdl
-        6:                  constant.numeric.exponent.kdl       #↓6
-        7:                  punctuation.separator.exponent.kdl  #([eE])([+-])?({{integer}}) = exponent
-        8:                  keyword.operator.arithmetic.kdl     #      ↑7
-        9:                  constant.numeric.integer.kdl        #             ^8
-  float_fraction          :                       # Floating point literal (fraction)
-    - match               : '([+-])?\b({{integer}}*)((\.)({{integer}}))+\b'
-      scope               : meta.number.float.kdl constant.numeric.value.kdl
+      branch_point        : ⸙int∨dec∨float
+      branch              :
+        - integer⸙        # Integer literal
+        - decimal⸙        # Floating point literal (fraction)
+        - float⸙          # Floating point literal (exponent)
+  int∨dec∨float⁄-:
+    - match               : '([+-])?([0-9])' # leading zeros are allowed
       captures            :
-        1:                  keyword.operator.arithmetic.kdl
-        2:                  constant.numeric.significand.kdl constant.numeric.integer.kdl
-        3:                  constant.numeric.significand.kdl
-        4:                  punctuation.separator.decimal.kdl
-        5:                  constant.numeric.integer.kdl
-  binary                  :                       # Integer literal (binary)
-    - match               : '\b(0b)([01_]+)\b'
-      scope               : meta.number.integer.binary.kdl
+        1:                  keyword.operator.arithmetic.kdl comment.line.slash-dash.kdl
+        2:                  comment.line.slash-dash.kdl
+      branch_point        : ⸙int∨dec∨float⁄-
+      branch              :
+        - integer⁄-⸙
+        - decimal⁄-⸙
+        - float⁄-⸙
+  fail⸙int∨dec∨float-.:
+    - match               : '\.'
+      fail                : ⸙int∨dec∨float
+  fail⸙int∨dec∨float⁄-.:
+    - match               : '\.'
+      fail                : ⸙int∨dec∨float⁄-
+  fail⸙int∨dec∨float-ℯ:
+    - match               : '[eE]'
+      fail                : ⸙int∨dec∨float
+  fail⸙int∨dec∨float⁄-ℯ:
+    - match               : '[eE]'
+      fail                : ⸙int∨dec∨float⁄-
+  integer⸙:
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.integer.kdl
+    - include             : fail⸙int∨dec∨float-.
+    - include             : fail⸙int∨dec∨float-ℯ
+    - include             : digit₁₀_
+    - include             : pop3⸙
+  integer⁄-⸙:
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.integer.kdl
+    - include             : fail⸙int∨dec∨float⁄-.
+    - include             : fail⸙int∨dec∨float⁄-ℯ
+    - include             : digit₁₀_⁄-
+    - include             : pop3⸙
+  decimal⸙:                                       # Floating point literal (fraction)
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.decimal.kdl
+    - include             : fail⸙int∨dec∨float-ℯ
+    - include             : digit₁₀_
+    - match               : '(\.)'
+      scope               : punctuation.separator.decimal.kdl
+      push                :
+      - include           : fail⸙int∨dec∨float-ℯ
+      - include           : digit₁₀_
+      - include           : pop4
+    - include             : pop3⸙
+  decimal⁄-⸙:
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.decimal.kdl
+    - include             : fail⸙int∨dec∨float⁄-ℯ
+    - include             : digit₁₀_⁄-
+    - match               : '(\.)'
+      scope               : punctuation.separator.decimal.kdl comment.line.slash-dash.kdl
+      push                :
+      - include           : fail⸙int∨dec∨float⁄-ℯ
+      - include           : digit₁₀_⁄-
+      - include           : pop4
+    - include             : pop3⸙
+  float⸙:                                         # Floating point literal (exponent)
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.float.kdl constant.numeric.significand.kdl
+    - include             : digit₁₀_
+    - include             : float．
+    - include             : floatℯpartial
+    - include             : floatℯ
+    - include             : pop3⸙
+  float⁄-⸙:
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.float.kdl constant.numeric.significand.kdl
+    - include             : digit₁₀_⁄-
+    - include             : float．⁄-
+    - include             : floatℯ⁄-partial
+    - include             : floatℯ⁄-
+    - include             : pop3⸙
+  float．:
+    - match               : '(\.)'
+      scope               : punctuation.separator.decimal.kdl
+      push                :
+      - include           : digit₁₀_
+      - include           : pop
+  float．⁄-:
+    - match               : '(\.)'
+      scope               : punctuation.separator.decimal.kdl comment.line.slash-dash.kdl
+      push                :
+      - include           : digit₁₀_⁄-
+      - include           : pop
+  floatℯpartial:
+    - match               : '([eE])([+-])?(?={{nl_s}})'
       captures            :
-        1:                  constant.numeric.base.kdl
-        2:                  constant.numeric.value.kdl
-  octal                   :                       # Integer literal (octal)
-    - match               : '\b(0o)([0-7_]+)\b'
-      scope               : meta.number.integer.octal.kdl
+        1:                  punctuation.separator.exponent.kdl
+        2:                  keyword.operator.arithmetic.kdl
+      push                :
+      - clear_scopes      : 1 # clear previous meta scope significand
+      - meta_scope        : constant.numeric.exponent.kdl
+      - include           : pop4
+  floatℯ⁄-partial:
+    - match               : '([eE])([+-])?(?={{nl_s}})'
       captures            :
-        1:                  constant.numeric.base.kdl
-        2:                  constant.numeric.value.kdl
-  hexadecimal             :                       # Integer literal (hexadecimal)
-    - match               : '\b(0x)(\h+)\b'
-      scope               : meta.number.integer.hexadecimal.kdl
+        1:                  punctuation.separator.exponent.kdl comment.line.slash-dash.kdl
+        2:                  keyword.operator.arithmetic.kdl comment.line.slash-dash.kdl
+      push                :
+      - clear_scopes      : 1 # clear previous meta scope significand
+      - meta_scope        : constant.numeric.exponent.kdl
+      - include           : pop4
+  floatℯ:
+    - match               : '([eE])([+-])?([0-9])'
       captures            :
-        1:                  constant.numeric.base.kdl
-        2:                  constant.numeric.value.kdl
+        1:                  punctuation.separator.exponent.kdl
+        2:                  keyword.operator.arithmetic.kdl
+      push                :
+      - clear_scopes      : 1 # clear previous meta scope significand
+      - meta_scope        : constant.numeric.exponent.kdl
+      - include           : digit₁₀_
+      - include           : pop4
+  floatℯ⁄-:
+    - match               : '([eE])([+-])?([0-9])'
+      captures            :
+        1:                  punctuation.separator.exponent.kdl comment.line.slash-dash.kdl
+        2:                  keyword.operator.arithmetic.kdl comment.line.slash-dash.kdl
+      push                :
+      - clear_scopes      : 1 # clear previous meta scope significand
+      - meta_scope        : constant.numeric.exponent.kdl
+      - include           : digit₁₀_⁄-
+      - include           : pop4
 
-  empty_line              :
-    - match               : '\n'
+  binary:                                         # Integer literal (binary)
+    - match               : '(0b)(?=[0-1])'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.binary.kdl
+      - meta_content_scope: constant.numeric.value.kdl
+      - include           : ℤ₂
+  binary⁄-:
+    - match               : '(0b)(?=[0-1])'
+      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.binary.kdl
+      - meta_content_scope: constant.numeric.value.kdl
+      - include           : ℤ₂⁄-
+  octal:                                          # Integer literal (octal)
+    - match               : '(0o)(?=[0-7])'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.octal.kdl
+      - meta_content_scope: constant.numeric.value.kdl
+      - include           : ℤ₈
+  octal⁄-:
+    - match               : '(0o)(?=[0-7])'
+      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.octal.kdl
+      - meta_content_scope: constant.numeric.value.kdl
+      - include           : ℤ₈⁄-
+  hexadecimal:                                    # Integer literal (hexadecimal)
+    - match               : '(0x)(?=\h)'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.hexadecimal.kdl
+      - meta_content_scope: constant.numeric.value.kdl
+      - include           : ℤ₁₆
+  hexadecimal⁄-:
+    - match               : '(0x)(?=\h)'
+      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.hexadecimal.kdl
+      - meta_content_scope: constant.numeric.value.kdl
+      - include           : ℤ₁₆⁄-
 
-  node_terminator         :
-    - match               : '{{node_terminator}}'
-      scope               : punctuation.terminator.node.kdl
+  bin¦oct¦hex-partial:
+    - include             : binary-partial
+    - include             : octal-partial
+    - include             : hexadecimal-partial
+  bin¦oct¦hex⁄-partial:
+    - include             : binary⁄-partial
+    - include             : octal⁄-partial
+    - include             : hexadecimal⁄-partial
+  binary-partial:
+    - match               : '(0b)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.binary.kdl
+      - include           : pop5
+  binary⁄-partial:
+    - match               : '(0b)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.binary.kdl
+      - include           : pop5
+  octal-partial:
+    - match               : '(0o)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.octal.kdl
+      - include           : pop5
+  octal⁄-partial:
+    - match               : '(0o)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.octal.kdl
+      - include           : pop5
+  hexadecimal-partial:
+    - match               : '(0x)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.hexadecimal.kdl
+      - include           : pop5
+  hexadecimal⁄-partial:
+    - match               : '(0x)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.hexadecimal.kdl
+      - include           : pop5
 
-  node_name               :
-    - match               : '(?!{{ident_char_non}}|\s|\\){{ident_char}}'
-      scope               : entity.name.tag.node
-    - include             : line-continuation
+  # Values - Numbers (helpers) digit₁₀_
+  # can't match repeatable group in a regex, so repeat a single digit match
+  ℤ:
+    - match               : '([0-9])' # leading zeros are allowed
+      push                :
+      - include           : digit₁₀_
+      - include           : pop4
+  ℤ⁄-:
+    - match               : '([0-9])'
+      scope               : comment.line.slash-dash.kdl
+      push                :
+      - include           : digit₁₀_⁄-
+      - include           : pop4
+  ℤ₂:
+    - match               : '([0-1])'
+      push                :
+      - include           : digit₂_
+      - include           : pop4
+  ℤ₂⁄-:
+    - match               : '([0-1])'
+      scope               : comment.line.slash-dash.kdl
+      push                :
+      - include           : digit₂_⁄-
+      - include           : pop4
+  ℤ₈:
+    - match               : '([0-7])'
+      push                :
+      - include           : digit₈_
+      - include           : pop4
+  ℤ₈⁄-:
+    - match               : '([0-7])'
+      scope               : comment.line.slash-dash.kdl
+      push                :
+      - include           : digit₈_⁄-
+      - include           : pop4
+  ℤ₁₆:
+    - match               : '(\h)'
+      push                :
+      - include           : digit₁₆_
+      - include           : pop4
+  ℤ₁₆⁄-:
+    - match               : '(\h)'
+      scope               : comment.line.slash-dash.kdl
+      push                :
+      - include           : digit₁₆_⁄-
+      - include           : pop4
+  digit₁₀_:
+    - match               : '(_)|([0-9])'
+      captures            :
+        1:                  punctuation.separator.number.kdl
+  digit₁₀_⁄-:
+    - match               : '(_)|([0-9])'
+      captures            :
+        1:                  punctuation.separator.number.kdl comment.line.slash-dash.kdl
+        2:                  comment.line.slash-dash.kdl
+  digit₂_:
+    - match               : '(_)|([0-1])'
+      captures            :
+        1:                  punctuation.separator.number.kdl
+  digit₂_⁄-:
+    - match               : '(_)|([0-1])'
+      captures            :
+        1:                  punctuation.separator.number.kdl comment.line.slash-dash.kdl
+        2:                  comment.line.slash-dash.kdl
+  digit₈_:
+    - match               : '(_)|([0-7])'
+      captures            :
+        1:                  punctuation.separator.number.kdl
+  digit₈_⁄-:
+    - match               : '(_)|([0-7])'
+      captures            :
+        1:                  punctuation.separator.number.kdl comment.line.slash-dash.kdl
+        2:                  comment.line.slash-dash.kdl
+  digit₁₆_:
+    - match               : '(_)|([0-9a-fA-F])'
+      captures            :
+        1:                  punctuation.separator.number.kdl
+  digit₁₆_⁄-:
+    - match               : '(_)|([0-9a-fA-F])'
+      captures            :
+        1:                  punctuation.separator.number.kdl comment.line.slash-dash.kdl
+        2:                  comment.line.slash-dash.kdl
 
 
 #——— 2 Node Element: 4 Child
