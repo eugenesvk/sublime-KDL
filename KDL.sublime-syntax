@@ -202,6 +202,49 @@ contexts:
     - match               : '({{comment_block_doc_beg}})'
       captures            :
         1:                  punctuation.definition.comment.begin.kdl
+#——— Type-values
+  type-value:             #✗³
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl
+      push                : #✗⁴
+      - meta_scope        : meta.annotation.kdl #✗⁴type_value
+      - meta_content_scope: entity.name.type.kdl
+      - match             : '(?<=\()(\))|(\))'
+        captures          :
+          1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
+          2:                punctuation.separator.annotation.end.kdl
+        pop               : 1 # remove ↑annotation
+        set               : # push bugs even with pop, still get meta_content
+        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : value
+        - include         : value🛑
+        - include         : pop2_pre-term # todo: sort which are best
+        - include         : any🛑s
+      - include           : type-name
+      - include           : type🛑
+  type-value⁄-:           #✗³
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl comment.line.slash-dash.kdl #✗typearg⁄-
+      push                : #✗⁴
+      - meta_scope        : meta.annotation.kdl #✗⁴type-value⁄–
+      - meta_content_scope: entity.name.type.kdl comment.line.slash-dash.kdl
+      - match             : '(?<=\()(\))|(\))'
+        captures          :
+          1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
+          2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl
+        pop               : 1 # remove ↑annotation
+        set               : # push bugs even with pop, still get meta_content
+        - include         : s🛑¹s
+        - include         : value⁄-
+        - include         : value🛑
+        - include         : any🛑s
+      - include           : type-name
+      - include           : type🛑
+
+  type-name:     # see type-content-node
+    - include             : keyword🛑
+    - match               : '"' # string can't use to ban "a""b"
+      scope               : punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : comment.block.documentation.kdl
       - match             : '{{comment_block_end}}'
@@ -211,6 +254,15 @@ contexts:
       - include           : comment_block
   comment_block           :                       # Block comment
     - match               : '({{comment_block_beg}})'
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - include           : char-escaped
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        push              : # can't pop 2 or "a""b" is allowed
+        - match           : (?=\))
+          pop             : 2 # remove ↑ + string
+        - include         : any🛑s
+    - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
       captures            :
         1:                  punctuation.definition.comment.begin.kdl
       push                 :
@@ -220,8 +272,60 @@ contexts:
         pop               : 1
       - include           : comment_block_doc
       - include           : comment_block
+        1:                 storage.type.string.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        5:                 punctuation.definition.string.end.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - match             : (?=\))
+        pop               : 1 # remove    string
+      - include           : any🛑s
+    - include             : IDs_bare
+  type-name⁄-:
+    - include             : keyword🛑⁄-
+    - match               : '"' # string can't use to ban "a""b"
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - include           : char-escaped
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        set               : # can't pop 2 or "a""b" is allowed
+        - match           : (?=\))
+          pop             : 2 # remove ↑ + string
+        - include         : any🛑s
+    - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        1:                 storage.type.string.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        5:                 punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - match             : (?=\))
+        pop               : 1 # remove    string
+      - include           : any🛑s
+    - include             : IDs_bare
+  # type-content: # fails due to the need to mandate 1value
+    # - include             : keyword🛑
+    # - include             : string
+    # - include             : IDs_bare
+  # type-content⁄-:
+  #   - include             : keyword🛑⁄-
+  #   - include             : string⁄-
+  #   - include             : IDs_bare
+  type🛑:
+    - include             : char🆔¬
+    - include             : s🛑s
+    - include             : S🛑s
 
 
+
+
+  IDs_bare:
+    - match               : '({{bareID}})'
+  ID_bare:
+    - match               : '({{bareID}})'
+      pop                 : 1
 
 #——— Values - Keywords
   boolean:
