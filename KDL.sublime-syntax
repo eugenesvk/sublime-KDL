@@ -201,7 +201,6 @@ contexts:
   comment_block_doc       :                       # Block documentation comment
     - match               : '({{comment_block_doc_beg}})'
       captures            :
-        1:                  punctuation.definition.comment.begin.kdl
 #——— 2 Node Element: 3 Property
   ⚿₌v-⸙2:                 #✗⁴
     - meta_scope          : meta.property.kdl #✗⁴⚿₌v⸙
@@ -341,14 +340,6 @@ contexts:
     - match               : '"' # string can't use to ban "a""b"
       scope               : punctuation.definition.string.begin.kdl
       push                :
-      - meta_scope        : comment.block.documentation.kdl
-      - match             : '{{comment_block_end}}'
-        scope             : punctuation.definition.comment.end.kdl
-        pop               : 1
-      - include           : comment_block_doc
-      - include           : comment_block
-  comment_block           :                       # Block comment
-    - match               : '({{comment_block_beg}})'
       - meta_scope        : meta.string.kdl string.quoted.double.kdl
       - include           : char-escaped
       - match             : '"'
@@ -359,14 +350,6 @@ contexts:
         - include         : any🛑s
     - match               : '(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
       captures            :
-        1:                  punctuation.definition.comment.begin.kdl
-      push                 :
-      - meta_scope        : comment.block.kdl
-      - match             : '{{comment_block_end}}'
-        scope             : punctuation.definition.comment.end.kdl
-        pop               : 1
-      - include           : comment_block_doc
-      - include           : comment_block
         1:                 storage.type.string.kdl
         2:                 punctuation.definition.string.begin.kdl
         5:                 punctuation.definition.string.end.kdl
