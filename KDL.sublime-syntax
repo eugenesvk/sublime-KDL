@@ -194,9 +194,6 @@ contexts:
   attribute               : # argument or property, but ↓ is only property? todo add argument
     - match               : '(?!{{ident_char_non}}|\s)({{ident_char}}+)(=)'
       captures            :
-        1:                  meta.mapping.key.kdl entity.other.attribute-name.kdl
-        2:                  meta.mapping.kdl punctuation.separator.key-value.kdl
-      push                : property-value
 #——— 2 Node Element: 2 Argument or 3 Property
   arg∨prop:               #✗³
     # - include           : node␠
