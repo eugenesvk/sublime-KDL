@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.9.0...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.9.1...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[0.9.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.1
+## [0.9.1]
 - __Fixed__
   + :beetle: ending} breaking the following } in children
 
