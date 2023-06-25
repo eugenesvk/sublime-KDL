@@ -4,6 +4,7 @@ name             : KDL
 file_extensions  : [kdl]
 scope            : source.kdl
 version          : 2
+# See Whitespace (Line breaking and non-Newline) at file end
 
 
 # !!! sets don't allow whitespace even with (?x:), so watch out for [{{var}}] where var='(?x: abc)', 'x' will also be included
@@ -14,61 +15,6 @@ version          : 2
   # rbuckton.github.io/regexp-features/engines/oniguruma.html
   # raw.githubusercontent.com/kkos/oniguruma/v6.9.1/doc/RE  6.8.0 2018/07/26 (not sure which version ST uses)
     # github.com/kkos/oniguruma/blob/master/doc/RE (latest)
-
-# Whitespace (Line breaking)
-  #  Acronym	Name                         	Code Pt 	Oniguruma
-  #  CRLF   	Carriage Return and Line Feed	   D + A	\r\n
-  #  CR     	Carriage Return              	   D    	\r
-  #  LF     	Line Feed                    	   A    	\n (newline)
-  #✗ VT     	Vertical Tabulation          	   B    	\v
-  #  FF     	Form Feed                    	   C    	\f
-  #  NEL    	Next Line                    	  85    	 
-  #  LS     	Line Separator               	2028    	 
-  #  PS     	Paragraph Separator          	2029    	 
-  # ∑= d+a d a c   85 2028 2029 (KDL)
-  # ∑= d+a d a c b 85 2028 2029 (oniguruma) \R: \r\n or \r \n \v \f 85 2028 2029 (!!! can't be used in a character class !!!)
-  #             \v vertical tab is excluded from KDL
-  # Sublime only works with: (?>\R), equiv= (?>\r\n?|[\x{A}-\x{C}\x{85}\x{2028}\x{2029}])
-  # (?>…) — Matches the provided pattern, but no backtracking is performed if the match fails
-  # \b           backspace               8
-  # \a           bell                    7
-  # \e           escape                 1B
-
-# Whitespace (non-Newline)
-  # Acronym	Name                     	Code Pt	Oniguruma
-  #        	Character Tabulation     	   9   	\t (horizontal tab)
-  #        	Space                    	  20   	.
-  #        	No-Break Space           	  A0   	.
-  #        	Ogham Space Mark         	1680   	.
-  #        	En Quad                  	2000   	.
-  #        	Em Quad                  	2001   	.
-  #        	En Space                 	2002   	.
-  #        	Em Space                 	2003   	.
-  #        	Three-Per-Em Space       	2004   	.
-  #        	Four-Per-Em Space        	2005   	.
-  #        	Six-Per-Em Space         	2006   	.
-  #        	Figure Space             	2007   	.
-  #        	Punctuation Space        	2008   	.
-  #        	Thin Space               	2009   	.
-  #        	Hair Space               	200A   	.
-  #        	Narrow No-Break Space    	202F   	.
-  #        	Medium Mathematical Space	205F   	.
-  #        	Ideographic Space        	3000   	.
-  # ∑=                 9 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
-  # \s 85(nel) a b c d 9 Line_Separator Paragraph_Separator Space_Separator (oniguruma)
-    # Space_Separator    20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
-    # Line_Separator      2028
-    # Paragraph_Separator	2029
-    # https://www.compart.com/en/unicode/category/Zl
-    # https://www.compart.com/en/unicode/category/Zs
-    # https://www.compart.com/en/unicode/category/Zp
-    # [^\S\r\n] double negative to match whitespace without newline (but add other newlines)
-      # [^\S(?>\R)] seems to work
-      # \S character NOT
-        # 9 a b c d 85
-        # Line_Separator      2028
-        # Paragraph_Separator 2029
-        # Space_Separator 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
 
 # ident = identifier #ss#=set safe #ss!# set safe with exception
 # _var = var rules can't be expressed within literal regexes, e.g., excluding keywords
@@ -518,3 +464,58 @@ contexts:
         pop               : 1
       - include           : attribute
       - include           : strings
+
+# Whitespace (Line breaking)
+  #  Acronym	Name                         	Code Pt 	Oniguruma
+  #  CRLF   	Carriage Return and Line Feed	   D + A	\r\n
+  #  CR     	Carriage Return              	   D    	\r
+  #  LF     	Line Feed                    	   A    	\n (newline)
+  #✗ VT     	Vertical Tabulation          	   B    	\v
+  #  FF     	Form Feed                    	   C    	\f
+  #  NEL    	Next Line                    	  85    	 
+  #  LS     	Line Separator               	2028    	 
+  #  PS     	Paragraph Separator          	2029    	 
+  # ∑= d+a d a c   85 2028 2029 (KDL)
+  # ∑= d+a d a c b 85 2028 2029 (oniguruma) \R: \r\n or \r \n \v \f 85 2028 2029 (!!! can't be used in a character class !!!)
+  #             \v vertical tab is excluded from KDL
+  # Sublime only works with: (?>\R), equiv= (?>\r\n?|[\x{A}-\x{C}\x{85}\x{2028}\x{2029}])
+  # (?>…) — Matches the provided pattern, but no backtracking is performed if the match fails
+  # \b           backspace               8
+  # \a           bell                    7
+  # \e           escape                 1B
+
+# Whitespace (non-Newline)
+  # Acronym	Name                     	Code Pt	Oniguruma
+  #        	Character Tabulation     	   9   	\t (horizontal tab)
+  #        	Space                    	  20   	.
+  #        	No-Break Space           	  A0   	.
+  #        	Ogham Space Mark         	1680   	.
+  #        	En Quad                  	2000   	.
+  #        	Em Quad                  	2001   	.
+  #        	En Space                 	2002   	.
+  #        	Em Space                 	2003   	.
+  #        	Three-Per-Em Space       	2004   	.
+  #        	Four-Per-Em Space        	2005   	.
+  #        	Six-Per-Em Space         	2006   	.
+  #        	Figure Space             	2007   	.
+  #        	Punctuation Space        	2008   	.
+  #        	Thin Space               	2009   	.
+  #        	Hair Space               	200A   	.
+  #        	Narrow No-Break Space    	202F   	.
+  #        	Medium Mathematical Space	205F   	.
+  #        	Ideographic Space        	3000   	.
+  # ∑=                 9 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
+  # \s 85(nel) a b c d 9 Line_Separator Paragraph_Separator Space_Separator (oniguruma)
+    # Space_Separator    20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
+    # Line_Separator      2028
+    # Paragraph_Separator	2029
+    # https://www.compart.com/en/unicode/category/Zl
+    # https://www.compart.com/en/unicode/category/Zs
+    # https://www.compart.com/en/unicode/category/Zp
+    # [^\S\r\n] double negative to match whitespace without newline (but add other newlines)
+      # [^\S(?>\R)] seems to work
+      # \S character NOT
+        # 9 a b c d 85
+        # Line_Separator      2028
+        # Paragraph_Separator 2029
+        # Space_Separator 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
