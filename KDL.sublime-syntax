@@ -335,26 +335,6 @@ contexts:
       scope               : entity.name.tag.node
     - include             : line-continuation
 
-  # line-continuation-or-pop:
-    # - include             : line-continuation
-    # - match               : (?=\s*($|;|#))
-      # pop                 : true
-  line-continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
-                          #                  =↑single-line-comment_no_nl newline
-    - match               : \\
-      scope               : punctuation.separator.continuation.line.kdl
-      set                 : line_continuation-line1
-  line_continuation-line1:
-    - include             : ws                          # ≝ ... ws*
-    - include             : comment_line_no_nl          # ≝ ... single-line-comment (without newline, so ↓ captures)
-    - match               : '({{nl_s}})'                # ≝ ... newline
-      set                 : line_continuation-line_next
-    - include             : non_ws_illegal
-  line_continuation-line_next:
-    - include             : ws
-    - include             : comment_line_no_nl
-    - include             : newline_illegal
-    - include             : pop_before-non_ws
 
   child_block             :
     - match               : '{'
@@ -382,25 +362,172 @@ contexts:
   /-comment_child_block2-body:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
+#——— 2 Node Element: 5 End
+  node_terminator:        # ≝ node-terminator : single-line-comment | newline | ";" | eof
+    - include             : comment_line
+    - include             : ␤
+    - include             : eof
+    # - include             : pop｝
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
       pop                 : 1
-    - include             : /-comment_child_block2
+    - include             : ｝🛑
+  node_terminator🛑2:
+    - include             : comment_line🛑2
+    - include             : ␤🛑2
+    # - include             : eof
+    - match               : ;
+      scope               : invalid.illegal.position.kdl
+      pop                 : 2
+    - include             : ｝🛑2
+  node_terminator🛑3:
+    - include             : comment_line🛑3
+    - include             : ␤🛑3
+    # - include             : eof
+    - match               : ;
+      scope               : invalid.illegal.position.kdl
+      pop                 : 3
+    - include             : ｝🛑3
+  node_terminator⁄-:
+    - include             : comment_line⁄-
+    - include             : ␤
+    - include             : eof
+    # - include             : pop｝
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      pop                 : 1
+    - include             : ｝🛑
+  node_terminator2:       # X pops to allow the convenience of earlier pushes to e.g. track node level and ensure arguments have mandatory ws
+    - include             : comment_line2_term
+    - include             : ␤term2
+    - include             : eof2
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
+      pop                 : 2
+    - include             : ｝🛑2
+  node_terminator2⁄-:
+    - include             : comment_line2_term⁄-
+    - include             : ␤term2
+    - include             : eof2
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+    - include             : ｝🛑2
+  node_terminator3:
+    - include             : comment_line3_term
+    - include             : ␤term3
+    - include             : eof3
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
+      pop                 : 3
+    - include             : ｝🛑3
+  node_terminator3⁄-:
+    - include             : comment_line3_term⁄-
+    - include             : ␤term3
+    - include             : eof3
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗n_term3⁄–
+      pop                 : 3
+    - include             : ｝🛑3
+  node_terminator4:
+    - include             : comment_line4_term
+    - include             : ␤term4
+    - include             : eof4
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
+      pop                 : 4
+    - include             : ｝🛑4
+  node_terminator4⁄-:
+    - include             : comment_line4_term⁄-
+    - include             : ␤term4
+    - include             : eof4
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      pop                 : 4
+    - include             : ｝🛑4
 
-  comment_line            :                       # Single-line comment
-    - match               : '{{single_line_comment}}'
+  pre｝🛑:                # missing node terminator before }, requires hunting down for space before }, which nodespace or other rule can handle already
+    - match               : '{{b_sp}}*?({{b_sp}})?(?=\})'
       captures            :
-        1:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
-        2:                  comment.line.double-slash.kdl
-        3:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
-  comment_line_no_nl      :                       # Single-line comment without capturing ending ␤
-    - match               : '{{single_line_comment_no_nl}}'
-      captures            :
-        1:                  comment.line.double-slash.kdl punctuation.definition.comment.kdl
-        2:                  comment.line.double-slash.kdl
-  comment_slashdash_block :                       # Slashdash block comment
-    - match               : '(/-)({)'
-      captures            :
-        1:                  punctuation.definition.comment.begin.kdl
-        2:                  punctuation.section.mapping.begin
+        1:                  invalid.illegal.kdl
+      pop                 : 1
+  ｝🛑:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      pop                 : 1
+  ｝🛑2:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      pop                 : 2
+  ｝🛑3:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      pop                 : 3
+  ｝🛑4:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
+      pop                 : 4
+  ｝:
+    - match               : '(?=\})'
+      pop                 : 1
+
+  line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
+                          #                  =↑single-line-comment_no_nl newline
+    - match               : \\
+      scope               : punctuation.separator.continuation.line.kdl #✗lc
+      push                : line_continuation-line1
+  line_continuation⁄-:
+    - match               : \\
+      scope               : punctuation.separator.continuation.line.kdl comment.line.slash-dash.kdl #✗lc⁄–
+      push                : line_continuation⁄-line1
+  line_continuations:
+    - match               : \\
+      scope               : punctuation.separator.continuation.line.kdl #✗lcs
+      push                : line_continuations-line1
+  line_continuation-line1:
+    - include             : wss                         # ≝ ... ws*
+    - include             : comment_line_no␤           # ≝ ... single-line-comment (without newline, so ↓ captures)
+    - match               : '({{nl_s}})'                # ≝ ... newline
+      #scope               : dbg✗line_continuation-line1
+      set                 : line_continuation-line_next
+    - include             : S🛑s
+  line_continuation⁄-line1:
+    - include             : wss                         # ≝ ... ws*
+    - include             : comment_line_no␤           # ≝ ... single-line-comment (without newline, so ↓ captures)
+    - match               : '({{nl_s}})'                # ≝ ... newline
+      set                 : line_continuation⁄-line_next
+    - include             : S🛑s
+  line_continuations-line1:
+    #- meta_scope          : dbg✗line_continuations-line1
+    # - include             : keyword-partial
+    - include             : wss
+    - include             : comment_line_no␤
+    - match               : '({{nl_s}})'
+      set                 : line_continuations-line_next
+    - include             : S🛑s
+  line_continuation-line_next:
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ␤🛑
+    - match               : \\                          # disallows repeated
+      scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl
+      # pop                 : 1                         # disallows 2nd \, but not 3rd+
+    - include             : else-pop
+    # - include             : else-pop2                   # 2 disallows repeated \, but requires extra push before use
+  line_continuation⁄-line_next:
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ␤🛑
+    - match               : \\                          # disallows repeated
+      scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+    - include             : else-pop
+  line_continuations-line_next:
+    - include             : wss
+    - include             : comment_lines_no␤
+    - include             : ␤🛑s # todo: change to 1
+    - include             : else-pop
+
+
 #——— Comments
   comment_block_doc       :                       # Block documentation comment
     - match               : '({{comment_block_doc_beg}})'
