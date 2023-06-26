@@ -857,6 +857,102 @@ contexts:
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
+  strings-quoted-double-consecutive🛑: #
+    - match               : '((?<=#)|(?<="))(")([^"]*")'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”“”s
+        3:                 invalid.illegal.muted.position.kdl #✗”“”s
+    - match               : '((?<=#)|(?<="))(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”“s
+        3:                 invalid.illegal.muted.position.kdl #✗”“s
+  string-quoted-double-consecutive🛑3: #
+    - match               : '((?<=#)|(?<="))(")([^"]*")'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”“”3
+        3:                 invalid.illegal.muted.position.kdl #✗”“”3
+      push                :
+      - include           : pop3
+    - match               : '((?<=#)|(?<="))(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”“3
+        3:                 invalid.illegal.muted.position.kdl #✗”“3
+      push                :
+      - include           : pop3
+  string-quoted-double-consecutive🛑4:
+    - match               : '((?<=#)|(?<="))(")([^"]*")'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”“”4
+        3:                 invalid.illegal.muted.position.kdl #✗”“”4
+      push                :
+      - include           : pop4
+    - match               : '((?<=#)|(?<="))(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”“4
+        3:                 invalid.illegal.muted.position.kdl #✗”“4
+      push                :
+      - include           : pop4
+  strings-quoted-double-raw-consecutive🛑:
+    - match               : '((?<=#)|(?<="))(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“”s
+        3:                 invalid.illegal.position.kdl #✗”r“”s
+        5:                 invalid.illegal.muted.position.kdl #✗”r“”s
+        6:                 invalid.illegal.muted.position.kdl #✗”r“”s
+    - match               : '((?<=#)|(?<="))(r)(#*)(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“s
+        3:                 invalid.illegal.position.kdl #✗”r“s
+        4:                 invalid.illegal.position.kdl #✗”r“s
+        5:                 invalid.illegal.muted.position.kdl #✗”r“s
+  string-quoted-double-raw-consecutive🛑3:
+    - match               : '((?<=#)|(?<="))(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“”3
+        3:                 invalid.illegal.position.kdl #✗”r“”3
+        5:                 invalid.illegal.muted.position.kdl #✗”r“”3
+        6:                 invalid.illegal.muted.position.kdl #✗”r“”3
+      push                :
+      - include           : pop3
+    - match               : '((?<=#)|(?<="))(r)(#*)(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“3
+        3:                 invalid.illegal.position.kdl #✗”r“3
+        4:                 invalid.illegal.position.kdl #✗”r“3
+        5:                 invalid.illegal.muted.position.kdl #✗”r“3
+      push                :
+      - include           : pop3
+  string-quoted-double-raw-consecutive🛑4:
+    - match               : '((?<=#)|(?<="))(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“”4
+        3:                 invalid.illegal.position.kdl #✗”r“”4
+        5:                 invalid.illegal.muted.position.kdl #✗”r“”4
+        6:                 invalid.illegal.muted.position.kdl #✗”r“”4
+      push                :
+      - include           : pop4
+    - match               : '((?<=#)|(?<="))(r)(#*)(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“4
+        3:                 invalid.illegal.position.kdl #✗”r“4
+        4:                 invalid.illegal.position.kdl #✗”r“4
+        5:                 invalid.illegal.muted.position.kdl #✗”r“4
+      push                :
+      - include           : pop4
+  bare-after-string🛑: #
+    - match               : '((?<=#)|(?<="))({{bareID}})([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”bare
+        6:                 invalid.illegal.muted.position.kdl #✗”bare
+      push                :
+      - include           : pop3
+  bare-after-string🛑4:
+    - match               : '((?<=#)|(?<="))({{bareID}})([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”bare
+        6:                 invalid.illegal.muted.position.kdl #✗”bare
+      push                :
+      - include           : pop4
 
 
 #——— Values - Numbers
@@ -1904,7 +2000,12 @@ contexts:
   pop3_pre-str:
     - match               : '(?=\"|r\")'
       pop                 : 3
-
+  pop_pre）:
+    - match               : (?=\))
+      pop                 : 1
+  pop2_pre）:
+    - match               : (?=\))
+      pop                 : 2
 
   else-pop:               # pop_pre-non_ws
     - match               : '(?=\S)'
