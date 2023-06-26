@@ -1,7 +1,61 @@
 // SYNTAX TEST "Packages/KDL/KDL.sublime-syntax"
-
 // 0. Test overall source match
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.kdl
+
+// 2 Node Element: 1 Node name
+"node string
+//<-              punctuation.definition.string.begin.kdl
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
+multiline"
+//<-              meta.string.kdl string.quoted.double.kdl
+  //<-            meta.string.kdl string.quoted.double.kdl
+//^^^^^^^^        meta.string.kdl string.quoted.double.kdl
+//       ^        punctuation.definition.string.end.kdl
+r"node raw string
+//<-              storage.type.string.kdl
+ //<-             punctuation.definition.string.begin.kdl
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+multiline"
+//<-              meta.string.kdl string.quoted.double.raw.kdl
+  //<-            meta.string.kdl string.quoted.double.raw.kdl
+//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+//       ^        punctuation.definition.string.end.kdl
+r#"node #raw string
+//<-              storage.type.string.kdl
+ //<-             punctuation.definition.string.begin.kdl
+//^               punctuation.definition.string.begin.kdl
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+multiline"#
+//<-              meta.string.kdl string.quoted.double.raw.kdl
+  //<-            meta.string.kdl string.quoted.double.raw.kdl
+//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+//       ^        punctuation.definition.string.end.kdl
+
+n "Trying to ban some consecutive strings"
+"n""b"
+//^               punctuation.definition.string.end.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^            invalid.illegal.muted.position.kdl
+"n"#"b"
+//^               punctuation.definition.string.end.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^^           invalid.illegal.muted.position.kdl
+"n"r"b"
+//^               punctuation.definition.string.end.kdl
+// ^^             invalid.illegal.position.kdl
+//   ^^           invalid.illegal.muted.position.kdl
+
+r##"n"##r#"b"#
+//     ^          punctuation.definition.string.end.kdl
+//      ^^^       invalid.illegal.position.kdl
+//         ^^^    invalid.illegal.muted.position.kdl
+r"multiline
+nn"r"b""b"
+//^               punctuation.definition.string.end.kdl
+// ^^             invalid.illegal.position.kdl
+//   ^^           invalid.illegal.muted.position.kdl
+//     ^          invalid.illegal.position.kdl
+//      ^^        invalid.illegal.muted.position.kdl
 
 // 2 Node Element: 2 Argument
 n "Values can't be repeated without a separator (glued)"
@@ -349,6 +403,17 @@ title r###""""Rawest"""string""""###
 //     ^^^                                        punctuation.definition.string.begin.kdl
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              meta.string.kdl, string.quoted.double.raw.kdl
 //                               ^^^              punctuation.definition.string.end.kdl
+nnn r"raw"
+nnn r"multiline raw
+//  ^^^^^^^^^^^^^^^          string.quoted.double.raw.kdl
+//  ^                        storage.type.string.kdl
+//   ^                       punctuation.definition.string.begin.kdl
+string
+//^^^^                       string.quoted.double.raw.kdl
+multiline
+//^^^^^^^                    string.quoted.double.raw.kdl
+"
+//<-      punctuation.definition.string.end.kdl
 
 
 
@@ -427,7 +492,8 @@ n "Illegal space between a tag and its value"
    (r"t""t")n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
-//      ^^^                  invalid.illegal.position.kdl
+//      ^                    invalid.illegal.position.kdl
+//       ^^                  invalid.illegal.muted.position.kdl
 
 
 
@@ -781,11 +847,13 @@ n /-1 /-true /- "comment string" /-r"r aw" /-r#"Raw est"s"#
   ("t1""t2")n "Only a single value in a type allowed"
 //^^^^^^^^^^ meta.node.kdl meta.annotation.kdl
 // ^^^^^^^^  entity.name.type.kdl
-//     ^^^^  invalid.illegal.position.kdl
+//     ^     invalid.illegal.position.kdl
+//      ^^^  invalid.illegal.muted.position.kdl
 /-("t1""t2")n "Only a single value in a type allowed"
 //^^^^^^^^^^ meta.node.kdl meta.annotation.kdl
 // ^^^^^^^^  entity.name.type.kdl
-//     ^^^^  invalid.illegal.position.kdl
+//     ^     invalid.illegal.position.kdl
+//      ^^^  invalid.illegal.muted.position.kdl
 
 
 // 3 Data: Keywords (Invalid)
