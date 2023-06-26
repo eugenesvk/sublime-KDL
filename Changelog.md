@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file
 <!-- - __Security__ -->
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
+- __Fixed__
+  + :beetle: invalid multiline raw strings
 
 [0.9.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.1
 ## [0.9.1]
