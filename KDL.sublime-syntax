@@ -99,7 +99,7 @@ variables:
   escline_beg:              	'\\'                                                         	#
   linespace_re:             	'{{nl_s}}|{{ws}}|{{single_line_comment}}'                    	# set-unsafe; includes recursion: ws → multi_line_comment → commented_block🗘
   char_linesp:              	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                           #ss!#	# ex / but not precisely //
-  newline:                  	'(?>\r\n?|[\x{A}\x{C}\x{85}\x{2028}\x{2029}])'               	# \R without \v
+  newline:                  	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'          	# \R
   nl_s:                     	'[\r\n\x{C}\x{85}\x{2028}\x{2029}]'                     #ss!#	# not precisely ␤␊
   ws:                       	'{{bom}}|{{u_sp}}|{{multi_line_comment}}'                    	#
   b_sp:                     	'[{{bom}}{{u_sp}}]'                                     #ss# 	#
@@ -2044,14 +2044,13 @@ contexts:
   #  CRLF   	Carriage Return and Line Feed	   D + A	\r\n
   #  CR     	Carriage Return              	   D    	\r
   #  LF     	Line Feed                    	   A    	\n (newline)
-  #✗ VT     	Vertical Tabulation          	   B    	\v
+  #  VT     	Vertical Tabulation          	   B    	\v
   #  FF     	Form Feed                    	   C    	\f
   #  NEL    	Next Line                    	  85    	 
   #  LS     	Line Separator               	2028    	 
   #  PS     	Paragraph Separator          	2029    	 
-  # ∑= d+a d a c   85 2028 2029 (KDL)
+  # ∑= d+a d a c b 85 2028 2029 (KDL)
   # ∑= d+a d a c b 85 2028 2029 (oniguruma) \R: \r\n or \r \n \v \f 85 2028 2029 (!!! can't be used in a character class !!!)
-  #             \v vertical tab is excluded from KDL
   # Sublime only works with: (?>\R), equiv= (?>\r\n?|[\x{A}-\x{C}\x{85}\x{2028}\x{2029}])
   # (?>…) — Matches the provided pattern, but no backtracking is performed if the match fails
   # \b           backspace               8
