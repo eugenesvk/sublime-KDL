@@ -205,12 +205,18 @@ contexts:
   strings:
     - include: strings-quoted-double
     - include: strings-quoted-double-raw
+  strings_node-id:
+    - include: strings-quoted-double_node-id
+    - include: strings-quoted-double-raw_node-id
   string⁄-:
     - include: string-quoted-double⁄-
     - include: string-quoted-double-raw⁄-
   strings⁄-:
     - include: strings-quoted-double⁄-
     - include: strings-quoted-double-raw⁄-
+  strings⁄-_node-id:
+    - include: strings-quoted-double⁄-_node-id
+    - include: strings-quoted-double-raw⁄-_node-id
   number:
     - include: bin¦oct¦hex-partial
     - include: hexadecimal
@@ -361,10 +367,10 @@ contexts:
     - include             : keywords🛑
     - match               : '(?={{string_beg}})'
       push                : #✗²
-      - meta_scope        : entity.name.tag.node.kdl #✗²
+      # - meta_scope        : entity.name.tag.node.kdl #✗²
       - include           : string-quoted-double-raw-consecutive🛑3
       - include           : string-quoted-double-consecutive🛑3
-      - include           : strings
+      - include           : strings_node-id # use custom strings scopes or meta_scope gets applied to "args"
       - include           : node-elements
       - include           : node_terminator3
     - include             : bare-after-string🛑
@@ -379,10 +385,10 @@ contexts:
     - include             : keywords⁄-🛑
     - match               : '(?={{string_beg}})'
       push                : #✗²
-      - meta_scope        : entity.name.tag.node.kdl #✗²
+      # - meta_scope        : entity.name.tag.node.kdl #✗²
       - include           : string-quoted-double-raw-consecutive🛑3
       - include           : string-quoted-double-consecutive🛑3
-      - include           : strings⁄-
+      - include           : strings⁄-_node-id # use custom strings scopes or meta_scope gets applied to "args"
       - include           : node-elements⁄-
       - include           : node_terminator3⁄-
     - include             : bare-after-string🛑
@@ -789,11 +795,30 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : char-escaped
+  strings-quoted-double_node-id:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+      - include           : char-escaped
   strings-quoted-double⁄-:
     - match               : '"'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+      - include           : char-escaped⁄-
+  strings-quoted-double⁄-_node-id:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
       - match             : '"'
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
@@ -845,6 +870,17 @@ contexts:
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
+  strings-quoted-double-raw_node-id:
+    - match               : '(r)(#*)(")'
+      captures            :
+        1:                 storage.type.string.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : kdentity.name.tag.node.l meta.string.kdl string.quoted.double.raw.kdl
+      - match             : '"\2' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
   strings-quoted-double-raw⁄-:
     - match               : '(r)(#*)(")'
       captures            :
@@ -853,6 +889,18 @@ contexts:
         3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"\2' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+  strings-quoted-double-raw⁄-_node-id:
+    - match               : '(r)(#*)(")'
+      captures            :
+        1:                 storage.type.string.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
