@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file
 
 - __Fixed__
   + :beetle: add vertical tab to the list of whitespace characters
+  + :beetle: fix meta scope (quoted node name) bleeding into non-node strings
 
 [0.9.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.2
 ## [0.9.2]
