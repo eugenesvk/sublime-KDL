@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.9.2...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.9.3...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[0.9.3]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.3
+## [0.9.3]
 - __Fixed__
   + :beetle: add vertical tab to the list of whitespace characters
   + :beetle: fix meta scope (quoted node name) bleeding into non-node strings
