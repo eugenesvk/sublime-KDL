@@ -584,7 +584,7 @@ contexts:
       push                : property-value⁄- # todo: set bugs to clear
   property-value:         #✗⁴
     # - meta_scope          : # gets misapplied to =
-    # - meta_content_scope  : # gets miremoved from some values that pop immediately like boolean #meta.property.value.kdl meta.mapping.value.kdl ✗⁴
+    # - meta_content_scope  : # gets removed from some values that pop immediately like boolean #meta.property.value.kdl meta.mapping.value.kdl ✗⁴
     - include             : comments
     - match               : (?=\()
       pop                 : 2 # ↑⸙ to reach ³ like arg_typed
