@@ -3,6 +3,23 @@
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.kdl
 
 // 2 Node Element: 1 Node name
+node_name "not a node"
+//<-                      meta.node.kdl entity.name.tag.node.kdl
+//^^^^^^^                 meta.node.kdl entity.name.tag.node.kdl
+//       ^^^^^^^^^^^^^   -entity.name.tag.node.kdl
+"nodestr" "not a node"
+//<-                      meta.node.kdl
+//^^^^^^^                 meta.node.kdl
+ //<-                     entity.name.tag.node.kdl
+//^^^^^^                  entity.name.tag.node.kdl
+//       ^^^^^^^^^^^^^   -entity.name.tag.node.kdl
+/-node_name "not a node"
+//^^^^^^^^^               meta.node.kdl entity.name.tag.node.kdl
+//         ^^^^^^^^^^^^^ -entity.name.tag.node.kdl
+/-"nodestr" "not a node"
+//^^^^^^^^                meta.node.kdl
+//^^^^^^^^                entity.name.tag.node.kdl
+//         ^^^^^^^^^^^^^ -entity.name.tag.node.kdl
 "node string
 //<-              punctuation.definition.string.begin.kdl
 //^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
