@@ -63,6 +63,17 @@ variables:
   # prop_eq:                  	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'            	#
   # value:                    	'{{type}}?({{string}}|{{number}}|{{keyword}})'               	#
   # type:                     	'\({{ID}}\)'                                                 	#
+  #                           	                                                             	#
+  char_illegal:               	'[{{bom}}{{c0a}}{{c0b}}{{cdel}}{{n_usc}}{{cdir}}]' #ss #     	# ST doesn't allow tracking BOM@file begin, so no need to add a BOF condition
+    c0a:                      	'[\x{0000}-\x{0008}]'                                        	#
+    # c0valid:                	'[\x{0009}-\x{000D}]'                                        	#9␉\t A␊\n B␋\v C␌\f D␍\r
+    c0b:                      	'[\x{000E}-\x{001F}]'                                        	#
+    cdel:                     	'[\x{007F}]'                                                 	#
+    n_usc:                    	'[{{surrog_high}}{{surrog_low}}]'         #ss #              	# not Unicode scalar value
+      surrog_high:            	'[\x{D800}-\x{DBFF}]'                                        	#
+      surrog_low:             	'[\x{DC00}-\x{DFFF}]'                                        	#
+    cdir:                     	'[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'      	#
+  usc:                        	'[\x{0000}-\x{D7FF}\x{E000}-\x{FFFF}]'                       	#
   # escaped_string:           	'"{{character}}*"'                                           	#
   # character:                	'\\{{escape}}|[^"]'                                          	#
   # escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
