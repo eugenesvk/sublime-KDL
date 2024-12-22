@@ -50,7 +50,6 @@ number           ; 	decimal|hex|octal|binary
 boolean            	true false
 /*                 	*/
 binary           ; 	sign? "0b [0-1]     ([0-1]     | _)*"
-binary           ; 	sign? "0b [0-1]     ([0-1]     | _)*"
 octal            ; 	sign? "0o [0-7]     ([0-7]     | _)*"
 hex              ; 	sign? "0x hex-digit (hex-digit | _)*"
 decimal          ; 	sign? "   integer                   (. integer)? exponent?"
@@ -60,4 +59,4 @@ digit              	" [0-9]       "
 hex-digit          	" [0-9a-fA-F] "
 sign               	+|-
 /*                 	*/
-//github.com/kdl-org/kdl/blob/main/SPEC.md
+//github.com/kdl-org/kdl/blob/main/SPEC_v1.md
