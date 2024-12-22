@@ -1129,7 +1129,14 @@ r 1 { r2 1; } /*comment before ;*/;
 //            ^^^^^^^^^^^^^^^^^^^^               comment.block.kdl
 
 
-// 10. Potential tests (unsorted dump)
+// 10.1
+char_illegal cdir="‎‏ ‪‫‬‭‮ ⁦⁧⁨⁩"
+//                 ^^                           invalid.illegal.kdl
+//                    ^^^^^                     invalid.illegal.kdl
+//                          ^^^^                invalid.illegal.kdl
+
+
+// 11. Potential tests (unsorted dump)
 
 aa r=2;
 aaa r=2\
