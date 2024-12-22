@@ -42,7 +42,7 @@ All notable changes to this project will be documented in this file
 [0.9.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.1
 ## [0.9.1]
 - __Fixed__
-  + :beetle: ending} breaking the following } in children
+  + :beetle: ending `}` breaking the following `}` in children
 
 [0.9.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.0
 ## [0.9.0]
