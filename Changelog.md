@@ -22,6 +22,12 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Added__
+  + support for the version marker
+- __Changed__
+  + v1 syntax to `KDL1`
+  + scope to `text.kdl1` from `source.kdl1` (the latter is for programming languages)
+
 [0.9.3]: https://github.com/eugenesvk/sublime-kdl/releases/tag/0.9.3
 ## [0.9.3]
 - __Fixed__
