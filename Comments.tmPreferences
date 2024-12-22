@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>KDL Comments</string>
 	<key>scope</key>
-	<string>text.kdl</string>
+	<string>(text.kdl|text.kdl1|text.kdl2)</string>
 	<key>settings</key>
 	<dict>
 		<key>shellVariables</key>

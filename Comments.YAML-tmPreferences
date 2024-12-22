@@ -1,5 +1,5 @@
 name    : KDL Comments
-scope   : text.kdl
+scope   : text.kdl|text.kdl1|text.kdl2
 settings:
   shellVariables:
   - name : TM_COMMENT_START
