@@ -1,0 +1,306 @@
+%YAML 1.2
+---
+name             : reSTeng
+hidden_file_extensions: [re_st_engine]
+scope            : source.rest
+hidden           : true
+version          : 2
+# See Whitespace (Line breaking and non-Newline) at file end
+
+# !sets don't allow whitespace even with (?x:), so watch out for [{{var}}] where var='(?x: abc)', 'x' will also be included
+  # _digit _char = set-safe [{{var_s}}], i.e. contains only characters, no conditional matching groups
+  # use syntax rules instead of variables that can't be recursive
+  # lookaheads skip meta scopes, so might need to repeat them
+# quote regexes with # : - { [ >
+# Oniguruma regex engine features
+  # rbuckton.github.io/regexp-features/engines/oniguruma.html
+  # raw.githubusercontent.com/kkos/oniguruma/v6.9.1/doc/RE  6.8.0 2018/07/26 (not sure which version ST uses)
+    # github.com/kkos/oniguruma/blob/master/doc/RE (latest)
+# \k<> named group, while \g<> is recursion!
+# include ignores meta patterns in the included contexts
+
+# ident = identifier #ss#=set safe #ss!# set safe with exception
+# _var = var rules can't be expressed within literal regexes, e.g., excluding keywords
+variables:
+  nodes:                    	'(?x: {{linespace_re}}*                                      	#
+    (?##)                   	   ({{node}} {{nodes}}?)?                                    	#
+    (?##)                   	      {{linespace_re}}*                                      	)' #
+  node:                     	'(?x:                                                        	#
+    (?##)                   	 (/\- {{node_space}}*)?                                      	# Slashdash comment
+    (?##)                   	                       {{type}} ? {{ID}}                     	#
+    (?##)                   	      ({{node_space}}+ {{node_prop_or_arg}} )*               	#
+    (?##)                   	      ({{node_space}}* {{node_children}} {{ws}}*)?           	#
+    (?##)                   	       {{node_space}}* {{node_terminator}}                   	)' #
+  node_prop_or_arg:         	'(/\-{{node_space}}*)?({{prop}}|{{value}})'                  	#
+  node_children:            	'(/\-{{node_space}}*)?{{{nodes}}}'                           	#
+  node_space:               	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                          	#
+  node_sp_beg:              	'{{ws_beg}}|{{escline_beg}}'                                 	#
+  line_sp_beg:              	'{{ws_beg}}|{{c_line_beg}}|{{nl_s}}'                         	#
+  any_sp_t_beg:             	'{{node_sp_beg}}|{{node_term_beg}}'                          	#
+  node_sp_end:              	'{{ws_end}}' #|{{escline_end}} ✗ needs previous line         	#
+  pre_val:                  	'^|\=|\)|{{node_sp_end}}'                                    	# line begin^ as line-cont surrogate
+  ws_beg:                   	'{{b_sp}}|{{comment_block_beg}}'                             	#
+  ws_end:                   	'{{b_sp}}|{{comment_block_end}}'                             	#
+  node_terminator:          	'{{single_line_comment}}|{{newline}}|;|{{eof}}'              	#
+  node_term_beg:            	'{{c_line_beg}}|;|{{eof}}|{{nl_s}}'                          	#
+  node_term_beg_no_nl:      	'{{c_line_beg}}|;|{{eof}}'                                   	#
+  #                         	                                                             	#
+  # bareID:                 	'(?!{{keyword}}[^{{charID}}]){{bareID_or_KW}}'               	#
+  bareID_or_KW:             	'{{bareID_ex_dig_sign}}|{{bareID_ex_dig}}'                   	#
+  bareID_ex_dig_sign:       	'{{charID_ex_dig_sign}}{{charID}}*'                          	# pre-sign: exclude digit/sign to avoid clashes
+  bareID_ex_dig:            	'[+-](?:{{charID_ex_dig}}{{charID}}*)?'                      	# pos-sign: exclude digit only
+  charID:                   	'[[{{unicode_char}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'     	#
+  charID_not:               	'[\/\\(){}<>;\[\]=,"]'                                       	#
+  charWS:                   	'[{{nl_s}}{{b_sp}}]'                                         	#
+  charID_rec:               	'{{charID}}(?!{{linespace_re}})'                             	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
+  charID_ex_dig:            	'[[{{charID}}]&&[^{{d_dec}}]]'                               	#
+  charID_ex_dig_sign:       	'[[{{charID_ex_dig}}]&&[^+-]]'                               	#
+  unicode_char:             	'[\x{0021}-\x{10FFFF}]'                                      	# invalid: ≤0x20 or >0x10FFF)
+  keyword:                  	'{{boolean}}|{{nil}}'                                        	#
+  prop:                     	'{{ID}}={{value}}'                                           	#
+  prop_eq:                  	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'            	#
+  value:                    	'{{type}}?({{string}}|{{number}}|{{keyword}})'               	#
+  type:                     	'\({{ID}}\)'                                                 	#
+  escaped_string:           	'"{{character}}*"'                                           	#
+  character:                	'\\{{escape}}|[^"]'                                          	#
+  escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
+  escape_char:              	'["\\/bfnrt]'                                                	#
+  escape_unicode:           	'u{{{d_hex}}{1,6}}'                                          	#
+  d_bin:                    	'[0-1]'                                                      	#
+  d_bin_:                   	'[0-1_]'                                                     	#
+  d_oct:                    	'[0-7]'                                                      	#
+  d_oct_:                   	'[0-7_]'                                                     	#
+  d_dec:                    	'[0-9]'                                                      	#
+  d_dec_:                   	'[0-9_]'                                                     	#
+  d_hex:                    	'[0-9a-fA-F]'                                                	#
+  d_hex_:                   	'[0-9a-fA-F_]'                                               	#
+  #                         	                                                             	#
+  boolean:                  	'(?:true|false)'                                             	# data type 1/4
+  nil:                      	'(?:null)'                                                   	# data type 2/4
+  string:                   	'{{raw_string}}|{{escaped_string}}'                          	# data type 3/4
+  number:                   	'{{decimal}}|{{hex}}|{{octal}}|{{binary}}'                   	# data type 4/4
+  #    ↓string              	                                                             	#
+  raw_string:               	 '(r)(#+)?(\")([\S\s]*?)(\")(\2)'                            	#
+  raw_string_re:            	 'r{{raw_string_hash_re}}'                                   	#🗘
+  raw_string_hash_re:       	'#{{raw_string_hash_re}}#|{{raw_string_quotes}}'             	#🗘
+  raw_string_quotes:        	'".*"'                                                       	#
+  string_beg:               	'"|r#*"'                                                     	# or (?!r)"|r#*"
+  string_end:               	'"#*'                                                        	# or (?!r)"|r#*"
+  #    ↓number              	                                                             	#
+  decimal:                  	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'    	#
+  exponent:                 	'([eE])([+-])?({{integer}})'                                 	#
+  integer:                  	'{{d_dec}}{{d_dec_}}*'                                       	# leading 0s are allowed
+  #sign:                    	'[+-]'                                                  #ss# 	# using [+-] is cleaner than {{sign}}
+  #                         	                                                             	#
+  hex:                      	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                          	#
+  octal:                    	'([+-])?(0o)({{d_oct}}{{d_oct_}}*)'                          	#
+  binary:                   	'([+-])?(0b)({{d_bin}}{{d_bin_}}*)'                          	#
+  #                         	                                                             	#
+  escline:                  	'\\{{ws}}*({{single_line_comment}}|{{nl_s}})'                	#
+  escline_beg:              	'\\'                                                         	#
+  linespace_re:             	'{{nl_s}}|{{ws}}|{{single_line_comment}}'                    	# set-unsafe; includes recursion: ws → multi_line_comment → commented_block🗘
+  char_linesp:              	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                           #ss!#	# ex / but not precisely //
+  newline:                  	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'          	# \R
+  nl_s:                     	'[\r\n\x{C}\x{85}\x{2028}\x{2029}]'                     #ss!#	# not precisely ␤␊
+  ws:                       	'{{bom}}|{{u_sp}}|{{multi_line_comment}}'                    	#
+  b_sp:                     	'[{{bom}}{{u_sp}}]'                                     #ss# 	#
+  bom:                      	'[\x{FEFF}]'                                                 	#
+  unicode_space:            	'[[\s]&&[^{{nl_s}}]]'                                        	#
+  single_line_comment:      	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'             	#
+  single_line_comment_no_nl:	'({{c_line_beg}})([^{{nl_s}}]*)'                             	#
+  multi_line_comment:       	'{{comment_block_beg}}{{commented_block}}'                   	# set-unsafe; recursion: commented_block🗘
+  c_beg:                    	'/'                                                          	#
+  c_slashdash:              	'/-'                                                         	#
+  c_line_beg:               	'//'                                                         	#
+  c_line_end:               	'{{nl_s}}|{{eof}}'                                           	#
+  eof:                      	'$(?!{{nl_s}})'                                              	#
+  eof_x:                    	'(?=[\S\s]{{eof}})' # when ↑ bugs                            	#
+  comment_block_beg:        	'/\*'                                                        	#
+  comment_block_doc_beg:    	'{{comment_block_beg}}(!|\*(?!/))'                           	#
+  commented_block:          	'\*/|({{multi_line_comment}}|\*|/|[^*/]+){{commented_block}}'	# !!! cant recurse vars, do via syntax
+  comment_block_end:        	'\*/'                                                        	#
+  comment_block_doc_end:    	'{{comment_block_end}}'                                      	#
+  u_sp: '[\x{9}\x{20}\x{A0}\x{1680}\x{2000}\x{2001}\x{2002}\x{2003}\x{2004}\x{2005}\x{2006}\x{2007}\x{2008}\x{2009}\x{200A}\x{202F}\x{205F}\x{3000}]' #ss# #
+  ID: '{{string}}|((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
+  bareID:        '((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
+  # ↑ excludes keywords, but string would be a pain to style
+
+contexts:
+  main:
+    - meta_include_prototype: false
+    - match : ''
+      push  :
+      # - include: ws_line_break
+      - include: ws_no_line_break
+
+  ws_line_break:
+    # - include: ws_line_break_crlf
+    # - include: ws_line_break_cr
+    # - include: ws_line_break_lf
+    - include: ws_line_break_vt
+    # - include: ws_line_break_ff
+    # - include: ws_line_break_nel
+    # - include: ws_line_break_ls
+    # - include: ws_line_break_ps
+  ws_no_line_break:
+    - include: ws_uspace_combo
+    # - include: ws_uspace_character_tabulation
+    # - include: ws_uspace_space
+    # - include: ws_uspace_no-break_space
+    # - include: ws_uspace_ogham_space_mark
+    # - include: ws_uspace_en_quad
+    # - include: ws_uspace_em_quad
+    # - include: ws_uspace_en_space
+    # - include: ws_uspace_em_space
+    # - include: ws_uspace_three-per-em_space
+    # - include: ws_uspace_four-per-em_space
+    # - include: ws_uspace_six-per-em_space
+    # - include: ws_uspace_figure_space
+    # - include: ws_uspace_punctuation_space
+    # - include: ws_uspace_thin_space
+    # - include: ws_uspace_hair_space
+    # - include: ws_uspace_narrow_no-break_space
+    # - include: ws_uspace_medium_mathematical_space
+    # - include: ws_uspace_ideographic_space
+
+# ws_no_line_break:
+  ws_uspace_combo     :
+    - match               : '[[:blank:]]'
+      scope               : invalid.illegal.uspace.character.combo
+
+  ws_uspace_character_tabulation     :
+    - match               : '\x{0009}'
+      scope               : invalid.illegal.uspace.character_tabulation
+  ws_uspace_space                    :
+    - match               : '\x{0020}'
+      scope               : invalid.illegal.uspace.space.regular
+  ws_uspace_no-break_space           :
+    - match               : '\x{00A0}'
+      scope               : invalid.illegal.uspace.space.no_break
+  ws_uspace_ogham_space_mark         :
+    - match               : '\x{1680}'
+      scope               : invalid.illegal.uspace.ogham_space_mark
+  ws_uspace_en_quad                  :
+    - match               : '\x{2000}'
+      scope               : invalid.illegal.uspace.en_quad
+  ws_uspace_em_quad                  :
+    - match               : '\x{2001}'
+      scope               : invalid.illegal.uspace.em_quad
+  ws_uspace_en_space                 :
+    - match               : '\x{2002}'
+      scope               : invalid.illegal.uspace.space.en
+  ws_uspace_em_space                 :
+    - match               : '\x{2003}'
+      scope               : invalid.illegal.uspace.space.em
+  ws_uspace_three-per-em_space       :
+    - match               : '\x{2004}'
+      scope               : invalid.illegal.uspace.space.three_per_em
+  ws_uspace_four-per-em_space        :
+    - match               : '\x{2005}'
+      scope               : invalid.illegal.uspace.space.four_per_em
+  ws_uspace_six-per-em_space         :
+    - match               : '\x{2006}'
+      scope               : invalid.illegal.uspace.space.six_per_em
+  ws_uspace_figure_space             :
+    - match               : '\x{2007}'
+      scope               : invalid.illegal.uspace.space.figure
+  ws_uspace_punctuation_space        :
+    - match               : '\x{2008}'
+      scope               : invalid.illegal.uspace.space.punctuation
+  ws_uspace_thin_space               :
+    - match               : '\x{2009}'
+      scope               : invalid.illegal.uspace.space.thin
+  ws_uspace_hair_space               :
+    - match               : '\x{200A}'
+      scope               : invalid.illegal.uspace.space.hair
+  ws_uspace_narrow_no-break_space    :
+    - match               : '\x{202F}'
+      scope               : invalid.illegal.uspace.space.narrow_no_break
+  ws_uspace_medium_mathematical_space:
+    - match               : '\x{205F}'
+      scope               : invalid.illegal.uspace.space.medium_mathematical
+  ws_uspace_ideographic_space        :
+    - match               : '\x{3000}'
+      scope               : invalid.illegal.uspace.space.ideographic
+
+# ws_line_break:
+  ws_line_break_crlf:
+    - match               : '\r\n'
+      scope               : invalid.illegal.line_break.crlf
+  ws_line_break_cr:
+    - match               : '\r'
+      scope               : invalid.illegal.line_break.cr
+  ws_line_break_lf:
+    - match               : '\n'
+      scope               : invalid.illegal.line_break.lf
+  ws_line_break_vt:
+    - match               : '\v'
+      scope               : invalid.illegal.line_break.vt
+  ws_line_break_ff:
+    - match               : '\f'
+      scope               : invalid.illegal.line_break.ff
+  ws_line_break_nel:
+    - match               : '\x{0085}'
+      scope               : invalid.illegal.line_break.nel
+  ws_line_break_ls:
+    - match               : '\x{2028}'
+      scope               : invalid.illegal.line_break.ls
+  ws_line_break_ps:
+    - match               : '\x{2029}'
+      scope               : invalid.illegal.line_break.ps
+
+# Whitespace (Line breaking)
+  #  Acronym  Name                          Code Pt   Oniguruma     Symbol
+  #  CRLF     Carriage Return and Line Feed    D + A  \r\n          n/a
+  #  CR       Carriage Return                  D      \r            n/a
+  #  LF       Line Feed                        A      \n (newline)  n/a
+  #  VT       Vertical Tabulation              B      \v            ¦¦
+  #  FF       Form Feed                        C      \f            ¦¦
+  #  NEL      Next Line                       85                    n/a
+  #  LS       Line Separator                2028                    ¦ ¦
+  #  PS       Paragraph Separator           2029                    ¦ ¦
+  # ∑= d+a d a c b 85 2028 2029 (KDL)
+  # ∑= d+a d a c b 85 2028 2029 (oniguruma) \R: \r\n or \r \n \v \f 85 2028 2029 (!!! can't be used in a character class !!!)
+  # Sublime only works with: (?>\R), equiv= (?>\r\n?|[\x{A}-\x{C}\x{85}\x{2028}\x{2029}])
+  # (?>…) — Matches the provided pattern, but no backtracking is performed if the match fails
+  # \b           backspace               8
+  # \a           bell                    7
+  # \e           escape                 1B
+
+# Whitespace (non-Newline)
+  # Acronym Name                      Code Pt Oniguruma           Symbol
+  #         Character Tabulation         9    \t (horizontal tab) ¦ ¦
+  #         Space                       20    .                   ¦ ¦
+  #         No-Break Space              A0    .                   ¦ ¦
+  #         Ogham Space Mark          1680    .                   ¦ ¦
+  #         En Quad                   2000    .                   ¦ ¦
+  #         Em Quad                   2001    .                   ¦ ¦
+  #         En Space                  2002    .                   ¦ ¦
+  #         Em Space                  2003    .                   ¦ ¦
+  #         Three-Per-Em Space        2004    .                   ¦ ¦
+  #         Four-Per-Em Space         2005    .                   ¦ ¦
+  #         Six-Per-Em Space          2006    .                   ¦ ¦
+  #         Figure Space              2007    .                   ¦ ¦
+  #         Punctuation Space         2008    .                   ¦ ¦
+  #         Thin Space                2009    .                   ¦ ¦
+  #         Hair Space                200A    .                   ¦ ¦
+  #         Narrow No-Break Space     202F    .                   ¦ ¦
+  #         Medium Mathematical Space 205F    .                   ¦ ¦
+  #         Ideographic Space         3000    .                   ¦　¦
+  # ∑=                 9 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
+  # oniguruma
+    # [[:blank:]]      9 Space_Separator
+    # Space_Separator    20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
+    # \s    85 a b c d 9 Space_Separator Line_Separator Paragraph_Separator
+    # Line_Separator      2028
+    # Paragraph_Separator 2029
+    # compart.com/en/unicode/category/Zl
+    # compart.com/en/unicode/category/Zs
+    # compart.com/en/unicode/category/Zp
+    # [^\S\r\n] double negative to match whitespace without newline (but add other newlines)
+      # [^\S(?>\R)] seems to work
+      # \S character NOT
+        # 9 a b c d 85
+        # Line_Separator      2028
+        # Paragraph_Separator 2029
+        # Space_Separator 20 A0 1680 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 200A 202F 205F 3000
