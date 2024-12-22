@@ -365,7 +365,7 @@ contexts:
 
 #——— 2 Node Element: 1 Name
   nodeID:                 #✗¹
-    - include             : keywords🛑
+    # - include             : keywords🛑
     - match               : '(?={{string_beg}})'
       push                : #✗²
       # - meta_scope        : entity.name.tag.node.kdl #✗²
@@ -383,7 +383,7 @@ contexts:
       - include           : node_terminator3
       - include           : S🛑s
   nodeID⁄-:               #✗¹
-    - include             : keywords⁄-🛑
+    # - include             : keywords⁄-🛑
     - match               : '(?={{string_beg}})'
       push                : #✗²
       # - meta_scope        : entity.name.tag.node.kdl #✗²
@@ -606,7 +606,7 @@ contexts:
     - include             : property🛑
   property-value⁄-:       # ✗⁴
     - meta_content_scope  : meta.property.value.kdl meta.mapping.value.kdl #✗⁴
-    - include             : comments⁄-
+    - include             : comments #comments⁄-
     - match               : (?=\()
       pop                 : 2 # ⚿₌v⁄-⸙2 to reach ³ like arg_typed⁄-
       push                : #✗³
@@ -683,7 +683,7 @@ contexts:
       # - meta_scope        : dbgtype-name⁄–✗⁵
       - include           : strings-quoted-double-raw-consecutive🛑
       - include           : strings-quoted-double-consecutive🛑
-      - include           : strings⁄
+      - include           : strings⁄-
       - include           : pop_pre） # remove ↑
       - include           : any🛑s
     - include             : IDs_bare
