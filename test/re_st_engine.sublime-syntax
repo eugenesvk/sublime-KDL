@@ -124,7 +124,8 @@ variables:
   ID: '{{string}}|((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
   bareID:        '((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
   # ↑ excludes keywords, but string would be a pain to style
-  uspace_combo:	'[[[:blank:]]z]'	#
+  bblank:	'[[:blank:]]' #ss #	#
+  uspace_combo: '[{{bblank}}z]'  #
 
 contexts:
   main:
