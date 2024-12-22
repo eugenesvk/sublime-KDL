@@ -1,0 +1,1354 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+// 0. Test overall source match
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.kdl2
+
+// 2 Node Element: 1 Node name
+node_name "not a node"
+//<-                      meta.node.kdl entity.name.tag.node.kdl
+//^^^^^^^                 meta.node.kdl entity.name.tag.node.kdl
+//       ^^^^^^^^^^^^^   -entity.name.tag.node.kdl
+"nodestr" "not a node"
+//<-                      meta.node.kdl
+//^^^^^^^                 meta.node.kdl
+ //<-                     entity.name.tag.node.kdl
+//^^^^^^                  entity.name.tag.node.kdl
+//       ^^^^^^^^^^^^^   -entity.name.tag.node.kdl
+/-node_name "not a node"
+//^^^^^^^^^               meta.node.kdl entity.name.tag.node.kdl
+//         ^^^^^^^^^^^^^ -entity.name.tag.node.kdl
+/-"nodestr" "not a node"
+//^^^^^^^^                meta.node.kdl
+//^^^^^^^^                entity.name.tag.node.kdl
+//         ^^^^^^^^^^^^^ -entity.name.tag.node.kdl
+"node string
+//<-              punctuation.definition.string.begin.kdl
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
+multiline"
+//<-              meta.string.kdl string.quoted.double.kdl
+  //<-            meta.string.kdl string.quoted.double.kdl
+//^^^^^^^^        meta.string.kdl string.quoted.double.kdl
+//       ^        punctuation.definition.string.end.kdl
+r"node raw string
+//<-              storage.type.string.kdl
+ //<-             punctuation.definition.string.begin.kdl
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+multiline"
+//<-              meta.string.kdl string.quoted.double.raw.kdl
+  //<-            meta.string.kdl string.quoted.double.raw.kdl
+//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+//       ^        punctuation.definition.string.end.kdl
+r#"node #raw string
+//<-              storage.type.string.kdl
+ //<-             punctuation.definition.string.begin.kdl
+//^               punctuation.definition.string.begin.kdl
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+multiline"#
+//<-              meta.string.kdl string.quoted.double.raw.kdl
+  //<-            meta.string.kdl string.quoted.double.raw.kdl
+//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+//       ^        punctuation.definition.string.end.kdl
+
+n "Trying to ban some consecutive strings"
+"n""b"
+//^               punctuation.definition.string.end.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^            invalid.illegal.muted.position.kdl
+"n"#"b"
+//^               punctuation.definition.string.end.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^^           invalid.illegal.muted.position.kdl
+"n"r"b"
+//^               punctuation.definition.string.end.kdl
+// ^^             invalid.illegal.position.kdl
+//   ^^           invalid.illegal.muted.position.kdl
+
+r##"n"##r#"b"#
+//     ^          punctuation.definition.string.end.kdl
+//      ^^^       invalid.illegal.position.kdl
+//         ^^^    invalid.illegal.muted.position.kdl
+r"multiline
+nn"r"b""b"
+//^               punctuation.definition.string.end.kdl
+// ^^             invalid.illegal.position.kdl
+//   ^^           invalid.illegal.muted.position.kdl
+//     ^          invalid.illegal.position.kdl
+//      ^^        invalid.illegal.muted.position.kdl
+
+// 2 Node Element: 2 Argument
+n "Values can't be repeated without a separator (glued)"
+n    1  1       0b155
+//              ^^^    meta.argument.value.kdl meta.mapping.value.kdl
+//                 ^^ -meta.argument.value.kdl meta.mapping.value.kdl
+//              ^^     constant.numeric.base.kdl
+//                ^    constant.numeric.value.kdl
+//                 ^   invalid.illegal.position.kdl
+//                  ^  invalid.illegal.muted.position.kdl
+n /- 1  1   /-  0b155
+//              ^^^    meta.argument.value.kdl meta.mapping.value.kdl
+//                 ^^ -meta.argument.value.kdl meta.mapping.value.kdl
+//              ^^     constant.numeric.base.kdl
+//                ^    constant.numeric.value.kdl
+//                 ^   invalid.illegal.position.kdl
+//                  ^  invalid.illegal.muted.position.kdl
+nnn (a)"Ttt" (b)"ttt"
+nnn    "Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+nnn (a)"Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+/-n    "Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+/-n (a)"Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+n err; // invalid arguments marked before node terminator
+//^^                   invalid.illegal.muted.position.kdl
+//  ^                  invalid.illegal.position.kdl
+//   ^                 punctuation.terminator.node.kdl
+n err  // invalid arguments marked before node terminator
+//^^                   invalid.illegal.muted.position.kdl
+//  ^                  invalid.illegal.position.kdl
+//     ^               comment.line.double-slash.kdl
+n "Illegal property key glued to a valid string argument"
+n bare-identifier|"string"
+//^^^^^^^^^^^^^^^                       invalid.illegal.muted.position.kdl
+//               ^                      invalid.illegal.position.kdl
+//                ^^^^^^^^              meta.string.kdl string.quoted.double.kdl
+n bare-identifier"string"
+//^^^^^^^^^^^^^                         invalid.illegal.muted.position.kdl
+//             ^                        invalid.illegal.position.kdl
+//              ^^^^^^^^^               meta.string.kdl string.quoted.double.raw.kdl
+
+
+// 2 Node Element: 3 Property (key=value)
+command "twitter" "tw" a=2 b=true url="https://twitter.com/" {
+//                     ^                                    meta.mapping.key.kdl
+//                      ^                                   punctuation.separator.key-value.kdl
+//                       ^                                  meta.mapping.value.kdl
+//                         ^                                meta.mapping.key.kdl
+//                          ^                               punctuation.separator.key-value.kdl
+//                           ^^^^                           meta.mapping.value.kdl
+//                                ^^^                       meta.mapping.key.kdl
+//                                   ^                      punctuation.separator.key-value.kdl
+//                                    ^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.kdl
+  match regexp="^@(?<username>[A-Za-z_]+$" url="https://twitter.com/{username}" encoding="path"
+  default url="https://twitter.com/search?q={}" encoding=(enc)"query" tst=true
+//                                                       ^^^^^        meta.annotation.kdl, meta.mapping.value.kdl
+//                                                       ^            punctuation.separator.annotation.begin.kdl
+//                                                           ^        punctuation.separator.annotation.end.kdl
+//                                                        ^^^         entity.name.type.kdl
+//        ^^^                                                         entity.other.attribute-name.kdl , meta.mapping.key.kdl
+//                                         ^                         -entity.other.attribute-name.kdl
+//           ^                                                        punctuation.separator.key-value.kdl
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                       meta.mapping.value.kdl
+//                                                       ^^^^^^^^^^^^ meta.mapping.value.kdl
+}
+n "Values can't be repeated without a separator"
+n kkk=1 k=1 kkk=0b155
+//              ^^^    meta.property.value.kdl meta.mapping.value.kdl
+//                 ^^ -meta.property.value.kdl meta.mapping.value.kdl
+//              ^^     constant.numeric.base.kdl
+//                ^    constant.numeric.value.kdl
+//                 ^   invalid.illegal.position.kdl
+//                  ^  invalid.illegal.muted.position.kdl
+n /-k=1 k=1 /-k=0b155
+//              ^^^    meta.property.value.kdl meta.mapping.value.kdl
+//                 ^^ -meta.property.value.kdl meta.mapping.value.kdl
+//              ^^     constant.numeric.base.kdl
+//                ^    constant.numeric.value.kdl
+//                 ^   invalid.illegal.position.kdl
+//                  ^  invalid.illegal.muted.position.kdl
+n a=x; //invalid arguments highlighted
+//  ^                  invalid.illegal.position.kdl
+n a=x 
+//  ^                  invalid.illegal.position.kdl
+/* but not before a newline when it's not clear user ended typing*/
+n a=x
+//  ^                 -invalid.illegal.position.kdl
+
+nnn ppp="tttt  ✗noseparator"
+nnn ppp="tttt""✗noseparator"
+//      ^^^^^^                 meta.property.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.position.kdl
+//             ^^^^^^^^^^^^^   invalid.illegal.muted.position.kdl
+//                          ^ -invalid.illegal
+nnn ppp=(t)"t""✗noseparator"
+//      ^^^^^^                 meta.property.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.position.kdl
+//             ^^^^^^^^^^^^^   invalid.illegal.muted.position.kdl
+//                          ^ -invalid.illegal
+nnn url=(a)"t""✗no separato
+//      ^^^^^^                 meta.property.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.position.kdl
+//             ^^^             invalid.illegal.muted.position.kdl
+//                ^^^^^^^^^   -invalid.illegal
+//                          ^ -invalid.illegal
+nnn url=(a)"t"     separato
+//                ^^^^^^^^^   -invalid.illegal
+/-n ppp="tttt""✗noseparator"
+//      ^^^^^^                 meta.property.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.position.kdl
+//             ^^^^^^^^^^^^^   invalid.illegal.muted.position.kdl
+//                          ^ -invalid.illegal
+/-n ppp=(t)"t""✗noseparator"
+//      ^^^^^^                 meta.property.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.position.kdl
+//             ^^^^^^^^^^^^^   invalid.illegal.muted.position.kdl
+//                          ^ -invalid.illegal
+/-n url=(a)"t""✗no separato
+//      ^^^^^^                 meta.property.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.position.kdl
+//             ^^^             invalid.illegal.muted.position.kdl
+//                ^^^^^^^^^   -invalid.illegal
+/-n url=(a)"t"     separato
+//                ^^^^^^^^^   -invalid.illegal
+n k=1 k✗␠=  1 cc false;
+//    ^^^                      meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+//       ^                     meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//        ^                    invalid.illegal.position.kdl
+//         ^                   invalid.illegal.muted.position.kdl
+//          ^                  meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+//            ^^               meta.argument.value.kdl meta.mapping.value.kdl
+//            ^                invalid.illegal.muted.position.kdl
+//             ^               invalid.illegal.position.kdl
+//               ^^^^^         meta.argument.value.kdl meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
+//                    ^        punctuation.terminator.node.kdl
+
+
+// 2 Node Element: 4 Child
+node-outer {
+//         ^                                      punctuation.section.mapping.begin.kdl
+//<-                                              entity.name.tag, entity.name.tag.node
+ //<-                                             entity.name.tag, entity.name.tag.node
+//^^^^^^^^                                        entity.name.tag, entity.name.tag.node
+  node_inner;
+//^^^^^^^^^^                                      entity.name.tag, entity.name.tag.node
+}
+//<-                                              punctuation.section.mapping.end.kdl
+parent { terminate-child1; terminate-child2; }
+//       ^^^^^^^^^^^^^^^^                         entity.name.tag, entity.name.tag.node
+//                         ^^^^^^^^^^^^^^^^       entity.name.tag, entity.name.tag.node
+//                       ^                        punctuation.terminator.node.kdl
+//                                         ^      punctuation.terminator.node.kdl
+nnn {//ending} doesn't break the following}
+}
+//<- meta.node.kdl punctuation.section.mapping.end.kdl
+
+// 2 Node Element: 5 End
+nnn
+// ^                                   punctuation.terminator.node.kdl
+nnn ;
+//  ^                                  punctuation.terminator.node.kdl
+nnn //
+//  ^^                                 punctuation.terminator.node.kdl
+
+
+
+// 3 Data: Keywords
+boolean   true   false; "null" null
+//        ^^^^                          constant.language.boolean
+//               ^^^^^                  constant.language.boolean
+//                             ^^^^     constant.language.null
+boolean k=true k=false; "null" null
+//        ^^^^                          constant.language.boolean
+//               ^^^^^                  constant.language.boolean
+//                             ^^^^     constant.language.null
+
+
+
+// 3 Data: Numbers
+node-with-number +2.0
+//               ^^^^                             constant.numeric.value.kdl, constant.numeric.decimal.kdl
+//               ^                                keyword.operator.arithmetic.kdl
+my-num    +1.234e-42 // decimal-radix numbers
+//        ^^^^^^^^^^                              constant.numeric.value.kdl, constant.numeric.float.kdl
+//        ^^^^^^                                  constant.numeric.significand.kdl
+//              ^^^^                             -constant.numeric.significand.kdl
+//              ^^^^                              constant.numeric.exponent.kdl
+//        ^^^^^^                                 -constant.numeric.exponent.kdl
+//        ^                                       keyword.operator.arithmetic.kdl
+//               ^                                keyword.operator.arithmetic.kdl
+//          ^                                     punctuation.separator.decimal.kdl
+//              ^                                 punctuation.separator.exponent.kdl
+my-num    -1.234    //   with optional exponent
+//        ^^^^^^                                  constant.numeric.value.kdl, constant.numeric.decimal.kdl
+//        ^                                       keyword.operator.arithmetic.kdl
+//          ^                                     punctuation.separator.decimal.kdl
+my-num    -3        //   with optional fractional
+//        ^^                                      constant.numeric.integer.kdl, constant.numeric.value.kdl
+//        ^                                       keyword.operator.arithmetic.kdl
+my-hex    0xdeadbeef
+//        ^^^^^^^^^^                    constant.numeric.integer.hexadecimal.kdl
+//        ^^                            constant.numeric.base.kdl
+//          ^^^^^^^^                    constant.numeric.value.kdl
+my-octal  0o755
+//        ^^^^^                         constant.numeric.integer.octal.kdl
+//        ^^                            constant.numeric.base.kdl
+//          ^^^                         constant.numeric.value.kdl
+my-binary 0b10101101
+//        ^^^^^^^^^^                    constant.numeric.integer.binary.kdl
+//        ^^                            constant.numeric.base.kdl
+//          ^^^^^^^^                    constant.numeric.value.kdl
+bignum 1_000_000.000_001e+1_000 // Numbers can have underscores to help readability
+//      ^                               punctuation.separator.number.kdl
+//          ^                           punctuation.separator.number.kdl
+//                  ^                   punctuation.separator.number.kdl
+//                         ^            punctuation.separator.number.kdl
+n "Glued numbers are invalid"
+nnn        0b12
+//            ^               invalid.illegal.position.kdl
+nnn (aaaaa)0b12
+//            ^               invalid.illegal.position.kdl
+nnn   k=(a)0b12
+//            ^               invalid.illegal.position.kdl
+nnn /-     0b12
+//            ^               invalid.illegal.position.kdl
+nnn /-(aaa)0b12
+//            ^               invalid.illegal.position.kdl
+nnn /-k=(a)0b12
+//            ^               invalid.illegal.position.kdl
+n   100000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   10.000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   10.0e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   1000e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-100000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-10.000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-10.0e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-1000e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   (a)100000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   (a)10.000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   (a)10.0e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   (a)1000e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)100000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)10.000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)10.0e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)1000e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   kk=(a)100000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n   kk=(a)10.000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n   kk=(a)10.0e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n   kk=(a)1000e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)100000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)10.000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)10.0e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)1000e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n "Don't error invalid exponents before a newline as it might turn valid"
+n 0b
+// ^                          -invalid.illegal.position.kdl
+n 0o
+// ^                          -invalid.illegal.position.kdl
+n 0x
+// ^                          -invalid.illegal.position.kdl
+n 10.5e
+//    ^                       -invalid.illegal
+n 10.5e+
+//    ^^                      -invalid.illegal
+n 10.5e+4
+//    ^                        punctuation.separator.exponent.kdl
+//     ^                       keyword.operator.arithmetic.kdl
+
+// 3 Data: Strings
+title "Regular \b\\\/\u{AAAAAA}string"
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            meta.string.kdl, string.quoted.double.kdl
+//             ^^^^^^^                            constant.character.escape.kdl
+//                     ^^^^^^^^                   constant.character.escape.unicode.16-bit-hex.kdl
+//    ^                                           punctuation.definition.string.begin.kdl
+//                                   ^            punctuation.definition.string.end.kdl
+title r"Raw string"
+//    ^                                           storage.type.string.kdl
+//     ^                                          punctuation.definition.string.begin.kdl
+//                ^                               punctuation.definition.string.end.kdl
+title r###""""Rawest"""string""""###
+//    ^                                           storage.type.string.kdl
+//     ^^^                                        punctuation.definition.string.begin.kdl
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              meta.string.kdl, string.quoted.double.raw.kdl
+//                               ^^^              punctuation.definition.string.end.kdl
+nnn r"raw"
+nnn r"multiline raw
+//  ^^^^^^^^^^^^^^^          string.quoted.double.raw.kdl
+//  ^                        storage.type.string.kdl
+//   ^                       punctuation.definition.string.begin.kdl
+string
+//^^^^                       string.quoted.double.raw.kdl
+multiline
+//^^^^^^^                    string.quoted.double.raw.kdl
+"
+//<-      punctuation.definition.string.end.kdl
+
+
+
+// 3 Data: Type
+n (null)1
+// ^^^^                                           invalid.illegal.position.kdl
+n (true)1
+// ^^^^                                           invalid.illegal.position.kdl
+n (false)1
+// ^^^^^                                          invalid.illegal.position.kdl
+
+(a)n k="a" k=1;
+(a)n k="a" k=1;
+(a)n k="a" k=1
+(a)n k="a" k=1
+  (a)n k="a" k=1;
+//^^^                        meta.annotation.kdl
+//   ^                      -meta.annotation.kdl
+//^                          punctuation.separator.annotation.begin.kdl
+//  ^                        punctuation.separator.annotation.end.kdl
+// ^                         entity.name.type.kdl
+//   ^                       entity.name.tag.node.kdl
+  ()()n k="a" k=1;
+//^^                         meta.annotation.kdl
+//  ^                       -meta.annotation.kdl
+//^                          punctuation.separator.annotation.begin.kdl
+// ^                         invalid.illegal.muted.kdl
+//  ^^                       invalid.illegal.kdl
+//    ^                      entity.name.tag.node.kdl
+  ("a")n k="a" k=1;
+//^^^^^                      meta.annotation.kdl
+//     ^                    -meta.annotation.kdl
+//^                          punctuation.separator.annotation.begin.kdl
+//    ^                      punctuation.separator.annotation.end.kdl
+// ^^^                       entity.name.type.kdl
+//     ^                     entity.name.tag.node.kdl
+
+(aaaa)n k="a"a k=1;
+(a)(a)n k="a"a k=1;
+
+n ()"✗← illegal empty type"
+// ^                                              invalid.illegal.muted.kdl
+n ( )"✗← illegal symbol (non-identifier)"
+// ^                                              invalid.illegal.position.kdl
+n (a) "✗← illegal separator"
+//   ^                                            invalid.illegal.position.kdl
+            n "a";
+n "Illegal space between a tag and its value"
+   (tttt)   <>    nn k=1 "a";
+//       ^                   invalid.illegal.position.kdl
+//        ^^                 invalid.illegal.muted.position.kdl
+//          ^^               invalid.illegal.kdl
+//            ^              invalid.illegal.position.kdl
+//             ^^^           invalid.illegal.muted.position.kdl
+//                ^^         entity.name.tag.node.kdl
+   ("tt")   <>    nn k=1 "a";
+//       ^                   invalid.illegal.position.kdl
+//        ^^                 invalid.illegal.muted.position.kdl
+//          ^^               invalid.illegal.kdl
+//            ^              invalid.illegal.position.kdl
+//             ^^^           invalid.illegal.muted.position.kdl
+//                ^^         entity.name.tag.node.kdl
+   (ttttttt)n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+   (r"tttt")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+   ("ttttt")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+   ("tt"ttt)n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+//      ^^^                  invalid.illegal.position.kdl
+   (r"t""t")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+//      ^                    invalid.illegal.position.kdl
+//       ^^                  invalid.illegal.muted.position.kdl
+
+
+
+
+
+// 7. Test various
+smile "😁"  // files must be utf8 encoded
+"!@#$@$%Q#$%~@!40" "1.2.3" "!!!!!"=true // Instead of anonymous nodes, nodes and properties can be wrapped in "" for arbitrary node names.
+foo123~!@#ÿ$%𐀀^‰†&*.:'|?+ "weeee"       // Legal bare identifier
+//<-                                    entity.name.tag, entity.name.tag.node
+ //<-                                   entity.name.tag, entity.name.tag.node
+//^^^^^^^^^^^^^^^^^^^^^^^               entity.name.tag, entity.name.tag.node
+//                        ^^^^^^^       meta.string.kdl, string.quoted.double.kdl
+ノード　お名前="☜(ﾟヮﾟ☜)" // use unicode!
+//  ^^^                                 meta.mapping.key.kdl
+//     ^                                punctuation.separator.key-value.kdl
+//      ^^^^^^^^^                       meta.mapping.value.kdl, meta.string.kdl, string.quoted.double.kdl
+//<-                                    entity.name.tag, entity.name.tag.node
+ //<-                                   entity.name.tag, entity.name.tag.node
+//^                                     entity.name.tag, entity.name.tag.node
+foo bar=true "baz" quux=4 false 1 2 3 // kdl specifically allows properties and values to be interspersed with each other, much like CLI commands
+
+// 8. Test Line continuation
+node-with-line-continuation \ /* Nodes can be separated into multiple lines with a single-line comment
+//<-                                              entity.name.tag, entity.name.tag.node
+ //<-                                             entity.name.tag, entity.name.tag.node
+//^^^^^^^^^^^^^^^^^^^^^^^^^                       entity.name.tag, entity.name.tag.node
+//                          ^                     punctuation.separator.continuation.line.kdl
+//                            ^^                  punctuation.definition.comment.begin.kdl
+//                            ^^^^^^^^^^^^^^^^^^^ comment.block.kdl
+*/
+r"↑ ␤ required after \ since /**/=whitespace"
+node-with-line-continuations \ // Only 1 (optional) single-line comment
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                             ^^                 punctuation.definition.comment.begin.kdl
+//                             ^^^^^^^^^^^^^^^^^^ comment.line.double-slash.kdl
+k=1
+
+node-with-line-continuations \
+  +1.1 2                     \ /* after
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                             ^^                 punctuation.definition.comment.begin.kdl
+//                             ^^^^^^^^           comment.block.kdl
+*/
+  3 4                        \ /* line continuation
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                             ^^                 punctuation.definition.comment.begin.kdl
+//                             ^^^^^^^^^^^^^^^^^^ comment.block.kdl
+*/
+  3 4                        \/*
+//                           ^                    punctuation.separator.continuation.line.kdl
+//                            ^^                  punctuation.definition.comment.begin.kdl, comment.block
+  or block comments /* even nested */
+//                  ^^                            punctuation.definition.comment.begin.kdl, comment.block
+//                                 ^^             punctuation.definition.comment.end.kdl, comment.block
+//<-                                              comment.block.kdl
+ //<-                                             comment.block.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^          comment.block.kdl
+//                  ^^^^^^^^^^^^^^^^^             comment.block.kdl comment.block.kdl
+*/     //
+  5 6//^^                                         punctuation.definition.comment.begin.kdl, comment.line.double-slash.kdl
+legal-multiple-line-continuations\//node␠+ node-prop-or-arg
+\//node-space ≝   ws* escline ws* | ws+
+\//escline    ≝ \ ws* single-line-comment|newline
+\//←single line comment ending line continuation ↑
+\
+\//↑␤                  ending line continuation ↑
+k=1;
+//<- meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+n "Illegal due to no ␤ after line continuation before prop"\ /*
+*/ k=1
+// ^^^ invalid.illegal.position.kdl
+k=1
+
+// 9. Test Comments
+/**/ // avoid being parsed as a doc '/**' comment
+//<-   comment.block.kdl
+//^^   comment.block.kdl
+//^^   punctuation.definition.comment.end.kdl
+//<-   punctuation.definition.comment.begin.kdl
+ //<-  punctuation.definition.comment.begin.kdl
+
+/*!Doc block comment /* nested block comment */*/
+//                   ^^                              comment.block.documentation.kdl punctuation.definition.comment.begin.kdl
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^      comment.block.documentation.kdl comment.block.kdl
+//                                           ^^      comment.block.documentation.kdl punctuation.definition.comment.end.kdl
+//<-                                                 comment.block.documentation.kdl
+ //<-                                                comment.block.documentation.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    comment.block.documentation.kdl
+//<-                                                 punctuation.definition.comment.begin.kdl
+ //<-                                                punctuation.definition.comment.begin.kdl
+//^                                                  punctuation.definition.comment.begin.kdl
+//                                             ^^    punctuation.definition.comment.end.kdl
+
+node-with-slashdash-number /--1.0 +2.0 \/*
+//                         ^^                        punctuation.definition.comment.begin.kdl
+//                           ^                     - punctuation.definition.comment.begin.kdl
+//                         ^^^^^^                    comment.line.slash-dash
+//                                ^                  keyword.operator.arithmetic.kdl
+//                                ^^^^               constant.numeric.value.kdl, constant.numeric.decimal.kdl
+*/
+1 /-"comment string" /-r"r aw" /-r#"Raw est"s"#
+//^^                                                 punctuation.definition.comment.begin.kdl
+//  ^                                              - punctuation.definition.comment.begin.kdl
+//^^^^^^^^^^^^^^^^^^                                 comment.line.slash-dash
+//                  ^                              - comment.line.slash-dash
+//                   ^^                              punctuation.definition.comment.begin.kdl
+//                     ^                           - punctuation.definition.comment.begin.kdl
+//                   ^^^^^^^^^                       comment.line.slash-dash
+//                            ^                    - comment.line.slash-dash
+//                             ^^                    punctuation.definition.comment.begin.kdl
+//                               ^                 - punctuation.definition.comment.begin.kdl
+//                             ^^^^^^^^^^^^^^^^      comment.line.slash-dash
+//                                             ^   - comment.line.slash-dash
+  /-nodeNestedSlashdashed "disabled" key=1 {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.slash-dash.kdl
+//^^                                         punctuation.definition.comment.begin.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^                    comment.line.slash-dash.kdl
+//                                         ^ punctuation.section.mapping.begin.kdl
+//<-                                         text.kdl2
+ //<-                                        text.kdl2
+  node_inner_disabled
+//^^^^^^^^^^^^^^^^^^^                        comment.line.slash-dash.kdl
+//^^^^^^^^^^^^^^^^^^^                        comment.block.slash-dash.kdl
+  r 1 {
+//    ^                                      punctuation.section.mapping.begin.kdl
+    r 2 { r 3 { r 4 { r 5 { r 6;};};};};}
+//                             ^             punctuation.terminator.node
+//                               ^           punctuation.terminator.node
+//                                 ^         punctuation.terminator.node
+//                                   ^       punctuation.terminator.node
+//                                     ^     punctuation.terminator.node
+//                              ^            punctuation.section.mapping.end.kdl
+//                                ^          punctuation.section.mapping.end.kdl
+//                                  ^        punctuation.section.mapping.end.kdl
+//                                    ^      punctuation.section.mapping.end.kdl
+//                                      ^    punctuation.section.mapping.end.kdl
+}; node_post_slashdashed key=1
+//<-                                    punctuation.section.mapping.end.kdl, punctuation.definition.comment.end, punctuation.terminator.node.kdl, comment.block.kdl
+ //<-                                   punctuation.terminator.node
+ //<-                                  -comment.block.kdl
+// ^^^^^^^^^^^^^^^^^^^^^                entity.name.tag.node
+
+n "/-Slashdashed nodes retain all the scopes of individual elements!"
+/-nnn   kkk=111 kkk=222 "333" kkk=444 "555" kkk=666 {
+//<-                                                  comment.block.slash-dash.kdl comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+ //<-                                                 comment.block.slash-dash.kdl comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.node.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.slash-dash.kdl
+//^^^                                                 entity.name.tag.node.kdl comment.line.slash-dash.kdl
+//      ^^^                                           meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//         ^                                          meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
+//          ^^^                                       meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+//              ^^^                                   meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                 ^                                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
+//                  ^^^                               meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+//                      ^^^^^                         meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl comment.line.slash-dash.kdl
+//                      ^                             punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+//                          ^                         punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+//                            ^^^                     meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                               ^                    meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
+//                                ^^^                 meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+//                                    ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl comment.line.slash-dash.kdl
+//                                    ^               punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+//                                        ^           punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+//                                          ^^^       meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                                             ^      meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
+//                                              ^^^   meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+//                                                  ^ meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+  nnn   kkk=111 kkk=222 "333" kkk=444 "555" kkk=666 {
+  nnn   kkk=111 kkk=222 "333" kkk=444 "555" kkk=666
+  }
+}
+
+// 2 Node Element: 5 End
+n /-;n "Terminators can't be slashdashed"
+//  ^                        invalid.illegal.position.kdl
+//   ^                      -invalid
+n /-
+//^^                         comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//  ^                       -invalid.illegal.position.kdl
+n "↑ don't erorr newlines";
+//<-                         meta.node.kdl
+
+// Test −I -Invalid -Illegal
+
+// 3 Data: Keywords (−Invalid)
+n      tru //← partial keyword is not invalid
+//     ^^^        -invalid.illegal.position.kdl
+n   (a)tru
+//     ^^^        -invalid.illegal.position.kdl
+n/*  */tru
+//     ^^^        -invalid.illegal.position.kdl
+n/**/k=tru
+//     ^^^        -invalid.illegal.position.kdl
+n \
+tru;
+//<-              -invalid.illegal.position.kdl
+ //<-             -invalid.illegal.position.kdl
+//^               -invalid.illegal.position.kdl
+n |tru // but only when it's in a valid argument position
+//^^^              invalid.illegal.muted.position.kdl
+//   ^             invalid.illegal.position.kdl
+n |fal //
+n a=x ;
+//  ^              invalid.illegal.position.kdl
+//   ^            -invalid.illegal.position.kdl
+//    ^            punctuation.terminator.node.kdl
+n a=x;
+//  ^              invalid.illegal.position.kdl
+//   ^            -invalid.illegal.position.kdl
+//   ^             punctuation.terminator.node.kdl
+n/**/k=|tru //
+//     ^^^         invalid.illegal.muted.position.kdl
+//        ^        invalid.illegal.position.kdl
+
+//Don't error incomplete invalid arguments that may turn into valid properties...
+n r
+//^                                     meta.argument.value.kdl meta.mapping.value.kdl
+//^                                    -invalid.illegal.position.kdl
+//... but do error when we expect the node is complete with an explicit terminator
+n r;
+//^                                     meta.argument.value.kdl meta.mapping.value.kdl
+//^                                     invalid.illegal.position.kdl
+// ^                                    punctuation.terminator.node.kdl
+//...
+n r//
+//^                                     meta.argument.value.kdl meta.mapping.value.kdl
+//^                                     invalid.illegal.position.kdl
+// ^                                    comment.line.double-slash.kdl
+
+
+  nn "a";  // cmd cmd aa d
+  nn "a" ; // cmd cmd aa d
+  nn "a"   // cmd cmd aa d
+/-nn "a"   // cmd cmd aa d
+  nn "a"   // cmd cmd aa d
+/-nn "a";  // cmd cmd aa d
+/-nn "a" ; // cmd cmd aa d
+//                ^        -invalid.illegal
+nnn (aaaa)error_stops→;
+//  ^^^^^^^^^^^^^^^^^^   meta.argument.value.kdl meta.mapping.value.kdl
+//  ^^^^^^               meta.annotation.kdl
+//  ^                    punctuation.separator.annotation.begin.kdl
+//   ^^^^                entity.name.type.kdl
+//       ^               punctuation.separator.annotation.end.kdl
+//        ^^^^^^^^^^^    invalid.illegal.muted.position.kdl
+//                   ^   invalid.illegal.position.kdl
+//                    ^ -invalid.illegal
+//                    ^  punctuation.terminator.node.kdl
+
+// 4. Test Children −I -Invalid -Illegal
+n k=+1{k;};
+//    ^                                       -invalid.illegal.position.kdl
+
+
+
+// 8. Test Line continuation
+// Various whitespace separating line continuation and arguments
+n \
+k=1
+//<- meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+n \ 
+k=1
+//<- meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+n \/*
+*/
+k=1
+//<- meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+n \ /*
+*/
+k=1
+//<- meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+
+/-n { r 1 ;// line comment not consuming ␤
+}
+//<-                                          -invalid.illegal.position.kdl
+n { r 1 ;
+}
+//<-                                          -invalid.illegal.position.kdl
+n k=+1{"←children don't require space!";};
+//    ^                                       -invalid.illegal.position.kdl
+n          true   true   true   true ;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   "a"    true   true   true   true    " comment";
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n        /-true /-true /-true /-true ;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-"a"  /-true /-true /-true /-true /- " comment";
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-"  comment string"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-  "comment string"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-/**/"comment string"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-/**/ "comment string"
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   1   true   "comment string"    r"r aww" /-r#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   1   true   "comment string"  /-r"r aww" /-r#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-1 /-true /- "comment string" /-r"r aw" /-r#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+
+
+// Test /-Slashdashed Elements
+// 4. Test Numbers
+/-de-with-number +2.0
+//               ^^^^                             constant.numeric.value.kdl, constant.numeric.decimal.kdl comment.line.slash-dash.kdl
+//               ^                                keyword.operator.arithmetic.kdl comment.line.slash-dash.kdl
+/--num    +1.234e-42 // decimal-radix numbers
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     comment.block.slash-dash.kdl
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^     comment.line.slash-dash.kdl
+//        ^^^^^^^^^^                              constant.numeric.value.kdl, constant.numeric.float.kdl
+//        ^^^^^^                                  constant.numeric.significand.kdl
+//              ^^^^                             -constant.numeric.significand.kdl
+//              ^^^^                              constant.numeric.exponent.kdl
+//        ^^^^^^                                 -constant.numeric.exponent.kdl
+//        ^                                       keyword.operator.arithmetic.kdl
+//               ^                                keyword.operator.arithmetic.kdl
+//          ^                                     punctuation.separator.decimal.kdl
+//              ^                                 punctuation.separator.exponent.kdl
+/--num    -1.234    //   with optional exponent
+//        ^^^^^^                                  constant.numeric.value.kdl, constant.numeric.decimal.kdl
+//        ^                                       keyword.operator.arithmetic.kdl
+//          ^                                     punctuation.separator.decimal.kdl
+/--num    -3        //   with optional fractional
+//        ^^                                      constant.numeric.integer.kdl, constant.numeric.value.kdl
+//        ^                                       keyword.operator.arithmetic.kdl
+/--hex    0xdeadbeef
+//        ^^^^^^^^^^                    constant.numeric.integer.hexadecimal.kdl
+//        ^^                            constant.numeric.base.kdl
+//          ^^^^^^^^                    constant.numeric.value.kdl
+/--octal  0o755
+//        ^^^^^                         constant.numeric.integer.octal.kdl
+//        ^^                            constant.numeric.base.kdl
+//          ^^^                         constant.numeric.value.kdl
+/--binary 0b10101101
+//        ^^^^^^^^^^                    constant.numeric.integer.binary.kdl
+//        ^^                            constant.numeric.base.kdl
+//          ^^^^^^^^                    constant.numeric.value.kdl
+/-gnum 1_000_000.000_001e+1_000 // Numbers can have underscores to help readability
+//      ^                               punctuation.separator.number.kdl
+//          ^                           punctuation.separator.number.kdl
+//                  ^                   punctuation.separator.number.kdl
+//                         ^            punctuation.separator.number.kdl
+
+
+// Test Invalid
+  ("t1""t2")n "Only a single value in a type allowed"
+//^^^^^^^^^^ meta.node.kdl meta.annotation.kdl
+// ^^^^^^^^  entity.name.type.kdl
+//     ^     invalid.illegal.position.kdl
+//      ^^^  invalid.illegal.muted.position.kdl
+/-("t1""t2")n "Only a single value in a type allowed"
+//^^^^^^^^^^ meta.node.kdl meta.annotation.kdl
+// ^^^^^^^^  entity.name.type.kdl
+//     ^     invalid.illegal.position.kdl
+//      ^^^  invalid.illegal.muted.position.kdl
+
+
+// 3 Data: Keywords (Invalid)
+keyword≠key true=1; n false=1; b null=1
+//          ^^^^                                  constant.language.boolean invalid.illegal.position.kdl
+//                    ^^^^^                       constant.language.boolean invalid.illegal.position.kdl
+//                               ^^^^             constant.language.null invalid.illegal.position.kdl
+keyword≠key truee=1; n falsee=1; b nulle=1
+//          ^^^^^                               -invalid.illegal.position.kdl
+//                     ^^^^^^                   -invalid.illegal.position.kdl
+//                                 ^^^^^        -invalid.illegal.position.kdl
+
+// 4. Test Numbers (Invalid)
+n 1+12 k=1 "Glued number args are an error"
+// ^                                    invalid.illegal.position.kdl
+//  ^^                                  invalid.illegal.muted.position.kdl
+n k=+1_0+00_000
+//      ^                               invalid.illegal.position.kdl -constant.numeric.value.kdl
+n k=+1_0.5+00_000
+//        ^                             invalid.illegal.position.kdl -constant.numeric.value.kdl
+n 10.+12
+//   ^                                  invalid.illegal.position.kdl
+//    ^^                                invalid.illegal.muted.position.kdl
+n 10.5e+12+12 k=1
+//        ^                             invalid.illegal.position.kdl
+n /-1+12 k=1 "Glued number args are an error"
+//   ^                                  invalid.illegal.position.kdl
+//    ^^                                invalid.illegal.muted.position.kdl
+n k=/-+1_0+00_000
+//        ^                             invalid.illegal.position.kdl -constant.numeric.value.kdl
+n k=/-+1_0.5+00_000
+//          ^                           invalid.illegal.position.kdl -constant.numeric.value.kdl
+n /-10.+12
+//     ^                                invalid.illegal.position.kdl
+//      ^^                              invalid.illegal.muted.position.kdl
+n /-10.5e+12+12 k=1
+//          ^                           invalid.illegal.position.kdl
+n b=0b k=1
+//   ^                                  invalid.illegal.position.kdl
+
+n .5; /* gently warn on illegal args */
+//^                                     invalid.illegal.muted.position.kdl
+// ^                                    invalid.illegal.position.kdl
+n .5
+//^                                    -invalid.position.kdl
+// ^                                   -invalid.illegal.position.kdl
+/*but not before whitespace as .5 can turn into a legal .5=1 property*/
+
+// 7. Test various
+"Glued nodes" "1st symbol illegal, others muted, pop early on child/term/line end/comment..."
+"n""inv"
+// ^                                    invalid.illegal.position.kdl
+//  ^^^^                                invalid.illegal.muted.position.kdl
+//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+"n""inv";
+// ^                                    invalid.illegal.position.kdl
+//  ^^^^                                invalid.illegal.muted.position.kdl
+//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+"n""inv"{}
+// ^                                    invalid.illegal.position.kdl
+//  ^^^^                                invalid.illegal.muted.position.kdl
+//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+"n""inv"//
+// ^                                    invalid.illegal.position.kdl
+//  ^^^^                                invalid.illegal.muted.position.kdl
+//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+"n""inv"\/*
+// ^                                    invalid.illegal.position.kdl
+//  ^^^^                                invalid.illegal.muted.position.kdl
+//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+*/
+a=1
+"Same for" /-"slashdashed elements"
+/-"n""inv"
+//   ^                                  invalid.illegal.position.kdl
+//    ^^^^                              invalid.illegal.muted.position.kdl
+//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+/-"n""inv";
+//   ^                                  invalid.illegal.position.kdl
+//    ^^^^                              invalid.illegal.muted.position.kdl
+//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+/-"n""inv"{}
+//   ^                                  invalid.illegal.position.kdl
+//    ^^^^                              invalid.illegal.muted.position.kdl
+//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+/-"n""inv"//
+//   ^                                  invalid.illegal.position.kdl
+//    ^^^^                              invalid.illegal.muted.position.kdl
+//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+/-"n""inv"\/*
+//   ^                                  invalid.illegal.position.kdl
+//    ^^^^                              invalid.illegal.muted.position.kdl
+//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
+*/
+a=1
+
+
+// 9.1 Test Line continuation
+n \ /*sadf*/ ✗ /*
+  //         ^                                  invalid.illegal.position.kdl
+  *//*       ↑ illegal non-whitespace char*/
+  /*   illegal empty line with a comment ✗→*/
+  //                                         ^  invalid.illegal.position.kdl
+  /**/ //✗↓ illegal empty line ✗→
+  //                             ^              invalid.illegal.position.kdl
+
+//<-                                            invalid.illegal.position.kdl
+k=1 // ← mark non-whitespace on 2nd+ lines as legal again
+//<-                                           -invalid.illegal.position.kdl
+n \ /*sadf*/ ✗//
+  //         ^                                  invalid.illegal.position.kdl
+  //         ^                                  invalid.illegal.position.kdl
+k=1
+
+
+n \ //
+
+//<-                                            invalid.illegal.position.kdl
+  k=1 "✗↑illegal empty line"=1
+//^                                            -invalid.illegal.position.kdl
+n \
+    
+  //^                                           invalid.illegal.position.kdl
+  "✗↑illegal empty space line"=1
+//^                                            -invalid.illegal.position.kdl
+n \
+  //✗illegal empty line with a comment→
+  //                                   ^        invalid.illegal.position.kdl
+  //✗illegal empty line with a comment→
+  //                                   ^        invalid.illegal.position.kdl
+  k=1//
+//^                                            -invalid.illegal.position.kdl
+n \
+  /*legal*/ k=1
+//^                                            -invalid.illegal.position.kdl
+//          ^                                  -invalid.illegal.position.kdl
+
+n\aa k\=1
+//^^                                              invalid.illegal.position.kdl
+//   ^^^^                                         invalid.illegal.position.kdl
+
+//<-                                              invalid.illegal.position.kdl
+k=1
+//<-                                             -invalid.illegal.position.kdl
+
+k=1
+n \    "only comments allowed after line⎋"
+//     ^^^^^                                      invalid.illegal.position.kdl
+//                                         ^     -invalid.illegal.position.kdl
+k=1
+n \ // "only comments allowed after line⎋"
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        comment.line.double-slash
+//                                         ^     -invalid.illegal.position.kdl
+k=1
+
+n /--1.0 2  \     /**/ //fd
+//          ^                                     punctuation.separator.continuation.line.kdl
+ k=1
+n /--1.0 2 \ /**/ //f
+//         ^                                      punctuation.separator.continuation.line.kdl
+//           ^^^^                                 comment.block.kdl
+//                ^^^                             comment.line.double-slash.kdl
+//                   ^                           -comment.line.double-slash.kdl
+ k=1
+n /--1.0 2 \   //f //
+//         ^                                      punctuation.separator.continuation.line.kdl
+//             ^^^^^^                             comment.line.double-slash.kdl
+//                   ^                           -comment.line.double-slash.kdl
+ k=1
+n /--1.0 2 \ /f //
+//         ^                                      punctuation.separator.continuation.line.kdl
+//           ^^                                   invalid.illegal.position.kdl
+  /*        */
+//^^^^^^^^^^^^                                    comment.block.kdl
+ k=1
+
+illegal-multiple-terminator 1;;
+//                            ^                   invalid.illegal.position.kdl
+
+
+/-\
+  node;
+//^^^^ comment.block.slash-dash.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
+n {
+/-\
+  node;
+//^^^^ meta.node.kdl meta.block.child.kdl comment.block.slash-dash.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
+};
+
+// Match spaces as part of the key=value, but signal an error
+n k=1 k✗␠=  1 false;
+//        ^                                       invalid.illegal.position.kdl
+//         ^                                      invalid.illegal.muted.position
+n k=1 k✗␠  = 1 false;
+//       ^                                        invalid.illegal.position.kdl
+//        ^                                       invalid.illegal.muted.position
+//          ^                                     invalid.illegal.position.kdl
+
+n k=1 "k"=1 "v"
+n k=1 "v"
+n\
+/*illegal since WS only allows directly after \\ without any newlines*/
+b=1
+
+/-  \
+node;
+// ↑ should be commented with slashdash since node sp is allowed ws* escline ws* | ws+
+
+// Missing terminator warning, 2 options:
+  // 1 (here)        is to highlight              } without a preceding ;
+  // 2 (alternative) is to highlight space before }, but
+    // there is not always space there
+    // space is taken by node␠, so harder to make it give up ␠ in '/**/ }'
+      // even if you add a rule that handles ' }' with a higher priority
+      // node␠ doesn't know the difference between '; }' and ' }'
+  n  { "forgot;terminator"      ;};
+//                              ^                punctuation.terminator.node.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  { "forgot;terminator"       };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  {  forgot;terminator        };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  { "forgot;terminator" /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  {  forgot;terminator  /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  { "forgot;terminator"       };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  {  forgot;terminator        };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  { "forgot;terminator" /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  {  forgot;terminator  /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+
+r 1 { r2 1; }  "🛑 child-must-be-terminated!"
+//             ^                                 invalid.illegal.position.kdl
+//              ^                                invalid.illegal.muted.position.kdl
+//               ^                              -invalid.position
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^     invalid.illegal.muted.position.kdl
+//               make spaces "valid" as they'd be fine alone
+r 1 { r2 1; }; "node after ;"
+//           ^                                   punctuation.terminator.node
+//             ^^^^^^^^^^^^^^                    entity.name.tag.node.kdl
+r 1 { r2 1; } /*comment before ;*/;
+//                                ^              punctuation.terminator.node
+//            ^^^^^^^^^^^^^^^^^^^^               comment.block.kdl
+
+
+// 10. Potential tests (unsorted dump)
+
+aa r=2;
+aaa r=2\
+rr=2
+//dsf
+
+r"sdfsafd"
+null
++ a=2
+-null a =2 null
+
+//asdsdf
+  n /-1 ;
+  n a=1   1 ;
+  n   1 ;
+  n a=1 /-1 ;
+n 0b1 {n 0b1;};
+n 1 {n 11;};
+n 1 {n 1 ;};
+n 1 {n 1 {n 1 {n 1;};};};
+n 11{n 11{n 11{n 1;};};};
+n 1 {n 11{n 1;};};
+n 1;
+n 1 ; n 1;
+n{ };
+n {};
+n 1 {n;};
+  n   1     {n 1 a=1 1 ;};
+  n /-1     {n 1 a=1 1 ;};
+  n /-1     {n 1 a=1 1 ;};
+  n   a=1   {n 1 a=1 1 ;};
+  n /-a=1   {n 1 a=1 1 ;};
+  n   1 /-{n 1 a=1 1 ;};
+/-n /-1   {n 1 a=1 1 ;};
+  n a=1    {n a=1;};
+  n a=1   1 true;
+  n a=1 /-1 true;
+/-n a=1 /-1 true;
+// "Same for" /-"slashdashed elements"
+
+n {n 1 {};};
+/-n {n 1 {};};
+
+n 1\//✓
+/-\//✓
+1//✓
+
+aa k=1 "a" //
+aa "k"=1 "a" /-\
+true
+aa k=1 "a"   { aa;}
+aa k=1 "a" /-{ aa;}
+aa k=1 "a" /- { aa;}
+aa k=1 "a" /-\
+{ aa;}
+aa   aa=2       aa=2; aa    -1     aa=2
+aa /-aa=2       aa=2; aa /- -1     aa=2
+aa    "s"       aa=2; aa    "s\n"  aa=2
+aa /- "s"       aa=2; aa /- "s\n"  aa=2
+aa   r"s"       aa=2; aa   r#"s"#  aa=2
+aa /-r"s"       aa=2; aa /-r#"s"#  aa=2
+aa   r##"R"s"## aa=2; aa   "c"   r"r w"   r#"R " "# aa=2
+aa /-r##"R"s"## aa=2; aa /-"c" /-r"r w" /-r#"R " "# aa=2
+aa   0b11       aa=2; aa   -100    aa=2
+aa /-0b11       aa=2; aa /--100    aa=2
+aa   true       aa=2; aa   null    aa=2
+aa /-true       aa=2; aa /-null    ra=2
+aa k=1 "a" /-{ aa;}
+
+a "a"=1
+name r"b"=1  b b=1 "b"=1 b b=1 b;
+b b p=1 b=1 pasdfsdf=61 b 1 b 1 n=1;
+nn true=1
+n 0.5
+name 0b01 0o12 0x11 "bbb#b"=1  r#"bb"# b="2" "b"=1 b=1;
+
+bb p=1 b=1 pasdfsdf=61 c=+1 +=1 null null true 12.22;
+nn r##"b#b"##=1  b=1 "b"=1 bc=1 "b";
+
+
+
+
+(a)aa;
+(a)aa k=1;
+(a)aa k=1;
+(a)aa \
+ k=1;
+(a)a/*valid no space*/k=1
+(a)"aa" k=1;
+(a)"aa" k=1;
+(a)"aa" \
+  k=1;
+(a)"aa"/*valid no space*/k=1
+
+aa    /*✗ no WS separator*/
+a/**/"a"/*✓    WS comment*/
+a "a"   /*✓    WS ␠*/
+a /**/ /*
+*/ /**/ "a"/*✓ WS␠∨comments*/
+
+a\
+  "a"    /*✓ line⎋*/
+
+
+
+(xxx)(true-true)nnn
+(true-true)legal-type
+nnn (xxx)1 (a)1
+nnn true 1 (a)(a)1 "zz" zz
+nnn 1 true "a"=1 a=1;
+ (a)tru r"a\b" 1 tru "a\b"
+nnn r"a\b"  "a\b"
+nnn "a"=1
+nnn (a)true (b)true (a)1 (a)"/**/a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+nnn         (a)true (a)a (a)"a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+nnn "a"   "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+  (a)"n" a=1 "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+/-(a)"n" a=1 "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+r"aa" arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+aa  argggg a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+aa n true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+"a" "a"=true "a" r"a"=true;
+a "a"=true "b"=tru
+a "a"=tru
+a "a"=tru
+
+n/*valid no space*/b=1
+n\
+b=1//valid line cont
+
+a "a"=true "a" r"a"=\
+true
+
+a "saf" "saf" "saf" "s=af"  = 1 "saf" =
+a "a" "a" r"a"=0b11 "a" 1 "a"=1 "a"=2 1;
+a "a" "a" r"a"=(a)0b1 "a"=(a)"a" "a"=r"a";
+a (saf) (saf) (saf) (saf)= (saf)=
+a  1=1 ;
+a true false null
+a 1 "a"   "a"="1" "a"=1;
+a "a"=1 "a" "a"=1 "a"=1;
+a 0b1 k=1 k=1;
+a true ("f")"a" ;
+a (f)"a";
+a 0b1 k=1 k=1;
+a "a" = 1 "a"=1;
+a 1 k=1;
+true null r"aa" arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+true aa  argggg a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+true true aa n true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+
+
+/-"ach"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+// fix my color highlighting shceme, thisis just blac
+match   /-aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+  "ch"    aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+  "ch"  /-aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+/-"ach"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+/-r"ch"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+/-aaach   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+match aaa=111 /-l="a" "k"=1 "k"="v"
+nn aa=11 aa=0b111 aa=11111
+nn aa=11 aa="111" aa="111"
+nn aa=11 aa="111""1" aa="111"
+n      1 1 1
+n   (t)1 k=1   k=1
+n /-k=11 k=1 /-k=1
+n /-1111 k=1 /-k=1
+n /-(t)1 k=1 /-k=1
+n /-;
+match aaa=111 url="a"
+match aaa="a" url="a"
+nnn    "arg""arg";
+nnn (a)"arg""arg";
+nnn (a)true (a)1
+nnn (a)"arg" "arg";
+n kkk=1 k=1 kkk=0b155
+n /-k=1 k=1 /-k=0b155
+n kkk=1 k=1 kkk=10.5e5e5
+
+"n"  "k""j";
+"n" r"k"r"j";
+"n"  "k" "j";
+"n" r"k" r"j";
+"n"  "k"  "j";
+"n"  "k"1;
+"n" r"k"1;
+"n"  "k" 1;
+"n" r"k" 1;
+"n"  "k"=1;
+"n"   kk=1;
+"n"  "k"=(aaaaaa) 1;
+"n"  "k"=("aaaa") 1;
+"n"  "k"=("aaaa")1;
+"n"  "k"=("a""a") 1;
+  ("a")n k="a" k=1;
+
+"a"\ /*✗ no line⎋ end (␤ or //)
+*/ a
+"a" 
+
+a \  /*
+*/
+ "a"
+a  \  /*
+*/ //
+"a" \
+"a" /**/ "a"/*←illegal no space separator*/
+  a  /**/  a
+a  \  /**/ \  a
+a  \ \  a /* illegal dupe \\*/
+
+ /**/   a \ \
+
+\ \
+
+a  \
+a=1  /* illegal 2nd line cont*/  a
+n/*valid no space*/b=1
+k=
+("nn")nnn a=1
+("nn")nnn a=1 ;
