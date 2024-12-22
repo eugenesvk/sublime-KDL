@@ -1,0 +1,31 @@
+%YAML 1.2
+---
+name             : KDL
+file_extensions  : [kdl]
+scope            : text.kdl
+first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+(1|2)[[:blank:]]*$'
+hidden           : true
+version          : 2
+
+contexts:
+  main:
+    - match : '^(/-)([[:blank:]]*(kdl-version)[[:blank:]]+(2)[[:blank:]]*($))'
+      scope: comment.block.slash-dash.kdl comment.line.version-marker.kdl
+      captures:
+        1: comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+        2: meta.node.kdl
+        3: entity.name.tag.node.kdl keyword.other.version-marker.kdl comment.line.slash-dash.kdl
+        4: meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl constant.numeric.kdl-version.kdl comment.line.slash-dash.kdl
+        5: punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+      set   : KDL2.sublime-syntax
+    - match : '^(/-)([[:blank:]]*(kdl-version)[[:blank:]]+(1)[[:blank:]]*($))'
+      scope: comment.block.slash-dash.kdl comment.line.version-marker.kdl
+      captures:
+        1: comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+        2: meta.node.kdl
+        3: entity.name.tag.node.kdl keyword.other.version-marker.kdl comment.line.slash-dash.kdl
+        4: meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl constant.numeric.kdl-version.kdl comment.line.slash-dash.kdl
+        5: punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+      set   : KDL1.sublime-syntax
+    - match : '' # default
+      set   : KDL2.sublime-syntax
