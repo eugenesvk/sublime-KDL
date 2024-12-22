@@ -7,6 +7,7 @@ first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+(1|2)[[:blank:]]*$'
 hidden           : true
 version          : 2
 
+# BOM \x{FEFF}? doesnt' seem to be part of a line for re matching, so not added though it's part of the spec
 contexts:
   main:
     - match : '^(/-)([[:blank:]]*(kdl-version)[[:blank:]]+(2)[[:blank:]]*($))'
