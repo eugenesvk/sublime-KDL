@@ -2,7 +2,7 @@
 ---
 name             : KDL1
 file_extensions  : [kdl]
-scope            : source.kdl1
+scope            : text.kdl1
 first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+1[[:blank:]]*$'
 version          : 2
 # See Whitespace (Line breaking and non-Newline) in a separate re_st_engine.sublime-syntax
