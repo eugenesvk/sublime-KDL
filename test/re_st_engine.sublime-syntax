@@ -145,8 +145,9 @@ contexts:
     # - include: ws_line_break_ls
     # - include: ws_line_break_ps
   ws_no_line_break:
+    - include: tst1
     # - include: ws_uspace_combo
-    - include: ws_uspace_combo_var
+    # - include: ws_uspace_combo_var
     # - include: ws_uspace_character_tabulation
     # - include: ws_uspace_space
     # - include: ws_uspace_no-break_space
@@ -167,6 +168,9 @@ contexts:
     # - include: ws_uspace_ideographic_space
 
 # ws_no_line_break:
+  tst1     :
+    - match               : '[\x{0020}-\x{0021}\x{0063}-\x{0064}]'
+      scope               : invalid.illegal.uspace.character.combo
   ws_uspace_combo     :
     - match               : '[[:blank:]]'
       scope               : invalid.illegal.uspace.character.combo
