@@ -105,7 +105,7 @@ variables:
   ws:                       	'{{bom}}|{{u_sp}}|{{multi_line_comment}}'                    	#
   b_sp:                     	'[{{bom}}{{u_sp}}]'                                     #ss #	#
   bom:                      	'[\x{FEFF}]'                                                 	#
-  unicode_space:            	'[[\s]&&[^{{nl_s}}]]'                                        	#
+  unicode_space:            	'[[:blank:]]'                                           #ss #	#
   single_line_comment:      	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'             	#
   single_line_comment_no_nl:	'({{c_line_beg}})([^{{nl_s}}]*)'                             	#
   multi_line_comment:       	'{{comment_block_beg}}{{commented_block}}'                   	# set-unsafe; recursion: commented_block🗘
