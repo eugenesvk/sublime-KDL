@@ -892,7 +892,7 @@ contexts:
 #         2:                 punctuation.definition.string.begin.kdl
 #         3:                 punctuation.definition.string.begin.kdl
 #       push                :
-#       - meta_scope        : kdentity.name.tag.node.l meta.string.kdl string.quoted.double.raw.kdl
+#       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
 #       - match             : '"\2' # ↑match (#*)
 #         scope             : punctuation.definition.string.end.kdl
 #         pop               : 1
