@@ -103,8 +103,8 @@ variables:
   # char_linesp:              	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                           #ss!#	# ex / but not precisely //
   # newline:                  	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'          	# \R
   # nl_s:                     	'[\r\n\x{C}\x{85}\x{2028}\x{2029}]'                     #ss!#	# not precisely ␤␊
-  # ws:                       	'{{bom}}|{{u_sp}}|{{multi_line_comment}}'                    	#
-  # b_sp:                     	'[{{bom}}{{u_sp}}]'                                     #ss# 	#
+  ws:                         	 '{{u_sp}}|{{multi_line_comment}}'                           	#
+  b_sp:                       	'[{{u_sp}}]'                                            #ss #	#
   # bom:                      	'[\x{FEFF}]'                                                 	#
   # unicode_space:            	'[[\s]&&[^{{nl_s}}]]'                                        	#
   # single_line_comment:      	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'             	#
@@ -1788,14 +1788,12 @@ contexts:
 #       #scope               : dbg✗eof
 #       pop                 : 4
 
-#   ws:                     # ≝ bom | unicode-space | multi-line-comment
-#     - include             : bom
-#     - include             : u_sp
-#     - include             : comment_block∨doc
-#   wss:
-#     - include             : boms
-#     - include             : u_sps
-#     - include             : comment_block∨doc
+  ws:                     # ≝ unicode-space | multi-line-comment
+    - include             : u_sp
+    - include             : comment_block∨doc
+  wss:
+    - include             : u_sps
+    - include             : comment_block∨doc
 #   bom:
 #     - match               : '{{bom}}'
 #       #scope               : dbg✗bom
