@@ -6,6 +6,7 @@ scope            : text.kdl2
 first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+2[[:blank:]]*$'
 version          : 2
 extends          : Packages/KDL/KDL1.sublime-syntax
+# BOM \x{FEFF}? doesnt' seem to be part of a line for re matching, so not added though it's part of the spec
 # See Whitespace (Line breaking and non-Newline) in a separate re_st_engine.sublime-syntax
 
 # !sets don't allow whitespace even with (?x:), so watch out for [{{var}}] where var='(?x: abc)', 'x' will also be included
