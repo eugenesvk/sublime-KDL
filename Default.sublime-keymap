@@ -5,7 +5,7 @@
   {"key":"selection_empty"            	,"operator":"equal"         	,"operand":true                     	, "match_all":true},
   {"key":"following_text"             	,"operator":"regex_contains"	,"operand":"^(?:\t| |\\)|]|\\}|>|$)"	, "match_all":true},
   {"key":"preceding_text"             	,"operator":"regex_contains"	,"operand":"(?i)\\b[bfru]+$"        	, "match_all":true},
-  {"key":"selector"                   	,"operator":"equal"         	,"operand":"source.kdl"             	},
+  {"key":"selector"                   	,"operator":"equal"         	,"operand":"text.kdl"             	},
   {"key":"eol_selector"               	,"operator":"not_equal"     	,"operand":"string.quoted.double - punctuation.definition.string.end", "match_all":true},
   ]},
 {"keys":["'"]                         	,"command":"insert_snippet" 	,"args":{"contents":"'$0'"}, "context": [
@@ -14,7 +14,7 @@
   {"key":"selection_empty"            	,"operator":"equal"         	,"operand":true                     	, "match_all":true},
   {"key":"following_text"             	,"operator":"regex_contains"	,"operand":"^(?:\t| |\\)|]|\\}|>|$)"	, "match_all":true},
   {"key":"preceding_text"             	,"operator":"regex_contains"	,"operand":"(?i)\\b[bfru]+$"        	, "match_all":true},
-  {"key":"selector"                   	,"operator":"equal"         	,"operand":"source.kdl"             	},
+  {"key":"selector"                   	,"operator":"equal"         	,"operand":"text.kdl"               	},
   {"key":"eol_selector"               	,"operator":"not_equal"     	,"operand":"string.quoted.single - punctuation.definition.string.end", "match_all":true},
   ]},
 ]
