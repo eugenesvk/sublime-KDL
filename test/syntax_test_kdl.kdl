@@ -1,6 +1,6 @@
 // SYNTAX TEST "Packages/KDL/KDL.sublime-syntax"
 // 0. Test overall source match
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.kdl
 
 // 2 Node Element: 1 Node name
 node_name "not a node"
@@ -630,8 +630,8 @@ node-with-slashdash-number /--1.0 +2.0 \/*
 //^^                                         punctuation.definition.comment.begin.kdl
 //^^^^^^^^^^^^^^^^^^^^^^^                    comment.line.slash-dash.kdl
 //                                         ^ punctuation.section.mapping.begin.kdl
-//<-                                         source.kdl
- //<-                                        source.kdl
+//<-                                         text.kdl
+ //<-                                        text.kdl
   node_inner_disabled
 //^^^^^^^^^^^^^^^^^^^                        comment.line.slash-dash.kdl
 //^^^^^^^^^^^^^^^^^^^                        comment.block.slash-dash.kdl
