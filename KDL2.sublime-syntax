@@ -59,7 +59,7 @@ variables:
   # charID_rec:               	'{{charID}}(?!{{linespace_re}})'                             	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
   # charID_ex_dig:            	'[[{{charID}}]&&[^{{d_dec}}]]'                               	#
   # charID_ex_dig_sign:       	'[[{{charID_ex_dig}}]&&[^+-]]'                               	#
-  # unicode_char:             	'[\x{0021}-\x{10FFFF}]'                                      	# invalid: ≤0x20 or >0x10FFF)
+  # unicode_char:             	'[\x{0021}-\x{10FFFF}]'                              #⊎      	# invalid: ≤0x20 or >0x10FFF)
   # keyword:                  	'{{boolean}}|{{nil}}'                                        	#
   # prop:                     	'{{ID}}={{value}}'                                           	#
   # prop_eq:                  	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'            	#
