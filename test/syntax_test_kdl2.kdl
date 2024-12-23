@@ -129,18 +129,18 @@ n bare-identifie#"string"#
 
 
 // 2 Node Element: 3 Property (key=value)
-command "twitter" "tw" a=2 b=true url="https://twitter.com/" {
-//                     ^                                    meta.mapping.key.kdl
-//                      ^                                   punctuation.separator.key-value.kdl
-//                       ^                                  meta.mapping.value.kdl
-//                         ^                                meta.mapping.key.kdl
-//                          ^                               punctuation.separator.key-value.kdl
-//                           ^^^^                           meta.mapping.value.kdl
-//                                ^^^                       meta.mapping.key.kdl
-//                                   ^                      punctuation.separator.key-value.kdl
-//                                    ^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.kdl
+command "twitter" "tw" a=2 b=#true url="https://twitter.com/" {
+//                     ^                                     meta.mapping.key.kdl
+//                      ^                                    punctuation.separator.key-value.kdl
+//                       ^                                   meta.mapping.value.kdl
+//                         ^                                 meta.mapping.key.kdl
+//                          ^                                punctuation.separator.key-value.kdl
+//                           ^^^^^                           meta.mapping.value.kdl
+//                                 ^^^                       meta.mapping.key.kdl
+//                                    ^                      punctuation.separator.key-value.kdl
+//                                     ^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.kdl
   match regexp="^@(?<username>[A-Za-z_]+$" url="https://twitter.com/{username}" encoding="path"
-  default url="https://twitter.com/search?q={}" encoding=(enc)"query" tst=true
+  default url="https://twitter.com/search?q={}" encoding=(enc)"query" tst=#true
 //                                                       ^^^^^        meta.annotation.kdl, meta.mapping.value.kdl
 //                                                       ^            punctuation.separator.annotation.begin.kdl
 //                                                           ^        punctuation.separator.annotation.end.kdl
@@ -210,7 +210,7 @@ nnn url=(a)"t"     separato
 //                ^^^^^^^^^   -invalid.illegal
 /-n url=(a)"t"     separato
 //                ^^^^^^^^^   -invalid.illegal
-n k=1 k✗␠=  1 cc false;
+n k=1 k✗␠=  1 cc #false;
 //    ^^^                      meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
 //       ^                     meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
 //        ^                    invalid.illegal.position.kdl
@@ -219,8 +219,8 @@ n k=1 k✗␠=  1 cc false;
 //            ^^               meta.argument.value.kdl meta.mapping.value.kdl
 //            ^                invalid.illegal.muted.position.kdl
 //             ^               invalid.illegal.position.kdl
-//               ^^^^^         meta.argument.value.kdl meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
-//                    ^        punctuation.terminator.node.kdl
+//               ^^^^^^        meta.argument.value.kdl meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
+//                     ^       punctuation.terminator.node.kdl
 
 
 // 2 Node Element: 4 Child
@@ -253,14 +253,14 @@ nnn //
 
 
 // 3 Data: Keywords
-boolean   true   false; "null" null
-//        ^^^^                          constant.language.boolean
-//               ^^^^^                  constant.language.boolean
-//                             ^^^^     constant.language.null
-boolean k=true k=false; "null" null
-//        ^^^^                          constant.language.boolean
-//               ^^^^^                  constant.language.boolean
-//                             ^^^^     constant.language.null
+boolean   #true   #false; "#null" #null
+//        ^^^^^                         constant.language.boolean
+//                ^^^^^^                constant.language.boolean
+//                                ^^^^^ constant.language.null
+boolean k=#true k=#false; "null" #null
+//        ^^^^^                         constant.language.boolean
+//                ^^^^^^                constant.language.boolean
+//                               ^^^^^  constant.language.null
 
 
 
@@ -450,12 +450,12 @@ high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0
 
 
 // 3 Data: Type
-n (null)1
-// ^^^^                                           invalid.illegal.position.kdl
-n (true)1
-// ^^^^                                           invalid.illegal.position.kdl
-n (false)1
+n (#null)1
 // ^^^^^                                          invalid.illegal.position.kdl
+n (#true)1
+// ^^^^^                                          invalid.illegal.position.kdl
+n (#false)1
+// ^^^^^^                                         invalid.illegal.position.kdl
 ("a")a b=(#"sdf"#)1 c=(###"s"d"f"###)2 "allow strings, including raw, in annotations"
 //  ^                                              punctuation.separator.annotation.end.kdl
 //               ^                                 punctuation.separator.annotation.end.kdl
@@ -549,7 +549,7 @@ n "Illegal space between a tag and its value"
 
 // 7. Test various
 smile "😁"  // files must be utf8 encoded
-"!@#$@$%Q#$%~@!40" "1.2.3" "!!!!!"=true // Instead of anonymous nodes, nodes and properties can be wrapped in "" for arbitrary node names.
+"!@#$@$%Q#$%~@!40" "1.2.3" "!!!!!"=#true // Instead of anonymous nodes, nodes and properties can be wrapped in "" for arbitrary node names.
 foo123~!@<>ÿ$%𐀀^‰†&*,.:'|?+ "weeee"       // Legal bare identifier
 //<-                                    entity.name.tag, entity.name.tag.node
  //<-                                   entity.name.tag, entity.name.tag.node
@@ -562,7 +562,7 @@ foo123~!@<>ÿ$%𐀀^‰†&*,.:'|?+ "weeee"       // Legal bare identifier
 //<-                                    entity.name.tag, entity.name.tag.node
  //<-                                   entity.name.tag, entity.name.tag.node
 //^                                     entity.name.tag, entity.name.tag.node
-foo bar=true "baz" quux=4 false 1 2 3 // kdl specifically allows properties and values to be interspersed with each other, much like CLI commands
+foo bar=#true "baz" quux=4 #false 1 2 3 // kdl specifically allows properties and values to be interspersed with each other, much like CLI commands
 
 // 8. Test Line continuation
 node-with-line-continuation \ /* Nodes can be separated into multiple lines with a single-line comment
@@ -742,23 +742,23 @@ n "↑ don't erorr newlines";
 // Test −I -Invalid -Illegal
 
 // 3 Data: Keywords (−Invalid)
-n      tru //← partial keyword is not invalid
+n     #tru //← partial keyword is not invalid
 //     ^^^        -invalid.illegal.position.kdl
-n   (a)tru
-//     ^^^        -invalid.illegal.position.kdl
-n/*  */tru
-//     ^^^        -invalid.illegal.position.kdl
-n/**/k=tru
-//     ^^^        -invalid.illegal.position.kdl
+n   (a)#tru
+//      ^^^        -invalid.illegal.position.kdl
+n/*  */#tru
+//      ^^^        -invalid.illegal.position.kdl
+n/**/k=#tru
+//      ^^^        -invalid.illegal.position.kdl
 n \
-tru;
+#tru;
 //<-              -invalid.illegal.position.kdl
  //<-             -invalid.illegal.position.kdl
-//^               -invalid.illegal.position.kdl
-n |tru // but only when it's in a valid argument position
-//^^^              invalid.illegal.muted.position.kdl
-//   ^             invalid.illegal.position.kdl
-n |fal //
+// ^              -invalid.illegal.position.kdl
+n |#tru // but only when it's in a valid argument position
+//^^^^             invalid.illegal.muted.position.kdl
+//    ^            invalid.illegal.position.kdl
+n |#fal //
 n a=x ;
 //  ^              invalid.illegal.position.kdl
 //   ^            -invalid.illegal.position.kdl
@@ -767,9 +767,9 @@ n a=x;
 //  ^              invalid.illegal.position.kdl
 //   ^            -invalid.illegal.position.kdl
 //   ^             punctuation.terminator.node.kdl
-n/**/k=|tru //
-//     ^^^         invalid.illegal.muted.position.kdl
-//        ^        invalid.illegal.position.kdl
+n/**/k=|#tru //
+//     ^^^^        invalid.illegal.muted.position.kdl
+//         ^       invalid.illegal.position.kdl
 
 //Don't error incomplete invalid arguments that may turn into valid properties...
 n r
@@ -837,14 +837,14 @@ n { r 1 ;
 //<-                                          -invalid.illegal.position.kdl
 n k=+1{"←children don't require space!";};
 //    ^                                       -invalid.illegal.position.kdl
-n          true   true   true   true ;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n   "a"    true   true   true   true    " comment";
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n        /-true /-true /-true /-true ;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n /-"a"  /-true /-true /-true /-true /- " comment";
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n          #true   #true   #true   #true ;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   "a"    #true   #true   #true   #true    " comment";
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n        /-#true /-#true /-#true /-#true ;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-"a"  /-#true /-#true /-#true /-#true /- " comment";
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 n /-"  comment string"
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 n /-  "comment string"
@@ -853,12 +853,12 @@ n /-/**/"comment string"
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 n /-/**/ "comment string"
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n   1   true   "comment string"    #"r aww"# /-#"Raw est"s"#
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n   1   true   "comment string"  /-#"r aww"# /-#"Raw est"s"#
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n /-1 /-true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   1   #true   "comment string"    #"r aww"# /-#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   1   #true   "comment string"  /-#"r aww"# /-#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-1 /-#true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 
 
 // Test /-Slashdashed Elements
@@ -918,14 +918,14 @@ n /-1 /-true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
 
 
 // 3 Data: Keywords (Invalid)
-keyword≠key true=1; n false=1; b null=1
-//          ^^^^                                  constant.language.boolean invalid.illegal.position.kdl
-//                    ^^^^^                       constant.language.boolean invalid.illegal.position.kdl
-//                               ^^^^             constant.language.null invalid.illegal.position.kdl
-keyword≠key truee=1; n falsee=1; b nulle=1
-//          ^^^^^                               -invalid.illegal.position.kdl
-//                     ^^^^^^                   -invalid.illegal.position.kdl
-//                                 ^^^^^        -invalid.illegal.position.kdl
+keyword≠key #true=1; n #false=1; b #null=1
+//          ^^^^^                                constant.language.boolean invalid.illegal.position.kdl
+//                     ^^^^^^                    constant.language.boolean invalid.illegal.position.kdl
+//                                 ^^^^^         constant.language.null invalid.illegal.position.kdl
+keyword≠key #truee=1; n #falsee=1; b #nulle=1
+//          ^^^^^^                              -invalid.illegal.position.kdl
+//                       ^^^^^^                 -invalid.illegal.position.kdl
+//                                    ^^^^^     -invalid.illegal.position.kdl
 
 // 4. Test Numbers (Invalid)
 n 1+12 k=1 "Glued number args are an error"
@@ -1105,10 +1105,10 @@ n {
 };
 
 // Match spaces as part of the key=value, but signal an error
-n k=1 k✗␠=  1 false;
+n k=1 k✗␠=  1 #false;
 //        ^                                       invalid.illegal.position.kdl
 //         ^                                      invalid.illegal.muted.position
-n k=1 k✗␠  = 1 false;
+n k=1 k✗␠  = 1 #false;
 //       ^                                        invalid.illegal.position.kdl
 //        ^                                       invalid.illegal.muted.position
 //          ^                                     invalid.illegal.position.kdl
@@ -1188,9 +1188,9 @@ rr=2
 //dsf
 
 r"sdfsafd"
-null
+#null
 + a=2
--null a =2 null
+-#null a =2 #null
 
 //asdsdf
   n /-1 ;
@@ -1216,9 +1216,9 @@ n 1 {n;};
   n   1 /-{n 1 a=1 1 ;};
 /-n /-1   {n 1 a=1 1 ;};
   n a=1    {n a=1;};
-  n a=1   1 true;
-  n a=1 /-1 true;
-/-n a=1 /-1 true;
+  n a=1   1 #true;
+  n a=1 /-1 #true;
+/-n a=1 /-1 #true;
 // "Same for" /-"slashdashed elements"
 
 n {n 1 {};};
@@ -1230,7 +1230,7 @@ n 1\//✓
 
 aa k=1 "a" //
 aa "k"=1 "a" /-\
-true
+#true
 aa k=1 "a"   { aa;}
 aa k=1 "a" /-{ aa;}
 aa k=1 "a" /- { aa;}
@@ -1246,18 +1246,18 @@ aa   ##"R"s"## aa=2; aa   "c"   #"r w"#   #"R " "# aa=2
 aa /-##"R"s"## aa=2; aa /-"c" /-#"r w"# /-#"R " "# aa=2
 aa   0b11       aa=2; aa   -100    aa=2
 aa /-0b11       aa=2; aa /--100    aa=2
-aa   true       aa=2; aa   null    aa=2
-aa /-true       aa=2; aa /-null    ra=2
+aa   #true       aa=2; aa   #null    aa=2
+aa /-#true       aa=2; aa /-#null    ra=2
 aa k=1 "a" /-{ aa;}
 
 a "a"=1
 name #"b"#=1  b b=1 "b"=1 b b=1 b;
 b b p=1 b=1 pasdfsdf=61 b 1 b 1 n=1;
-nn true=1
+nn #true=1
 n 0.5
 name 0b01 0o12 0x11 "bbb#b"=1  #"bb"# b="2" "b"=1 b=1;
 
-bb p=1 b=1 pasdfsdf=61 c=+1 +=1 null null true 12.22;
+bb p=1 b=1 pasdfsdf=61 c=+1 +=1 #null #null #true 12.22;
 nn ##"b#b"##=1  b=1 "b"=1 bc=1 "b";
 
 
@@ -1286,24 +1286,24 @@ a\
 
 
 
-(xxx)(true-true)nnn
-(true-true)legal-type
+(xxx)(#true-#true)nnn
+(#true-#true)legal-type
 nnn (xxx)1 (a)1
-nnn true 1 (a)(a)1 "zz" zz
-nnn 1 true "a"=1 a=1;
+nnn #true 1 (a)(a)1 "zz" zz
+nnn 1 #true "a"=1 a=1;
  (a)tru #"a\b"# 1 tru "a\b"
 nnn #"a\b"#  "a\b"
 nnn "a"=1
-nnn (a)true (b)true (a)1 (a)"/**/a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-nnn         (a)true (a)a (a)"a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-nnn "a"   "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-  (a)"n" a=1 "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-/-(a)"n" a=1 "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-r"aa" arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-aa  argggg a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-aa n true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-"a" "a"=true "a" #"a"#=true;
-a "a"=true "b"=tru
+nnn (a)#true (b)#true (a)1 (a)"/**/a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+nnn         (a)#true (a)a (a)"a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+nnn "a"   "a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+  (a)"n" a=1 "a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+/-(a)"n" a=1 "a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+r"aa" arg "arg" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+aa  argggg a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+aa n #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+"a" "a"=#true "a" #"a"#=#true;
+a "a"=#true "b"=tru
 a "a"=tru
 a "a"=tru
 
@@ -1311,26 +1311,26 @@ n/*valid no space*/b=1
 n\
 b=1//valid line cont
 
-a "a"=true "a" #"a"#=\
-true
+a "a"=#true "a" #"a"#=\
+#true
 
 a "saf" "saf" "saf" "s=af"  = 1 "saf" =
 a "a" "a" #"a"#=0b11 "a" 1 "a"=1 "a"=2 1;
 a "a" "a" #"a"#=(a)0b1 "a"=(a)"a" "a"=r"a";
 a (saf) (saf) (saf) (saf)= (saf)=
 a  1=1 ;
-a true false null
+a #true #false #null
 a 1 "a"   "a"="1" "a"=1;
 a "a"=1 "a" "a"=1 "a"=1;
 a 0b1 k=1 k=1;
-a true ("f")"a" ;
+a #true ("f")"a" ;
 a (f)"a";
 a 0b1 k=1 k=1;
 a "a" = 1 "a"=1;
 a 1 k=1;
-true null #"aa"# arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-true aa  argggg a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-true true aa n true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+#true #null #"aa"# arg "arg" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+#true aa  argggg a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+#true #true aa n #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 
 
 /-"ach"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
@@ -1355,7 +1355,7 @@ match aaa=111 url="a"
 match aaa="a" url="a"
 nnn    "arg""arg";
 nnn (a)"arg""arg";
-nnn (a)true (a)1
+nnn (a)#true (a)1
 nnn (a)"arg" "arg";
 n kkk=1 k=1 kkk=0b155
 n /-k=1 k=1 /-k=0b155
