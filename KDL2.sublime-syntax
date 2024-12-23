@@ -78,7 +78,7 @@ variables:
   # escaped_string:           	'"{{character}}*"'                                           	#
   # character:                	'\\{{escape}}|[^"]'                                          	#
   # escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
-  # escape_char:              	'["\\/bfnrt]'                                                	#
+  escape_char:                	'["\\bfnrts]'                                                	#
   # escape_unicode:           	'u{{{d_hex}}{1,6}}'                                          	#
   # d_bin:                    	'[0-1]'                                                      	#
   # d_bin_:                   	'[0-1_]'                                                     	#
