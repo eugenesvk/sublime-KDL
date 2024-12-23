@@ -115,7 +115,7 @@ variables:
   # linespace_re:             	'{{nl_s}}|{{ws}}|{{single_line_comment}}'                    	# set-unsafe; includes recursion: ws → multi_line_comment → commented_block🗘
   # char_linesp:              	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                          #ss!# 	# ex / but not precisely //
   # newline:                  	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'          	# \R
-  # nl_s:                     	'[\r\n\x{C}\x{85}\x{2028}\x{2029}]'                    #ss!# 	# not precisely ␤␊
+  # nl_s:                     	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'              #ss!#  	# not precisely ␤␊
   ws:                         	 '{{u_sp}}|{{multi_line_comment}}'                           	#
   b_sp:                       	'[{{u_sp}}]'                                           #ss # 	#
   # bom:                      	'[\x{FEFF}]'                                                 	#
