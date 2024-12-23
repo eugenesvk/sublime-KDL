@@ -20,7 +20,7 @@ node_arg∨prop⠀⠀≝⠀⠀prop|value
   value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
   type⠀⠀⠀⠀⠀⠀⠀⠀⠀≝	"(";    node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
 node_children⠀⠀≝	"{";    nodes⠀node_last? "}"
-node_end⠀⠀⠀⠀⠀⠀⠀≝	comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
+node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
 
 § "Entries"
 node_arg∨prop⠀⠀≝⠀⠀prop|value
@@ -57,7 +57,6 @@ string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀
         char_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀uchar⠀-⠀␤⠀-⠀char🛑
       string_raw_body☰line⠀≝⠀⠀⦅uchar⠀⠀⠀⠀⠀-⠀char🛑⦆*?
 
-
 § "Numbers (space in 〔〕 is ignored)"
 number⠀⠀⠀⠀⠀⠀⠀≝⠀⠀keyword_number⠀|⠀hex⠀|⠀octal⠀|⠀binary⠀|⠀decimal
   hex⠀⠀⠀⠀⠀⠀⠀⠀≝;       ±?⠀0x⠀hdigit⠀⦅_⠀|⠀hdigit⦆*
@@ -86,7 +85,7 @@ comment_line⠀⠀⠀⠀⠀⠀≝   // ¬␤* ⦅␤ | eof⦆
 comment_block⠀⠀⠀⠀⠀≝;  /* commented_block
   commented_block⠀≝   */
                   |⠀⦅comment_block⠀|⠀*⠀|⠀⁄⠀|⠀〔¬*⁄〕+⦆⠀⠀🗘
-/-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝	 /- line␠*
+/-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  /-⠀line␠*
 
 § "Whitespace"
 line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_line  !="Whitespace               where newlines are allowed"
@@ -98,16 +97,13 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
 Language "A combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
     /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   newline=␤   'empty'=∅ */
-  - r#" ; " \  serve as regular KDL syntax, not part of definition (special unicode symbols do that)
-    For example, ≝; semicolon is used just to make the following definition a valid syntax
-    version⠀≝;	/-⠀u␠*
-    "#
-  ! "in != is a tip/comment"
-  § "is a section marker"
-  - r#"Double quotes " are used to denote literal text
-    \ within a literal string is used for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}
-    "#
-  🗘 r#"is a self-referential sign, e.g., the following are the same
+  - r#";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
+    r#"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "
+  - !="tip/comment"
+  - §="section marker"
+  - r#"""#="Double quotes are used to denote literal text"
+  - r#"\"#="within a literal string is used for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}"
+  - 🗘=r#"self-referential sign, e.g., the following are the same
     raw-s ≝ # raw-s-quote # | # raw-s #
     raw-s ≝ # raw-s-quote # | # 🗘    #  "#
   Regex                                                           	\
@@ -115,15 +111,15 @@ Language "A combination of ABNF with some regex spice thrown in" {
     *1–6="inclusive range: at least 1 at most 6"                  	\
     +="one  or more (greedy)"                                     	\
     ?="zero or one"                                               	\
-    *?="zero or more (non-greedy, match as few instances as possible; used only in raw strings)"
-    ¬⧵“ "〔set-␠〕" r#"set+␠"# ≝="Used as regex-style char set matches like [], where any char will be a single match (no escapes needed due to special enclosing syntax)"\
-      "Char range"="0-9"\
-      "Negation"="¬" or="^"\
-      "〔〕 can contain whitespace for alignment which is ignored for matching"
+    *?="zero or more (non-greedy, match as few instances as possible; used only in raw strings)"\
+    ¬="or ^: not this"            	\
+    "0-9"="char range (inclusive)"	\
+    ¬⧵“="[^\\\"]" "〔set-␠〕"="[a b]" r#"set+␠"#="[ab]" ≝="Used as regex-style char set matches like [], where any char will be a single match (no escapes needed due to special enclosing syntax)"\
+    "〔set-␠〕 can contain whitespace for alignment which is ignored for matching"
     ⦅group⦆ "used to group matches that must be matched together"
     a|b "means `a or b`, whichever matches first. Multiple items before `|` are a single group" "a b c | d"="(a b c) | d"
-  - r#"`-` is used for "except for" or "minus" whatever follows it. For example, `a - 'x'` means "any `a`, except something that matches the literal `'x'`"."#
-  ^ or="¬" "prefix 'does not match' whatever follows it: ^foo = must not match `foo`"
-  ¶ "is a cut point. It always matches and consumes no characters, but once matched, the parser is not allowed to backtrack past that point in the source. If a parser would rewind past the cut point, it must instead fail the overall parse, as if it had run out of options. (only for `raw-string` to ensure the 1st instance of the appropriate closing quote sequence ends it)"
-  - r#"A single definition may be split over multiple lines. Newlines are treated as spaces"#
+  - -="used for 'except for' or 'minus' whatever follows it" "uchar⠀-⠀␤"="anything matching the 'uchar' rule (unicode chars) except for something that matches '␤' rule (newline whitespace)"
+  prefix ^=(or)"¬" "'does not match' whatever follows it:" ^foo="must not match 'foo'"
+  - ¶="cut point: always matches and consumes no characters, but once matched, the parser is not allowed to backtrack past that point in the source. If a parser would rewind past the cut point, it must instead fail the overall parse, as if it had run out of options (only for 'rastring_raw' to ensure the 1st instance of the appropriate closing quote sequence ends it)"
+  - "A single definition may be split over multiple lines. Newlines are treated as spaces"
 }
