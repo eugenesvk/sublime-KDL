@@ -91,8 +91,8 @@ variables:
   # d_hex:                    	'[0-9a-fA-F]'                                                	#
   # d_hex_:                   	'[0-9a-fA-F_]'                                               	#
   # #                         	                                                             	#
-  # boolean:                  	'(?:true|false)'                                             	# data type 1/4
-  # nil:                      	'(?:null)'                                                   	# data type 2/4
+  boolean:                    	'(?:\#true|\#false)'                                         	# data type 1/4
+  nil:                        	'(?:\#null)'                                                 	# data type 2/4
   # string:                   	'{{raw_string}}|{{escaped_string}}'                          	# data type 3/4
   # number:                   	'{{decimal}}|{{hex}}|{{octal}}|{{binary}}'                   	# data type 4/4
   # #    ↓string              	                                                             	#
@@ -728,61 +728,61 @@ contexts:
 #       pop                 : 1
 
 # #——— Values - Keywords
-#   boolean:
-#     - match               : \b(true|false)\b
-#       scope               : keyword.other.kdl constant.language.boolean.kdl
-#       pop                 : 2
-#   boolean⁄-:
-#     - match               : \b(true|false)\b
-#       scope               : keyword.other.kdl constant.language.boolean.kdl comment.line.slash-dash.kdl
-#       pop                 : 2
-#   nil:
-#     - match               : '\b(null)\b'
-#       scope               : keyword.other.kdl constant.language.null.kdl
-#       pop                 : 2
-#   nil⁄-:
-#     - match               : '\b(null)\b'
-#       scope               : keyword.other.kdl constant.language.null.kdl comment.line.slash-dash.kdl
-#       pop                 : 2
+  boolean:
+    - match               : \#\b(true|false)\b
+      scope               : keyword.other.kdl constant.language.boolean.kdl
+      pop                 : 2
+  boolean⁄-:
+    - match               : \#\b(true|false)\b
+      scope               : keyword.other.kdl constant.language.boolean.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+  nil:
+    - match               : '\#\b(null)\b'
+      scope               : keyword.other.kdl constant.language.null.kdl
+      pop                 : 2
+  nil⁄-:
+    - match               : '\#\b(null)\b'
+      scope               : keyword.other.kdl constant.language.null.kdl comment.line.slash-dash.kdl
+      pop                 : 2
 
-#   # before     sp begin
-#   # after  = ) sp end (though can't detect line continuation, add that condition within line cont rule)
-#   true-partial: #\b bugs with n t|x
-#     - match               : '(?<={{pre_val}})(t|tr|tru)(?={{any_sp_t_beg}})'
-#       #scope               : dbg✗true_partial punctuation.separator
-#       pop                 : 2
-#   true-partial⁄-:
-#     - match               : '(?<={{pre_val}})(t|tr|tru)(?={{any_sp_t_beg}})'
-#       scope               : comment.line.slash-dash.kdl
-#       pop                 : 2
-#   false-partial:
-#     - match               : '(?<={{pre_val}})(f|fa|fal|fals)(?={{any_sp_t_beg}})'
-#       #scope               : dbg✗false_partial entity.other.attribute-name.kdl
-#       pop                 : 2
-#   false-partial⁄-:
-#     - match               : '(?<={{pre_val}})(f|fa|fal|fals)(?={{any_sp_t_beg}})'
-#       scope               : comment.line.slash-dash.kdl
-#       pop                 : 2
-#   null-partial:
-#     - match               : '(?<={{pre_val}})(n|nu|nul)(?={{any_sp_t_beg}})'
-#       pop                 : 2
-#   null-partial⁄-:
-#     - match               : '(?<={{pre_val}})(n|nu|nul)(?={{any_sp_t_beg}})'
-#       scope               : comment.line.slash-dash.kdl
-#       pop                 : 2
+  # before     sp begin
+  # after  = ) sp end (though can't detect line continuation, add that condition within line cont rule)
+  true-partial: #\b bugs with n t|x
+    - match               : '(?<={{pre_val}})#(t|tr|tru)(?={{any_sp_t_beg}})'
+      #scope               : dbg✗true_partial punctuation.separator
+      pop                 : 2
+  true-partial⁄-:
+    - match               : '(?<={{pre_val}})#(t|tr|tru)(?={{any_sp_t_beg}})'
+      scope               : comment.line.slash-dash.kdl
+      pop                 : 2
+  false-partial:
+    - match               : '(?<={{pre_val}})\#(f|fa|fal|fals)(?={{any_sp_t_beg}})'
+      #scope               : dbg✗false_partial entity.other.attribute-name.kdl
+      pop                 : 2
+  false-partial⁄-:
+    - match               : '(?<={{pre_val}})\#(f|fa|fal|fals)(?={{any_sp_t_beg}})'
+      scope               : comment.line.slash-dash.kdl
+      pop                 : 2
+  null-partial:
+    - match               : '(?<={{pre_val}})\#(n|nu|nul)(?={{any_sp_t_beg}})'
+      pop                 : 2
+  null-partial⁄-:
+    - match               : '(?<={{pre_val}})\#(n|nu|nul)(?={{any_sp_t_beg}})'
+      scope               : comment.line.slash-dash.kdl
+      pop                 : 2
 
-#   boolean🛑:
-#     - match               : '(true|false)(?=[^{{charID}}])'
-#       scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl
-#   boolean🛑⁄-:
-#     - match               : '(true|false)(?=[^{{charID}}])'
-#       scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
-#   null🛑:
-#     - match               : '(null)(?=[^{{charID}}])'
-#       scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl
-#   null🛑⁄-:
-#     - match               : '(null)(?=[^{{charID}}])'
-#       scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+  boolean🛑:
+    - match               : '(\#true|\#false)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl
+  boolean🛑⁄-:
+    - match               : '(\#true|\#false)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+  null🛑:
+    - match               : '(\#null)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl
+  null🛑⁄-:
+    - match               : '(\#null)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
 
 
 # #——— Values - Strings
