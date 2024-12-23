@@ -53,6 +53,7 @@ variables:
   # bareID_ex_dig:            	'[+-](?:{{charID_ex_dig}}{{charID}}*)?'                      	# pos-sign: exclude digit only
   # charID:                   	'[[{{unicode_char}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'     	#
   # charID_not:               	'[\/\\(){}<>;\[\]=,"]'                                       	#
+  # charID_not1st:            	'([0-9])|([+-][0-9])'                                        	#
   # charWS:                   	'[{{nl_s}}{{b_sp}}]'                                         	#
   # charID_rec:               	'{{charID}}(?!{{linespace_re}})'                             	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
   # charID_ex_dig:            	'[[{{charID}}]&&[^{{d_dec}}]]'                               	#
@@ -554,6 +555,7 @@ contexts:
 #     - include             : ⚿⁄-
 #   ⚿:                      #✗⁴
 #     - include             : keyword🛑
+#     - include             : ID_bare¬1st🛑
 #     - match               : '({{charID}}+)'
 #       scope               : entity.other.attribute-name.kdl
 #       pop                 : 1 # ↑⸙
@@ -2011,6 +2013,11 @@ contexts:
 #   char🆔¬:
 #     - match               : '{{charID_not}}'
 #       scope               : invalid.illegal.kdl #✗chID
+#   ID_bare¬1st🛑:
+#     # - match               : '({{charID_not1st}})'
+#     - match               : '(?<!=)({{charID_not1st}})' # K=V lookbehind prevents matching V after K fails
+#       scope               : invalid.illegal.position.kdl
+#       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
 #   pop_pre␠:
 #     - match               : '(?={{b_sp}})'
 #       pop                 : 1
