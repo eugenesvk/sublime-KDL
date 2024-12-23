@@ -69,11 +69,12 @@ keyword⠀⠀⠀⠀⠀⠀⠀⠀≝⠀boolean⠀|⠀#null
 keyword_number⠀≝⠀⠀#inf⠀⠀⠀|⠀#-inf⠀|⠀#nan
 boolean⠀⠀⠀⠀⠀⠀⠀⠀≝⠀#true⠀⠀⠀|⠀#false
 
-§ "Specific code points"
-bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ "\u{FEFF}"
-char🛑⠀⠀⠀⠀⠀⠀⠀⠀≝ "control" "surrogate" "direction control" ("2nd+")"bom" (🔗spec)"disallowed-literal-code-points"
-uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ "Any unicode Scalar Value (no surrogates)"
-u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ "Non line-breaking unicode White_Space" (🔗spec)"whitespace"
+§ "Specific code points (\u{0} unicode format is implied in 〔A–F〕 and ommited for brevity)"
+bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "\u{FEFF}"
+char🛑⠀⠀⠀⠀⠀⠀⠀⠀≝  (¬1st)"bom"; (c0a)〔u0–u8〕; (c0b)〔E–1F〕; (cdel)〔7F〕; (c_dir)〔200E–200F⠀202A–202E⠀2066–2069〕; usc¬ (🔗spec)"disallowed-literal-code-points"
+  usc¬⠀⠀⠀⠀⠀⠀⠀⠀≝; (surr_high)〔D800–DBFF〕; (surr_low)〔DC00–DFFF〕 !="valid c0: 〔u9–uD〕 9␉\t A␊\n B␋\v C␌\f D␍\r"
+uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0–D7FF⠀E000–10FFFF〕         !="Any Unicode Scalar Value (no surrogates)"
+u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"
 
 § "Comments (// /* */ after ≝ serve as definition symbols)"
 comment_line⠀⠀⠀⠀⠀⠀≝   // ¬␤* ⦅␤ | eof⦆
@@ -82,12 +83,12 @@ comment_block⠀⠀⠀⠀⠀≝;  /* commented_block
                   |⠀⦅comment_block⠀|⠀*⠀|⠀⁄⠀|⠀〔¬*⁄〕+⦆⠀⠀🗘
 /-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  /-⠀line␠*
 
-§ "Whitespace"
+§ "Whitespace (\u{0} unicode format is implied in 〔A–F〕 and ommited for brevity)"
 line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_line  !="Whitespace               where newlines are allowed"
   node␠⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀ws*⠀escline⠀ws*⠀|⠀ws+    !="Whitespace within nodes, where newline-ish things must be esclined"
     ws⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀u␠⠀|⠀comment_block
     escline⠀⠀⠀⠀≝⠀⠀⧵⠀ws*⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
-  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "Line-breaking unicode White_Space" (🔗spec)"newline"
+  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  (u)D+A⠀|⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Grammar language: a combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
