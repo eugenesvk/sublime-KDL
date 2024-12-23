@@ -51,7 +51,7 @@ variables:
   # bareID_or_KW:             	'{{bareID_ex_dig_sign}}|{{bareID_ex_dig}}'                   	#
   # bareID_ex_dig_sign:       	'{{charID_ex_dig_sign}}{{charID}}*'                          	# pre-sign: exclude digit/sign to avoid clashes
   # bareID_ex_dig:            	'[+-](?:{{charID_ex_dig}}{{charID}}*)?'                      	# pos-sign: exclude digit only
-  # charID:                   	'[[{{unicode_char}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'     	#
+  charID:                     	'[[{{usv}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'              	#
   charID_not:                 	'[\/\\(){};\[\]=#"]'                                         	#
   # charID_not1st:            	'([0-9])|([+-][0-9])'                                        	#
   # charWS:                   	'[{{nl_s}}{{b_sp}}]'                                         	#
