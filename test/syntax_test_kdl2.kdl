@@ -456,6 +456,17 @@ n (true)1
 // ^^^^                                           invalid.illegal.position.kdl
 n (false)1
 // ^^^^^                                          invalid.illegal.position.kdl
+("a")a b=(#"sdf"#)1 c=(###"s"d"f"###)2 "allow strings, including raw, in annotations"
+//  ^                                              punctuation.separator.annotation.end.kdl
+//               ^                                 punctuation.separator.annotation.end.kdl
+//                                  ^              punctuation.separator.annotation.end.kdl
+//^                                                meta.annotation.kdl entity.name.type.kdl meta.string.kdl
+//        ^^^^^^^                                  meta.annotation.kdl entity.name.type.kdl meta.string.kdl
+//                     ^^^^^^^^^^^^^               meta.annotation.kdl entity.name.type.kdl meta.string.kdl
+(###"s"d" and also in line-splitting strings
+   f"###)a
+//^^^^^^                                          meta.annotation.kdl entity.name.type.kdl meta.string.kdl
+//      ^                                         punctuation.separator.annotation.end.kdl
 
 (a)n k="a" k=1;
 (a)n k="a" k=1;
