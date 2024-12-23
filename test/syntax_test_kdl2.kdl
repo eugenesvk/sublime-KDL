@@ -28,20 +28,19 @@ multiline"
   //<-            meta.string.kdl string.quoted.double.kdl
 //^^^^^^^^        meta.string.kdl string.quoted.double.kdl
 //       ^        punctuation.definition.string.end.kdl
-r"node raw string
-//<-              storage.type.string.kdl
+#"node raw string
+//<-              punctuation.definition.string.begin.kdl
  //<-             punctuation.definition.string.begin.kdl
 //^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-multiline"
+multiline"#
 //<-              meta.string.kdl string.quoted.double.raw.kdl
   //<-            meta.string.kdl string.quoted.double.raw.kdl
 //^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
 //       ^        punctuation.definition.string.end.kdl
-r#"node #raw string
-//<-              storage.type.string.kdl
+#"node #raw string
+//<-              punctuation.definition.string.begin.kdl
  //<-             punctuation.definition.string.begin.kdl
-//^               punctuation.definition.string.begin.kdl
-//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+// ^^^^^^^^^^     entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
 multiline"#
 //<-              meta.string.kdl string.quoted.double.raw.kdl
   //<-            meta.string.kdl string.quoted.double.raw.kdl
@@ -55,24 +54,23 @@ n "Trying to ban some consecutive strings"
 //  ^^            invalid.illegal.muted.position.kdl
 "n"#"b"
 //^               punctuation.definition.string.end.kdl
-// ^              invalid.illegal.position.kdl
-//  ^^^           invalid.illegal.muted.position.kdl
+// ^^             invalid.illegal.position.kdl
+//   ^^           invalid.illegal.muted.position.kdl
 "n"r"b"
 //^               punctuation.definition.string.end.kdl
-// ^^             invalid.illegal.position.kdl
-//   ^^           invalid.illegal.muted.position.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^^           invalid.illegal.muted.position.kdl
 
-r##"n"##r#"b"#
+ ##"n"###"b"#
 //     ^          punctuation.definition.string.end.kdl
-//      ^^^       invalid.illegal.position.kdl
-//         ^^^    invalid.illegal.muted.position.kdl
-r"multiline
-nn"r"b""b"
+//      ^^        invalid.illegal.position.kdl
+//        ^^^     invalid.illegal.muted.position.kdl
+#"multiline
+nn"##"b""b"
 //^               punctuation.definition.string.end.kdl
-// ^^             invalid.illegal.position.kdl
-//   ^^           invalid.illegal.muted.position.kdl
-//     ^          invalid.illegal.position.kdl
-//      ^^        invalid.illegal.muted.position.kdl
+//  ^^            invalid.illegal.position.kdl
+//    ^^          invalid.illegal.muted.position.kdl
+//       ^^       invalid.illegal.muted.position.kdl
 
 // 2 Node Element: 2 Argument
 n "Values can't be repeated without a separator (glued)"
@@ -124,10 +122,10 @@ n bare-identifier|"string"
 //^^^^^^^^^^^^^^^                       invalid.illegal.muted.position.kdl
 //               ^                      invalid.illegal.position.kdl
 //                ^^^^^^^^              meta.string.kdl string.quoted.double.kdl
-n bare-identifier"string"
+n bare-identifie#"string"#
 //^^^^^^^^^^^^^                         invalid.illegal.muted.position.kdl
 //             ^                        invalid.illegal.position.kdl
-//              ^^^^^^^^^               meta.string.kdl string.quoted.double.raw.kdl
+//               ^^^^^^^^^              meta.string.kdl string.quoted.double.raw.kdl
 
 
 // 2 Node Element: 3 Property (key=value)
@@ -415,26 +413,28 @@ title "Regular \b\\\/\u{AAAAAA}string"
 //                     ^^^^^^^^                   constant.character.escape.unicode.16-bit-hex.kdl
 //    ^                                           punctuation.definition.string.begin.kdl
 //                                   ^            punctuation.definition.string.end.kdl
-title r"Raw string"
-//    ^                                           storage.type.string.kdl
-//     ^                                          punctuation.definition.string.begin.kdl
-//                ^                               punctuation.definition.string.end.kdl
-title r###""""Rawest"""string""""###
-//    ^                                           storage.type.string.kdl
+title #"Raw string"#
+//    ^^^^^^^^^^^^^^                              string.quoted.double.raw.kdl
+//    ^^                                          punctuation.definition.string.begin.kdl
+//                ^^                              punctuation.definition.string.end.kdl
+title  ###""""Rawest"""string""""###
 //     ^^^                                        punctuation.definition.string.begin.kdl
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              meta.string.kdl, string.quoted.double.raw.kdl
+//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              meta.string.kdl, string.quoted.double.raw.kdl
 //                               ^^^              punctuation.definition.string.end.kdl
-nnn r"raw"
-nnn r"multiline raw
+nnn #"raw"#
+nnn #"multiline raw
 //  ^^^^^^^^^^^^^^^          string.quoted.double.raw.kdl
-//  ^                        storage.type.string.kdl
-//   ^                       punctuation.definition.string.begin.kdl
+//  ^^                       punctuation.definition.string.begin.kdl
 string
 //^^^^                       string.quoted.double.raw.kdl
 multiline
 //^^^^^^^                    string.quoted.double.raw.kdl
-"
+"#
 //<-      punctuation.definition.string.end.kdl
+v1 r"no" "prefix in v2"
+// ^                                              invalid.illegal.position.kdl
+v1 r###""""Rawest"""string""""###
+// ^                                              invalid.illegal.position.kdl
 
 
 
@@ -629,7 +629,7 @@ node-with-slashdash-number /--1.0 +2.0 \/*
 //                                ^                  keyword.operator.arithmetic.kdl
 //                                ^^^^               constant.numeric.value.kdl, constant.numeric.decimal.kdl
 */
-1 /-"comment string" /-r"r aw" /-r#"Raw est"s"#
+1 /-"comment string" /-#"r aw"# /-#"Raw est"s"#
 //^^                                                 punctuation.definition.comment.begin.kdl
 //  ^                                              - punctuation.definition.comment.begin.kdl
 //^^^^^^^^^^^^^^^^^^                                 comment.line.slash-dash
@@ -637,11 +637,11 @@ node-with-slashdash-number /--1.0 +2.0 \/*
 //                   ^^                              punctuation.definition.comment.begin.kdl
 //                     ^                           - punctuation.definition.comment.begin.kdl
 //                   ^^^^^^^^^                       comment.line.slash-dash
-//                            ^                    - comment.line.slash-dash
-//                             ^^                    punctuation.definition.comment.begin.kdl
-//                               ^                 - punctuation.definition.comment.begin.kdl
-//                             ^^^^^^^^^^^^^^^^      comment.line.slash-dash
-//                                             ^   - comment.line.slash-dash
+//                             ^                   - comment.line.slash-dash
+//                              ^^                   punctuation.definition.comment.begin.kdl
+//                                ^                - punctuation.definition.comment.begin.kdl
+//                              ^^^^^^^^^^^^^^^     comment.line.slash-dash
+//                                             ^  - comment.line.slash-dash
   /-nodeNestedSlashdashed "disabled" key=1 {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.slash-dash.kdl
 //^^                                         punctuation.definition.comment.begin.kdl
@@ -826,12 +826,12 @@ n /-/**/"comment string"
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 n /-/**/ "comment string"
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n   1   true   "comment string"    r"r aww" /-r#"Raw est"s"#
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n   1   true   "comment string"  /-r"r aww" /-r#"Raw est"s"#
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
-n /-1 /-true /- "comment string" /-r"r aw" /-r#"Raw est"s"#
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   1   true   "comment string"    #"r aww"# /-#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n   1   true   "comment string"  /-#"r aww"# /-#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+n /-1 /-true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 
 
 // Test /-Slashdashed Elements
@@ -1213,10 +1213,10 @@ aa   aa=2       aa=2; aa    -1     aa=2
 aa /-aa=2       aa=2; aa /- -1     aa=2
 aa    "s"       aa=2; aa    "s\n"  aa=2
 aa /- "s"       aa=2; aa /- "s\n"  aa=2
-aa   r"s"       aa=2; aa   r#"s"#  aa=2
-aa /-r"s"       aa=2; aa /-r#"s"#  aa=2
-aa   r##"R"s"## aa=2; aa   "c"   r"r w"   r#"R " "# aa=2
-aa /-r##"R"s"## aa=2; aa /-"c" /-r"r w" /-r#"R " "# aa=2
+aa   #"s"#      aa=2; aa   #"s"#  aa=2
+aa /-#"s"#      aa=2; aa /-#"s"#  aa=2
+aa   ##"R"s"## aa=2; aa   "c"   #"r w"#   #"R " "# aa=2
+aa /-##"R"s"## aa=2; aa /-"c" /-#"r w"# /-#"R " "# aa=2
 aa   0b11       aa=2; aa   -100    aa=2
 aa /-0b11       aa=2; aa /--100    aa=2
 aa   true       aa=2; aa   null    aa=2
@@ -1224,14 +1224,14 @@ aa /-true       aa=2; aa /-null    ra=2
 aa k=1 "a" /-{ aa;}
 
 a "a"=1
-name r"b"=1  b b=1 "b"=1 b b=1 b;
+name #"b"#=1  b b=1 "b"=1 b b=1 b;
 b b p=1 b=1 pasdfsdf=61 b 1 b 1 n=1;
 nn true=1
 n 0.5
-name 0b01 0o12 0x11 "bbb#b"=1  r#"bb"# b="2" "b"=1 b=1;
+name 0b01 0o12 0x11 "bbb#b"=1  #"bb"# b="2" "b"=1 b=1;
 
 bb p=1 b=1 pasdfsdf=61 c=+1 +=1 null null true 12.22;
-nn r##"b#b"##=1  b=1 "b"=1 bc=1 "b";
+nn ##"b#b"##=1  b=1 "b"=1 bc=1 "b";
 
 
 
@@ -1264,8 +1264,8 @@ a\
 nnn (xxx)1 (a)1
 nnn true 1 (a)(a)1 "zz" zz
 nnn 1 true "a"=1 a=1;
- (a)tru r"a\b" 1 tru "a\b"
-nnn r"a\b"  "a\b"
+ (a)tru #"a\b"# 1 tru "a\b"
+nnn #"a\b"#  "a\b"
 nnn "a"=1
 nnn (a)true (b)true (a)1 (a)"/**/a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 nnn         (a)true (a)a (a)"a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
@@ -1275,7 +1275,7 @@ nnn "a"   "a" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 r"aa" arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 aa  argggg a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 aa n true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
-"a" "a"=true "a" r"a"=true;
+"a" "a"=true "a" #"a"#=true;
 a "a"=true "b"=tru
 a "a"=tru
 a "a"=tru
@@ -1284,12 +1284,12 @@ n/*valid no space*/b=1
 n\
 b=1//valid line cont
 
-a "a"=true "a" r"a"=\
+a "a"=true "a" #"a"#=\
 true
 
 a "saf" "saf" "saf" "s=af"  = 1 "saf" =
-a "a" "a" r"a"=0b11 "a" 1 "a"=1 "a"=2 1;
-a "a" "a" r"a"=(a)0b1 "a"=(a)"a" "a"=r"a";
+a "a" "a" #"a"#=0b11 "a" 1 "a"=1 "a"=2 1;
+a "a" "a" #"a"#=(a)0b1 "a"=(a)"a" "a"=r"a";
 a (saf) (saf) (saf) (saf)= (saf)=
 a  1=1 ;
 a true false null
@@ -1301,7 +1301,7 @@ a (f)"a";
 a 0b1 k=1 k=1;
 a "a" = 1 "a"=1;
 a 1 k=1;
-true null r"aa" arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+true null #"aa"# arg "arg" a a=1 true a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 true aa  argggg a "n"=1 true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 true true aa n true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
 
@@ -1335,14 +1335,14 @@ n /-k=1 k=1 /-k=0b155
 n kkk=1 k=1 kkk=10.5e5e5
 
 "n"  "k""j";
-"n" r"k"r"j";
+"n" #"k"#"j";
 "n"  "k" "j";
-"n" r"k" r"j";
+"n" #"k"# #"j"#;
 "n"  "k"  "j";
 "n"  "k"1;
-"n" r"k"1;
+"n" #"k"#1;
 "n"  "k" 1;
-"n" r"k" 1;
+"n" #"k"# 1;
 "n"  "k"=1;
 "n"   kk=1;
 "n"  "k"=(aaaaaa) 1;
