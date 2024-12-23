@@ -93,7 +93,8 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
     /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   newline=␤   'empty'=∅ */
   - r#";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
-    r#"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "
+    r#"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
+    keys=(and_types)"are used for extra group info"
   - !="tip/comment"
   - §="section marker"
   - r#"""#="Double quotes are used to denote literal text"
