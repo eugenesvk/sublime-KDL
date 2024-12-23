@@ -1957,11 +1957,11 @@ contexts:
 #     - match               : '(\S*)(?={{b_sp}})'
 #       captures            :
 #         2:                  invalid.illegal.muted.position.kdl #✗S🛑pre␠
-#   ch🛑pre␠:              # to avoid red flashes, mark last char as illegal before ␠
-#     - match               : '({{charID}}*)({{charID}})(?={{b_sp}})'
-#       captures            :
-#         1:                  invalid.illegal.muted.position.kdl #✗ch🛑pre␠
-#         2:                  invalid.illegal.position.kdl #✗ch🛑pre␠
+  ch🛑pre␠:              # to avoid red flashes, mark last char as illegal before ␠
+    - match               : '({{charID_or_KW}}*)({{charID_or_KW}})(?={{b_sp}})'
+      captures            :
+        1:                  invalid.illegal.muted.position.kdl #✗ch🛑pre␠
+        2:                  invalid.illegal.position.kdl #✗ch🛑pre␠
 #   ch🛑pre-str:
 #     - match               : '({{charID}}*?)({{charID}})(?={{string_beg}})'
 #       captures            :
