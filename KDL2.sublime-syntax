@@ -773,17 +773,35 @@ contexts:
       pop                 : 2
 
   boolean🛑:
-    - match               : '(\#true|\#false)(?=[^{{charID}}])'
-      scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl
+    - match               : '(\#)?((t)rue|(f)alse)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.boolean.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl
+        2:                 invalid.illegal.muted.position.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.position.kdl
   boolean🛑⁄-:
-    - match               : '(\#true|\#false)(?=[^{{charID}}])'
-      scope               : keyword.other.kdl constant.language.boolean.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+    - match               : '(\#)?((t)rue|(f)alse)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.boolean.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2:                 iinvalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        4:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
   null🛑:
-    - match               : '(\#null)(?=[^{{charID}}])'
-      scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl
+    - match               : '(\#)?((n)ull)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.null.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl
+        2:                 ininvalid.illegal.muted.position.kdl
+        3:                 invalid.illegal.position.kdl
   null🛑⁄-:
-    - match               : '(\#null)(?=[^{{charID}}])'
-      scope               : keyword.other.kdl constant.language.null.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+    - match               : '(\#)?((n)ull)(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.null.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2:                 ininvalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
 
 
 # #——— Values - Strings
