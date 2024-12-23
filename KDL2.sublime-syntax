@@ -94,12 +94,12 @@ variables:
   # string:                   	'{{raw_string}}|{{escaped_string}}'                          	# data type 3/4
   # number:                   	'{{decimal}}|{{hex}}|{{octal}}|{{binary}}'                   	# data type 4/4
   # #    ↓string              	                                                             	#
-  # raw_string:               	 '(r)(#+)?(\")([\S\s]*?)(\")(\2)'                            	#
-  # raw_string_re:            	 'r{{raw_string_hash_re}}'                                   	#🗘
+  raw_string:                 	 '(#+)?(\")([\S\s]*?)(\")(\2)'                               	#
+  raw_string_re:              	 '{{raw_string_hash_re}}'                                    	#🗘
   # raw_string_hash_re:       	'#{{raw_string_hash_re}}#|{{raw_string_quotes}}'             	#🗘
   # raw_string_quotes:        	'".*"'                                                       	#
-  # string_beg:               	'"|r#*"'                                                     	# or (?!r)"|r#*"
-  # string_end:               	'"#*'                                                        	# or (?!r)"|r#*"
+  string_beg:                 	'"|#*"'                                                      	# or (?!r)"|#*"
+  # string_end:               	'"#*'                                                        	# or (?!r)"|#*"
   # #    ↓number              	                                                             	#
   # decimal:                  	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'    	#
   # exponent:                 	'([eE])([+-])?({{integer}})'                                 	#
@@ -853,75 +853,69 @@ contexts:
 #         1:                 constant.character.escape.kdl comment.line.slash-dash.kdl
 #         3:                 constant.character.escape.kdl comment.line.slash-dash.kdl
 #         4:                 constant.character.escape.unicode.16-bit-hex.kdl comment.line.slash-dash.kdl
-#   string-quoted-double-raw:
-#     - match               : '(r)(#*)(")'
-#       captures            :
-#         1:                 storage.type.string.kdl
-#         2:                 punctuation.definition.string.begin.kdl
-#         3:                 punctuation.definition.string.begin.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
-#       - match             : '"\2' # ↑match (#*)
-#         scope             : punctuation.definition.string.end.kdl
-#         pop               : 3
-#   string-quoted-double-raw⁄-:
-#     - match               : '(r)(#*)(")'
-#       captures            :
-#         1:                 storage.type.string.kdl comment.line.slash-dash.kdl
-#         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#         3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
-#       - meta_content_scope: comment.line.slash-dash.kdl
-#       - match             : '"\2' # ↑match (#*)
-#         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-#         pop               : 3
-#   strings-quoted-double-raw:
-#     - match               : '(r)(#*)(")'
-#       captures            :
-#         1:                 storage.type.string.kdl
-#         2:                 punctuation.definition.string.begin.kdl
-#         3:                 punctuation.definition.string.begin.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
-#       - match             : '"\2' # ↑match (#*)
-#         scope             : punctuation.definition.string.end.kdl
-#         pop               : 1
-#   strings-quoted-double-raw_node-id:
-#     - match               : '(r)(#*)(")'
-#       captures            :
-#         1:                 storage.type.string.kdl
-#         2:                 punctuation.definition.string.begin.kdl
-#         3:                 punctuation.definition.string.begin.kdl
-#       push                :
-#       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-#       - match             : '"\2' # ↑match (#*)
-#         scope             : punctuation.definition.string.end.kdl
-#         pop               : 1
-#   strings-quoted-double-raw⁄-:
-#     - match               : '(r)(#*)(")'
-#       captures            :
-#         1:                 storage.type.string.kdl comment.line.slash-dash.kdl
-#         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#         3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
-#       - meta_content_scope: comment.line.slash-dash.kdl
-#       - match             : '"\2' # ↑match (#*)
-#         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-#         pop               : 1
-#   strings-quoted-double-raw⁄-_node-id:
-#     - match               : '(r)(#*)(")'
-#       captures            :
-#         1:                 storage.type.string.kdl comment.line.slash-dash.kdl
-#         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#         3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#       push                :
-#       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-#       - meta_content_scope: comment.line.slash-dash.kdl
-#       - match             : '"\2' # ↑match (#*)
-#         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-#         pop               : 1
+  string-quoted-double-raw:
+    - match               : '(#*)(")'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 3
+  string-quoted-double-raw⁄-:
+    - match               : '(#*)(")'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+  strings-quoted-double-raw:
+    - match               : '(#*)(")'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+  strings-quoted-double-raw_node-id:
+    - match               : '(#*)(")'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+      - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+  strings-quoted-double-raw⁄-:
+    - match               : '(#*)(")'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+  strings-quoted-double-raw⁄-_node-id:
+    - match               : '(#*)(")'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
 #   strings-quoted-double-consecutive🛑: #
 #     - match               : '((?<=#)|(?<="))(")([^"]*")'
 #       captures            :
@@ -957,53 +951,47 @@ contexts:
 #         3:                 invalid.illegal.muted.position.kdl #✗”“4
 #       push                :
 #       - include           : pop4
-#   strings-quoted-double-raw-consecutive🛑:
-#     - match               : '((?<=#)|(?<="))(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
-#       captures            :
-#         2:                 invalid.illegal.position.kdl #✗”r“”s
-#         3:                 invalid.illegal.position.kdl #✗”r“”s
-#         5:                 invalid.illegal.muted.position.kdl #✗”r“”s
-#         6:                 invalid.illegal.muted.position.kdl #✗”r“”s
-#     - match               : '((?<=#)|(?<="))(r)(#*)(")([{{b_sp}}\S]*)'
-#       captures            :
-#         2:                 invalid.illegal.position.kdl #✗”r“s
-#         3:                 invalid.illegal.position.kdl #✗”r“s
-#         4:                 invalid.illegal.position.kdl #✗”r“s
-#         5:                 invalid.illegal.muted.position.kdl #✗”r“s
-#   string-quoted-double-raw-consecutive🛑3:
-#     - match               : '((?<=#)|(?<="))(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
-#       captures            :
-#         2:                 invalid.illegal.position.kdl #✗”r“”3
-#         3:                 invalid.illegal.position.kdl #✗”r“”3
-#         5:                 invalid.illegal.muted.position.kdl #✗”r“”3
-#         6:                 invalid.illegal.muted.position.kdl #✗”r“”3
-#       push                :
-#       - include           : pop3
-#     - match               : '((?<=#)|(?<="))(r)(#*)(")([{{b_sp}}\S]*)'
-#       captures            :
-#         2:                 invalid.illegal.position.kdl #✗”r“3
-#         3:                 invalid.illegal.position.kdl #✗”r“3
-#         4:                 invalid.illegal.position.kdl #✗”r“3
-#         5:                 invalid.illegal.muted.position.kdl #✗”r“3
-#       push                :
-#       - include           : pop3
-#   string-quoted-double-raw-consecutive🛑4:
-#     - match               : '((?<=#)|(?<="))(r)((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
-#       captures            :
-#         2:                 invalid.illegal.position.kdl #✗”r“”4
-#         3:                 invalid.illegal.position.kdl #✗”r“”4
-#         5:                 invalid.illegal.muted.position.kdl #✗”r“”4
-#         6:                 invalid.illegal.muted.position.kdl #✗”r“”4
-#       push                :
-#       - include           : pop4
-#     - match               : '((?<=#)|(?<="))(r)(#*)(")([{{b_sp}}\S]*)'
-#       captures            :
-#         2:                 invalid.illegal.position.kdl #✗”r“4
-#         3:                 invalid.illegal.position.kdl #✗”r“4
-#         4:                 invalid.illegal.position.kdl #✗”r“4
-#         5:                 invalid.illegal.muted.position.kdl #✗”r“4
-#       push                :
-#       - include           : pop4
+  strings-quoted-double-raw-consecutive🛑:
+    - match               : '((?<=#)|(?<="))((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“”s
+        4:                 invalid.illegal.muted.position.kdl #✗”r“”s
+        5:                 invalid.illegal.muted.position.kdl #✗”r“”s
+    - match               : '((?<=#)|(?<="))(#*)(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“s
+        3:                 invalid.illegal.position.kdl #✗”r“s
+        4:                 invalid.illegal.muted.position.kdl #✗”r“s
+  string-quoted-double-raw-consecutive🛑3:
+    - match               : '((?<=#)|(?<="))((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“”3
+        4:                 invalid.illegal.muted.position.kdl #✗”r“”3
+        5:                 invalid.illegal.muted.position.kdl #✗”r“”3
+      push                :
+      - include           : pop3
+    - match               : '((?<=#)|(?<="))(#*)(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“3
+        3:                 invalid.illegal.position.kdl #✗”r“3
+        4:                 invalid.illegal.muted.position.kdl #✗”r“3
+      push                :
+      - include           : pop3
+  string-quoted-double-raw-consecutive🛑4:
+    - match               : '((?<=#)|(?<="))((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“”4
+        4:                 invalid.illegal.muted.position.kdl #✗”r“”4
+        5:                 invalid.illegal.muted.position.kdl #✗”r“”4
+      push                :
+      - include           : pop4
+    - match               : '((?<=#)|(?<="))(#*)(")([{{b_sp}}\S]*)'
+      captures            :
+        2:                 invalid.illegal.position.kdl #✗”r“4
+        3:                 invalid.illegal.position.kdl #✗”r“4
+        4:                 invalid.illegal.muted.position.kdl #✗”r“4
+      push                :
+      - include           : pop4
 #   bare-after-string🛑: #
 #     - match               : '((?<=#)|(?<="))({{bareID}})([{{b_sp}}\S]*)'
 #       captures            :
