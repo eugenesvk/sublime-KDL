@@ -1,6 +1,6 @@
 /-kdl-version 2
 § "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"\
-  ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" r#"set+␠"# ¬⧵“=r#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
+  ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" #"set+␠"# ¬⧵“=#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
 document⠀⠀bom?⠀⠀version?⠀⠀nodes
   bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ 	 "\u{FEFF}"
   version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠*⠀kdl-version⠀u␠+⠀⦅1|2⦆⠀u␠*⠀␤
@@ -30,7 +30,7 @@ string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀
     signed🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀±⠀⠀⠀⠀⦅⦅char🆔⠀-⠀〔0-9〕⠀⠀⠀⠀⠀-⠀.⦆⠀char🆔*⦆?
     dotted🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀±?⠀.⠀⦅⦅char🆔⠀-⠀〔0-9〕⠀⠀⠀⠀⠀⠀⠀⠀⦆⠀char🆔*⦆?
     char🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀uchar⠀-⠀u␠⠀-⠀␤⠀-⠀char🆔¬⠀-⠀char🛑
-    char🆔¬⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  r#"(;){"}[#]/=\"#
+    char🆔¬⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  #"(;){"}[#]/=\"#
     keyword🆔🛑⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan
   string_quoted⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀“⠀⠀⠀⠀string_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”
                          |⠀“““⠀⠀␤⠀string_body☰line⠀⠀␤⠀⦅u␠|ws⎋⦆*⠀⠀”””
@@ -94,14 +94,14 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
 § "Grammar language: a combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
     /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   newline=␤   'empty'=∅ */
-  - r#";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
-    r#"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
+  - #";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
+    #"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
     keys=(and_types)"are used for extra group info"
   - !="tip/comment"
   - §="section marker"
-  - r#"""#="Double quotes are used to denote literal text"
-  - r#"\"#="within a literal string is used for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}"
-  - 🗘=r#"self-referential sign, e.g., the following are the same
+  - #"""#="Double quotes are used to denote literal text"
+  - #"\"#="within a literal string is used for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}"
+  - 🗘=#"self-referential sign, e.g., the following are the same
     raw-s ≝ # raw-s-quote # | # raw-s #
     raw-s ≝ # raw-s-quote # | # 🗘    #  "#
   Regex                                                           	\
@@ -112,7 +112,7 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
     *?="zero or more (non-greedy, match as few instances as possible; used only in raw strings)"\
     ¬="or ^: not this"            	\
     "0-9"="char range (inclusive)"	\
-    ¬⧵“="[^\\\"]" "〔set-␠〕"="[a b]" r#"set+␠"#="[ab]" ≝="Used as regex-style char set matches like [], where any char will be a single match (no escapes needed due to special enclosing syntax)"\
+    ¬⧵“="[^\\\"]" "〔set-␠〕"="[a b]" #"set+␠"#="[ab]" ≝="Used as regex-style char set matches like [], where any char will be a single match (no escapes needed due to special enclosing syntax)"\
     "〔set-␠〕 can contain whitespace for alignment which is ignored for matching"
     ⦅group⦆ "used to group matches that must be matched together"
     a|b "means `a or b`, whichever matches first. Multiple items before `|` are a single group" "a b c | d"="(a b c) | d"
