@@ -18,14 +18,6 @@ document⠀⠀bom?⠀⠀version?⠀⠀nodes
 node_arg∨prop⠀⠀≝⠀⠀prop|value
   prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠* "="; node␠*⠀value
   value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
-  type⠀⠀⠀⠀⠀⠀⠀⠀⠀≝	"(";    node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
-node_children⠀⠀≝	"{";    nodes⠀node_last? "}"
-node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
-
-§ "Entries"
-node_arg∨prop⠀⠀≝⠀⠀prop|value
-  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠* "="; node␠*⠀value
-  value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
   type⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "(";   node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
 node_children⠀⠀≝  "{";    nodes⠀node_last? "}"
 node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
