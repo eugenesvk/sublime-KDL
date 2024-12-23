@@ -1,114 +1,125 @@
-("group")⦅g⦆ |=(or)"|" set="〔set-␠〕" r#"set+␠"# ¬⧵“=r#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
-document;	bom?; version?; nodes
+KDL_grammar 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"
+  ("group")⦅g⦆ |=(or)"|" set="〔set-␠〕" r#"set+␠"# ¬⧵“=r#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
+document⠀⠀bom?⠀⠀version?⠀⠀nodes
+  bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ 	 "\u{FEFF}"
+  version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠*⠀kdl-version⠀u␠+⠀⦅1|2⦆⠀u␠*⠀␤
+  nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅line␠*⠀node_prev⦆*
+                  ⠀⦅line␠*⠀node_last⦆*⠀line␠*
+    node_prev⠀⠀≝⠀⠀node_base⠀node_end
+    node_last⠀⠀≝⠀⠀node_base⠀node_end?
+      node_base⠀≝; /-?⠀type?⠀node␠*⠀string
+        ⦅node␠+; /-?⠀node_arg∨prop⠀⠀⠀⦆*     !="Slashdashed node_children must be after props and args"
+        ⦅node␠+; /-⠀⠀node_children⠀⠀⠀⦆*
+        ⦅node␠+⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?
+        ⦅node␠+; /-⠀⠀node_children⠀⠀⠀⦆*
+        node␠*
 
-#Nodes                            	\
-nodes=""    ;⦅line␠*⠀node⦆*⠀line␠*	\
-base_node="";⁄-?⠀type?⠀node␠*⠀string
-  ⦅node␠+⠀⠀⠀⁄-?⠀node_arg∨prop⦆*	// slashdashed node_children must be after props and args
-  ⦅node␠+⠀⠀⠀⁄-⠀⠀node_children⠀⠀⠀⦆*
-  ⦅node␠+⠀⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?
-  ⦅node␠+⠀⠀⠀⁄-⠀⠀node_children⠀⠀⠀⦆*
-  ⠀node␠*     	                         	\
-node="";      	base_node⠀node_terminator	\
-final_node="";	base_node⠀node_terminator?
+§ "Entries"
+node_arg∨prop⠀⠀≝⠀⠀prop|value
+  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠* "="; node␠*⠀value
+  value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
+  type⠀⠀⠀⠀⠀⠀⠀⠀⠀≝	"(";    node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
+node_children⠀⠀≝	"{";    nodes⠀node_last? "}"
+node_end⠀⠀⠀⠀⠀⠀⠀≝	comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
 
-#Entries           	                                                   	\
-node_arg∨prop="";  	prop|value                                         	\
-node_children=""   	"{"; nodes⠀final_node? "}"                         	\
-node_terminator="";	single_line_comment⠀|⠀␤⠀|⠀；⠀|⠀eof                  	\
-\                  	                                                   	//
-prop="";           	string⠀node␠* "="; node␠*⠀value                    	\
-value="";          	type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆	\
-type=""            	"(";⠀⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
+§ "Entries"
+node_arg∨prop⠀⠀≝⠀⠀prop|value
+  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠* "="; node␠*⠀value
+  value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
+  type⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "(";   node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
+node_children⠀⠀≝  "{";    nodes⠀node_last? "}"
+node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
 
-#Strings                      	                                                 	\
-string="";                    	  str🆔⠀|⠀string_quoted⠀|⠀string_raw⠀⠀¶           	\
-  str🆔="";                    	unambiguous🆔⠀|⠀signed🆔⠀|⠀dotted🆔                 	\
-    unambiguous🆔="";          	     ⦅⦅char🆔⠀-⠀digit⠀-⠀±⠀-⠀.⦆⠀char🆔*⦆⠀-⠀keyword🆔🛑	\
-    signed🆔="";               	±⠀⠀⠀⠀⦅⦅char🆔⠀-⠀digit⠀⠀⠀⠀⠀-⠀.⦆⠀char🆔*⦆?           	\
-    dotted🆔="";               	±?⠀.⠀⦅⦅char🆔⠀-⠀digit⠀⠀⠀⠀⠀⠀⠀⠀⦆⠀char🆔*⦆?           	\
-    char🆔="";                 	uchar⠀-⠀u␠⠀-⠀␤⠀-⠀char🆔¬⠀-⠀char🛑                  	\
-    char🆔¬="";                	r#"(){}[]"/\;#="#                                	\
-    keyword🆔🛑="";             	 true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan          	\
-  string_quoted="";           	  “⠀⠀⠀⠀⠀⠀string_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”         	\
-    ;                         	|⠀“““⠀⠀␤⠀string_body☰line⠀⠀␤⠀⦅u␠|ws⎋⦆*⠀⠀”””      	\
-    string_body_line="";      	⦅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀char_str⠀⠀⠀⠀-⠀␤⦆*⠀⠀⠀⠀⠀              	\
-    string_body☰line="";      	⦅⦅“|““⦆?⠀⠀⠀⠀⠀⠀⠀char_str⠀⠀⠀⠀⠀⠀⦆*⠀                 	\
-    char_str="";              	 char⎋⠀|⠀uni⎋⠀|⠀ws⎋⠀|⠀〔¬⧵“〕⠀-⠀char🛑              	\
-      char⎋="";               	 ⧵⠀“⧵bfnrts                                      	\
-      uni⎋="";                	 ⧵ "u{"; hex_digit*1–6 "}"                       	\
-      ws⎋="";                 	 ⧵⠀⦅u␠|␤⦆+                                       	\
-    hex_digit="";             	 〔0-9a-fA-F〕                                     	\
-\                             	                                                 	//
-  string_raw="";              	  #⠀⠀⠀⠀⠀string_raw_quoted⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀#⠀           	\
-      ;                       	|⠀#⠀⠀⠀⠀⠀string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀#⠀           	\
-    string_raw_quoted="";     	  “⠀⠀⠀⠀⠀string_raw_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀”           	\
-      ;                       	|⠀“““⠀␤⠀string_raw_body☰line⠀␤⠀u␠*⠀”””           	\
-      string_raw_body_line="";	  ∅                                              	\
-        ;                     	|⠀⠀⠀⠀⠀⠀⦅char_raw⠀-⠀”⦆⠀char_raw*?⠀⠀⠀⠀⠀⠀           	\
-        ;                     	|⠀“⠀⠀⠀⠀⦅char_raw⠀-⠀”⦆⠀char_raw*?⠀⠀⠀⠀⠀⠀           	\
-        char_raw="";          	 uchar⠀-⠀␤⠀-⠀char🛑                               	\
-      string_raw_body☰line="";	⦅uchar⠀⠀⠀⠀⠀-⠀char🛑⦆*?
+§ "Strings"
+string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀string_quoted⠀|⠀string_raw⠀⠀¶
+  str🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀unambiguous🆔⠀|⠀signed🆔⠀|⠀dotted🆔
+    unambiguous🆔⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⦅⦅char🆔⠀-⠀digit⠀-⠀±⠀-⠀.⦆⠀char🆔*⦆⠀-⠀keyword🆔🛑
+    signed🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀±⠀⠀⠀⠀⦅⦅char🆔⠀-⠀digit⠀⠀⠀⠀⠀-⠀.⦆⠀char🆔*⦆?
+    dotted🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀±?⠀.⠀⦅⦅char🆔⠀-⠀digit⠀⠀⠀⠀⠀⠀⠀⠀⦆⠀char🆔*⦆?
+    char🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀uchar⠀-⠀u␠⠀-⠀␤⠀-⠀char🆔¬⠀-⠀char🛑
+    char🆔¬⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  r#"(;){"}[#]/=\"#
+    keyword🆔🛑⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan
+  string_quoted⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀“⠀⠀⠀⠀string_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”
+                         |⠀“““⠀⠀␤⠀string_body☰line⠀⠀␤⠀⦅u␠|ws⎋⦆*⠀⠀”””
+    string_body_line⠀⠀⠀⠀⠀≝⠀⠀⦅⠀⠀⠀⠀⠀⠀⠀⠀char_str⠀⠀⠀⠀-⠀␤⦆*
+    string_body☰line⠀⠀⠀⠀⠀≝⠀⠀⦅⦅“|““⦆?⠀⠀char_str⠀⠀⠀⠀⠀⠀⦆*
+    char_str⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀char⎋⠀|⠀uni⎋⠀|⠀ws⎋⠀|⠀〔¬⧵“〕⠀-⠀char🛑
+      char⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀“⧵bfnrts
+      uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵ "u{"; hdigit*1–6 "}"
+      ws⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀⦅u␠|␤⦆+
+  string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀#⠀string_raw_quoted⠀#
+                        ⠀⠀|⠀⠀#⠀⠀⠀⠀⠀⠀⠀⠀🗘⠀⠀⠀⠀⠀⠀⠀⠀#
+    string_raw_quoted⠀⠀⠀⠀⠀≝⠀⠀“⠀⠀⠀⠀⠀string_raw_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀”
+                           |⠀⠀“““⠀␤⠀string_raw_body☰line⠀␤⠀u␠*⠀”””
+      string_raw_body_line⠀≝⠀⠀∅
+                           |⠀⠀⠀⠀⠀⠀⦅char_raw⠀-⠀”⦆⠀char_raw*?
+                           |⠀“⠀⠀⠀⠀⦅char_raw⠀-⠀”⦆⠀char_raw*?
+        char_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀uchar⠀-⠀␤⠀-⠀char🛑
+      string_raw_body☰line⠀≝⠀⠀⦅uchar⠀⠀⠀⠀⠀-⠀char🛑⦆*?
 
 
-Numbers    	\
-number=""; 	keyword_number⠀|⠀hex⠀|⠀octal⠀|⠀binary⠀|⠀decimal	\
-\          	                                               	//
-decimal="";	      ±?⠀integer⠀⦅.⠀integer⦆?⠀ℯ?               	\
-ℯ="";      	〔eE⠀〕⠀±?⠀integer                               	\
-integer="";	          digit⠀⠀⦅_|digit⠀⠀⦆*                  	\
-digit="";  	〔0-9〕                                          	\
-±="";      	〔+⠀-〕                                          	\
-\
-hex="";   	      ±?⠀0x⠀hex_digit⠀⦅_|hex_digit⦆*	\
-octal=""; 	      ±?⠀0o⠀〔0-7〕⠀⠀⠀⠀⠀〔0-7_〕*       	\
-binary="";	      ±?⠀0b⠀〔0⠀1〕⠀⠀⠀⠀⠀〔0⠀1_〕*
+§ "Numbers (space in 〔〕 is ignored)"
+number⠀⠀⠀⠀⠀⠀⠀≝⠀⠀keyword_number⠀|⠀hex⠀|⠀octal⠀|⠀binary⠀|⠀decimal
+  hex⠀⠀⠀⠀⠀⠀⠀⠀≝;       ±?⠀0x⠀hdigit⠀⦅_⠀|⠀hdigit⦆*
+  octal⠀⠀⠀⠀⠀⠀≝;       ±?⠀0o⠀〔0-7〕⠀⠀⠀⠀⠀〔0-7_〕*
+  binary⠀⠀⠀⠀⠀≝;       ±?⠀0b⠀〔0⠀1〕⠀⠀⠀⠀⠀〔0⠀1_〕*
+  decimal⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀±?⠀integer⠀⦅.⠀integer⦆?⠀ℯ?
+    integer⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0-9〕⠀⠀⠀⠀⠀〔0-9_〕*
+    ℯ⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔eE〕⠀±?⠀integer
 
-"Keywords and booleans"	                      	\
-keyword="";            	boolean|#null⠀⠀⠀⠀⠀⠀⠀⠀⠀	\
-keyword_number="";     	#inf⠀⠀⠀|#-inf⠀|⠀#nan  	\
-boolean="";            	#true⠀⠀|#false
+  ±⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀〔+-〕
+  hdigit⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0-9a-fA-F〕
 
-"Specific code points"	                                          	\
-bom=""                	 "\u{FEFF}"                               	\
-char🛑=""              	"Table Disallowed Literal Code Points"    	\
-uchar=""              	"Any unicode Scalar Value (no surrogates)"	\
-u␠=""                 	"Non line-breaking unicode White_Space"
+§ "Keywords and booleans"
+keyword⠀⠀⠀⠀⠀⠀⠀⠀≝⠀boolean⠀|⠀#null
+keyword_number⠀≝⠀⠀#inf⠀⠀⠀|⠀#-inf⠀|⠀#nan
+boolean⠀⠀⠀⠀⠀⠀⠀⠀≝⠀#true⠀⠀⠀|⠀#false
 
-Comments               	                                                            	\
-single_line_comment=""\	 // ¬␤* ⦅␤|eof⦆                                             	\
-multi_line_comment=""; 	 /* commented_block                                         	\
-commented_block=""     	 */ |⠀⦅multi_line_comment⠀|⠀*⠀|⠀⁄⠀|⠀〔¬*⁄〕+⦆⠀⠀commented_block	\
-⁄-="";                 	 /- line␠*
+§ "Specific code points"
+bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ "\u{FEFF}"
+char🛑⠀⠀⠀⠀⠀⠀⠀⠀≝ "control" "surrogate" "direction control" ("2nd+")"bom" (🔗spec)"disallowed-literal-code-points"
+uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ "Any unicode Scalar Value (no surrogates)"
+u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ "Non line-breaking unicode White_Space" (🔗spec)"whitespace"
 
-Whitespace\
-ws="";     	  u␠⠀|⠀multi_line_comment            	\
-escline="";	⧵⠀ws*⠀⦅single_line_comment⠀|⠀␤⠀|⠀eof⦆	\
-␤=""       	"Line-breaking unicode White_Space)"\
-"Whitespace where ␤s are allowed"\
-line␠="";	node␠|␤|single_line_comment\
-"Whitespace within nodes, where newline-ish things must be esclined"\
-node␠="";	ws*⠀escline⠀ws*⠀|⠀ws+
+§ "Comments (// /* */ after ≝ serve as definition symbols)"
+comment_line⠀⠀⠀⠀⠀⠀≝   // ¬␤* ⦅␤ | eof⦆
+comment_block⠀⠀⠀⠀⠀≝;  /* commented_block
+  commented_block⠀≝   */
+                  |⠀⦅comment_block⠀|⠀*⠀|⠀⁄⠀|⠀〔¬*⁄〕+⦆⠀⠀🗘
+/-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝	 /- line␠*
 
-"Version marker"\
-version="";	/-⠀u␠*⠀kdl-version⠀u␠+⠀⦅1|2⦆⠀u␠*⠀␤
+§ "Whitespace"
+line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_line  !="Whitespace               where newlines are allowed"
+  node␠⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀ws*⠀escline⠀ws*⠀|⠀ws+    !="Whitespace within nodes, where newline-ish things must be esclined"
+    ws⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀u␠⠀|⠀comment_block
+    escline⠀⠀⠀⠀≝⠀⠀⧵⠀ws*⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
+  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "Line-breaking unicode White_Space" (🔗spec)"newline"
 
-//github.com/kdl-org/kdl/blob/main/SPEC.md
 Language "A combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
     /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   newline=␤   'empty'=∅ */
-  - r#" ; " \  serve as regular KDL syntax, so do
-     /* /- */ //  except for except for Comments definition, where they instead are used for definition
+  - r#" ; " \  serve as regular KDL syntax, not part of definition (special unicode symbols do that)
+    For example, ≝; semicolon is used just to make the following definition a valid syntax
+    version⠀≝;	/-⠀u␠*
     "#
+  ! "in != is a tip/comment"
+  § "is a section marker"
   - r#"Double quotes " are used to denote literal text
     \ within a literal string is used for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}
     "#
+  🗘 r#"is a self-referential sign, e.g., the following are the same
+    raw-s ≝ # raw-s-quote # | # raw-s #
+    raw-s ≝ # raw-s-quote # | # 🗘    #  "#
   Regex                                                           	\
     *="zero or more (greedy, match as many instances as possible)"	\
+    *1–6="inclusive range: at least 1 at most 6"                  	\
     +="one  or more (greedy)"                                     	\
     ?="zero or one"                                               	\
     *?="zero or more (non-greedy, match as few instances as possible; used only in raw strings)"
-    r#"set+␠"# or="〔set-␠〕" or=r#"set+␠"# ¬⧵“=r#" 〔^\"〕 "#  "Are used as regex-style character set matches like [], where any character between the brackets will be a single match, but no escapes are needed. They also support character ranges 0-9, and negation ¬ or ^ , 〔〕 can contain whitespace for alignment which is ignored for matching"
+    ¬⧵“ "〔set-␠〕" r#"set+␠"# ≝="Used as regex-style char set matches like [], where any char will be a single match (no escapes needed due to special enclosing syntax)"\
+      "Char range"="0-9"\
+      "Negation"="¬" or="^"\
+      "〔〕 can contain whitespace for alignment which is ignored for matching"
     ⦅group⦆ "used to group matches that must be matched together"
     a|b "means `a or b`, whichever matches first. Multiple items before `|` are a single group" "a b c | d"="(a b c) | d"
   - r#"`-` is used for "except for" or "minus" whatever follows it. For example, `a - 'x'` means "any `a`, except something that matches the literal `'x'`"."#
