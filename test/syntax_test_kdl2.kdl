@@ -504,15 +504,20 @@ n ( )"✗← illegal symbol (non-identifier)"
 n (a) "✗← illegal separator"
 //   ^                                            invalid.illegal.position.kdl
             n "a";
+all_invali}#(){}[]/#;="
+//        ^^                                     invalid.illegal.position.kdl
+//          ^^^^^^^^^^^                           invalid.illegal.muted.position.kdl
+yv2_<legalv2>
+//^^^^^^^^^^^                 -invalid.illegal.kdl
 n "Illegal space between a tag and its value"
-   (tttt)   <>    nn k=1 "a";
+   (tttt)   ##    nn k=1 "a";
 //       ^                   invalid.illegal.position.kdl
 //        ^^                 invalid.illegal.muted.position.kdl
 //          ^^               invalid.illegal.kdl
 //            ^              invalid.illegal.position.kdl
 //             ^^^           invalid.illegal.muted.position.kdl
 //                ^^         entity.name.tag.node.kdl
-   ("tt")   <>    nn k=1 "a";
+   ("tt")   ##    nn k=1 "a";
 //       ^                   invalid.illegal.position.kdl
 //        ^^                 invalid.illegal.muted.position.kdl
 //          ^^               invalid.illegal.kdl
@@ -545,11 +550,11 @@ n "Illegal space between a tag and its value"
 // 7. Test various
 smile "😁"  // files must be utf8 encoded
 "!@#$@$%Q#$%~@!40" "1.2.3" "!!!!!"=true // Instead of anonymous nodes, nodes and properties can be wrapped in "" for arbitrary node names.
-foo123~!@#ÿ$%𐀀^‰†&*.:'|?+ "weeee"       // Legal bare identifier
+foo123~!@<>ÿ$%𐀀^‰†&*,.:'|?+ "weeee"       // Legal bare identifier
 //<-                                    entity.name.tag, entity.name.tag.node
  //<-                                   entity.name.tag, entity.name.tag.node
-//^^^^^^^^^^^^^^^^^^^^^^^               entity.name.tag, entity.name.tag.node
-//                        ^^^^^^^       meta.string.kdl, string.quoted.double.kdl
+//^^^^^^^^^^^^^^^^^^^^^^^^^             entity.name.tag, entity.name.tag.node
+//                          ^^^^^^^     meta.string.kdl, string.quoted.double.kdl
 ノード　お名前="☜(ﾟヮﾟ☜)" // use unicode!
 //  ^^^                                 meta.mapping.key.kdl
 //     ^                                punctuation.separator.key-value.kdl
