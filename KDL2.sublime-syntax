@@ -429,28 +429,28 @@ contexts:
 #     - include             : arg_typed⁄-
 #     - include             : arg_untyped∨prop⁄-
 
-#   arg_untyped∨prop:       #✗³
-#     - match               : '(?={{string_beg}})'
-#       branch_point        : ⸙1“arg∨prop”
-#       branch              : #✗⁴⸙
-#         - “arg”-⸙1
-#         - “⚿”₌v-⸙1
-#     - match               : '(?={{charID}})'
-#       branch_point        : ⸙2arg∨prop
-#       branch              : #✗⁴⸙
-#         - arg-⸙2
-#         - ⚿₌v-⸙2
-#   arg_untyped∨prop⁄-:     #✗³
-#     - match               : '(?={{string_beg}})'
-#       branch_point        : ⸙1“arg∨prop”⁄-
-#       branch              : #✗⁴⸙
-#         - “arg”⁄-⸙1
-#         - “⚿”₌v⁄-⸙1
-#     - match               : '(?={{charID}})'
-#       branch_point        : ⸙2arg∨prop⁄-
-#       branch              : #✗⁴⸙
-#         - arg⁄-⸙2
-#         - ⚿₌v⁄-⸙2
+  arg_untyped∨prop:       #✗³
+    - match               : '(?={{string_beg}})'
+      branch_point        : ⸙1“arg∨prop”
+      branch              : #✗⁴⸙
+        - “arg”-⸙1
+        - “⚿”₌v-⸙1
+    - match               : '(?={{charID_or_KW}})'
+      branch_point        : ⸙2arg∨prop
+      branch              : #✗⁴⸙
+        - arg-⸙2
+        - ⚿₌v-⸙2
+  arg_untyped∨prop⁄-:     #✗³
+    - match               : '(?={{string_beg}})'
+      branch_point        : ⸙1“arg∨prop”⁄-
+      branch              : #✗⁴⸙
+        - “arg”⁄-⸙1
+        - “⚿”₌v⁄-⸙1
+    - match               : '(?={{charID_or_KW}})'
+      branch_point        : ⸙2arg∨prop⁄-
+      branch              : #✗⁴⸙
+        - arg⁄-⸙2
+        - ⚿₌v⁄-⸙2
 
 # #——— 2 Node Element: 2 Argument
 #   “arg”-⸙1:               #✗⁴
