@@ -262,10 +262,10 @@ contexts:
 # Whitespace (Line breaking)
   #  Acronym  Name                          Code Pt   Oniguruma     Symbol
   #  CRLF     Carriage Return and Line Feed    D + A  \r\n          n/a
-  #  CR       Carriage Return                  D      \r            n/a
-  #  LF       Line Feed                        A      \n (newline)  n/a
-  #  VT       Vertical Tabulation              B      \v            ¦¦
-  #  FF       Form Feed                        C      \f            ¦¦
+  #  CR       Carriage Return                  D      \r            n/a␍
+  #  LF       Line Feed                        A      \n (newline)  n/a␊
+  #  VT       Vertical Tabulation              B      \v            ¦¦␋⭿
+  #  FF       Form Feed                        C      \f            ¦¦␌
   #  NEL      Next Line                       85                    n/a
   #  LS       Line Separator                2028                    ¦ ¦
   #  PS       Paragraph Separator           2029                    ¦ ¦
@@ -279,7 +279,7 @@ contexts:
 
 # Whitespace (non-Newline)
   # Acronym Name                      Code Pt Oniguruma           Symbol
-  #         Character Tabulation         9    \t (horizontal tab) ¦ ¦
+  #         Character Tabulation         9    \t (horizontal tab) ¦ ¦␉⭾
   #         Space                       20    .                   ¦ ¦
   #         No-Break Space              A0    .                   ¦ ¦
   #         Ogham Space Mark          1680    .                   ¦ ¦
