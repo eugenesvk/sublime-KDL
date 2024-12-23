@@ -584,6 +584,19 @@ n "Illegal due to no ␤ after line continuation before prop"\ /*
 */ k=1
 // ^^^ invalid.illegal.position.kdl
 k=1
+n "Illegal due to ambiguity vs a number"\
+  11a=1 +1b=1 +b=1 +=1 +1=1
+//^^                                              invalid.illegal.position.kdl
+//      ^^                                        invalid.illegal.position.kdl
+//                     ^^                         invalid.illegal.position.kdl
+//  ^                                             entity.other.attribute-name.kdl
+//        ^                                       entity.other.attribute-name.kdl
+//            ^^                                  entity.other.attribute-name.kdl
+//                 ^                              entity.other.attribute-name.kdl
+//                        ^                       entity.other.attribute-name.kdl
+//                       ^                        meta.property.kdl
+//                        ^                       meta.property.name.kdl meta.mapping.key.kdl
+// (?<!=) prevents =1 from matching after the +1 fails ()
 
 // 9. Test Comments
 /**/ // avoid being parsed as a doc '/**' comment
