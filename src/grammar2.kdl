@@ -1,5 +1,6 @@
-KDL_grammar 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"
-  ("group")⦅g⦆ |=(or)"|" set="〔set-␠〕" r#"set+␠"# ¬⧵“=r#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
+/-kdl-version 2
+§ "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"\
+  ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" r#"set+␠"# ¬⧵“=r#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
 document⠀⠀bom?⠀⠀version?⠀⠀nodes
   bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ 	 "\u{FEFF}"
   version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠*⠀kdl-version⠀u␠+⠀⦅1|2⦆⠀u␠*⠀␤
@@ -86,7 +87,7 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
     escline⠀⠀⠀⠀≝⠀⠀⧵⠀ws*⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
   ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "Line-breaking unicode White_Space" (🔗spec)"newline"
 
-Language "A combination of ABNF with some regex spice thrown in" {
+§ "Grammar language: a combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
     /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   newline=␤   'empty'=∅ */
   - r#";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
