@@ -76,7 +76,7 @@ variables:
   usv_not_hex:                	  '[dD][8-9a-fA-F]{{d_hex}}{2}'                    #⊎        	#
   surrog_high:                	    '[\x{D800}-\x{DBFF}]'                          #⊎        	#
   surrog_low:                 	    '[\x{DC00}-\x{DFFF}]'                          #⊎        	#
-  cdir:                       	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'    	#
+  cdir:                       	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]' #⊎ 	#
   # escaped_string:           	'"{{character}}*"'                                           	#
   # character:                	'\\{{escape}}|[^"]'                                          	#
   # escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
