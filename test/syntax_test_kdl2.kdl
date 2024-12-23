@@ -405,9 +405,13 @@ n 10.5e+4
 //     ^                       keyword.operator.arithmetic.kdl
 
 // 3 Data: Strings
+n "\\\b\f\n\r\t\s\/ escape set"
+// ^^^^^^^^^^^^^^                                 constant.character.escape.kdl
+//               ^^                              -constant.character.escape.kdl
 title "Regular \b\\\/\u{AAAAAA}string"
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            meta.string.kdl, string.quoted.double.kdl
-//             ^^^^^^^                            constant.character.escape.kdl
+//             ^^^^                               constant.character.escape.kdl
+//                   ^                            constant.character.escape.kdl
 //                     ^^^^^^^^                   constant.character.escape.unicode.16-bit-hex.kdl
 //    ^                                           punctuation.definition.string.begin.kdl
 //                                   ^            punctuation.definition.string.end.kdl
