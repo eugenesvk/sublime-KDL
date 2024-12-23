@@ -41,8 +41,8 @@ string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀
       uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵ "u{"; hex_unicode "}"
         hex_unicode⠀⠀⠀⠀⠀⠀≝⠀⠀🔢₁₆*1–6⠀-; (surrogate)〔dD〕〔8-9a-fA-F〕🔢₁₆*2
       ws⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀⦅u␠|␤⦆+
-  string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀#⠀string_raw_quoted⠀#
-                        ⠀⠀|⠀⠀#⠀⠀⠀⠀⠀⠀⠀⠀🗘⠀⠀⠀⠀⠀⠀⠀⠀#
+  string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀＃⠀string_raw_quoted⠀＃
+                        ⠀⠀|⠀⠀＃⠀⠀⠀⠀⠀⠀⠀⠀🗘⠀⠀⠀⠀⠀⠀⠀⠀＃
     string_raw_quoted⠀⠀⠀⠀⠀≝⠀⠀“⠀⠀⠀⠀⠀string_raw_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀”
                            |⠀⠀“““⠀␤⠀string_raw_body☰line⠀␤⠀u␠*⠀”””
       string_raw_body_line⠀≝⠀⠀∅
@@ -66,9 +66,9 @@ number⠀⠀⠀⠀⠀⠀⠀≝⠀⠀keyword_number⠀|⠀hex⠀|⠀octal⠀|⠀b
   🔢₁₀_⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0-9_〕
 
 § "Keywords and booleans"
-keyword⠀⠀⠀⠀⠀⠀⠀⠀≝⠀boolean⠀|⠀#null
-keyword_number⠀≝⠀⠀#inf⠀⠀⠀|⠀#-inf⠀|⠀#nan
-boolean⠀⠀⠀⠀⠀⠀⠀⠀≝⠀#true⠀⠀⠀|⠀#false
+keyword⠀⠀⠀⠀⠀⠀⠀⠀≝⠀boolean⠀|⠀＃null
+keyword_number⠀≝⠀⠀＃inf⠀⠀⠀|⠀＃-inf⠀|⠀＃nan
+boolean⠀⠀⠀⠀⠀⠀⠀⠀≝⠀＃true⠀⠀⠀|⠀＃false
 
 § "Specific code points (\u{0} unicode format is implied in 〔A–F〕 and ommited for brevity)"
 bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "\u{FEFF}"
@@ -94,7 +94,7 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
 
 § "Grammar language: a combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
-    /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   newline=␤   'empty'=∅ */
+    /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   #＃ newline=␤   'empty'=∅ */
   - #";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
     #"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
     keys=(and_types)"are used for extra group info"
