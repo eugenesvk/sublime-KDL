@@ -1,3 +1,4 @@
+/-kdl-version 2
 § "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"\
   ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" r#"set+␠"# ¬⧵“=r#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
 document⠀⠀bom?⠀⠀version?⠀⠀nodes
