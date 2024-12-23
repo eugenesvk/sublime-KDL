@@ -60,29 +60,29 @@ variables:
   # charID_ex_dig:            	'[[{{charID}}]&&[^{{d_dec}}]]'                               	#
   # charID_ex_dig_sign:       	'[[{{charID_ex_dig}}]&&[^+-]]'                               	#
   # unicode_char:             	'[\x{0021}-\x{10FFFF}]'                              #⊎      	# invalid: ≤0x20 or >0x10FFF)
+  usv:                        	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎                  	#
   # keyword:                  	'{{boolean}}|{{nil}}'                                        	#
   # prop:                     	'{{ID}}={{value}}'                                           	#
   # prop_eq:                  	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'            	#
   # value:                    	'{{type}}?({{string}}|{{number}}|{{keyword}})'               	#
   # type:                     	'\({{ID}}\)'                                                 	#
   #                           	                                                             	#
-  char_illegal:               	'[{{bom}}{{c0a}}{{c0b}}{{cdel}}{{usc_not}}{{cdir}}]' #⊎      	# ST doesn't allow tracking BOM@file begin, so no need to add a BOF condition
+  char_illegal:               	'[{{bom}}{{c0a}}{{c0b}}{{cdel}}{{usv_not}}{{cdir}}]' #⊎      	# ST doesn't allow tracking BOM@file begin, so no need to add a BOF condition
   c0a:                        	  '[\x{0000}-\x{0008}]'                            #⊎        	#
   # c0valid:                  	  '[\x{0009}-\x{000D}]'                            #⊎        	#9␉\t A␊\n B␋\v C␌\f D␍\r
   c0b:                        	  '[\x{000E}-\x{001F}]'                            #⊎        	#
   cdel:                       	  '[\x{007F}]'                                     #⊎        	#
-  usc_not:                    	  '[{{surrog_high}}{{surrog_low}}]'                #⊎        	# not Unicode scalar value
-  usc_not_hex:                	  '[dD][8-9a-fA-F]{{d_hex}}{2}'                    #⊎        	#
+  usv_not:                    	  '[{{surrog_high}}{{surrog_low}}]'                #⊎        	# not Unicode scalar value
+  usv_not_hex:                	  '[dD][8-9a-fA-F]{{d_hex}}{2}'                    #⊎        	#
   surrog_high:                	    '[\x{D800}-\x{DBFF}]'                          #⊎        	#
   surrog_low:                 	    '[\x{DC00}-\x{DFFF}]'                          #⊎        	#
   cdir:                       	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'    	#
-  # usc:                      	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]'                     	#
   # escaped_string:           	'"{{character}}*"'                                           	#
   # character:                	'\\{{escape}}|[^"]'                                          	#
   # escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
   escape_char:                	'["\\bfnrts]'                                                	#
   # escape_unicode:           	'u{{{d_hex}}{1,6}}'                                          	#
-  escape_usc_not:             	'u{{{usc_not_hex}}}'                                         	#
+  escape_usv_not:             	'u{{{usv_not_hex}}}'                                         	#
   # d_bin:                    	'[0-1]'                                                      	#
   # d_bin_:                   	'[0-1_]'                                                     	#
   # d_oct:                    	'[0-7]'                                                      	#
@@ -845,14 +845,14 @@ contexts:
 #         pop               : 1
 #       - include           : char-escaped⁄-
   char-escaped:
-    - match               : '(\\)(({{escape_char}})|({{escape_usc_not}})|({{escape_unicode}}))'
+    - match               : '(\\)(({{escape_char}})|({{escape_usv_not}})|({{escape_unicode}}))'
       captures            :
         1:                 constant.character.escape.kdl
         3:                 constant.character.escape.kdl
         4:                 constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
         5:                 constant.character.escape.unicode.16-bit-hex.kdl
   char-escaped⁄-:
-    - match               : '(\\)(({{escape_char}})|({{escape_usc_not}})|({{escape_unicode}}))'
+    - match               : '(\\)(({{escape_char}})|({{escape_usv_not}})|({{escape_unicode}}))'
       captures            :
         1:                 constant.character.escape.kdl comment.line.slash-dash.kdl
         3:                 constant.character.escape.kdl comment.line.slash-dash.kdl
