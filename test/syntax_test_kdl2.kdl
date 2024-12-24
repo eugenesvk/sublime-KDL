@@ -476,9 +476,6 @@ n "/-Slashdashed nodes retain all the scopes of individual elements!"
 }
 
 // 2 Node Element: 5 End
-n /-;n "Terminators can't be slashdashed"
-//  ^                        invalid.illegal.position.kdl
-//   ^                      -invalid
 n /-
 //^^                         comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
 //  ^                       -invalid.illegal.position.kdl
