@@ -1,0 +1,224 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+// 11. Potential tests (unsorted dump)
+
+aa r=2;
+aaa r=2\
+rr=2
+//dsf
+
+r"sdfsafd"
+#null
++ a=2
+-#null a =2 #null
+
+//asdsdf
+  n /-1 ;
+  n a=1   1 ;
+  n   1 ;
+  n a=1 /-1 ;
+n 0b1 {n 0b1;};
+n 1 {n 11;};
+n 1 {n 1 ;};
+n 1 {n 1 {n 1 {n 1;};};};
+n 11{n 11{n 11{n 1;};};};
+n 1 {n 11{n 1;};};
+n 1;
+n 1 ; n 1;
+n{ };
+n {};
+n 1 {n;};
+  n   1     {n 1 a=1 1 ;};
+  n /-1     {n 1 a=1 1 ;};
+  n /-1     {n 1 a=1 1 ;};
+  n   a=1   {n 1 a=1 1 ;};
+  n /-a=1   {n 1 a=1 1 ;};
+  n   1 /-{n 1 a=1 1 ;};
+/-n /-1   {n 1 a=1 1 ;};
+  n a=1    {n a=1;};
+  n a=1   1 #true;
+  n a=1 /-1 #true;
+/-n a=1 /-1 #true;
+// "Same for" /-"slashdashed elements"
+
+n {n 1 {};};
+/-n {n 1 {};};
+
+n 1\//✓
+/-\//✓
+1//✓
+
+aa k=1 "a" //
+aa "k"=1 "a" /-\
+#true
+aa k=1 "a"   { aa;}
+aa k=1 "a" /-{ aa;}
+aa k=1 "a" /- { aa;}
+aa k=1 "a" /-\
+{ aa;}
+aa   aa=2       aa=2; aa    -1     aa=2
+aa /-aa=2       aa=2; aa /- -1     aa=2
+aa    "s"       aa=2; aa    "s\n"  aa=2
+aa /- "s"       aa=2; aa /- "s\n"  aa=2
+aa   #"s"#      aa=2; aa   #"s"#  aa=2
+aa /-#"s"#      aa=2; aa /-#"s"#  aa=2
+aa   ##"R"s"## aa=2; aa   "c"   #"r w"#   #"R " "# aa=2
+aa /-##"R"s"## aa=2; aa /-"c" /-#"r w"# /-#"R " "# aa=2
+aa   0b11       aa=2; aa   -100    aa=2
+aa /-0b11       aa=2; aa /--100    aa=2
+aa   #true       aa=2; aa   #null    aa=2
+aa /-#true       aa=2; aa /-#null    ra=2
+aa k=1 "a" /-{ aa;}
+
+a "a"=1
+name #"b"#=1  b b=1 "b"=1 b b=1 b;
+b b p=1 b=1 pasdfsdf=61 b 1 b 1 n=1;
+nn #true=1
+n 0.5
+name 0b01 0o12 0x11 "bbb#b"=1  #"bb"# b="2" "b"=1 b=1;
+
+bb p=1 b=1 pasdfsdf=61 c=+1 +=1 #null #null #true 12.22;
+nn ##"b#b"##=1  b=1 "b"=1 bc=1 "b";
+
+
+
+
+(a)aa;
+(a)aa k=1;
+(a)aa k=1;
+(a)aa \
+ k=1;
+(a)a/*valid no space*/k=1
+(a)"aa" k=1;
+(a)"aa" k=1;
+(a)"aa" \
+  k=1;
+(a)"aa"/*valid no space*/k=1
+
+aa    /*✗ no WS separator*/
+a/**/"a"/*✓    WS comment*/
+a "a"   /*✓    WS ␠*/
+a /**/ /*
+*/ /**/ "a"/*✓ WS␠∨comments*/
+
+a\
+  "a"    /*✓ line⎋*/
+
+
+
+(xxx)(#true-#true)nnn
+(#true-#true)legal-type
+nnn (xxx)1 (a)1
+nnn #true 1 (a)(a)1 "zz" zz
+nnn 1 #true "a"=1 a=1;
+ (a)tru #"a\b"# 1 tru "a\b"
+nnn #"a\b"#  "a\b"
+nnn "a"=1
+nnn (a)#true (b)#true (a)1 (a)"/**/a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+nnn         (a)#true (a)a (a)"a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+nnn "a"   "a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+  (a)"n" a=1 "a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+/-(a)"n" a=1 "a" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+r"aa" arg "arg" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+aa  argggg a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+aa n #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+"a" "a"=#true "a" #"a"#=#true;
+a "a"=#true "b"=tru
+a "a"=tru
+a "a"=tru
+
+n/*valid no space*/b=1
+n\
+b=1//valid line cont
+
+a "a"=#true "a" #"a"#=\
+#true
+
+a "saf" "saf" "saf" "s=af"  = 1 "saf" =
+a "a" "a" #"a"#=0b11 "a" 1 "a"=1 "a"=2 1;
+a "a" "a" #"a"#=(a)0b1 "a"=(a)"a" "a"=r"a";
+a (saf) (saf) (saf) (saf)= (saf)=
+a  1=1 ;
+a #true #false #null
+a 1 "a"   "a"="1" "a"=1;
+a "a"=1 "a" "a"=1 "a"=1;
+a 0b1 k=1 k=1;
+a #true ("f")"a" ;
+a (f)"a";
+a 0b1 k=1 k=1;
+a "a" = 1 "a"=1;
+a 1 k=1;
+#true #null #"aa"# arg "arg" a a=1 #true a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+#true aa  argggg a "n"=1 #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+#true #true aa n #true=1 "saf" "saf" "saf" "s=af"  = 1 "saf" =
+
+
+/-"ach"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+// fix my color highlighting shceme, thisis just blac
+match   /-aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+  "ch"    aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+  "ch"  /-aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+/-"ach"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+/-r"ch"   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+/-aaach   aaa=111 url="a" k=1 k=1 "k"=1 "k"="v"
+match aaa=111 /-l="a" "k"=1 "k"="v"
+nn aa=11 aa=0b111 aa=11111
+nn aa=11 aa="111" aa="111"
+nn aa=11 aa="111""1" aa="111"
+n      1 1 1
+n   (t)1 k=1   k=1
+n /-k=11 k=1 /-k=1
+n /-1111 k=1 /-k=1
+n /-(t)1 k=1 /-k=1
+n /-;
+match aaa=111 url="a"
+match aaa="a" url="a"
+nnn    "arg""arg";
+nnn (a)"arg""arg";
+nnn (a)#true (a)1
+nnn (a)"arg" "arg";
+n kkk=1 k=1 kkk=0b155
+n /-k=1 k=1 /-k=0b155
+n kkk=1 k=1 kkk=10.5e5e5
+
+"n"  "k""j";
+"n" #"k"#"j";
+"n"  "k" "j";
+"n" #"k"# #"j"#;
+"n"  "k"  "j";
+"n"  "k"1;
+"n" #"k"#1;
+"n"  "k" 1;
+"n" #"k"# 1;
+"n"  "k"=1;
+"n"   kk=1;
+"n"  "k"=(aaaaaa) 1;
+"n"  "k"=("aaaa") 1;
+"n"  "k"=("aaaa")1;
+"n"  "k"=("a""a") 1;
+  ("a")n k="a" k=1;
+
+"a"\ /*✗ no line⎋ end (␤ or //)
+*/ a
+"a" 
+
+a \  /*
+*/
+ "a"
+a  \  /*
+*/ //
+"a" \
+"a" /**/ "a"/*←illegal no space separator*/
+  a  /**/  a
+a  \  /**/ \  a
+a  \ \  a /* illegal dupe \\*/
+
+ /**/   a \ \
+
+\ \
+
+a  \
+a=1  /* illegal 2nd line cont*/  a
+n/*valid no space*/b=1
+k=
+("nn")nnn a=1
+("nn")nnn a=1 ;
