@@ -1,8 +1,5 @@
 /-kdl-version 2
-§ "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"\
-  !="← not grammar, but tip/comment (see details at the end of this file)"\
-  ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" #"set+␠"# 〔¬⧵“〕=#"〔^\"〕"# *="0+" +="1+" ?="0|1" ¬="not (or ^)"\
-  /* "literal" or \⧵  /⁄  ;；  *∗  "“ "”   {⎨ }⎬   #＃   ""=∅    ignore unquoted ; " */;
+§ "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"
 document⠀⠀bom?⠀⠀version?⠀⠀nodes
   bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ 	 "\u{FEFF}"
   version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠* "kdl-version"; u␠+⠀⦅ "1"; | "2"; ⦆⠀u␠*⠀␤
@@ -95,32 +92,28 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
   ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  (u)D+A⠀|⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Grammar language: a combination of ABNF with some regex spice thrown in" {
-  - "Some symbols are represented with unicode alternatives to avoid the need to quote"
-    /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   #＃   'empty'=∅ */
-  - #";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
+  • "Some literal symbols are represented with unicode alts to avoid the need to quote"
+    /* \⧵  /⁄  ;；  *∗  "“  "”  #＃   ""=∅  ignore unquoted ; " */
+  • #";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
     #"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
     keys=(and_types)"are used for extra group info"
-  - !="tip/comment"
-  - §="section marker"
-  - #"""#="Double quotes are used to denote literal text"
-  - #"\"#="within a literal string is used for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}"
-  - 🗘=#"self-referential sign, e.g., the following are the same
-    raw-s ≝ # raw-s-quote # | # raw-s #
-    raw-s ≝ # raw-s-quote # | # 🗘    #  "#
-  Regex                                                           	\
-    *="zero or more (greedy, match as many instances as possible)"	\
-    *1–6="inclusive range: at least 1 at most 6"                  	\
-    +="one  or more (greedy)"                                     	\
-    ?="zero or one"                                               	\
-    *?="zero or more (non-greedy, match as few instances as possible; used only in raw strings)"\
-    ¬="or ^: not this"            	\
-    "0-9"="char range (inclusive)"	\
-    ¬⧵“="[^\\\"]" "〔set-␠〕"="[a b]" #"set+␠"#="[ab]" ≝="Used as regex-style char set matches like [], where any char will be a single match (no escapes needed due to special enclosing syntax)"\
-    "〔set-␠〕 can contain whitespace for alignment which is ignored for matching"
-    ⦅group⦆ "used to group matches that must be matched together"
-    a|b "means `a or b`, whichever matches first. Multiple items before `|` are a single group" "a b c | d"="(a b c) | d"
-  - -="used for 'except for' or 'minus' whatever follows it" "uchar⠀-⠀␤"="anything matching the 'uchar' rule (unicode chars) except for something that matches '␤' rule (newline whitespace)"
-  prefix ^=(or)"¬" "'does not match' whatever follows it:" ^foo="must not match 'foo'"
-  - ¶="cut point: always matches and consumes no characters, but once matched, the parser is not allowed to backtrack past that point in the source. If a parser would rewind past the cut point, it must instead fail the overall parse, as if it had run out of options (only for 'rastring_raw' to ensure the 1st instance of the appropriate closing quote sequence ends it)"
-  - "A single definition may be split over multiple lines. Newlines are treated as spaces"
+  • #"""#="Double quotes is for literal text"   #"\"#="in a literal string is for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}"
+  • |="logical OR"    !="tip/comment"    §="section marker"   🗘=#"self-referential sign: the following are the same
+    raw ≝ # rquote # | #  🗘 #
+    raw ≝ # rquote # | # raw #  "#
+  Regex⠀matches                                                            	\
+    ?⠀="0|1 zero or one"                                                   	\
+    +⠀="1+  one  or more (greedy)"                                         	\
+    *⠀="0+  zero or more (    greedy, match as many instances as possible)"	\
+    *?="0+  zero or more (non-greedy, match as few  instances as possible; used only in raw strings)"\
+    *1–6="    inclusive range: at least 1 at most 6"                                         	\
+    "0–9"="char range (inclusive)"  –="en-dash used to not blend with hyphen-minus in search"	\
+    ¬="not this (^ in regex)" ¬foo="must not match 'foo'"  〔¬⧵“〕=#"[^\"] any char except for \ or " "# \
+    〔set⠀〕="[a b]" #"set"#="[ab]" ≝="regex Char set matches like [], where any char will be a single match"\
+    "↑ ignore ↑ contained spaces (useful for alignment)"
+    ⦅group⦆ "items must be matched together"\
+    a|b="'a or b', whichever matches 1st. Multiple items before | are a single group" "a b c | d"="⦅a b c⦆ | d"
+  • -="'except for' or 'minus' whatever follows it" "uchar⠀-⠀␤"="anything matching the 'uchar' rule (unicode chars) except for something that matches '␤' rule (newline whitespace)"
+  • ¶="cut point: always matches and consumes no characters, but once matched, the parser is not allowed to backtrack past that point in the source. If a parser would rewind past the cut point, it must instead fail the overall parse, as if it had run out of options (only for 'rastring_raw' to ensure the 1st instance of the appropriate closing quote sequence ends it)"
+  • "A single definition may be split over multiple lines. Newlines are treated as spaces"
 }
