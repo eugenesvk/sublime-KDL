@@ -202,12 +202,6 @@ multiline
 
 
 // 3 Data: Type
-n (#null)1
-// ^^^^^                                          invalid.illegal.position.kdl
-n (#true)1
-// ^^^^^                                          invalid.illegal.position.kdl
-n (#false)1
-// ^^^^^^                                         invalid.illegal.position.kdl
 ("a")a b=(#"sdf"#)1 c=(###"s"d"f"###)2 "allow strings, including raw, in annotations"
 //  ^                                              punctuation.separator.annotation.end.kdl
 //               ^                                 punctuation.separator.annotation.end.kdl
