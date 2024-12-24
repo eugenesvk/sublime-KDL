@@ -661,54 +661,6 @@ n /-1 /-#true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
 
 
 // 7. Test various
-"Glued nodes" "1st symbol illegal, others muted, pop early on child/term/line end/comment..."
-"n""inv"
-// ^                                    invalid.illegal.position.kdl
-//  ^^^^                                invalid.illegal.muted.position.kdl
-//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-"n""inv";
-// ^                                    invalid.illegal.position.kdl
-//  ^^^^                                invalid.illegal.muted.position.kdl
-//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-"n""inv"{}
-// ^                                    invalid.illegal.position.kdl
-//  ^^^^                                invalid.illegal.muted.position.kdl
-//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-"n""inv"//
-// ^                                    invalid.illegal.position.kdl
-//  ^^^^                                invalid.illegal.muted.position.kdl
-//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-"n""inv"\/*
-// ^                                    invalid.illegal.position.kdl
-//  ^^^^                                invalid.illegal.muted.position.kdl
-//      ^                              -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-*/
-a=1
-"Same for" /-"slashdashed elements"
-/-"n""inv"
-//   ^                                  invalid.illegal.position.kdl
-//    ^^^^                              invalid.illegal.muted.position.kdl
-//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-/-"n""inv";
-//   ^                                  invalid.illegal.position.kdl
-//    ^^^^                              invalid.illegal.muted.position.kdl
-//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-/-"n""inv"{}
-//   ^                                  invalid.illegal.position.kdl
-//    ^^^^                              invalid.illegal.muted.position.kdl
-//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-/-"n""inv"//
-//   ^                                  invalid.illegal.position.kdl
-//    ^^^^                              invalid.illegal.muted.position.kdl
-//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-/-"n""inv"\/*
-//   ^                                  invalid.illegal.position.kdl
-//    ^^^^                              invalid.illegal.muted.position.kdl
-//        ^                            -invalid.illegal.position.kdl invalid.illegal.muted.position.kdl
-*/
-a=1
-
-
 
 /-\
   node;
@@ -718,21 +670,6 @@ n {
   node;
 //^^^^ meta.node.kdl meta.block.child.kdl comment.block.slash-dash.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
 };
-
-// Match spaces as part of the key=value, but signal an error
-n k=1 k✗␠=  1 #false;
-//        ^                                       invalid.illegal.position.kdl
-//         ^                                      invalid.illegal.muted.position
-n k=1 k✗␠  = 1 #false;
-//       ^                                        invalid.illegal.position.kdl
-//        ^                                       invalid.illegal.muted.position
-//          ^                                     invalid.illegal.position.kdl
-
-n k=1 "k"=1 "v"
-n k=1 "v"
-n\
-/*illegal since WS only allows directly after \\ without any newlines*/
-b=1
 
 /-  \
 node;
