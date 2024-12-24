@@ -1,0 +1,89 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 3 Data: Numbers
+
+n "Glued numbers are invalid"
+nnn        0b12
+//            ^               invalid.illegal.position.kdl
+nnn (aaaaa)0b12
+//            ^               invalid.illegal.position.kdl
+nnn   k=(a)0b12
+//            ^               invalid.illegal.position.kdl
+nnn /-     0b12
+//            ^               invalid.illegal.position.kdl
+nnn /-(aaa)0b12
+//            ^               invalid.illegal.position.kdl
+nnn /-k=(a)0b12
+//            ^               invalid.illegal.position.kdl
+n   100000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   10.000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   10.0e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   1000e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-100000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-10.000+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-10.0e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n /-1000e1+1
+//        ^                   invalid.illegal.position.kdl
+//         ^                  invalid.illegal.muted.position.kdl
+n   (a)100000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   (a)10.000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   (a)10.0e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   (a)1000e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)100000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)10.000+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)10.0e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n /-(a)1000e1+1
+//           ^                 invalid.illegal.position.kdl
+//            ^                invalid.illegal.muted.position.kdl
+n   kk=(a)100000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n   kk=(a)10.000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n   kk=(a)10.0e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n   kk=(a)1000e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)100000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)10.000+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)10.0e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
+n /-kk=(a)1000e1+1
+//              ^              invalid.illegal.position.kdl
+//               ^             invalid.illegal.muted.position.kdl
