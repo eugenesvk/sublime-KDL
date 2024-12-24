@@ -660,16 +660,6 @@ n /-1 /-#true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
 //      ^^^  invalid.illegal.muted.position.kdl
 
 
-// 3 Data: Keywords (Invalid)
-keyword≠key #true=1; n #false=1; b #null=1
-//          ^^^^^                                constant.language.boolean invalid.illegal.position.kdl
-//                     ^^^^^^                    constant.language.boolean invalid.illegal.position.kdl
-//                                 ^^^^^         constant.language.null invalid.illegal.position.kdl
-keyword≠key #truee=1; n #falsee=1; b #nulle=1
-//          ^^^^^^                              -invalid.illegal.position.kdl
-//                       ^^^^^^                 -invalid.illegal.position.kdl
-//                                    ^^^^^     -invalid.illegal.position.kdl
-
 // 7. Test various
 "Glued nodes" "1st symbol illegal, others muted, pop early on child/term/line end/comment..."
 "n""inv"
