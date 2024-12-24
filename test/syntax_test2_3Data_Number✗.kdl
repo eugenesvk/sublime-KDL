@@ -87,3 +87,39 @@ n /-kk=(a)10.0e1+1
 n /-kk=(a)1000e1+1
 //              ^              invalid.illegal.position.kdl
 //               ^             invalid.illegal.muted.position.kdl
+
+
+n 1+12 k=1 "Glued number args are an error"
+// ^                                    invalid.illegal.position.kdl
+//  ^^                                  invalid.illegal.muted.position.kdl
+n k=+1_0+00_000
+//      ^                               invalid.illegal.position.kdl -constant.numeric.value.kdl
+n k=+1_0.5+00_000
+//        ^                             invalid.illegal.position.kdl -constant.numeric.value.kdl
+n 10.+12
+//   ^                                  invalid.illegal.position.kdl
+//    ^^                                invalid.illegal.muted.position.kdl
+n 10.5e+12+12 k=1
+//        ^                             invalid.illegal.position.kdl
+n /-1+12 k=1 "Glued number args are an error"
+//   ^                                  invalid.illegal.position.kdl
+//    ^^                                invalid.illegal.muted.position.kdl
+n k=/-+1_0+00_000
+//        ^                             invalid.illegal.position.kdl -constant.numeric.value.kdl
+n k=/-+1_0.5+00_000
+//          ^                           invalid.illegal.position.kdl -constant.numeric.value.kdl
+n /-10.+12
+//     ^                                invalid.illegal.position.kdl
+//      ^^                              invalid.illegal.muted.position.kdl
+n /-10.5e+12+12 k=1
+//          ^                           invalid.illegal.position.kdl
+n b=0b k=1
+//   ^                                  invalid.illegal.position.kdl
+
+n .5; /* gently warn on illegal args */
+//^                                     invalid.illegal.muted.position.kdl
+// ^                                    invalid.illegal.position.kdl
+n .5
+//^                                    -invalid.position.kdl
+// ^                                   -invalid.illegal.position.kdl
+/*but not before whitespace as .5 can turn into a legal .5=1 property*/
