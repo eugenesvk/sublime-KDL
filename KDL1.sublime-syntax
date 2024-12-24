@@ -732,26 +732,26 @@ contexts:
   # before     sp begin
   # after  = ) sp end (though can't detect line continuation, add that condition within line cont rule)
   true-partial: #\b bugs with n t|x
-    - match               : '(?<={{pre_val}})(t|tr|tru)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})(tr?u?)(?={{any_sp_t_beg}})'
       #scope               : dbg✗true_partial punctuation.separator
       pop                 : 2
   true-partial⁄-:
-    - match               : '(?<={{pre_val}})(t|tr|tru)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})(tr?u?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
   false-partial:
-    - match               : '(?<={{pre_val}})(f|fa|fal|fals)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})(fa?l?s?)(?={{any_sp_t_beg}})'
       #scope               : dbg✗false_partial entity.other.attribute-name.kdl
       pop                 : 2
   false-partial⁄-:
-    - match               : '(?<={{pre_val}})(f|fa|fal|fals)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})(fa?l?s?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
   null-partial:
-    - match               : '(?<={{pre_val}})(n|nu|nul)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})(nu?l?)(?={{any_sp_t_beg}})'
       pop                 : 2
   null-partial⁄-:
-    - match               : '(?<={{pre_val}})(n|nu|nul)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})(nu?l?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
 
