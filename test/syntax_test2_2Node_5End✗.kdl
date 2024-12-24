@@ -1,0 +1,6 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 2 Node Element: 5 End
+n /-;n "Terminators can't be slashdashed"
+//  ^                        invalid.illegal.position.kdl
+//   ^                      -invalid
