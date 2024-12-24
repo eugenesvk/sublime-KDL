@@ -1,9 +1,11 @@
 /-kdl-version 2
 § "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md"\
-  ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" #"set+␠"# ¬⧵“=#"〔^\"〕"#  /* \/;*=⧵⁄；∗  "=“or” newline=␤ 'empty'=∅ ignore unquoted ; " */
+  !="← not grammar, but tip/comment (see details at the end of this file)"\
+  ⦅g⦆="(group)" |=(or)"|" set="〔set-␠〕" #"set+␠"# 〔¬⧵“〕=#"〔^\"〕"# *="0+" +="1+" ?="0|1" ¬="not (or ^)"\
+  /* "literal" or \⧵  /⁄  ;；  *∗  "“ "”   {⎨ }⎬   #＃   ""=∅    ignore unquoted ; " */;
 document⠀⠀bom?⠀⠀version?⠀⠀nodes
   bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝ 	 "\u{FEFF}"
-  version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠*⠀kdl-version⠀u␠+⠀⦅1|2⦆⠀u␠*⠀␤
+  version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠* "kdl-version"; u␠+⠀⦅ "1"; | "2"; ⦆⠀u␠*⠀␤
   nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅line␠*⠀node_prev⦆*
                   ⠀⦅line␠*⠀node_last⦆*⠀line␠*
     node_prev⠀⠀≝⠀⠀node_base⠀node_end
@@ -94,7 +96,7 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
 
 § "Grammar language: a combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
-    /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   #＃ newline=␤   'empty'=∅ */
+    /* \⧵  /⁄  ;；  *∗  "“ or "”   {⎨ }⎬   #＃   'empty'=∅ */
   - #";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
     #"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
     keys=(and_types)"are used for extra group info"
