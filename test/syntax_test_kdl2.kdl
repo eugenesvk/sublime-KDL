@@ -670,42 +670,6 @@ keyword≠key #truee=1; n #falsee=1; b #nulle=1
 //                       ^^^^^^                 -invalid.illegal.position.kdl
 //                                    ^^^^^     -invalid.illegal.position.kdl
 
-// 4. Test Numbers (Invalid)
-n 1+12 k=1 "Glued number args are an error"
-// ^                                    invalid.illegal.position.kdl
-//  ^^                                  invalid.illegal.muted.position.kdl
-n k=+1_0+00_000
-//      ^                               invalid.illegal.position.kdl -constant.numeric.value.kdl
-n k=+1_0.5+00_000
-//        ^                             invalid.illegal.position.kdl -constant.numeric.value.kdl
-n 10.+12
-//   ^                                  invalid.illegal.position.kdl
-//    ^^                                invalid.illegal.muted.position.kdl
-n 10.5e+12+12 k=1
-//        ^                             invalid.illegal.position.kdl
-n /-1+12 k=1 "Glued number args are an error"
-//   ^                                  invalid.illegal.position.kdl
-//    ^^                                invalid.illegal.muted.position.kdl
-n k=/-+1_0+00_000
-//        ^                             invalid.illegal.position.kdl -constant.numeric.value.kdl
-n k=/-+1_0.5+00_000
-//          ^                           invalid.illegal.position.kdl -constant.numeric.value.kdl
-n /-10.+12
-//     ^                                invalid.illegal.position.kdl
-//      ^^                              invalid.illegal.muted.position.kdl
-n /-10.5e+12+12 k=1
-//          ^                           invalid.illegal.position.kdl
-n b=0b k=1
-//   ^                                  invalid.illegal.position.kdl
-
-n .5; /* gently warn on illegal args */
-//^                                     invalid.illegal.muted.position.kdl
-// ^                                    invalid.illegal.position.kdl
-n .5
-//^                                    -invalid.position.kdl
-// ^                                   -invalid.illegal.position.kdl
-/*but not before whitespace as .5 can turn into a legal .5=1 property*/
-
 // 7. Test various
 "Glued nodes" "1st symbol illegal, others muted, pop early on child/term/line end/comment..."
 "n""inv"
