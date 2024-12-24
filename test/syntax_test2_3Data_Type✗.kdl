@@ -1,0 +1,10 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 3 Data: Type
+
+n (#null)1
+// ^^^^^                                          invalid.illegal.position.kdl
+n (#true)1
+// ^^^^^                                          invalid.illegal.position.kdl
+n (#false)1
+// ^^^^^^                                         invalid.illegal.position.kdl
