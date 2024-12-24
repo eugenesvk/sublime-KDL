@@ -1,6 +1,21 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 3 Data: Keywords (Invalid)
+＃non-keyword🛑
+n #trued #trued !="bool-partial-ext🛑"
+//^^^^^^                                                   meta.argument.value.kdl meta.mapping.value.kdl
+//^^^^^                                                   -invalid.illegal.position.kdl
+//     ^                                                   invalid.illegal.position.kdl
+//       ^^^^^^                                            meta.argument.value.kdl meta.mapping.value.kdl
+//       ^^^^^                                            -invalid.illegal.position.kdl
+//            ^                                            invalid.illegal.position.kdl
+n #dtrud !="direct"
+//^                                                        keyword.other.kdl
+//^                                                       -invalid.illegal.position.kdl
+//^                                                       -invalid.illegal.muted.position.kdl
+// ^                                                       invalid.illegal.position.kdl
+//  ^^^^                                                   invalid.illegal.muted.position.kdl
+
 keyword≠key #true=1; n #false=1; b #null=1
 //          ^^                                   constant.language.boolean invalid.illegal.position.kdl
 //            ^^^                                constant.language.boolean invalid.illegal.muted.position.kdl
