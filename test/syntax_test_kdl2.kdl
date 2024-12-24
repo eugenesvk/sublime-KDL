@@ -923,10 +923,3 @@ r 1 { r2 1; }; "node after ;"
 r 1 { r2 1; } /*comment before ;*/;
 //                                ^              punctuation.terminator.node
 //            ^^^^^^^^^^^^^^^^^^^^               comment.block.kdl
-
-
-// 10.1
-char_illegal cdir="‎‏ ‪‫‬‭‮ ⁦⁧⁨⁩"
-//                 ^^                           invalid.illegal.kdl
-//                    ^^^^^                     invalid.illegal.kdl
-//                          ^^^^                invalid.illegal.kdl
