@@ -785,7 +785,7 @@ contexts:
       scope               : keyword.other.kdl constant.language.boolean.kdl
       captures            :
         1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
-        2:                 iinvalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        2:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
         3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
         4:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
   null🛑:
@@ -793,14 +793,14 @@ contexts:
       scope               : keyword.other.kdl constant.language.null.kdl
       captures            :
         1:                 invalid.illegal.position.kdl
-        2:                 ininvalid.illegal.muted.position.kdl
+        2:                 invalid.illegal.muted.position.kdl
         3:                 invalid.illegal.position.kdl
   null🛑⁄-:
     - match               : '(\#)?((n)ull)(?=[^{{charID}}])'
       scope               : keyword.other.kdl constant.language.null.kdl
       captures            :
         1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
-        2:                 ininvalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        2:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
         3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
 
 
