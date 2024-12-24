@@ -1,0 +1,20 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 3 Data: Strings
+
+v1 r"no" "prefix in v2"
+// ^                                              invalid.illegal.position.kdl
+v1 r###""""Rawest"""string""""###
+// ^                                              invalid.illegal.position.kdl
+no "Surrogates even in \u escaped form"\
+high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0}\u{D799}"
+//    ^                                                                constant.character.escape.kdl
+//     ^^^^^^^                                                         constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//             ^^^^^^^                                                 constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//                     ^^^^^^^                                         constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//                             ^^^^^^^                                 constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//                                            ^^^^^^^                  constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//                                                    ^^^^^^^          constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//                                                            ^^^^^^^  constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//                                                                           ^^^^         -invalid.illegal.muted.position.kdl
+//                                                                                ^^^^^^^ -invalid.illegal.muted.position.kdl
