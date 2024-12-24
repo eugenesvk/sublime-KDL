@@ -98,9 +98,9 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
     #"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
     keys=(and_types)"are used for extra group info"
   • #"""#="Double quotes is for literal text"   #"\"#="in a literal string is for escaping: \" or \\, and initiating uchar chars in hex \u{FEFF}"
-  • |="logical OR"    !="tip/comment"    §="section marker"   🗘=#"self-referential sign: the following are the same
-    raw ≝ # rquote # | #  🗘 #
-    raw ≝ # rquote # | # raw #  "#
+  • |="logical OR"    !="tip/comment"    §="section marker"   🗘="self-referential sign: the following are the same \
+    raw ≝ # rquote # | #  🗘 #  \
+    raw ≝ # rquote # | # raw #  "
   Regex⠀matches                                                            	\
     ?⠀="0|1 zero or one"                                                   	\
     +⠀="1+  one  or more (greedy)"                                         	\
