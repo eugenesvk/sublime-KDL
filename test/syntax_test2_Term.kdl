@@ -1,0 +1,50 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// Missing terminator warning, 2 options:
+  // 1 (here)        is to highlight              } without a preceding ;
+  // 2 (alternative) is to highlight space before }, but
+    // there is not always space there
+    // space is taken by node␠, so harder to make it give up ␠ in '/**/ }'
+      // even if you add a rule that handles ' }' with a higher priority
+      // node␠ doesn't know the difference between '; }' and ' }'
+  n  { "forgot;terminator"      ;};
+//                              ^                punctuation.terminator.node.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  { "forgot;terminator"       };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  {  forgot;terminator        };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  { "forgot;terminator" /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+  n  {  forgot;terminator  /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  { "forgot;terminator"       };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  {  forgot;terminator        };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  { "forgot;terminator" /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+/-n  {  forgot;terminator  /**/  };
+//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                                ^              punctuation.terminator.node.kdl
+
+r 1 { r2 1; }  "🛑 child-must-be-terminated!"
+//             ^                                 invalid.illegal.position.kdl
+//              ^                                invalid.illegal.muted.position.kdl
+//               ^                              -invalid.position
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^     invalid.illegal.muted.position.kdl
+//               make spaces "valid" as they'd be fine alone
+r 1 { r2 1; }; "node after ;"
+//           ^                                   punctuation.terminator.node
+//             ^^^^^^^^^^^^^^                    entity.name.tag.node.kdl
+r 1 { r2 1; } /*comment before ;*/;
+//                                ^              punctuation.terminator.node
+//            ^^^^^^^^^^^^^^^^^^^^               comment.block.kdl
