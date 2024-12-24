@@ -1,0 +1,6 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+char_illegal cdir="‎‏ ‪‫‬‭‮ ⁦⁧⁨⁩"
+//                 ^^                           invalid.illegal.kdl
+//                    ^^^^^                     invalid.illegal.kdl
+//                          ^^^^                invalid.illegal.kdl
