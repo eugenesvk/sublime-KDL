@@ -15,7 +15,7 @@ document⠀⠀bom?⠀⠀version?⠀⠀nodes
         node␠*
 
 § "Entries"
-node_arg∨prop⠀⠀≝⠀⠀prop|value
+node_arg∨prop⠀⠀≝⠀⠀prop⠀|⠀value
   prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠* "="; node␠*⠀value
   value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
     type⠀⠀⠀⠀⠀⠀⠀≝  "(";   node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
