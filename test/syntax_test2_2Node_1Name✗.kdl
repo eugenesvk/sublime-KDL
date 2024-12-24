@@ -1,0 +1,28 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 2 Node Element: 1 Node name
+
+n "Trying to ban some consecutive strings"
+"n""b"
+//^               punctuation.definition.string.end.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^            invalid.illegal.muted.position.kdl
+"n"#"b"
+//^               punctuation.definition.string.end.kdl
+// ^^             invalid.illegal.position.kdl
+//   ^^           invalid.illegal.muted.position.kdl
+"n"r"b"
+//^               punctuation.definition.string.end.kdl
+// ^              invalid.illegal.position.kdl
+//  ^^^           invalid.illegal.muted.position.kdl
+
+ ##"n"###"b"#
+//     ^          punctuation.definition.string.end.kdl
+//      ^^        invalid.illegal.position.kdl
+//        ^^^     invalid.illegal.muted.position.kdl
+#"multiline
+nn"##"b""b"
+//^               punctuation.definition.string.end.kdl
+//  ^^            invalid.illegal.position.kdl
+//    ^^          invalid.illegal.muted.position.kdl
+//       ^^       invalid.illegal.muted.position.kdl
