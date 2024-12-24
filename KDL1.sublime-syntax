@@ -253,12 +253,10 @@ contexts:
     - include: boolean🛑⁄-
     - include: null🛑⁄-
   keyword-partial: # avoid red flashes with unfinished typing
-    - include: true-partial
-    - include: false-partial
+    - include: bool-partial
     - include: null-partial
   keyword-partial⁄-:
-    - include: true-partial⁄-
-    - include: false-partial⁄-
+    - include: bool-partial⁄-
     - include: null-partial⁄-
 
 
@@ -731,20 +729,12 @@ contexts:
 
   # before     sp begin
   # after  = ) sp end (though can't detect line continuation, add that condition within line cont rule)
-  true-partial: #\b bugs with n t|x
-    - match               : '(?<={{pre_val}})(tr?u?)(?={{any_sp_t_beg}})'
-      #scope               : dbg✗true_partial punctuation.separator
+  bool-partial: #\b bugs with n t|x
+    - match               : '(?<={{pre_val}})(tr?u?|fa?l?s?)(?={{any_sp_t_beg}})'
+      #scope               : dbg✗bool_partial punctuation.separator
       pop                 : 2
-  true-partial⁄-:
-    - match               : '(?<={{pre_val}})(tr?u?)(?={{any_sp_t_beg}})'
-      scope               : comment.line.slash-dash.kdl
-      pop                 : 2
-  false-partial:
-    - match               : '(?<={{pre_val}})(fa?l?s?)(?={{any_sp_t_beg}})'
-      #scope               : dbg✗false_partial entity.other.attribute-name.kdl
-      pop                 : 2
-  false-partial⁄-:
-    - match               : '(?<={{pre_val}})(fa?l?s?)(?={{any_sp_t_beg}})'
+  bool-partial⁄-:
+    - match               : '(?<={{pre_val}})(tr?u?|fa?l?s?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
   null-partial:
