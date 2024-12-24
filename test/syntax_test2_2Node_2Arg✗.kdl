@@ -1,0 +1,57 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 2 Node Element: 2 Argument
+n "Values can't be repeated without a separator (glued)"
+n    1  1       0b155
+//              ^^^    meta.argument.value.kdl meta.mapping.value.kdl
+//                 ^^ -meta.argument.value.kdl meta.mapping.value.kdl
+//              ^^     constant.numeric.base.kdl
+//                ^    constant.numeric.value.kdl
+//                 ^   invalid.illegal.position.kdl
+//                  ^  invalid.illegal.muted.position.kdl
+n /- 1  1   /-  0b155
+//              ^^^    meta.argument.value.kdl meta.mapping.value.kdl
+//                 ^^ -meta.argument.value.kdl meta.mapping.value.kdl
+//              ^^     constant.numeric.base.kdl
+//                ^    constant.numeric.value.kdl
+//                 ^   invalid.illegal.position.kdl
+//                  ^  invalid.illegal.muted.position.kdl
+nnn (a)"Ttt" (b)"ttt"
+nnn    "Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+nnn (a)"Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+/-n    "Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+/-n (a)"Ttt""ttt"
+//     ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl
+//          ^          invalid.illegal.position.kdl
+//           ^^^^      invalid.illegal.muted.position.kdl
+//               ^    -invalid.illegal
+n err; // invalid arguments marked before node terminator
+//^^                   invalid.illegal.muted.position.kdl
+//  ^                  invalid.illegal.position.kdl
+//   ^                 punctuation.terminator.node.kdl
+n err  // invalid arguments marked before node terminator
+//^^                   invalid.illegal.muted.position.kdl
+//  ^                  invalid.illegal.position.kdl
+//     ^               comment.line.double-slash.kdl
+n "Illegal property key glued to a valid string argument"
+n bare-identifier|"string"
+//^^^^^^^^^^^^^^^                       invalid.illegal.muted.position.kdl
+//               ^                      invalid.illegal.position.kdl
+//                ^^^^^^^^              meta.string.kdl string.quoted.double.kdl
+n bare-identifie#"string"#
+//^^^^^^^^^^^^^                         invalid.illegal.muted.position.kdl
+//             ^                        invalid.illegal.position.kdl
+//               ^^^^^^^^^              meta.string.kdl string.quoted.double.raw.kdl
+
