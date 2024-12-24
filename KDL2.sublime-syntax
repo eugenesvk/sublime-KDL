@@ -275,6 +275,12 @@ contexts:
 #   keyword-partial⁄-:
 #     - include: bool-partial⁄-
 #     - include: null-partial⁄-
+  keyword-partial-ext🛑: # avoid red flashes with extra #keyword_typing
+    - include: bool-partial-ext🛑
+    - include: null-partial-ext🛑
+  keyword-partial-ext🛑⁄-:
+    - include: bool-partial-ext🛑⁄-
+    - include: null-partial-ext🛑⁄-
 
 
 
@@ -761,6 +767,45 @@ contexts:
     - match               : '(?<={{pre_val}})\#(nu?l?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
+
+  bool-partial-ext🛑: #\b bugs with n t|x   Invalid chars after valid keyword (even if partial)
+    - match               : '(?<={{pre_val}})(\#)(tr?u?e?|fa?l?s?e?)({{charID_or_KW}}+)'
+      # scope               : dbg✗bool_partial_ext🛑 punctuation.separator
+      captures            :
+        3:                  invalid.illegal.position.kdl
+      pop                 : 2
+  bool-partial-ext🛑⁄-:
+    - match               : '(?<={{pre_val}})(\#)(tr?u?e?|fa?l?s?e?)({{charID_or_KW}}+)'
+      captures            :
+        1:                                               comment.line.slash-dash.kdl
+        2:                                               comment.line.slash-dash.kdl
+        3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+  null-partial-ext🛑:
+    - match               : '(?<={{pre_val}})(\#)(nu?l?l?)({{charID_or_KW}}+)'
+      captures            :
+        3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+  null-partial-ext🛑⁄-:
+    - match               : '(?<={{pre_val}})(\#)(nu?l?l?)({{charID_or_KW}}+)'
+      captures            :
+        1:                                               comment.line.slash-dash.kdl
+        2:                                               comment.line.slash-dash.kdl
+        3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+
+  ＃non-keyword🛑:
+    - match               : '(?=\#)'
+      push                : #✗⁵
+      # - meta_scope        : ＃non-keyword🛑✗⁵
+      - include           : keyword-partial-ext🛑
+      - match             : '(\#)?({{charID_or_KW}})({{charID_or_KW}}*)'
+        scope             : keyword.other.kdl
+        captures          :
+          # 1:               invalid.illegal.muted.position.kdl
+          2:               invalid.illegal.position.kdl
+          3:               invalid.illegal.muted.position.kdl
+        pop                 : 2
 
   boolean🛑:
     - match               : '(\#)?((t)rue|(f)alse)(?=[^{{charID}}])'
