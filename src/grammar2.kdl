@@ -17,10 +17,10 @@ document⠀⠀bom?⠀⠀version?⠀⠀nodes
 
 § "Entries"
 node_arg∨prop⠀⠀≝⠀⠀prop|value
-  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠* "="; node␠*⠀value
+  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀node␠*⠀＝⠀node␠*⠀value
   value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅string⠀|⠀number⠀|⠀keyword⦆
   type⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "(";   node␠*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀node␠* ")"
-node_children⠀⠀≝  "{";    nodes⠀node_last? "}"
+node_children⠀⠀≝⠀⠀⠀⎨⠀⠀⠀⠀nodes⠀node_last?⠀⠀⎬
 node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
 
 § "Strings"
@@ -40,6 +40,7 @@ string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀
       char⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀〔“⧵bfnrts〕
       uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵ "u{"; 🔢₁₆*1–6 "}"
       uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀u❴🔢₁₆*1–6❵
+      uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀u⎨⠀🔢₁₆*1–6⠀⎬
       uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀u⎨⠀🔢₁₆*1–6⠀⎬
       ws⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀⦅u␠|␤⦆+
   string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀#⠀string_raw_quoted⠀#
@@ -94,7 +95,7 @@ line␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node␠⠀|⠀␤⠀|⠀comment_li
 
 § "Grammar language: a combination of ABNF with some regex spice thrown in" {
   - "Some symbols are represented with unicode alternatives to avoid the need to quote"
-    /* \⧵  /⁄  ;；  *∗  "“ or "”   {❴⎨ }⎬❵   newline=␤   'empty'=∅ */
+    /* \⧵  /⁄  ;；  *∗  "“ or "”   {❴⎨ }⎬❵  =＝ newline=␤   'empty'=∅ */
   - r#";"\"#="serve as regular KDL syntax, not part of definition (special unicode symbols do that)"\
     r#"≝;"#="semicolon is used just to make the following definition a valid syntax:  version⠀≝;	/-⠀u␠*  "\
     keys=(and_types)"are used for extra group info"
