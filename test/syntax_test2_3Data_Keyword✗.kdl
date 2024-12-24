@@ -1,0 +1,11 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 3 Data: Keywords (Invalid)
+keyword≠key #true=1; n #false=1; b #null=1
+//          ^^^^^                                constant.language.boolean invalid.illegal.position.kdl
+//                     ^^^^^^                    constant.language.boolean invalid.illegal.position.kdl
+//                                 ^^^^^         constant.language.null invalid.illegal.position.kdl
+keyword≠key #truee=1; n #falsee=1; b #nulle=1
+//          ^^^^^^                              -invalid.illegal.position.kdl
+//                       ^^^^^^                 -invalid.illegal.position.kdl
+//                                    ^^^^^     -invalid.illegal.position.kdl
