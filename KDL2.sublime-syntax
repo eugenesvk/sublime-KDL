@@ -732,8 +732,8 @@ contexts:
 #     - match               : '({{bareID}})'
 #       pop                 : 1
 
-# #——— Values - Keywords
-  boolean:
+#——— Values - Keywords
+  boolean:  #\b bugs with # since # isn't word border, so move # before \b
     - match               : \#\b(true|false)\b
       scope               : keyword.other.kdl constant.language.boolean.kdl
       pop                 : 2
