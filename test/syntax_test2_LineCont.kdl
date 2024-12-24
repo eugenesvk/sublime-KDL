@@ -1,0 +1,83 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 9.1 Test Line continuation
+n \ /*sadf*/ ✗ /*
+  //         ^                                  invalid.illegal.position.kdl
+  *//*       ↑ illegal non-whitespace char*/
+  /*   illegal empty line with a comment ✗→*/
+  //                                         ^  invalid.illegal.position.kdl
+  /**/ //✗↓ illegal empty line ✗→
+  //                             ^              invalid.illegal.position.kdl
+
+//<-                                            invalid.illegal.position.kdl
+k=1 // ← mark non-whitespace on 2nd+ lines as legal again
+//<-                                           -invalid.illegal.position.kdl
+n \ /*sadf*/ ✗//
+  //         ^                                  invalid.illegal.position.kdl
+  //         ^                                  invalid.illegal.position.kdl
+k=1
+
+
+n \ //
+
+//<-                                            invalid.illegal.position.kdl
+  k=1 "✗↑illegal empty line"=1
+//^                                            -invalid.illegal.position.kdl
+n \
+    
+  //^                                           invalid.illegal.position.kdl
+  "✗↑illegal empty space line"=1
+//^                                            -invalid.illegal.position.kdl
+n \
+  //✗illegal empty line with a comment→
+  //                                   ^        invalid.illegal.position.kdl
+  //✗illegal empty line with a comment→
+  //                                   ^        invalid.illegal.position.kdl
+  k=1//
+//^                                            -invalid.illegal.position.kdl
+n \
+  /*legal*/ k=1
+//^                                            -invalid.illegal.position.kdl
+//          ^                                  -invalid.illegal.position.kdl
+
+n\aa k\=1
+//^^                                              invalid.illegal.position.kdl
+//   ^^^^                                         invalid.illegal.position.kdl
+
+//<-                                              invalid.illegal.position.kdl
+k=1
+//<-                                             -invalid.illegal.position.kdl
+
+k=1
+n \    "only comments allowed after line⎋"
+//     ^^^^^                                      invalid.illegal.position.kdl
+//                                         ^     -invalid.illegal.position.kdl
+k=1
+n \ // "only comments allowed after line⎋"
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        comment.line.double-slash
+//                                         ^     -invalid.illegal.position.kdl
+k=1
+
+n /--1.0 2  \     /**/ //fd
+//          ^                                     punctuation.separator.continuation.line.kdl
+ k=1
+n /--1.0 2 \ /**/ //f
+//         ^                                      punctuation.separator.continuation.line.kdl
+//           ^^^^                                 comment.block.kdl
+//                ^^^                             comment.line.double-slash.kdl
+//                   ^                           -comment.line.double-slash.kdl
+ k=1
+n /--1.0 2 \   //f //
+//         ^                                      punctuation.separator.continuation.line.kdl
+//             ^^^^^^                             comment.line.double-slash.kdl
+//                   ^                           -comment.line.double-slash.kdl
+ k=1
+n /--1.0 2 \ /f //
+//         ^                                      punctuation.separator.continuation.line.kdl
+//           ^^                                   invalid.illegal.position.kdl
+  /*        */
+//^^^^^^^^^^^^                                    comment.block.kdl
+ k=1
+
+illegal-multiple-terminator 1;;
+//                            ^                   invalid.illegal.position.kdl
