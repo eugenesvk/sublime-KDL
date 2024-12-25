@@ -80,7 +80,7 @@ variables:
   # escaped_string:       	'"{{character}}*"'                                       	#
   # character:            	'\\{{escape}}|[^"]'                                      	#
   # escape:               	'{{escape_char}}|{{escape_unicode}}'                     	#
-  escape_char:            	'["\\bfnrts]'                                            	#
+  escape_char:            	'["\\bfnrts]'                                            	#v2: +s −/
   # escape_unicode:       	'u{{{d_hex}}{1,6}}'                                      	#
   escape_usv_not:         	'u{{{usv_not_hex}}}'                                     	#
   # d_bin:                	'[0-1]'                                                  	#
