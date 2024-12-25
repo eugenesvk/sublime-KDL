@@ -461,7 +461,7 @@ contexts:
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop⁄-
     - include             : value⁄-
-    - include             : value🛑
+    - include             : value🛑⁄-
     - include             : pop_pre␤
     - include             : pop⸙
 
@@ -523,6 +523,10 @@ contexts:
     # - include             : pop_pre🆔¬  # let previous layers deal with invalid chars
     - include             : ch🛑pre␠   # todo: or just scrap illegals? let unstyled content be the indicator
   value🛑:
+    - include             : val🛑
+    - include             : ch🛑pre_term
+    - include             : ch🛑pre-str
+  value🛑⁄-:
     - include             : val🛑
     - include             : ch🛑pre_term
     - include             : ch🛑pre-str
