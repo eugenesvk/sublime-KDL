@@ -560,16 +560,16 @@ contexts:
 #     - include             : S🛑pre␤
 
 # #——— 2 Node Element: 3 Property
-#   ⚿₌v-⸙2:                 #✗⁴
-#     - meta_scope          : meta.property.kdl #✗⁴⚿₌v⸙
-#     - include             : keyword🛑
-#     - include             : ID_bare¬1st🛑
-#     - include             : ⚿
-#   ⚿₌v⁄-⸙2:                #✗⁴
-#     - meta_scope          : meta.property.kdl #✗⁴⚿₌v⁄–⸙
-#     - include             : keyword🛑⁄-
-#     - include             : ID_bare¬1st🛑⁄-
-#     - include             : ⚿⁄-
+  ⚿₌v-⸙2:                 #✗⁴
+    - meta_scope          : meta.property.kdl #✗⁴⚿₌v⸙
+    - include             : keyword🛑
+    - include             : ID_bare¬1st🛑
+    - include             : ⚿
+  ⚿₌v⁄-⸙2:                #✗⁴
+    - meta_scope          : meta.property.kdl #✗⁴⚿₌v⁄–⸙
+    - include             : keyword🛑⁄-
+    - include             : ID_bare¬1st🛑⁄-
+    - include             : ⚿⁄-
 #   ⚿:                      #✗⁴
 #     - match               : '({{charID}}+)'
 #       scope               : entity.other.attribute-name.kdl
