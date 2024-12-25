@@ -9,12 +9,16 @@ v1 r###""""Rawest"""string""""###
 no "Surrogates even in \u escaped form"\
 high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0}\u{D799}"
 //    ^                                                                constant.character.escape.kdl
-//     ^^^^^^^                                                         constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
-//             ^^^^^^^                                                 constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
-//                     ^^^^^^^                                         constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
-//                             ^^^^^^^                                 constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
-//                                            ^^^^^^^                  constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
-//                                                    ^^^^^^^          constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
-//                                                            ^^^^^^^  constant.character.escape.unicode.16-bit-hex.kdl invalid.illegal.muted.position.kdl
+//     ^^^^^^^                                                         constant.character.escape.utf8.hex.kdl
+//       ^^^^                                                          constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//               ^^^^                                                  constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//                       ^^^^                                          constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//                               ^^^^                                  constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//                                              ^^^^                   constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//                                                      ^^^^           constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//                                                              ^^^^   constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
 //                                                                           ^^^^         -invalid.illegal.muted.position.kdl
 //                                                                                ^^^^^^^ -invalid.illegal.muted.position.kdl
+a "\u{11FFFF} \u{110FFFF}" !="Unicode escaped above valid USV \u{10FFFF}"
+//    ^^^^^^                            constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//               ^^^^^^^                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
