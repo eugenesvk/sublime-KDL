@@ -560,13 +560,15 @@ contexts:
 # #——— 2 Node Element: 3 Property
 #   ⚿₌v-⸙2:                 #✗⁴
 #     - meta_scope          : meta.property.kdl #✗⁴⚿₌v⸙
+#     - include             : keyword🛑
+#     - include             : ID_bare¬1st🛑
 #     - include             : ⚿
 #   ⚿₌v⁄-⸙2:                #✗⁴
 #     - meta_scope          : meta.property.kdl #✗⁴⚿₌v⁄–⸙
+#     - include             : keyword🛑⁄-
+#     - include             : ID_bare¬1st🛑⁄-
 #     - include             : ⚿⁄-
 #   ⚿:                      #✗⁴
-#     - include             : keyword🛑
-#     - include             : ID_bare¬1st🛑
 #     - match               : '({{charID}}+)'
 #       scope               : entity.other.attribute-name.kdl
 #       pop                 : 1 # ↑⸙
@@ -575,7 +577,6 @@ contexts:
 #         - include         : property₌
 #         - include         : pop_pre-term # unblock errors from spoiling the whole line
 #   ⚿⁄-:                    #✗⁴
-#     - include             : keyword🛑⁄-
 #     - match               : '({{charID}}+)'
 #       scope               : entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 #       pop                 : 1 # ↑⸙
