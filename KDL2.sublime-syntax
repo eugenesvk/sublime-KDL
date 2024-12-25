@@ -77,6 +77,9 @@ variables:
   surrog_high:            	    '[\x{D800}-\x{DBFF}]'                          #⊎    	#
   surrog_low:             	    '[\x{DC00}-\x{DFFF}]'                          #⊎    	#
   cdir:                   	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'	#⊎
+  codepoint_not_hex:      	  '{{d_hex}}{7,}|{{cp_max1_hex}}|{{cp_max2_hex}}'        	#1234567>10FFFF
+  cp_max1_hex:            	    '[2-9a-fA-F]{{d_hex}}{5}'                       #⊎   	#20FFFF>10FFFF
+  cp_max2_hex:            	    '1[1-9a-fA-F]{{d_hex}}{4}'                      #⊎   	#11FFFF>10FFFF
   # escaped_string:       	'"{{character}}*"'                                       	#
   # character:            	'\\{{escape}}|[^"]'                                      	#
   # escape:               	'{{escape_char}}|{{escape_unicode}}'                     	#
@@ -1017,31 +1020,39 @@ contexts:
 #       - include           : char-escaped⁄-
   char-escaped:
     # - match               : '(\\)(({{escape_char}})|({{escape_usv_not}})|({{escape_unicode}}))'
-    - match               : '(\\)(({{escape_char}})|((u)({)({{usv_not_hex}})(}))|((u)({)({{d_hex}}{1,6})(})))'
+    - match               : '(\\)(({{escape_char}})|((u)({)({{codepoint_not_hex}})(}))|((u)({)({{usv_not_hex}})(}))|((u)({)({{d_hex}}{1,6})(})))'
       captures            :
-        1 :                constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-        3 :                constant.character.escape.kdl
-        5 :                constant.character.escape.utf8.hex.kdl
-        6 :                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl
-        7 :                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
-        8 :                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
+        1:                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+        3:                 constant.character.escape.kdl
+        5:                 constant.character.escape.utf8.hex.kdl
+        6:                 constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl
+        7:                 constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+        8:                 constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
         10:                constant.character.escape.utf8.hex.kdl
         11:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl
-        12:                constant.character.escape.utf8.hex.kdl
+        12:                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
         13:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
+        15:                constant.character.escape.utf8.hex.kdl
+        16:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl
+        17:                constant.character.escape.utf8.hex.kdl
+        18:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
   char-escaped⁄-:
-    - match               : '(\\)(({{escape_char}})|((u)({)({{usv_not_hex}})(}))|((u)({)({{d_hex}}{1,6})(})))'
+    - match               : '(\\)(({{escape_char}})|((u)({)({{codepoint_not_hex}})(}))|((u)({)({{usv_not_hex}})(}))|((u)({)({{d_hex}}{1,6})(})))'
       captures            :
-        1 :                constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
-        3 :                constant.character.escape.kdl comment.line.slash-dash.kdl
-        5 :                constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
-        6 :                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl comment.line.slash-dash.kdl
-        7 :                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-        8 :                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl comment.line.slash-dash.kdl
+        1:                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+        3:                 constant.character.escape.kdl comment.line.slash-dash.kdl
+        5:                 constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
+        6:                 constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl comment.line.slash-dash.kdl
+        7:                 constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        8:                 constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl comment.line.slash-dash.kdl
         10:                constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
         11:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl comment.line.slash-dash.kdl
-        12:                constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
+        12:                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
         13:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl comment.line.slash-dash.kdl
+        15:                constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
+        16:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl comment.line.slash-dash.kdl
+        17:                constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
+        18:                constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl comment.line.slash-dash.kdl
   string-quoted-double-raw:
     - match               : '(#*)(")'
       captures            :
