@@ -1,6 +1,8 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 3 Data: Type
+nn(no_space)n
+//^                                               invalid.illegal.position.kdl
 
 n (#null)1
 // ^^                                             invalid.illegal.position.kdl
