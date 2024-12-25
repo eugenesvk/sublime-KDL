@@ -69,12 +69,12 @@ keyword⠀⠀⠀⠀⠀⠀⠀⠀≝⠀boolean⠀|⠀＃null
 keyword_number⠀≝⠀⠀＃inf⠀⠀⠀|⠀＃-inf⠀|⠀＃nan
 boolean⠀⠀⠀⠀⠀⠀⠀⠀≝⠀＃true⠀⠀⠀|⠀＃false
 
-§ "Specific code points (\u{0} unicode format is implied in 〔A–F〕 and ommited for brevity)"
-bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "\u{FEFF}"
-char🛑⠀⠀⠀⠀⠀⠀⠀⠀≝  (¬1st)"bom"; (c0a)〔u0–u8〕; (c0b)〔E–1F〕; (cdel)〔7F〕; (c_dir)〔200E–200F⠀202A–202E⠀2066–2069〕; usc¬ (🔗spec)"disallowed-literal-code-points"
-  usc¬⠀⠀⠀⠀⠀⠀⠀⠀≝; (surr_high)〔D800–DBFF〕; (surr_low)〔DC00–DFFF〕 !="valid c0: 〔u9–uD〕 9␉\t A␊\n B␋\\v C␌\f D␍\r"
-uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0–D7FF⠀E000–10FFFF〕         !="Any Unicode Scalar Value (no surrogates)"
-u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"\
+§ "Specific code points" !="\u{0} unicode format is implied ommited for brevity: 〔A–F〕=〔\u{A}–\u{F}〕 (range)"
+bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "\u{FEFF}"
+char🛑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  (¬1st)"bom"; (c0a)〔u0–u8〕; (c0b)〔E–1F〕; (cdel)〔7F〕; (c_dir)〔200E–200F⠀202A–202E⠀2066–2069〕; usv¬ (🔗spec)"disallowed-literal-code-points"
+ (surrogate)usv¬⠀≝; (high)〔D800–DBFF〕; (low)〔DC00–DFFF〕 !="valid c0: 〔u9–uD〕 9␉\t A␊\n B␋\\v C␌\f D␍\r"
+uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0–D7FF⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀E000–10FFFF〕 !="Any Unicode Scalar Value (no surrogates)"
+u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"\
                   "⭾                                                                                  　  "
 
 § "Comments (// /* */ after ≝ serve as definition symbols)"
