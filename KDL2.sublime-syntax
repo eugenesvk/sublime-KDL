@@ -766,12 +766,18 @@ contexts:
     - match               : '\#\b(null)\b'
       scope               : keyword.other.kdl constant.language.null.kdl comment.line.slash-dash.kdl
       pop                 : 2
-  floatkw:
-    - match               : \#\b(-?inf|nan)\b
+  floatkw:  #\b bugs with -
+    - match               : \#-?\b(inf)\b
+      scope               : keyword.other.kdl constant.language.float.kdl
+      pop                 : 2
+    - match               : \#\b(nan)\b
       scope               : keyword.other.kdl constant.language.float.kdl
       pop                 : 2
   floatkw⁄-:
-    - match               : \#\b(-?inf|nan)\b
+    - match               : \#-?\b(inf)\b
+      scope               : keyword.other.kdl constant.language.float.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+    - match               : \#\b(nan)\b
       scope               : keyword.other.kdl constant.language.float.kdl comment.line.slash-dash.kdl
       pop                 : 2
 
