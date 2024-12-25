@@ -126,6 +126,7 @@ variables:
   # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'            #∪   	# not precisely ␤␊
   ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
   b_sp:                   	'[{{u_sp}}]'                                        #⊎   	#
+  uspnl:                 	'{{u_sp}}|{{newline}}'                              #.   	#
   # bom:                  	'[\x{FEFF}]'                                             	#
   # unicode_space:        	'[[:blank:]]'                                       #⊎   	#
   # comment_line:         	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'         	#
@@ -1029,6 +1030,7 @@ contexts:
         pop               : 1
       - include           : char-esc-uni🛑
       - include           : char-esc-uni
+      - include           : u␠␤s
       - include           : any🛑
   char-esc-uni:
     - match               : '(u)({)({{d_hex}}{1,6})(})'
@@ -1070,6 +1072,7 @@ contexts:
         pop               : 1
       - include           : char-esc-uni⁄-🛑
       - include           : char-esc-uni⁄-
+      - include           : u␠␤s
       - include           : any🛑
   char-esc-uni⁄-:
     - match               : '(u)({)({{d_hex}}{1,6})(})'
@@ -2000,12 +2003,19 @@ contexts:
 #         - match           : $
 #           pop             : 1
 
-# # Primitives, with some ~matching KDL Spec elements
+# Primitives, with some ~matching KDL Spec elements
 #   linesp:                 # ≝ linespace : newline | ws | single-line-comment
 #     - include             : ␤
 #     - include             : ws
 #     - include             : comment_line #todo: bugs with } on a line after //
 #     # - include             : comment_line_no␤
+  u␠␤s:   # Regular and line breaking whitespace
+    - match               : '({{uspnl}})'
+      scope               : whitespace.escape.kdl
+      push                : # to "glue" contiguous spaces together with the same scope
+      - match             : '({{uspnl}})'
+        scope             : whitespace.escape.kdl
+      - include           : else-pop2
 #   ␤s:
 #     - match               : '{{newline}}'
 #       #scope               : dbg✗␤s
