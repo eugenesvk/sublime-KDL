@@ -198,11 +198,13 @@ n 10.5e+4
 n "\\\b\f\n\r\t\s\/ escape set"
 // ^^^^^^^^^^^^^^                                 constant.character.escape.kdl
 //               ^^                              -constant.character.escape.kdl
-title "Regular \b\\\/\u{AAAAAA}string"
+title "Regular \b\\\/\u{10FFFF}string"
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            meta.string.kdl, string.quoted.double.kdl
 //             ^^^^                               constant.character.escape.kdl
-//                   ^                            constant.character.escape.kdl
-//                     ^^^^^^^^                   constant.character.escape.unicode.16-bit-hex.kdl
+//                   ^                            constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//                     ^                          constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl
+//                            ^                   constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
+//                     ^^^^^^^^                   constant.character.escape.utf8.hex.kdl
 //    ^                                           punctuation.definition.string.begin.kdl
 //                                   ^            punctuation.definition.string.end.kdl
 title #"Raw string"#
