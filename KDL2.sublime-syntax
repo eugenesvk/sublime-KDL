@@ -59,7 +59,7 @@ variables:
   # charID_rec:           	'{{charID}}(?!{{linespace_re}})'                         	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
   # charID_ex_dig:        	'[[{{charID}}]&&[^0-9]]'                                 	#
   # charID_ex_dig_sign:   	'[[{{charID_ex_dig}}]&&[^+-]]'                           	#
-  # unicode_char:         	'[\x{0021}-\x{10FFFF}]'                              #⊎  	# invalid: ≤0x20 or >0x10FFF)
+  # unicode_char:         	'[\x{0021}-\x{10FFFF}]'                             #⊎   	# invalid: ≤0x20 or >0x10FFF)
   usv:                    	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎              	#
   # keyword:              	'{{boolean}}|{{nil}}'                                    	#
   # prop:                 	'{{ID}}={{value}}'                                       	#
@@ -79,8 +79,8 @@ variables:
   cdir:                   	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'	#⊎
   usv_fmt_not_hex:        	  '0{1,5}{{d_hex}}{1,5}'                           #⊎    	# can be > max, so put lower in priority vs codepoint_not_hex
   codepoint_not_hex:      	  '{{d_hex}}{7,}|{{cp_max1_hex}}|{{cp_max2_hex}}'        	#1234567>10FFFF
-  cp_max1_hex:            	    '[2-9a-fA-F]{{d_hex}}{5}'                       #⊎   	#20FFFF>10FFFF
-  cp_max2_hex:            	    '1[1-9a-fA-F]{{d_hex}}{4}'                      #⊎   	#11FFFF>10FFFF
+  cp_max1_hex:            	    '[2-9a-fA-F]{{d_hex}}{5}'                      #⊎    	#20FFFF>10FFFF
+  cp_max2_hex:            	    '1[1-9a-fA-F]{{d_hex}}{4}'                     #⊎    	#11FFFF>10FFFF
   # escaped_string:       	'"{{character}}*"'                                       	#
   # character:            	'\\{{escape}}|[^"]'                                      	#
   # escape:               	'{{escape_char}}|{{escape_unicode}}'                     	#
@@ -112,7 +112,7 @@ variables:
   # decimal:              	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'	#
   # exponent:             	'([eE])([+-])?({{integer}})'                             	#
   # integer:              	'[0-9][0-9_]*'                                           	# leading 0s are allowed
-  # #sign:                	'[+-]'                                                 #⊎	# using [+-] is cleaner than {{sign}}
+  # #sign:                	'[+-]'                                               #⊎  	# using [+-] is cleaner than {{sign}}
   # #                     	                                                         	#
   # hex:                  	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                      	#
   # octal:                	'([+-])?(0o)([0-7][0-7_]*)'                              	#
@@ -121,13 +121,13 @@ variables:
   # escline:              	'\\{{ws}}*({{comment_line}}|{{nl_s}})'                   	#
   # escline_beg:          	'\\'                                                     	#
   # linespace_re:         	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
-  # char_linesp:          	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                          #∪	# ex / but not precisely //
-  # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'      	# \R
-  # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'              #∪ 	# not precisely ␤␊
+  # char_linesp:          	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                       #∪   	# ex / but not precisely //
+  # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])' #.   	# \R
+  # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'            #∪   	# not precisely ␤␊
   ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
-  b_sp:                   	'[{{u_sp}}]'                                           #⊎	#
+  b_sp:                   	'[{{u_sp}}]'                                        #⊎   	#
   # bom:                  	'[\x{FEFF}]'                                             	#
-  # unicode_space:        	'[[:blank:]]'                                          #⊎	#
+  # unicode_space:        	'[[:blank:]]'                                       #⊎   	#
   # comment_line:         	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'         	#
   # comment_line_no_nl:   	'({{c_line_beg}})([^{{nl_s}}]*)'                         	#
   # comment_block:        	'{{comment_block_beg}}{{commented_block}}'               	# set-unsafe; recursion: commented_block🗘
