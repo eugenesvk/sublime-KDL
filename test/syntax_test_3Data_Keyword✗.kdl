@@ -17,13 +17,17 @@ n #dtrud !="direct"
 //  ^^^^                                                   invalid.illegal.muted.position.kdl
 
 n #true=1; n #false=1; b #null=1;c !="keyword≠key"
-//^^                                             constant.language.boolean invalid.illegal.position.kdl
-//  ^^^                                          constant.language.boolean invalid.illegal.muted.position.kdl
-//           ^^                                  constant.language.boolean invalid.illegal.position.kdl
-//             ^^^^                              constant.language.boolean invalid.illegal.muted.position.kdl
-//                       ^^                      constant.language.null invalid.illegal.position.kdl
-//                         ^^^                   constant.language.null invalid.illegal.muted.position.kdl
+//^^                                             keyword.other.kdl invalid.illegal.position.kdl
+//  ^^^                                          keyword.other.kdl invalid.illegal.muted.position.kdl
+//           ^^                                  keyword.other.kdl invalid.illegal.position.kdl
+//             ^^^^                              keyword.other.kdl invalid.illegal.muted.position.kdl
+//                       ^^                      keyword.other.kdl invalid.illegal.position.kdl
+//                         ^^^                   keyword.other.kdl invalid.illegal.muted.position.kdl
 n #truee=1; n #falsee=1; b #nulle=1;c !="keyword≠key"
-//^^^^^^                                        -invalid.illegal.position.kdl
-//             ^^^^^^                           -invalid.illegal.position.kdl
-//                          ^^^^^               -invalid.illegal.position.kdl
+//^^^^^^                                         meta.node.kdl meta.property.kdl
+//^^                                             invalid.illegal.position.kdl
+//  ^^^^                                         invalid.illegal.muted.position.kdl
+//            ^^                                 invalid.illegal.position.kdl
+//              ^^^^^                            invalid.illegal.muted.position.kdl
+//                         ^^                    invalid.illegal.position.kdl
+//                           ^^^^                invalid.illegal.muted.position.kdl
