@@ -31,3 +31,53 @@ n #truee=1; n #falsee=1; b #nulle=1;c !="keyword≠key"
 //              ^^^^^                            invalid.illegal.muted.position.kdl
 //                         ^^                    invalid.illegal.position.kdl
 //                           ^^^^                invalid.illegal.muted.position.kdl
+n true=1;n false=1;b null=1;b inf=1;b -inf=1;b nan=1;c !="ambiguious no#keyword≠key"
+//^                                                 constant.language.boolean.kdl invalid.illegal.position.kdl
+//^                                                -invalid.illegal.muted.position.kdl
+// ^^^                                              constant.language.boolean.kdl invalid.illegal.muted.position.kdl
+// ^^^                                             -invalid.illegal.position.kdl
+//         ^                                        constant.language.boolean.kdl invalid.illegal.position.kdl
+//         ^                                       -invalid.illegal.muted.position.kdl
+//          ^^^^                                    constant.language.boolean.kdl invalid.illegal.muted.position.kdl
+//          ^^^^                                   -invalid.illegal.position.kdl
+//                   ^                              constant.language.null.kdl invalid.illegal.position.kdl
+//                   ^                             -invalid.illegal.muted.position.kdl
+//                    ^^^                           constant.language.null.kdl invalid.illegal.muted.position.kdl
+//                    ^^^                          -invalid.illegal.position.kdl
+//                            ^                     constant.language.float.kdl invalid.illegal.position.kdl
+//                            ^                    -invalid.illegal.muted.position.kdl
+//                             ^^                   constant.language.float.kdl invalid.illegal.muted.position.kdl
+//                             ^^                  -invalid.illegal.position.kdl
+//                                    ^^            constant.language.float.kdl invalid.illegal.position.kdl
+//                                    ^^           -invalid.illegal.muted.position.kdl
+//                                      ^^          constant.language.float.kdl invalid.illegal.muted.position.kdl
+//                                      ^^         -invalid.illegal.position.kdl
+//                                             ^    constant.language.float.kdl invalid.illegal.position.kdl
+//                                             ^   -invalid.illegal.muted.position.kdl
+//                                              ^^  constant.language.float.kdl invalid.illegal.muted.position.kdl
+//                                              ^^ -invalid.illegal.position.kdl
+n true; n false; b null; b inf; b -inf; b nan; c !="ambiguious no#keyword≠arg"
+//^^^                                            invalid.illegal.muted.position.kdl
+//^^^                                           -invalid.illegal.position.kdl
+//   ^                                           invalid.illegal.position.kdl
+//   ^                                          -invalid.illegal.muted.position.kdl
+//        ^^^^                                   invalid.illegal.muted.position.kdl
+//        ^^^^                                  -invalid.illegal.position.kdl
+//            ^                                  invalid.illegal.position.kdl
+//            ^                                 -invalid.illegal.muted.position.kdl
+//                 ^^^                           invalid.illegal.muted.position.kdl
+//                 ^^^                          -invalid.illegal.position.kdl
+//                    ^                          invalid.illegal.position.kdl
+//                    ^                         -invalid.illegal.muted.position.kdl
+//                         ^^                    invalid.illegal.muted.position.kdl
+//                         ^^                   -invalid.illegal.position.kdl
+//                           ^                   invalid.illegal.position.kdl
+//                           ^                  -invalid.illegal.muted.position.kdl
+//                                ^^^            invalid.illegal.muted.position.kdl
+//                                ^^^           -invalid.illegal.position.kdl
+//                                   ^           invalid.illegal.position.kdl
+//                                   ^          -invalid.illegal.muted.position.kdl
+//                                        ^^     invalid.illegal.muted.position.kdl
+//                                        ^^    -invalid.illegal.position.kdl
+//                                          ^    invalid.illegal.position.kdl
+//                                          ^   -invalid.illegal.muted.position.kdl
