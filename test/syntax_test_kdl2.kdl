@@ -267,15 +267,6 @@ multiline
 (aaaa)n k="a"a k=1;
 (a)(a)n k="a"a k=1;
 
-n ()"✗← illegal empty type"
-// ^                                              invalid.illegal.muted.kdl
-n ( )"✗← illegal symbol (non-identifier)"
-// ^                                              invalid.illegal.position.kdl
-n (a) "✗← illegal separator"
-//   ^                                            invalid.illegal.position.kdl
-            n "a";
-yv2_<legalv2>
-//^^^^^^^^^^^                 -invalid.illegal.kdl
 n "Illegal space between a tag and its value"
    (tttt)   ##    nn k=1 "a";
 //       ^                   invalid.illegal.position.kdl

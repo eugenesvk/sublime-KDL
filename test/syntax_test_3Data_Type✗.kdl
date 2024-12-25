@@ -3,8 +3,21 @@
 // 3 Data: Type
 
 n (#null)1
-// ^^^^^                                          invalid.illegal.position.kdl
+// ^^                                             invalid.illegal.position.kdl
+//   ^^^                                          invalid.illegal.muted.position.kdl
 n (#true)1
-// ^^^^^                                          invalid.illegal.position.kdl
+// ^^                                             invalid.illegal.position.kdl
+//   ^^^                                          invalid.illegal.muted.position.kdl
 n (#false)1
-// ^^^^^^                                         invalid.illegal.position.kdl
+// ^^                                             invalid.illegal.position.kdl
+//   ^^^^                                         invalid.illegal.muted.position.kdl
+
+n ()"✗← illegal empty type"
+// ^                                              invalid.illegal.muted.kdl
+n ( )"✗← illegal symbol (non-identifier)"
+// ^                                              invalid.illegal.position.kdl
+n (a) "✗← illegal separator"
+//   ^                                            invalid.illegal.position.kdl
+            n "a";
+yv2_<legalv2>
+//^^^^^^^^^^^                 -invalid.illegal.kdl
