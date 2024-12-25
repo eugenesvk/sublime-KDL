@@ -818,13 +818,13 @@ contexts:
         2:                                               comment.line.slash-dash.kdl
         3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
       pop                 : 2
-  null-partial-ext🛑:
-    - match               : '(?<={{pre_val}})(\#)(nu?l?l?)({{charID_or_KW}}+)'
+  null-partial-ext🛑:  # remove 'n' match otherwise 'nan' will never get a chance
+    - match               : '(?<={{pre_val}})(\#)(nul?l?)({{charID_or_KW}}+)'
       captures            :
         3:                  invalid.illegal.position.kdl
       pop                 : 2
   null-partial-ext🛑⁄-:
-    - match               : '(?<={{pre_val}})(\#)(nu?l?l?)({{charID_or_KW}}+)'
+    - match               : '(?<={{pre_val}})(\#)(nul?l?)({{charID_or_KW}}+)'
       captures            :
         1:                                               comment.line.slash-dash.kdl
         2:                                               comment.line.slash-dash.kdl
