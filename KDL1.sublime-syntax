@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 name             : KDL1
-file_extensions  : [kdl]
+file_extensions  : [kdl,kdl1]
 scope            : text.kdl1
 first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+1[[:blank:]]*$'
 version          : 2
