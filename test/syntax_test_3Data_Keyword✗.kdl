@@ -2,35 +2,61 @@
 
 // 3 Data: Keywords (Invalid)
 ＃non-keyword🛑
-n #trued #trued !="bool-partial-ext🛑"
+n #trued #trued #infd #-infd #nand !="bool-partial-ext🛑"
 //^^^^^^                                                   meta.argument.value.kdl meta.mapping.value.kdl
 //^^^^^                                                   -invalid.illegal.position.kdl
 //     ^                                                   invalid.illegal.position.kdl
 //       ^^^^^^                                            meta.argument.value.kdl meta.mapping.value.kdl
 //       ^^^^^                                            -invalid.illegal.position.kdl
 //            ^                                            invalid.illegal.position.kdl
-n #dtrud !="direct"
+//              ^^^^^                                      meta.argument.value.kdl meta.mapping.value.kdl
+//              ^^^^                                      -invalid.illegal.position.kdl
+//                  ^                                      invalid.illegal.position.kdl
+//                    ^^^^^^                               meta.argument.value.kdl meta.mapping.value.kdl
+//                    ^^^^^                               -invalid.illegal.position.kdl
+//                         ^                               invalid.illegal.position.kdl
+//                           ^^^^^                         meta.argument.value.kdl meta.mapping.value.kdl
+//                           ^^^^                         -invalid.illegal.position.kdl
+//                               ^                         invalid.illegal.position.kdl
+n #dtrud #dnand !="direct"
 //^                                                        keyword.other.kdl
 //^                                                       -invalid.illegal.position.kdl
 //^                                                       -invalid.illegal.muted.position.kdl
 // ^                                                       invalid.illegal.position.kdl
 //  ^^^^                                                   invalid.illegal.muted.position.kdl
+//       ^                                                 keyword.other.kdl
+//       ^                                                -invalid.illegal.position.kdl
+//       ^                                                -invalid.illegal.muted.position.kdl
+//        ^                                                invalid.illegal.position.kdl
+//         ^^^^                                            invalid.illegal.muted.position.kdl
 
-n #true=1; n #false=1; b #null=1;c !="keyword≠key"
-//^^                                             keyword.other.kdl invalid.illegal.position.kdl
-//  ^^^                                          keyword.other.kdl invalid.illegal.muted.position.kdl
-//           ^^                                  keyword.other.kdl invalid.illegal.position.kdl
-//             ^^^^                              keyword.other.kdl invalid.illegal.muted.position.kdl
-//                       ^^                      keyword.other.kdl invalid.illegal.position.kdl
-//                         ^^^                   keyword.other.kdl invalid.illegal.muted.position.kdl
-n #truee=1; n #falsee=1; b #nulle=1;c !="keyword≠key"
-//^^^^^^                                         meta.node.kdl meta.property.kdl
-//^^                                             invalid.illegal.position.kdl
-//  ^^^^                                         invalid.illegal.muted.position.kdl
-//            ^^                                 invalid.illegal.position.kdl
-//              ^^^^^                            invalid.illegal.muted.position.kdl
-//                         ^^                    invalid.illegal.position.kdl
-//                           ^^^^                invalid.illegal.muted.position.kdl
+n #true=1;n #false=1;b #null=1;n #inf=1;n #-inf=1;b #nan=1;c !="keyword≠key"
+//^^                                                            keyword.other.kdl invalid.illegal.position.kdl
+//  ^^^                                                         keyword.other.kdl invalid.illegal.muted.position.kdl
+//          ^^                                                  keyword.other.kdl invalid.illegal.position.kdl
+//            ^^^^                                              keyword.other.kdl invalid.illegal.muted.position.kdl
+//                     ^^                                       keyword.other.kdl invalid.illegal.position.kdl
+//                       ^^^                                    keyword.other.kdl invalid.illegal.muted.position.kdl
+//                               ^^                             keyword.other.kdl invalid.illegal.position.kdl
+//                                 ^^                           keyword.other.kdl invalid.illegal.muted.position.kdl
+//                                        ^^                    keyword.other.kdl invalid.illegal.position.kdl
+//                                          ^^^                 keyword.other.kdl invalid.illegal.muted.position.kdl
+//                                                  ^^          keyword.other.kdl invalid.illegal.position.kdl
+//                                                    ^^        keyword.other.kdl invalid.illegal.muted.position.kdl
+n #truee=1;n #falsee=1;b #nulle=1;b #infe=1;b #-infe=1;b #nane=1;c !="keyword≠key"
+//^^^^^^                                                        meta.node.kdl meta.property.kdl
+//^^                                                            invalid.illegal.position.kdl
+//  ^^^^                                                        invalid.illegal.muted.position.kdl
+//           ^^                                                 invalid.illegal.position.kdl
+//             ^^^^^                                            invalid.illegal.muted.position.kdl
+//                       ^^                                     invalid.illegal.position.kdl
+//                         ^^^^                                 invalid.illegal.muted.position.kdl
+//                                  ^^                          invalid.illegal.position.kdl
+//                                    ^^^                       invalid.illegal.muted.position.kdl
+//                                            ^^                invalid.illegal.position.kdl
+//                                              ^^^^            invalid.illegal.muted.position.kdl
+//                                                       ^^     invalid.illegal.position.kdl
+//                                                         ^^^  invalid.illegal.muted.position.kdl
 n true=1;n false=1;b null=1;b inf=1;b -inf=1;b nan=1;c !="ambiguious no#keyword≠key"
 //^                                                 constant.language.boolean.kdl invalid.illegal.position.kdl
 //^                                                -invalid.illegal.muted.position.kdl
