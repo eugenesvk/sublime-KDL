@@ -49,6 +49,13 @@ multiline"#
 
 
 // 2 Node Element: 2 Argument
+kw   #true #false #null #inf #-inf #nan
+//   ^^^^^                                                   meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
+//         ^^^^^^                                            meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
+//                ^^^^^                                      meta.mapping.value.kdl keyword.other.kdl constant.language.null.kdl
+//                      ^^^^                                 meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
+//                           ^^^^^                           meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
+//                                 ^^^^                      meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 
 
 // 2 Node Element: 3 Property (key=value)
@@ -73,6 +80,13 @@ command "twitter" "tw" a=2 b=#true url="https://twitter.com/" {
 //           ^                                                        punctuation.separator.key-value.kdl
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                       meta.mapping.value.kdl
 //                                                       ^^^^^^^^^^^^ meta.mapping.value.kdl
+  kw t=#true f=#false n=#null fl=#inf fl=#-inf fl=#nan
+//     ^^^^^                                                 meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
+//             ^^^^^^                                        meta.mapping.value.kdl keyword.other.kdl constant.language.boolean.kdl
+//                      ^^^^^                                meta.mapping.value.kdl keyword.other.kdl constant.language.null.kdl
+//                               ^^^^                        meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
+//                                       ^^^^^               meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
+//                                                ^^^^       meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 }
 
 
