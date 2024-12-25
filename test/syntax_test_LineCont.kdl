@@ -87,3 +87,19 @@ n /--1.0 2 \ /f //
 
 illegal-multiple-terminator 1;;
 //                            ^                   invalid.illegal.position.kdl
+
+n !="All literal whitespace following \\ in a string discarded (here it's just marked)"
+b    "\sar\
+                    　nsans\s\ssbz "
+//<-                              whitespace.escape.kdl
+ //<-                             whitespace.escape.kdl
+// ^^^^^^^^^^^^^^^^^^             whitespace.escape.kdl
+b    "\sar\                    　
+//    ^                           constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//     ^                          constant.character.escape.kdl
+//        ^                       constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//         ^^^^^^^^^^^^^^^^^^^^^  whitespace.escape.kdl
+\s"
+//<-                              constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+ //<-                             constant.character.escape.kdl
+//^                               punctuation.definition.string.end.kdl
