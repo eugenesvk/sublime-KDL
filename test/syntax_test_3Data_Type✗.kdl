@@ -21,3 +21,41 @@ n (a) "✗← illegal separator"
             n "a";
 yv2_<legalv2>
 //^^^^^^^^^^^                 -invalid.illegal.kdl
+
+
+(aaaa)n k="a"a k=1;
+(a)(a)n k="a"a k=1;
+
+n "Illegal space between a tag and its value"
+   (tttt)   ##    nn k=1 "a";
+//       ^                   invalid.illegal.position.kdl
+//        ^^                 invalid.illegal.muted.position.kdl
+//          ^^               invalid.illegal.kdl
+//            ^              invalid.illegal.position.kdl
+//             ^^^           invalid.illegal.muted.position.kdl
+//                ^^         entity.name.tag.node.kdl
+   ("tt")   ##    nn k=1 "a";
+//       ^                   invalid.illegal.position.kdl
+//        ^^                 invalid.illegal.muted.position.kdl
+//          ^^               invalid.illegal.kdl
+//            ^              invalid.illegal.position.kdl
+//             ^^^           invalid.illegal.muted.position.kdl
+//                ^^         entity.name.tag.node.kdl
+   (ttttttt)n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+   (r"tttt")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+   ("ttttt")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+   ("tt"ttt)n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+//      ^^^                  invalid.illegal.position.kdl
+   (r"t""t")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+//      ^                    invalid.illegal.position.kdl
+//       ^^                  invalid.illegal.muted.position.kdl
