@@ -57,7 +57,7 @@ variables:
   # charID_not1st:            	'([0-9])|([+-][0-9])'                               #.       	#
   # charWS:                   	'[{{nl_s}}{{b_sp}}]'                                         	#
   # charID_rec:               	'{{charID}}(?!{{linespace_re}})'                             	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
-  # charID_ex_dig:            	'[[{{charID}}]&&[^{{d_dec}}]]'                               	#
+  # charID_ex_dig:            	'[[{{charID}}]&&[^0-9]]'                                     	#
   # charID_ex_dig_sign:       	'[[{{charID_ex_dig}}]&&[^+-]]'                               	#
   # unicode_char:             	'[\x{0021}-\x{10FFFF}]'                              #⊎      	# invalid: ≤0x20 or >0x10FFF)
   usv:                        	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎                  	#
@@ -106,12 +106,12 @@ variables:
   # #    ↓number              	                                                             	#
   # decimal:                  	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'    	#
   # exponent:                 	'([eE])([+-])?({{integer}})'                                 	#
-  # integer:                  	'{{d_dec}}{{d_dec_}}*'                                       	# leading 0s are allowed
+  # integer:                  	'[0-9][0-9_]*'                                               	# leading 0s are allowed
   # #sign:                    	'[+-]'                                                 #⊎    	# using [+-] is cleaner than {{sign}}
   # #                         	                                                             	#
   # hex:                      	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                          	#
-  # octal:                    	'([+-])?(0o)({{d_oct}}{{d_oct_}}*)'                          	#
-  # binary:                   	'([+-])?(0b)({{d_bin}}{{d_bin_}}*)'                          	#
+  # octal:                    	'([+-])?(0o)([0-7][0-7_]*)'                                  	#
+  # binary:                   	'([+-])?(0b)([0-1][0-7_]*)'                                  	#
   # #                         	                                                             	#
   # escline:                  	'\\{{ws}}*({{single_line_comment}}|{{nl_s}})'                	#
   # escline_beg:              	'\\'                                                         	#
