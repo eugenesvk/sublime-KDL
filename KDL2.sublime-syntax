@@ -834,7 +834,7 @@ contexts:
         scope             : keyword.other.kdl
         captures          :
           1:                                                  comment.line.slash-dash.kdl
-          2:               invalid.illegal.position.kdl       comment.line.slash-dash.kdl
+          2:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
           3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
         pop                 : 2
 
