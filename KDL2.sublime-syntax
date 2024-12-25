@@ -24,120 +24,120 @@ extends          : Packages/KDL/KDL1.sublime-syntax
 # ident = identifier #⊎=set safe #∪ set safe with exception
 # _var = var rules can't be expressed within literal regexes, e.g., excluding keywords
 variables:
-  # nodes:                    	'(?x: {{linespace_re}}*                                      	#
-  #   (?##)                   	   ({{node}} {{nodes}}?)?                                    	#
-  #   (?##)                   	      {{linespace_re}}*                                      	)' #
-  # node:                     	'(?x:                                                        	#
-  #   (?##)                   	 (/\- {{node_space}}*)?                                      	# Slashdash comment
-  #   (?##)                   	                       {{type}} ? {{ID}}                     	#
-  #   (?##)                   	      ({{node_space}}+ {{node_prop_or_arg}} )*               	#
-  #   (?##)                   	      ({{node_space}}* {{node_children}} {{ws}}*)?           	#
-  #   (?##)                   	       {{node_space}}* {{node_terminator}}                   	)' #
-  # node_prop_or_arg:         	'(/\-{{node_space}}*)?({{prop}}|{{value}})'                  	#
-  # node_children:            	'(/\-{{node_space}}*)?{{{nodes}}}'                           	#
-  # node_space:               	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                          	#
-  # node_sp_beg:              	'{{ws_beg}}|{{escline_beg}}'                                 	#
-  # line_sp_beg:              	'{{ws_beg}}|{{c_line_beg}}|{{nl_s}}'                         	#
-  # any_sp_t_beg:             	'{{node_sp_beg}}|{{node_term_beg}}'                          	#
-  # node_sp_end:              	'{{ws_end}}' #|{{escline_end}} ✗ needs previous line         	#
-  # pre_val:                  	'^|\=|\)|{{node_sp_end}}'                                    	# line begin^ as line-cont surrogate
-  # ws_beg:                   	'{{b_sp}}|{{comment_block_beg}}'                             	#
-  # ws_end:                   	'{{b_sp}}|{{comment_block_end}}'                             	#
-  # node_terminator:          	'{{single_line_comment}}|{{newline}}|;|{{eof}}'              	#
-  # node_term_beg:            	'{{c_line_beg}}|;|{{eof}}|{{nl_s}}'                          	#
-  # node_term_beg_no_nl:      	'{{c_line_beg}}|;|{{eof}}'                                   	#
-  # #                         	                                                             	#
-  # # bareID:                 	'(?!{{keyword}}[^{{charID}}]){{bareID_or_KW}}'               	#
-  # bareID_or_KW:             	'{{bareID_ex_dig_sign}}|{{bareID_ex_dig}}'                   	#
-  # bareID_ex_dig_sign:       	'{{charID_ex_dig_sign}}{{charID}}*'                          	# pre-sign: exclude digit/sign to avoid clashes
-  # bareID_ex_dig:            	'[+-](?:{{charID_ex_dig}}{{charID}}*)?'                      	# pos-sign: exclude digit only
-  charID:                     	'[[{{usv}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'              	#
-  charID_or_KW:               	'[{{charID}}\#]'                                    #⊎       	#
-  charID_not:                 	'[\/\\(){};\[\]=#"]'                                #⊎       	#
-  # charID_not1st:            	'([0-9])|([+-][0-9])'                               #.       	#
-  # charWS:                   	'[{{nl_s}}{{b_sp}}]'                                         	#
-  # charID_rec:               	'{{charID}}(?!{{linespace_re}})'                             	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
-  # charID_ex_dig:            	'[[{{charID}}]&&[^0-9]]'                                     	#
-  # charID_ex_dig_sign:       	'[[{{charID_ex_dig}}]&&[^+-]]'                               	#
-  # unicode_char:             	'[\x{0021}-\x{10FFFF}]'                              #⊎      	# invalid: ≤0x20 or >0x10FFF)
-  usv:                        	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎                  	#
-  # keyword:                  	'{{boolean}}|{{nil}}'                                        	#
-  # prop:                     	'{{ID}}={{value}}'                                           	#
-  # prop_eq:                  	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'            	#
-  # value:                    	'{{type}}?({{string}}|{{number}}|{{keyword}})'               	#
-  # type:                     	'\({{ID}}\)'                                                 	#
-  #                           	                                                             	#
-  char_illegal:               	'[{{bom}}{{c0a}}{{c0b}}{{cdel}}{{usv_not}}{{cdir}}]' #⊎      	# ST doesn't allow tracking BOM@file begin, so no need to add a BOF condition
-  c0a:                        	  '[\x{0000}-\x{0008}]'                            #⊎        	#
-  # c0valid:                  	  '[\x{0009}-\x{000D}]'                            #⊎        	#9␉\t A␊\n B␋\v C␌\f D␍\r
-  c0b:                        	  '[\x{000E}-\x{001F}]'                            #⊎        	#
-  cdel:                       	  '[\x{007F}]'                                     #⊎        	#
-  usv_not:                    	  '[{{surrog_high}}{{surrog_low}}]'                #⊎        	# not Unicode scalar value
-  usv_not_hex:                	  '[dD][8-9a-fA-F]{{d_hex}}{2}'                    #⊎        	#
-  surrog_high:                	    '[\x{D800}-\x{DBFF}]'                          #⊎        	#
-  surrog_low:                 	    '[\x{DC00}-\x{DFFF}]'                          #⊎        	#
-  cdir:                       	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]' #⊎ 	#
-  # escaped_string:           	'"{{character}}*"'                                           	#
-  # character:                	'\\{{escape}}|[^"]'                                          	#
-  # escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
-  escape_char:                	'["\\bfnrts]'                                                	#
-  # escape_unicode:           	'u{{{d_hex}}{1,6}}'                                          	#
-  escape_usv_not:             	'u{{{usv_not_hex}}}'                                         	#
-  # d_bin:                    	'[0-1]'                                                      	#
-  # d_bin_:                   	'[0-1_]'                                                     	#
-  # d_oct:                    	'[0-7]'                                                      	#
-  # d_oct_:                   	'[0-7_]'                                                     	#
-  # d_dec:                    	'[0-9]'                                                      	#
-  # d_dec_:                   	'[0-9_]'                                                     	#
-  # d_hex:                    	'[0-9a-fA-F]'                                                	#
-  # d_hex_:                   	'[0-9a-fA-F_]'                                               	#
-  # #                         	                                                             	#
-  boolean:                    	'(?:\#true|\#false)'                                         	# data type 1/4
-  nil:                        	'(?:\#null)'                                                 	# data type 2/4
-  # string:                   	'{{raw_string}}|{{escaped_string}}'                          	# data type 3/4
-  number:                     	'{{floatkw}}{{decimal}}|{{hex}}|{{octal}}|{{binary}}' #.     	# data type 4/4
-  # #    ↓string              	                                                             	#
-  raw_string:                 	 '(#+)?(\")([\S\s]*?)(\")(\2)'                               	#
-  raw_string_re:              	 '{{raw_string_hash_re}}'                                    	#🗘
-  # raw_string_hash_re:       	'#{{raw_string_hash_re}}#|{{raw_string_quotes}}'             	#🗘
-  # raw_string_quotes:        	'".*"'                                                       	#
-  string_beg:                 	'"|#*"'                                                      	# or (?!r)"|#*"
-  # string_end:               	'"#*'                                                        	# or (?!r)"|#*"
-  #    ↓number                	                                                             	#
-  floatkw:                    	'(\#inf|\#-inf|\#nan)'                     #.                	# ? not uncapturing like nil?
-  # decimal:                  	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'    	#
-  # exponent:                 	'([eE])([+-])?({{integer}})'                                 	#
-  # integer:                  	'[0-9][0-9_]*'                                               	# leading 0s are allowed
-  # #sign:                    	'[+-]'                                                 #⊎    	# using [+-] is cleaner than {{sign}}
-  # #                         	                                                             	#
-  # hex:                      	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                          	#
-  # octal:                    	'([+-])?(0o)([0-7][0-7_]*)'                                  	#
-  # binary:                   	'([+-])?(0b)([0-1][0-7_]*)'                                  	#
-  # #                         	                                                             	#
-  # escline:                  	'\\{{ws}}*({{single_line_comment}}|{{nl_s}})'                	#
-  # escline_beg:              	'\\'                                                         	#
-  # linespace_re:             	'{{nl_s}}|{{ws}}|{{single_line_comment}}'                    	# set-unsafe; includes recursion: ws → multi_line_comment → commented_block🗘
-  # char_linesp:              	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                          #∪    	# ex / but not precisely //
-  # newline:                  	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'          	# \R
-  # nl_s:                     	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'              #∪     	# not precisely ␤␊
-  ws:                         	 '{{u_sp}}|{{multi_line_comment}}'                           	#
-  b_sp:                       	'[{{u_sp}}]'                                           #⊎    	#
-  # bom:                      	'[\x{FEFF}]'                                                 	#
-  # unicode_space:            	'[[:blank:]]'                                          #⊎    	#
-  # single_line_comment:      	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'             	#
-  # single_line_comment_no_nl:	'({{c_line_beg}})([^{{nl_s}}]*)'                             	#
-  # multi_line_comment:       	'{{comment_block_beg}}{{commented_block}}'                   	# set-unsafe; recursion: commented_block🗘
-  # c_beg:                    	'/'                                                          	#
-  # c_slashdash:              	'/-'                                                         	#
-  # c_line_beg:               	'//'                                                         	#
-  # c_line_end:               	'{{nl_s}}|{{eof}}'                                           	#
-  # eof:                      	'$(?!{{nl_s}})'                                              	#
-  # eof_x:                    	'(?=[\S\s]{{eof}})' # when ↑ bugs                            	#
-  # comment_block_beg:        	'/\*'                                                        	#
-  # comment_block_doc_beg:    	'{{comment_block_beg}}(!|\*(?!/))'                           	#
-  # commented_block:          	'\*/|({{multi_line_comment}}|\*|/|[^*/]+){{commented_block}}'	# !!! cant recurse vars, do via syntax
-  # comment_block_end:        	'\*/'                                                        	#
-  # comment_block_doc_end:    	'{{comment_block_end}}'                                      	#
+  # nodes:                	'(?x: {{linespace_re}}*                                  	#
+  #   (?##)               	   ({{node}} {{nodes}}?)?                                	#
+  #   (?##)               	      {{linespace_re}}*                                  	)' #
+  # node:                 	'(?x:                                                    	#
+  #   (?##)               	 (/\- {{node_space}}*)?                                  	# Slashdash comment
+  #   (?##)               	                       {{type}} ? {{ID}}                 	#
+  #   (?##)               	      ({{node_space}}+ {{node_prop_or_arg}} )*           	#
+  #   (?##)               	      ({{node_space}}* {{node_children}} {{ws}}*)?       	#
+  #   (?##)               	       {{node_space}}* {{node_terminator}}               	)' #
+  # node_prop_or_arg:     	'(/\-{{node_space}}*)?({{prop}}|{{value}})'              	#
+  # node_children:        	'(/\-{{node_space}}*)?{{{nodes}}}'                       	#
+  # node_space:           	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                      	#
+  # node_sp_beg:          	'{{ws_beg}}|{{escline_beg}}'                             	#
+  # line_sp_beg:          	'{{ws_beg}}|{{c_line_beg}}|{{nl_s}}'                     	#
+  # any_sp_t_beg:         	'{{node_sp_beg}}|{{node_term_beg}}'                      	#
+  # node_sp_end:          	'{{ws_end}}' #|{{escline_end}} ✗ needs previous line     	#
+  # pre_val:              	'^|\=|\)|{{node_sp_end}}'                                	# line begin^ as line-cont surrogate
+  # ws_beg:               	'{{b_sp}}|{{comment_block_beg}}'                         	#
+  # ws_end:               	'{{b_sp}}|{{comment_block_end}}'                         	#
+  # node_terminator:      	'{{comment_line}}|{{newline}}|;|{{eof}}'                 	#
+  # node_term_beg:        	'{{c_line_beg}}|;|{{eof}}|{{nl_s}}'                      	#
+  # node_term_beg_no_nl:  	'{{c_line_beg}}|;|{{eof}}'                               	#
+  # #                     	                                                         	#
+  # # bareID:             	'(?!{{keyword}}[^{{charID}}]){{bareID_or_KW}}'           	#
+  # bareID_or_KW:         	'{{bareID_ex_dig_sign}}|{{bareID_ex_dig}}'               	#
+  # bareID_ex_dig_sign:   	'{{charID_ex_dig_sign}}{{charID}}*'                      	# pre-sign: exclude digit/sign to avoid clashes
+  # bareID_ex_dig:        	'[+-](?:{{charID_ex_dig}}{{charID}}*)?'                  	# pos-sign: exclude digit only
+  charID:                 	'[[{{usv}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'          	#
+  charID_or_KW:           	'[{{charID}}\#]'                                    #⊎   	#
+  charID_not:             	'[\/\\(){};\[\]=#"]'                                #⊎   	#
+  # charID_not1st:        	'([0-9])|([+-][0-9])'                               #.   	#
+  # charWS:               	'[{{nl_s}}{{b_sp}}]'                                     	#
+  # charID_rec:           	'{{charID}}(?!{{linespace_re}})'                         	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
+  # charID_ex_dig:        	'[[{{charID}}]&&[^0-9]]'                                 	#
+  # charID_ex_dig_sign:   	'[[{{charID_ex_dig}}]&&[^+-]]'                           	#
+  # unicode_char:         	'[\x{0021}-\x{10FFFF}]'                              #⊎  	# invalid: ≤0x20 or >0x10FFF)
+  usv:                    	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎              	#
+  # keyword:              	'{{boolean}}|{{nil}}'                                    	#
+  # prop:                 	'{{ID}}={{value}}'                                       	#
+  # prop_eq:              	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'        	#
+  # value:                	'{{type}}?({{string}}|{{number}}|{{keyword}})'           	#
+  # type:                 	'\({{ID}}\)'                                             	#
+  #                       	                                                         	#
+  char_illegal:           	'[{{bom}}{{c0a}}{{c0b}}{{cdel}}{{usv_not}}{{cdir}}]' #⊎  	# ST doesn't allow tracking BOM@file begin, so no need to add a BOF condition
+  c0a:                    	  '[\x{0000}-\x{0008}]'                            #⊎    	#
+  # c0valid:              	  '[\x{0009}-\x{000D}]'                            #⊎    	#9␉\t A␊\n B␋\v C␌\f D␍\r
+  c0b:                    	  '[\x{000E}-\x{001F}]'                            #⊎    	#
+  cdel:                   	  '[\x{007F}]'                                     #⊎    	#
+  usv_not:                	  '[{{surrog_high}}{{surrog_low}}]'                #⊎    	# not Unicode scalar value
+  usv_not_hex:            	  '[dD][8-9a-fA-F]{{d_hex}}{2}'                    #⊎    	#
+  surrog_high:            	    '[\x{D800}-\x{DBFF}]'                          #⊎    	#
+  surrog_low:             	    '[\x{DC00}-\x{DFFF}]'                          #⊎    	#
+  cdir:                   	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'	#⊎
+  # escaped_string:       	'"{{character}}*"'                                       	#
+  # character:            	'\\{{escape}}|[^"]'                                      	#
+  # escape:               	'{{escape_char}}|{{escape_unicode}}'                     	#
+  escape_char:            	'["\\bfnrts]'                                            	#
+  # escape_unicode:       	'u{{{d_hex}}{1,6}}'                                      	#
+  escape_usv_not:         	'u{{{usv_not_hex}}}'                                     	#
+  # d_bin:                	'[0-1]'                                                  	#
+  # d_bin_:               	'[0-1_]'                                                 	#
+  # d_oct:                	'[0-7]'                                                  	#
+  # d_oct_:               	'[0-7_]'                                                 	#
+  # d_dec:                	'[0-9]'                                                  	#
+  # d_dec_:               	'[0-9_]'                                                 	#
+  # d_hex:                	'[0-9a-fA-F]'                                            	#
+  # d_hex_:               	'[0-9a-fA-F_]'                                           	#
+  # #                     	                                                         	#
+  boolean:                	'(?:\#true|\#false)'                                     	# data type 1/4
+  nil:                    	'(?:\#null)'                                             	# data type 2/4
+  # string:               	'{{raw_string}}|{{escaped_string}}'                      	# data type 3/4
+  number:                 	'{{floatkw}}{{decimal}}|{{hex}}|{{octal}}|{{binary}}' #. 	# data type 4/4
+  # #    ↓string          	                                                         	#
+  raw_string:             	 '(#+)?(\")([\S\s]*?)(\")(\2)'                           	#
+  raw_string_re:          	 '{{raw_string_hash_re}}'                                	#🗘
+  # raw_string_hash_re:   	'#{{raw_string_hash_re}}#|{{raw_string_quotes}}'         	#🗘
+  # raw_string_quotes:    	'".*"'                                                   	#
+  string_beg:             	'"|#*"'                                                  	# or (?!r)"|#*"
+  # string_end:           	'"#*'                                                    	# or (?!r)"|#*"
+  #    ↓number            	                                                         	#
+  floatkw:                	'(\#inf|\#-inf|\#nan)'                     #.            	# ? not uncapturing like nil?
+  # decimal:              	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'	#
+  # exponent:             	'([eE])([+-])?({{integer}})'                             	#
+  # integer:              	'[0-9][0-9_]*'                                           	# leading 0s are allowed
+  # #sign:                	'[+-]'                                                 #⊎	# using [+-] is cleaner than {{sign}}
+  # #                     	                                                         	#
+  # hex:                  	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                      	#
+  # octal:                	'([+-])?(0o)([0-7][0-7_]*)'                              	#
+  # binary:               	'([+-])?(0b)([0-1][0-7_]*)'                              	#
+  # #                     	                                                         	#
+  # escline:              	'\\{{ws}}*({{comment_line}}|{{nl_s}})'                   	#
+  # escline_beg:          	'\\'                                                     	#
+  # linespace_re:         	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
+  # char_linesp:          	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                          #∪	# ex / but not precisely //
+  # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])'      	# \R
+  # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'              #∪ 	# not precisely ␤␊
+  ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
+  b_sp:                   	'[{{u_sp}}]'                                           #⊎	#
+  # bom:                  	'[\x{FEFF}]'                                             	#
+  # unicode_space:        	'[[:blank:]]'                                          #⊎	#
+  # comment_line:         	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'         	#
+  # comment_line_no_nl:   	'({{c_line_beg}})([^{{nl_s}}]*)'                         	#
+  # comment_block:        	'{{comment_block_beg}}{{commented_block}}'               	# set-unsafe; recursion: commented_block🗘
+  # c_beg:                	'/'                                                      	#
+  # c_slashdash:          	'/-'                                                     	#
+  # c_line_beg:           	'//'                                                     	#
+  # c_line_end:           	'{{nl_s}}|{{eof}}'                                       	#
+  # eof:                  	'$(?!{{nl_s}})'                                          	#
+  # eof_x:                	'(?=[\S\s]{{eof}})' # when ↑ bugs                        	#
+  # comment_block_beg:    	'/\*'                                                    	#
+  # comment_block_doc_beg:	'{{comment_block_beg}}(!|\*(?!/))'                       	#
+  # commented_block:      	'\*/|({{comment_block}}|\*|/|[^*/]+){{commented_block}}' # !!! cant recurse vars, do via syntax
+  # comment_block_end:    	'\*/'                  	#
+  # comment_block_doc_end:	'{{comment_block_end}}'	#
   # u_sp: '[\x{9}\x{20}\x{A0}\x{1680}\x{2000}\x{2001}\x{2002}\x{2003}\x{2004}\x{2005}\x{2006}\x{2007}\x{2008}\x{2009}\x{200A}\x{202F}\x{205F}\x{3000}]' #ss# #
   # ID: '{{string}}|((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
   # bareID:        '((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
@@ -1807,7 +1807,7 @@ contexts:
 #       - include           : comment_block_doc
 #       - include           : comment_block
 #   comment_line:                                   # Single-line comment
-#     - match               : // # better than {{single_line_comment}} as doesn't consume the whole line and allows embedding with early popping
+#     - match               : // # better than {{comment_line}} as doesn't consume the whole line and allows embedding with early popping
 #       scope               : punctuation.definition.comment.begin.kdl
 #       push                :
 #         - meta_scope      : comment.line.double-slash.kdl
