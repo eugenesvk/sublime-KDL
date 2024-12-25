@@ -95,7 +95,7 @@ variables:
   boolean:                    	'(?:\#true|\#false)'                                         	# data type 1/4
   nil:                        	'(?:\#null)'                                                 	# data type 2/4
   # string:                   	'{{raw_string}}|{{escaped_string}}'                          	# data type 3/4
-  # number:                   	'{{decimal}}|{{hex}}|{{octal}}|{{binary}}'                   	# data type 4/4
+  number:                     	'{{floatkw}}{{decimal}}|{{hex}}|{{octal}}|{{binary}}' #.     	# data type 4/4
   # #    ↓string              	                                                             	#
   raw_string:                 	 '(#+)?(\")([\S\s]*?)(\")(\2)'                               	#
   raw_string_re:              	 '{{raw_string_hash_re}}'                                    	#🗘
@@ -103,7 +103,8 @@ variables:
   # raw_string_quotes:        	'".*"'                                                       	#
   string_beg:                 	'"|#*"'                                                      	# or (?!r)"|#*"
   # string_end:               	'"#*'                                                        	# or (?!r)"|#*"
-  # #    ↓number              	                                                             	#
+  #    ↓number                	                                                             	#
+  floatkw:                    	'(\#inf|\#-inf|\#nan)'                     #.                	# ? not uncapturing like nil?
   # decimal:                  	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'    	#
   # exponent:                 	'([eE])([+-])?({{integer}})'                                 	#
   # integer:                  	'[0-9][0-9_]*'                                               	# leading 0s are allowed
