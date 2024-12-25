@@ -800,15 +800,15 @@ contexts:
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
   floatkw-partial:
-    - match               : '(?<={{pre_val}})\#(-?in?f?)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})\#(-?in?)(?={{any_sp_t_beg}})'
       pop                 : 2
-    - match               : '(?<={{pre_val}})\#(n?an?)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})\#(n?a)(?={{any_sp_t_beg}})'
       pop                 : 2
   floatkw-partial⁄-:
-    - match               : '(?<={{pre_val}})\#(-?in?f?)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})\#(-?in?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
-    - match               : '(?<={{pre_val}})\#(n?an?)(?={{any_sp_t_beg}})'
+    - match               : '(?<={{pre_val}})\#(n?a)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
 
