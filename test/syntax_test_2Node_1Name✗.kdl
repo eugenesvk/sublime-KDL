@@ -26,3 +26,6 @@ nn"##"b""b"
 //  ^^            invalid.illegal.position.kdl
 //    ^^          invalid.illegal.muted.position.kdl
 //       ^^       invalid.illegal.muted.position.kdl
+
+all_invali}#){}[]/#;=
+//        ^^^^^^^^^^^                             invalid.illegal.position.kdl

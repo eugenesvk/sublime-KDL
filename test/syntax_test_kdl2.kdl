@@ -274,9 +274,6 @@ n ( )"✗← illegal symbol (non-identifier)"
 n (a) "✗← illegal separator"
 //   ^                                            invalid.illegal.position.kdl
             n "a";
-all_invali}#(){}[]/#;="
-//        ^^                                     invalid.illegal.position.kdl
-//          ^^^^^^^^^^^                           invalid.illegal.muted.position.kdl
 yv2_<legalv2>
 //^^^^^^^^^^^                 -invalid.illegal.kdl
 n "Illegal space between a tag and its value"
