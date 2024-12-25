@@ -799,17 +799,39 @@ contexts:
         3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
       pop                 : 2
 
-  ＃non-keyword🛑:
+  ＃non-keyword🛑: # in prop=val # isn't allowed, so no partial #tru included
     - match               : '(?=\#)'
       push                : #✗⁵
       # - meta_scope        : ＃non-keyword🛑✗⁵
-      - include           : keyword-partial-ext🛑
       - match             : '(\#)?({{charID_or_KW}})({{charID_or_KW}}*)'
         scope             : keyword.other.kdl
         captures          :
-          # 1:               invalid.illegal.muted.position.kdl
+          1:               invalid.illegal.position.kdl
           2:               invalid.illegal.position.kdl
           3:               invalid.illegal.muted.position.kdl
+        pop                 : 2
+  ＃maybe-keyword🛑:
+    - match               : '(?=\#)'
+      push                : #✗⁵
+      # - meta_scope        : ＃maybe-keyword🛑✗⁵
+      - include           : keyword-partial-ext🛑  # in arguments #t could be #true, so could #trued be a typo, thus don't error on partials, only on extends
+      - match             : '(\#)?({{charID_or_KW}})({{charID_or_KW}}*)'
+        scope             : keyword.other.kdl
+        captures          :
+          2:               invalid.illegal.position.kdl
+          3:               invalid.illegal.muted.position.kdl
+        pop                 : 2
+  ＃maybe-keyword🛑⁄-:
+    - match               : '(?=\#)'
+      push                : #✗⁵
+      # - meta_scope        : ＃maybe-keyword🛑⁄-✗⁵
+      - include           : keyword-partial-ext🛑⁄-
+      - match             : '(\#)?({{charID_or_KW}})({{charID_or_KW}}*)'
+        scope             : keyword.other.kdl
+        captures          :
+          1:                                                  comment.line.slash-dash.kdl
+          2:               invalid.illegal.position.kdl       comment.line.slash-dash.kdl
+          3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
         pop                 : 2
 
   boolean🛑:
