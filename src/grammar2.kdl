@@ -89,7 +89,7 @@ l_␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀n␠⠀|⠀␤⠀|⠀comment_line
   n␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀w␠*⠀escline⠀w␠*⠀|⠀w␠+  !="Whitespace within nodes, where newline-ish things must be esclined"
     w␠⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠⠀⠀|⠀⠀⠀comment_block
     escline⠀⠀⠀≝⠀⧵⠀w␠*⠀⠀⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
-  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  (u)D+A⠀|⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
+  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔D〕〔A〕?⠀|⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Grammar language help: ABNF with some regex. Refs to rules are quoted ‘nodes’" {
   • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literals represented with unicode alts to avoid quotes"
