@@ -54,7 +54,7 @@ variables:
   charID_not1st:            	'([0-9])|([+-][0-9])'                                        	#
   charWS:                   	'[{{nl_s}}{{b_sp}}]'                                         	#
   charID_rec:               	'{{charID}}(?!{{linespace_re}})'                             	# set-unsafe; includes recursion: linespace → ws → multi_line_comment → commented_block🗘
-  charID_ex_dig:            	'[[{{charID}}]&&[^{{d_dec}}]]'                               	#
+  charID_ex_dig:            	'[[{{charID}}]&&[^0-9]]'                                     	#
   charID_ex_dig_sign:       	'[[{{charID_ex_dig}}]&&[^+-]]'                               	#
   unicode_char:             	'[\x{0021}-\x{10FFFF}]'                                      	# invalid: ≤0x20 or >0x10FFF)
   keyword:                  	'{{boolean}}|{{nil}}'                                        	#
@@ -67,12 +67,12 @@ variables:
   escape:                   	'{{escape_char}}|{{escape_unicode}}'                         	#
   escape_char:              	'["\\/bfnrt]'                                                	#
   escape_unicode:           	'u{{{d_hex}}{1,6}}'                                          	#
-  d_bin:                    	'[0-1]'                                                      	#
-  d_bin_:                   	'[0-1_]'                                                     	#
-  d_oct:                    	'[0-7]'                                                      	#
-  d_oct_:                   	'[0-7_]'                                                     	#
-  d_dec:                    	'[0-9]'                                                      	#
-  d_dec_:                   	'[0-9_]'                                                     	#
+  #d_bin:                   	'[0-1]'                                                      	#
+  #d_bin_:                  	'[0-1_]'                                                     	#
+  #d_oct:                   	'[0-7]'                                                      	#
+  #d_oct_:                  	'[0-7_]'                                                     	#
+  #d_dec:                   	'[0-9]'                                                      	#
+  #d_dec_:                  	'[0-9_]'                                                     	#
   d_hex:                    	'[0-9a-fA-F]'                                                	#
   d_hex_:                   	'[0-9a-fA-F_]'                                               	#
   #                         	                                                             	#
@@ -90,12 +90,12 @@ variables:
   #    ↓number              	                                                             	#
   decimal:                  	      '([+-])?({{integer}})(\.{{integer}})?{{exponent}}?'    	#
   exponent:                 	'([eE])([+-])?({{integer}})'                                 	#
-  integer:                  	'{{d_dec}}{{d_dec_}}*'                                       	# leading 0s are allowed
+  integer:                  	'[0-9][0-9_]*'                                               	# leading 0s are allowed
   #sign:                    	'[+-]'                                                  #ss# 	# using [+-] is cleaner than {{sign}}
   #                         	                                                             	#
   hex:                      	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                          	#
-  octal:                    	'([+-])?(0o)({{d_oct}}{{d_oct_}}*)'                          	#
-  binary:                   	'([+-])?(0b)({{d_bin}}{{d_bin_}}*)'                          	#
+  octal:                    	'([+-])?(0o)([0-7][0-7_]*)'                                  	#
+  binary:                   	'([+-])?(0b)([0-1][0-7_]*)'                                  	#
   #                         	                                                             	#
   escline:                  	'\\{{ws}}*({{single_line_comment}}|{{nl_s}})'                	#
   escline_beg:              	'\\'                                                         	#
