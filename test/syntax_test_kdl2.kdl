@@ -116,6 +116,16 @@ nnn ;
 //  ^                                  punctuation.terminator.node.kdl
 nnn //
 //  ^^                                 punctuation.terminator.node.kdl
+children !="Last node @ child block no longer needs to be terminated with ; even with } on the same line"
+n{n}
+// ^                                  -meta.block.child.kdl
+// ^                                   punctuation.section.mapping.end.kdl
+n{n;n{n;n};}
+//       ^                             punctuation.section.mapping.end.kdl
+//         ^                           punctuation.section.mapping.end.kdl
+n{n;n{n;n}}
+//       ^^                            punctuation.section.mapping.end.kdl
+//        ^                           -meta.block.child.kdl
 
 
 
