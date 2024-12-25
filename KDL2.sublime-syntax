@@ -255,32 +255,40 @@ contexts:
 #   comment_block∨doc:
 #     - include: comment_block_doc
 #     - include: comment_block
-#   keyword:
-#     - include: keyword-partial
-#     - include: boolean
-#     - include: nil
-#   keyword⁄-:
-#     - include: keyword-partial⁄-
-#     - include: boolean⁄-
-#     - include: nil⁄-
-#   keyword🛑:
-#     - include: boolean🛑
-#     - include: null🛑
-#   keyword🛑⁄-:
-#     - include: boolean🛑⁄-
-#     - include: null🛑⁄-
-#   keyword-partial: # avoid red flashes with unfinished typing
-#     - include: bool-partial
-#     - include: null-partial
-#   keyword-partial⁄-:
-#     - include: bool-partial⁄-
-#     - include: null-partial⁄-
+  keyword:
+    - include: keyword-partial
+    - include: boolean
+    - include: nil
+    - include: floatkw
+  keyword⁄-:
+    - include: keyword-partial⁄-
+    - include: boolean⁄-
+    - include: nil⁄-
+    - include: floatkw⁄-
+  keyword🛑:
+    - include: boolean🛑
+    - include: null🛑
+    - include: floatkw🛑
+  keyword🛑⁄-:
+    - include: boolean🛑⁄-
+    - include: null🛑⁄-
+    - include: floatkw🛑⁄-
+  keyword-partial: # avoid red flashes with unfinished typing
+    - include: bool-partial
+    - include: null-partial
+    - include: floatkw-partial
+  keyword-partial⁄-:
+    - include: bool-partial⁄-
+    - include: null-partial⁄-
+    - include: floatkw-partial⁄-
   keyword-partial-ext🛑: # avoid red flashes with extra #keyword_typing
     - include: bool-partial-ext🛑
     - include: null-partial-ext🛑
+    - include: floatkw-partial-ext🛑
   keyword-partial-ext🛑⁄-:
     - include: bool-partial-ext🛑⁄-
     - include: null-partial-ext🛑⁄-
+    - include: floatkw-partial-ext🛑⁄-
 
 
 
@@ -758,6 +766,14 @@ contexts:
     - match               : '\#\b(null)\b'
       scope               : keyword.other.kdl constant.language.null.kdl comment.line.slash-dash.kdl
       pop                 : 2
+  floatkw:
+    - match               : \#\b(-?inf|nan)\b
+      scope               : keyword.other.kdl constant.language.float.kdl
+      pop                 : 2
+  floatkw⁄-:
+    - match               : \#\b(-?inf|nan)\b
+      scope               : keyword.other.kdl constant.language.float.kdl comment.line.slash-dash.kdl
+      pop                 : 2
 
   # before     sp begin
   # after  = ) sp end (though can't detect line continuation, add that condition within line cont rule)
@@ -774,6 +790,18 @@ contexts:
       pop                 : 2
   null-partial⁄-:
     - match               : '(?<={{pre_val}})\#(nu?l?)(?={{any_sp_t_beg}})'
+      scope               : comment.line.slash-dash.kdl
+      pop                 : 2
+  floatkw-partial:
+    - match               : '(?<={{pre_val}})\#(-?in?f?)(?={{any_sp_t_beg}})'
+      pop                 : 2
+    - match               : '(?<={{pre_val}})\#(n?an?)(?={{any_sp_t_beg}})'
+      pop                 : 2
+  floatkw-partial⁄-:
+    - match               : '(?<={{pre_val}})\#(-?in?f?)(?={{any_sp_t_beg}})'
+      scope               : comment.line.slash-dash.kdl
+      pop                 : 2
+    - match               : '(?<={{pre_val}})\#(n?an?)(?={{any_sp_t_beg}})'
       scope               : comment.line.slash-dash.kdl
       pop                 : 2
 
@@ -797,6 +825,28 @@ contexts:
       pop                 : 2
   null-partial-ext🛑⁄-:
     - match               : '(?<={{pre_val}})(\#)(nu?l?l?)({{charID_or_KW}}+)'
+      captures            :
+        1:                                               comment.line.slash-dash.kdl
+        2:                                               comment.line.slash-dash.kdl
+        3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+  floatkw-partial-ext🛑:
+    - match               : '(?<={{pre_val}})(\#)(-?in?f?)({{charID_or_KW}}+)'
+      captures            :
+        3:                  invalid.illegal.position.kdl
+      pop                 : 2
+    - match               : '(?<={{pre_val}})(\#)(na?n?)({{charID_or_KW}}+)'
+      captures            :
+        3:                  invalid.illegal.position.kdl
+      pop                 : 2
+  floatkw-partial-ext🛑⁄-:
+    - match               : '(?<={{pre_val}})(\#)(-?in?f?)({{charID_or_KW}}+)'
+      captures            :
+        1:                                               comment.line.slash-dash.kdl
+        2:                                               comment.line.slash-dash.kdl
+        3:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+      pop                 : 2
+    - match               : '(?<={{pre_val}})(\#)(na?n?)({{charID_or_KW}}+)'
       captures            :
         1:                                               comment.line.slash-dash.kdl
         2:                                               comment.line.slash-dash.kdl
@@ -866,6 +916,34 @@ contexts:
   null🛑⁄-:
     - match               : '(\#)?((n)(ull))(?=[^{{charID}}])'
       scope               : keyword.other.kdl constant.language.null.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+  floatkw🛑:
+    - match               : '(\#)?((-)?(i)(nf))(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.float.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.position.kdl
+        5:                 invalid.illegal.muted.position.kdl
+    - match               : '(\#)?((n)(an))(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.float.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
+  floatkw🛑⁄-:
+    - match               : '(\#)?((-)?(i)(nf))(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.float.kdl
+      captures            :
+        1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        4:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        5:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+    - match               : '(\#)?((n)(an))(?=[^{{charID}}])'
+      scope               : keyword.other.kdl constant.language.float.kdl
       captures            :
         1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
         3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
