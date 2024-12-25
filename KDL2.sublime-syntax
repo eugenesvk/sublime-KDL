@@ -1657,6 +1657,7 @@ contexts:
     - match               : ;
       scope               : punctuation.terminator.node.kdl
       pop                 : 3
+    - include             : pop3 # no terminator @ last child node not an error anymore
     - include             : ｝🛑3
   node_terminator3⁄-:
     - include             : comment_line3_term⁄-
@@ -1665,6 +1666,7 @@ contexts:
     - match               : ;
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗n_term3⁄–
       pop                 : 3
+    - include             : pop3
     - include             : ｝🛑3
 #   node_terminator4:
 #     - include             : comment_line4_term
