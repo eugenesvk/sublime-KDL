@@ -6,7 +6,10 @@ v1 r"no" "prefix in v2"
 // ^                                              invalid.illegal.position.kdl
 v1 r###""""Rawest"""string""""###
 // ^                                              invalid.illegal.position.kdl
-no "Surrogates even in \u escaped form"\
+no "\u invalid escape"
+//  ^                                              constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//   ^                                             invalid.illegal.position.kdl
+no "Surrogates even in \\u escaped form"\
 high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0}\u{D799}"
 //    ^                                                                constant.character.escape.kdl
 //     ^^^^^^^                                                         constant.character.escape.utf8.hex.kdl
@@ -19,6 +22,9 @@ high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0
 //                                                              ^^^^   constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
 //                                                                           ^^^^         -invalid.illegal.muted.position.kdl
 //                                                                                ^^^^^^^ -invalid.illegal.muted.position.kdl
-a "\u{11FFFF} \u{110FFFF}" !="Unicode escaped above valid USV \u{10FFFF}"
+a "\u{11FFFF} \u{110FFFF}" !="Unicode escaped above valid USV \u{10FFFF} char-esc-uni🛑"
 //    ^^^^^^                            constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
 //               ^^^^^^^                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+a "\u{000FFF} \u{0F}" !="Unicode escaped in non-canonical format with extra prefixed 0s"
+//    ^^^^^^                            constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+//               ^^                     constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
