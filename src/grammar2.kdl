@@ -84,7 +84,7 @@ comment_block⠀⠀⠀⠀⠀≝;  /* commented_block
                   |⠀⦅comment_block⠀|⠀*⠀|⠀⁄⠀|⠀〔¬*⁄〕+⦆⠀⠀🗘
 /-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  /-⠀l_␠*
 
-§ "Whitespace" !="\u{0} unicode format is implied in 〔A–F〕 and ommited for brevity"
+§ "Whitespace" !="\u{F} unicode format is implied in 〔F〕 and ommited for brevity"
 l_␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀n␠⠀|⠀␤⠀|⠀comment_line  !="Whitespace               where newlines are allowed"
   n␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀w␠*⠀escline⠀w␠*⠀|⠀w␠+  !="Whitespace within nodes, where newline-ish things must be esclined"
     w␠⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠⠀⠀|⠀⠀⠀comment_block
