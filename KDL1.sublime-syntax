@@ -67,12 +67,6 @@ variables:
   escape:               	'{{escape_char}}|{{escape_unicode}}'                     	#
   escape_char:          	'["\\/bfnrt]'                                            	#
   escape_unicode:       	'u{{{d_hex}}{1,6}}'                                      	#
-  #d_bin:               	'[0-1]'                                                  	#
-  #d_bin_:              	'[0-1_]'                                                 	#
-  #d_oct:               	'[0-7]'                                                  	#
-  #d_oct_:              	'[0-7_]'                                                 	#
-  #d_dec:               	'[0-9]'                                                  	#
-  #d_dec_:              	'[0-9_]'                                                 	#
   d_hex:                	'[0-9a-fA-F]'                                            	#
   d_hex_:               	'[0-9a-fA-F_]'                                           	#
   #                     	                                                         	#
