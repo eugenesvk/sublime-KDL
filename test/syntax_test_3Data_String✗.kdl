@@ -1,6 +1,16 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 3 Data: Strings
+a """
+  " "" """
+//^                                          string.quoted.double.block.kdl invalid.illegal.position.kdl
+// ^^^^                                      string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+n """
+a  " """
+//<-                                         string.quoted.double.block.kdl invalid.illegal.position.kdl
+ //<-                                        string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+//^^^                                        string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+
 #"Multiline strings must have ␤ after the starting """ and before the ending """ "#
 a """err_not_nl
 //   ^                                          string.quoted.double.block.kdl invalid.illegal.position.kdl
