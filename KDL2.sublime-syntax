@@ -46,7 +46,7 @@ variables:
   # node_terminator:      	'{{comment_line}}|{{newline}}|;|{{eof}}'                 	#
   # node_term_beg:        	'{{c_line_beg}}|;|{{eof}}|{{nl_s}}'                      	#
   # node_term_beg_no_nl:  	'{{c_line_beg}}|;|{{eof}}'                               	#
-  # #                     	                                                         	#
+  #                       	                                                         	#
   # # bareID:             	'(?!{{keyword}}[^{{charID}}]){{bareID_or_KW}}'           	#
   # bareID_or_KW:         	'{{bareID_ex_dig_sign}}|{{bareID_ex_dig}}'               	#
   # bareID_ex_dig_sign:   	'{{charID_ex_dig_sign}}{{charID}}*'                      	# pre-sign: exclude digit/sign to avoid clashes
@@ -89,12 +89,12 @@ variables:
   escape_usv_not:         	'u{{{usv_not_hex}}}'                                     	#
   # d_hex:                	'[0-9a-fA-F]'                                            	#
   # d_hex_:               	'[0-9a-fA-F_]'                                           	#
-  # #                     	                                                         	#
+  #                       	                                                         	#
   boolean:                	'(?:\#true|\#false)'                                     	# data type 1/4
   nil:                    	'(?:\#null)'                                             	# data type 2/4
   # string:               	'{{raw_string}}|{{escaped_string}}'                      	# data type 3/4
   number:                 	'{{floatkw}}{{decimal}}|{{hex}}|{{octal}}|{{binary}}' #. 	# data type 4/4
-  # #    ↓string          	                                                         	#
+  #    ↓string            	                                                         	#
   raw_string:             	 '(#+)?(\")([\S\s]*?)(\")(\2)'                           	#
   raw_string_re:          	 '{{raw_string_hash_re}}'                                	#🗘
   # raw_string_hash_re:   	'#{{raw_string_hash_re}}#|{{raw_string_quotes}}'         	#🗘
@@ -107,11 +107,11 @@ variables:
   # exponent:             	'([eE])([+-])?({{integer}})'                             	#
   # integer:              	'[0-9][0-9_]*'                                           	# leading 0s are allowed
   # #sign:                	'[+-]'                                               #⊎  	# using [+-] is cleaner than {{sign}}
-  # #                     	                                                         	#
+  #                       	                                                         	#
   # hex:                  	'([+-])?(0x)({{d_hex}}{{d_hex_}}*)'                      	#
   # octal:                	'([+-])?(0o)([0-7][0-7_]*)'                              	#
   # binary:               	'([+-])?(0b)([0-1][0-7_]*)'                              	#
-  # #                     	                                                         	#
+  #                       	                                                         	#
   # escline:              	'\\{{ws}}*({{comment_line}}|{{nl_s}})'                   	#
   # escline_beg:          	'\\'                                                     	#
   # linespace_re:         	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
