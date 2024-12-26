@@ -969,15 +969,15 @@ contexts:
 
 
 #——— Values - Strings
-#   string-quoted-double:
-#     - match               : '"'
-#       scope               : punctuation.definition.string.begin.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.kdl
-#       - match             : '"'
-#         scope             : punctuation.definition.string.end.kdl
-#         pop               : 3
-#       - include           : char-escaped
+  string-quoted-double:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 3
+      - include           : char-escaped
   string-quoted-double3:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl
@@ -987,16 +987,16 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 3
       - include           : char-escaped
-#   string-quoted-double⁄-:
-#     - match               : '"'
-#       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.kdl
-#       - meta_content_scope: comment.line.slash-dash.kdl
-#       - match             : '"'
-#         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-#         pop               : 3
-#       - include           : char-escaped⁄-
+  string-quoted-double⁄-:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+      - include           : char-escaped⁄-
   string-quoted-double3⁄-:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1007,15 +1007,15 @@ contexts:
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 3
       - include           : char-escaped⁄-
-#   strings-quoted-double:
-#     - match               : '"'
-#       scope               : punctuation.definition.string.begin.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.kdl
-#       - match             : '"'
-#         scope             : punctuation.definition.string.end.kdl
-#         pop               : 1
-#       - include           : char-escaped
+  strings-quoted-double:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+      - include           : char-escaped
   strings-quoted-double3:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl
@@ -1025,15 +1025,15 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : char-escaped
-#   strings-quoted-double_node-id:
-#     - match               : '"'
-#       scope               : punctuation.definition.string.begin.kdl
-#       push                :
-#       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
-#       - match             : '"'
-#         scope             : punctuation.definition.string.end.kdl
-#         pop               : 1
-#       - include           : char-escaped
+  strings-quoted-double_node-id:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+      - include           : char-escaped
   strings-quoted-double3_node-id:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl
@@ -1043,16 +1043,16 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : char-escaped
-#   strings-quoted-double⁄-:
-#     - match               : '"'
-#       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#       push                :
-#       - meta_scope        : meta.string.kdl string.quoted.double.kdl
-#       - meta_content_scope: comment.line.slash-dash.kdl
-#       - match             : '"'
-#         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-#         pop               : 1
-#       - include           : char-escaped⁄-
+  strings-quoted-double⁄-:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+      - include           : char-escaped⁄-
   strings-quoted-double3⁄-:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1063,16 +1063,16 @@ contexts:
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
       - include           : char-escaped⁄-
-#   strings-quoted-double⁄-_node-id:
-#     - match               : '"'
-#       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
-#       push                :
-#       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
-#       - meta_content_scope: comment.line.slash-dash.kdl
-#       - match             : '"'
-#         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-#         pop               : 1
-#       - include           : char-escaped⁄-
+  strings-quoted-double⁄-_node-id:
+    - match               : '"'
+      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"'
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+      - include           : char-escaped⁄-
   strings-quoted-double3⁄-_node-id:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
