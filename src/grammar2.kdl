@@ -32,24 +32,25 @@ string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀
       char🆔¬⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  #"(;){"}[#]/=\"#
     keyword🆔🛑⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan
   string''⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀“⠀⠀⠀⠀string_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”
-                         |⠀“““⠀⠀␤⠀string_body☰line⠀⠀⠀⠀⠀␤⠀dedent␠*⠀”””
+                         |⠀“““⠀⠀␤⠀string_body☰line⠀⠀⠀⠀⠀␤⠀dedent␠e*⠀”””
     string_body_line⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅⠀⠀⠀⠀⠀⠀char_str⠀-⠀␤⦆*
-    string_body☰line⠀⠀⠀⠀⠀≝⠀⠀dedent␠*⠀⦅⦅“|““⦆?⠀char_str⠀⠀⠀⦆* !="←dedent␠ must exactly match ↑"
+    string_body☰line⠀⠀⠀⠀⠀≝⠀⠀dedent␠e≡⠀⦅⦅“|““⦆?⠀char_str⠀⠀⠀⦆* !="←dedent␠e must exactly match ≡↑"
     char_str⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀char⎋⠀|⠀uni⎋⠀|⠀w␠⎋⠀|⠀〔¬⧵“〕⠀-⠀char🛑
       char⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀〔“⧵bfnrts〕
       uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵ "u{"; uchar₁₆ "}"
         uchar₁₆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0-10FFFF〕⠀-; (surrogate)〔D800-DFFF〕 !="ranges in \u{F} format, but represented as hex₁₆, not actual symbols, so \u{B0} is 'B0', not '°', can be 0-padded up to max len of 6"
       w␠⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀⦅u␠|␤⦆+
-    dedent␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠|w␠⎋
+    dedent␠e⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠|w␠⎋
   string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀＃⠀string_raw_quoted⠀＃
                         ⠀⠀|⠀⠀＃⠀⠀⠀⠀⠀⠀⠀⠀🗘⠀⠀⠀⠀⠀⠀⠀⠀＃
-    string_raw_quoted⠀⠀⠀⠀⠀≝⠀⠀“⠀⠀⠀⠀⠀string_raw_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀”
-                           |⠀⠀“““⠀␤⠀string_raw_body☰line⠀␤⠀u␠*⠀”””
+    string_raw_quoted⠀⠀⠀⠀⠀≝⠀⠀“⠀⠀⠀⠀⠀string_raw_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”
+                           |⠀⠀“““⠀␤⠀string_raw_body☰line⠀␤⠀dedentu␠*⠀”””
       string_raw_body_line⠀≝ ""
                            |⠀⠀⠀⠀⠀⠀⦅char_raw⠀-⠀”⦆⠀char_raw*?
                            |⠀“⠀⠀⠀⠀⦅char_raw⠀-⠀”⦆⠀char_raw*?
-        char_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀uchar⠀-⠀␤⠀-⠀char🛑
-      string_raw_body☰line⠀≝⠀⠀⦅uchar⠀⠀⠀⠀⠀-⠀char🛑⦆*?
+        char_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀uchar⠀-⠀␤⠀-⠀char🛑
+      string_raw_body☰line⠀≝⠀⠀dedentu␠≡⠀⦅uchar⠀⠀⠀⠀⠀-⠀char🛑⦆*? !="←dedentu␠ must exactly match ≡↑"
+    dedentu␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠
 
 § "Numbers (space in 〔〕 is ignored)"
 number⠀⠀⠀⠀⠀⠀⠀≝⠀⠀keyword_number⠀|⠀hex⠀|⠀octal⠀|⠀binary⠀|⠀decimal
@@ -110,7 +111,8 @@ l_␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀n␠⠀|⠀␤⠀|⠀comment_line
     〔set⠀〕="[a b]" #"set"#="[ab]" ≝="regex Char set matches like [], where any char will be a single match"\
     "↑ ignore ↑ contained spaces (for visual separation or groups and alignment)"
     ⦅group⦆ "items must be matched together"\
-    a|b="'a or b', whichever matches 1st. Multiple items before | are a single group" "a b c | d"="⦅a b c⦆ | d"
+    a|b="'a or b', whichever matches 1st. Multiple items before | are a single group" "a b c | d"="⦅a b c⦆ | d"\
+    ≡="defined to be identical to another similarly named match"
   • -="'except for' whatever follows it" "uchar⠀-⠀␤"="match ‘uchar’ rule, but not ‘␤’ rule"
   • ¶="cut point: always matches and consumes no chars, but once matched, bans backtracking past that point in the source. If a parser would rewind past ¶, it must instead fail the overall parse, as if it had run out of options (only for ‘string_raw’ to ensure the 1st instance of the appropriate closing quote sequence ends it)"
   • "A single definition may be split over multiple lines. Newlines are treated as spaces"
