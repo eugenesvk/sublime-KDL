@@ -87,9 +87,9 @@ comment_block⠀⠀⠀⠀⠀≝;  /* commented_block
 
 § "Whitespace" !="\u{F} unicode format is implied in 〔F〕 and ommited for brevity"
 l_␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀n␠⠀|⠀␤⠀|⠀comment_line  !="Whitespace               where newlines are allowed"
-  n␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀w␠*⠀escline⠀w␠*⠀|⠀w␠+  !="Whitespace within nodes, where newline-ish things must be esclined"
-    w␠⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠⠀⠀|⠀⠀⠀comment_block
-    escline⠀⠀⠀≝⠀⧵⠀w␠*⠀⠀⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
+  n␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀cu␠*⠀escline⠀cu␠*⠀|⠀cu␠+  !="Whitespace within nodes, where newline-ish things must be esclined"
+    cu␠⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠⠀⠀|⠀⠀⠀comment_block
+    escline⠀⠀⠀≝⠀⧵⠀cu␠*⠀⠀⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
   ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔D〕〔A〕⠀|⠀u␤  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Grammar language help: ABNF with some regex. Refs to rules are quoted ‘nodes’" {
