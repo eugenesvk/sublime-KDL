@@ -261,6 +261,19 @@ n s="""
 //^^^^                       string.quoted.double.block.kdl
 """
 
+a #"""
+//^^^^                    string.quoted.double.block.raw.kdl punctuation.definition.string.begin.kdl
+raw multiline\n
+//^^^^^^^^^^^^^^          string.quoted.double.block.raw.kdl
+//           ^           -punctuation.definition.escape.begin.kdl
+//           ^^          -constant.character.escape.kdl
+  """# i=1
+//^^^^                    string.quoted.double.block.raw.kdl punctuation.definition.string.end.kdl
+a ##"""
+//^^^^^                   string.quoted.double.block.raw.kdl punctuation.definition.string.begin.kdl
+  """## i=1
+//^^^^^                   string.quoted.double.block.raw.kdl punctuation.definition.string.end.kdl
+
 
 // 3 Data: Type
 ("a")a b=(#"sdf"#)1 c=(###"s"d"f"###)2 "allow strings, including raw, in annotations"
