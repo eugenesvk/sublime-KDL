@@ -28,3 +28,25 @@ high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0
 a "\u{11FFFF} \u{110FFFF}" !="Unicode escaped above valid USV \u{10FFFF} char-esc-uni🛑"
 //    ^^^^^^                            constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
 //               ^^^^^^^                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
+
+b "Strings can have newlines outside of escaped whitespace"
+n "
+// ^                                     invalid.illegal.position.kdl
+"
+n "
+
+//<-                                     invalid.illegal.muted.position.kdl
+"
+n "asdf              　
+              　  //   ^                     invalid.illegal.position.kdl"
+
+n "asdf\
+aa
+//^                                      invalid.illegal.position.kdl
+
+//<-                                     invalid.illegal.muted.position.kdl
+"
+b "\sab\
+                　cdefg\ssbz
+//                         ^             invalid.illegal.position.kdl
+"
