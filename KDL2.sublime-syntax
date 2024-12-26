@@ -73,11 +73,11 @@ variables:
   c0b:                    	  '[\x{000E}-\x{001F}]'                            #⊎    	#
   cdel:                   	  '[\x{007F}]'                                     #⊎    	#
   usv_not:                	  '[{{surrog_high}}{{surrog_low}}]'                #⊎    	# not Unicode scalar value
-  usv_not_hex:            	  '[dD][8-9a-fA-F]{{d_hex}}{2}'                    #⊎    	#
+  usv_not_hex:            	  '0?0?[dD][8-9a-fA-F]{{d_hex}}{2}'                #.    	#
   surrog_high:            	    '[\x{D800}-\x{DBFF}]'                          #⊎    	#
   surrog_low:             	    '[\x{DC00}-\x{DFFF}]'                          #⊎    	#
   cdir:                   	  '[\x{200E}-\x{200F}\x{202A}-\x{202E}\x{2066}-\x{2069}]'	#⊎
-  usv_fmt_not_hex:        	  '0{1,5}{{d_hex}}{1,5}'                           #⊎    	# can be > max, so put lower in priority vs codepoint_not_hex
+  # usv_fmt_not_hex:      	  '0{1,5}{{d_hex}}{1,5}'                           #⊎    	# can be > max, so put lower in priority vs codepoint_not_hex
   codepoint_not_hex:      	  '{{d_hex}}{7,}|{{cp_max1_hex}}|{{cp_max2_hex}}'        	#1234567>10FFFF
   cp_max1_hex:            	    '[2-9a-fA-F]{{d_hex}}{5}'                      #⊎    	#20FFFF>10FFFF
   cp_max2_hex:            	    '1[1-9a-fA-F]{{d_hex}}{4}'                     #⊎    	#11FFFF>10FFFF
@@ -126,7 +126,7 @@ variables:
   # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'            #∪   	# not precisely ␤␊
   ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
   b_sp:                   	'[{{u_sp}}]'                                        #⊎   	#
-  uspnl:                 	'{{u_sp}}|{{newline}}'                              #.   	#
+  uspnl:                  	'{{u_sp}}|{{newline}}'                              #.   	#
   # bom:                  	'[\x{FEFF}]'                                             	#
   # unicode_space:        	'[[:blank:]]'                                       #⊎   	#
   # comment_line:         	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'         	#
@@ -1055,13 +1055,6 @@ contexts:
           3:               constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl #🛑usv_not_hex
           4:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
         pop               : 1
-      - match             : '(u)({)({{usv_fmt_not_hex}})(})' # can be > max, must be after codepoint_not_hex
-        captures          :
-          1:               constant.character.escape.utf8.hex.kdl
-          2:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl
-          3:               constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl #🛑usv_fmt_not_hex
-          4:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl
-        pop               : 1
   char-escaped⁄-:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
@@ -1091,13 +1084,6 @@ contexts:
           4:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl comment.line.slash-dash.kdl
         pop               : 1
       - match             : '(u)({)({{usv_not_hex}})(})'
-        captures          :
-          1:               constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
-          2:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl comment.line.slash-dash.kdl
-          3:               constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-          4:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.end.kdl comment.line.slash-dash.kdl
-        pop               : 1
-      - match             : '(u)({)({{usv_fmt_not_hex}})(})'
         captures          :
           1:               constant.character.escape.utf8.hex.kdl comment.line.slash-dash.kdl
           2:               constant.character.escape.utf8.hex.kdl punctuation.definition.usv.begin.kdl comment.line.slash-dash.kdl
