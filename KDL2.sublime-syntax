@@ -124,6 +124,7 @@ variables:
   # char_linesp:          	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                       #∪   	# ex / but not precisely //
   # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])' #.   	# \R
   # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'            #∪   	# not precisely ␤␊
+  nl_not:                 	'[^{{nl_s}}]'            #∪                              	# not precisely ␤␊
   ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
   b_sp:                   	'[{{u_sp}}]'                                        #⊎   	#
   uspnl:                  	'{{u_sp}}|{{newline}}'                              #.   	#
