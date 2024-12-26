@@ -1240,6 +1240,7 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 3
+      - include           : ␤🛑¹s
   string-quoted-double3-raw:
     - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
       captures            :
@@ -1271,6 +1272,7 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 3
+      - include           : ␤🛑¹s
   string-quoted-double3-raw⁄-:
     - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
       captures            :
@@ -1302,6 +1304,7 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
+      - include           : ␤🛑¹s
   strings-quoted-double3-raw:
     - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
       captures            :
@@ -1332,6 +1335,7 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
+      - include           : ␤🛑¹s
   strings-quoted-double3-raw_node-id:
     - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
       captures            :
@@ -1363,6 +1367,7 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
+      - include           : ␤🛑¹s
   strings-quoted-double3-raw⁄-:
     - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
       captures            :
@@ -1395,6 +1400,7 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
+      - include           : ␤🛑¹s
   strings-quoted-double3-raw⁄-_node-id:
     - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
       captures            :
