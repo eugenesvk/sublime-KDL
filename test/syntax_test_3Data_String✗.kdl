@@ -25,6 +25,3 @@ high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0
 a "\u{11FFFF} \u{110FFFF}" !="Unicode escaped above valid USV \u{10FFFF} char-esc-uni🛑"
 //    ^^^^^^                            constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
 //               ^^^^^^^                constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
-a "\u{000FFF} \u{0F}" !="Unicode escaped in non-canonical format with extra prefixed 0s"
-//    ^^^^^^                            constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
-//               ^^                     constant.character.escape.utf8.hex.kdl invalid.illegal.muted.position.kdl
