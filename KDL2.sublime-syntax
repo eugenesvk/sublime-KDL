@@ -81,12 +81,18 @@ variables:
   codepoint_not_hex:      	  '{{d_hex}}{7,}|{{cp_max1_hex}}|{{cp_max2_hex}}'        	#1234567>10FFFF
   cp_max1_hex:            	    '[2-9a-fA-F]{{d_hex}}{5}'                      #⊎    	#20FFFF>10FFFF
   cp_max2_hex:            	    '1[1-9a-fA-F]{{d_hex}}{4}'                     #⊎    	#11FFFF>10FFFF
-  # escaped_string:       	'"{{character}}*"'                                       	#
-  # character:            	'\\{{escape}}|[^"]'                                      	#
-  # escape:               	'{{escape_char}}|{{escape_unicode}}'                     	#
-  escape_char:            	'["\\bfnrts]'                                            	#v2: +s −/
-  # escape_unicode:       	'u{{{d_hex}}{1,6}}'                                      	#
-  escape_usv_not:         	'u{{{usv_not_hex}}}'                                     	#
+  escaped_string:         	'"{{str_body_line}}"|"""{{str_mline}}"""'                	#
+  str_body_line:          	'{{char_str1}}*'                                         	#string_body_line ≝ ⦅char_str - ␤⦆*
+  str_mline:              	'{{newline}}{{str_bodymline}}{{newline}}({{esc_uws}})*'  	#
+  str_bodymline:          	'"?"?{{char_str}}*'                                      	#
+  char_str:               	'{{escaped}}|[^"]'                                       	#char_str ≝ char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 - char🛑
+  char_str1:              	'{{escaped}}|[^"\n]'                                     	#char_str - ␤
+  escaped:                	'{{esc_char}}|{{esc_uni}}|{{esc_ws}}'                    	#
+  esc_char:               	'\\["\\bfnrts]'                                          	#v2: +s −/   char⎋ ≝ ⧵ 〔“⧵bfnrts〕
+  esc_uni:                	'\\u{{{d_hex}}{1,6}}'                                    	# uni⎋ ≝ ⧵ "u{"; uchar₁₆ "}"
+  esc_ws:                 	'\\({{u_sp}}|{{newline}})+'                              	# w␠⎋ ≝ ⧵ ⦅u␠|␤⦆+
+  esc_uws:                	'{{u_sp}}|{{esc_ws}}'                                    	# w␠⎋ ≝ ⧵ ⦅u␠|␤⦆+
+  esc_usv_not:            	'u{{{usv_not_hex}}}'                                     	#
   # d_hex:                	'[0-9a-fA-F]'                                            	#
   # d_hex_:               	'[0-9a-fA-F_]'                                           	#
   #                       	                                                         	#
@@ -1018,7 +1024,7 @@ contexts:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
       push                :
-      - match             : '({{escape_char}})'
+      - match             : '({{esc_char}})'
         captures          :
           1:               constant.character.escape.kdl
         pop               : 1
@@ -1054,7 +1060,7 @@ contexts:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
       push                :
-      - match             : '({{escape_char}})'
+      - match             : '({{esc_char}})'
         captures          :
           1:               constant.character.escape.kdl comment.line.slash-dash.kdl
         pop               : 1
