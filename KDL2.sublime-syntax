@@ -41,8 +41,8 @@ variables:
   # any_sp_t_beg:         	'{{node_sp_beg}}|{{node_term_beg}}'                      	#
   # node_sp_end:          	'{{ws_end}}' #|{{escline_end}} ✗ needs previous line     	#
   # pre_val:              	'^|\=|\)|{{node_sp_end}}'                                	# line begin^ as line-cont surrogate
-  # ws_beg:               	'{{b_sp}}|{{comment_block_beg}}'                         	#
-  # ws_end:               	'{{b_sp}}|{{comment_block_end}}'                         	#
+  # ws_beg:               	'{{u_sp}}|{{comment_block_beg}}'                         	#
+  # ws_end:               	'{{u_sp}}|{{comment_block_end}}'                         	#
   # node_terminator:      	'{{comment_line}}|{{newline}}|;|{{eof}}'                 	#
   # node_term_beg:        	'{{c_line_beg}}|;|{{eof}}|{{nl_s}}'                      	#
   # node_term_beg_no_nl:  	'{{c_line_beg}}|;|{{eof}}'                               	#
@@ -51,19 +51,19 @@ variables:
   # bareID_or_KW:         	'{{bareID_ex_dig_sign}}|{{bareID_ex_dig}}'               	#
   # bareID_ex_dig_sign:   	'{{charID_ex_dig_sign}}{{charID}}*'                      	# pre-sign: exclude digit/sign to avoid clashes
   # bareID_ex_dig:        	'[+-](?:{{charID_ex_dig}}{{charID}}*)?'                  	# pos-sign: exclude digit only
-  charID:                 	'[[{{usv}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'          	#
+  charID:                 	'[[{{uchar}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'        	#
   charID_or_KW:           	'[{{charID}}\#]'                                    #⊎   	#
   charID_not:             	'[\/\\(){};\[\]=#"]'                                #⊎   	#
   # charID_not1st:        	'([0-9])|([+-][0-9])'                               #.   	#
-  # charWS:               	'[{{nl_s}}{{b_sp}}]'                                #∪   	#\r\n sequence not accounted for
+  # charWS:               	'[{{nl_s}}{{u_sp}}]'                                #∪   	#\r\n sequence not accounted for
   # charID_rec:           	'{{charID}}(?!{{linespace_re}})'                         	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
   # charID_ex_dig:        	'[[{{charID}}]&&[^0-9]]'                                 	#
   # charID_ex_dig_sign:   	'[[{{charID_ex_dig}}]&&[^+-]]'                           	#
   # unicode_char:         	'[\x{0021}-\x{10FFFF}]'                             #⊎   	# invalid: ≤0x20 or >0x10FFF)
-  usv:                    	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎              	#
+  uchar:                  	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎              	#
   # keyword:              	'{{boolean}}|{{nil}}'                                    	#
   # prop:                 	'{{ID}}={{value}}'                                       	#
-  # prop_eq:              	'({{b_sp}}?)({{b_sp}}*)(=)({{b_sp}}?)({{b_sp}}*)'        	#
+  # prop_eq:              	'({{u_sp}}?)({{u_sp}}*)(=)({{u_sp}}?)({{u_sp}}*)'        	#
   # value:                	'{{type}}?({{string}}|{{number}}|{{keyword}})'           	#
   # type:                 	'\({{ID}}\)'                                             	#
   #                       	                                                         	#
@@ -122,12 +122,12 @@ variables:
   # escline:              	'\\{{ws}}*({{comment_line}}|{{nl_s}})'                   	#
   # escline_beg:          	'\\'                                                     	#
   # linespace_re:         	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
-  # char_linesp:          	'[{{nl_s}}{{b_sp}}{{c_beg}}]'                       #∪   	# ex / but not precisely //
+  # char_linesp:          	'[{{nl_s}}{{u_sp}}{{c_beg}}]'                       #∪   	# ex / but not precisely //
   # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])' #.   	# \R
   # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'            #∪   	# not precisely ␤␊
-  nl_not:                 	'[^{{nl_s}}]'            #∪                              	# not precisely ␤␊
+  nl_not_s:               	'[^{{nl_s}}]'                                      #⊎     	#
   ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
-  b_sp:                   	'[{{u_sp}}]'                                        #⊎   	#
+  b_sp:                   	'{{u_sp}}'                                          #⊎   	#left to override v1 syntax
   uspnl:                  	'{{u_sp}}|{{newline}}'                              #.   	#
   # uspnl_s:              	'[[{{u_sp}}]||[{{nl_s}}]]]                        #∪     	#?
   # bom:                  	'[\x{FEFF}]'                                             	#
@@ -147,7 +147,7 @@ variables:
   # comment_block_end:    	'\*/'                   	#
   # comment_block_doc_end:	'{{comment_block_end}}' 	#
   u_sp_not:               	'[^{{u_sp}}]'         #⊎	#
-  # u_sp: '[\x{9}\x{20}\x{A0}\x{1680}\x{2000}\x{2001}\x{2002}\x{2003}\x{2004}\x{2005}\x{2006}\x{2007}\x{2008}\x{2009}\x{200A}\x{202F}\x{205F}\x{3000}]' #ss# #
+  # u_sp: '[\x{9}\x{20}\x{A0}\x{1680}\x{2000}\x{2001}\x{2002}\x{2003}\x{2004}\x{2005}\x{2006}\x{2007}\x{2008}\x{2009}\x{200A}\x{202F}\x{205F}\x{3000}]' #⊎ #
   # ID: '{{string}}|((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
   # bareID:        '((?!({{keyword}})[^{{charID}}])({{bareID_ex_dig_sign}}|{{bareID_ex_dig}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
   # ↑ excludes keywords, but string would be a pain to style
@@ -990,7 +990,7 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   string-quoted-double3:
-    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl
         2:                 invalid.illegal.position.kdl
@@ -1020,7 +1020,7 @@ contexts:
       - include           : char-escaped⁄-
       - include           : ␤🛑¹s
   string-quoted-double3⁄-:
-    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         2:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
@@ -1050,7 +1050,7 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   strings-quoted-double3:
-    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl
         2:                 invalid.illegal.position.kdl
@@ -1079,7 +1079,7 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   strings-quoted-double3_node-id:
-    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl
         2:                 invalid.illegal.position.kdl
@@ -1109,7 +1109,7 @@ contexts:
       - include           : char-escaped⁄-
       - include           : ␤🛑¹s
   strings-quoted-double3⁄-:
-    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         2:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
@@ -1140,7 +1140,7 @@ contexts:
       - include           : char-escaped⁄-
       - include           : ␤🛑¹s
   strings-quoted-double3⁄-_node-id:
-    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         2:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
@@ -1242,7 +1242,7 @@ contexts:
         pop               : 3
       - include           : ␤🛑¹s
   string-quoted-double3-raw:
-    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl
         2:                 punctuation.definition.string.begin.kdl
@@ -1274,7 +1274,7 @@ contexts:
         pop               : 3
       - include           : ␤🛑¹s
   string-quoted-double3-raw⁄-:
-    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1306,7 +1306,7 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw:
-    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl
         2:                 punctuation.definition.string.begin.kdl
@@ -1337,7 +1337,7 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw_node-id:
-    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl
         2:                 punctuation.definition.string.begin.kdl
@@ -1369,7 +1369,7 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw⁄-:
-    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1402,7 +1402,7 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw⁄-_node-id:
-    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
         1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1427,7 +1427,7 @@ contexts:
 #       captures            :
 #         2:                 invalid.illegal.position.kdl #✗”“”s
 #         3:                 invalid.illegal.muted.position.kdl #✗”“”s
-#     - match               : '((?<=#)|(?<="))(")([{{b_sp}}\S]*)'
+#     - match               : '((?<=#)|(?<="))(")([{{u_sp}}\S]*)'
 #       captures            :
 #         2:                 invalid.illegal.position.kdl #✗”“s
 #         3:                 invalid.illegal.muted.position.kdl #✗”“s
@@ -1438,7 +1438,7 @@ contexts:
 #         3:                 invalid.illegal.muted.position.kdl #✗”“”3
 #       push                :
 #       - include           : pop3
-#     - match               : '((?<=#)|(?<="))(")([{{b_sp}}\S]*)'
+#     - match               : '((?<=#)|(?<="))(")([{{u_sp}}\S]*)'
 #       captures            :
 #         2:                 invalid.illegal.position.kdl #✗”“3
 #         3:                 invalid.illegal.muted.position.kdl #✗”“3
@@ -1451,7 +1451,7 @@ contexts:
 #         3:                 invalid.illegal.muted.position.kdl #✗”“”4
 #       push                :
 #       - include           : pop4
-#     - match               : '((?<=#)|(?<="))(")([{{b_sp}}\S]*)'
+#     - match               : '((?<=#)|(?<="))(")([{{u_sp}}\S]*)'
 #       captures            :
 #         2:                 invalid.illegal.position.kdl #✗”“4
 #         3:                 invalid.illegal.muted.position.kdl #✗”“4
@@ -1463,7 +1463,7 @@ contexts:
         2:                 invalid.illegal.position.kdl #✗”r“”s
         4:                 invalid.illegal.muted.position.kdl #✗”r“”s
         5:                 invalid.illegal.muted.position.kdl #✗”r“”s
-    - match               : '((?<=#)|(?<="))(#*)(")([{{b_sp}}\S]*)'
+    - match               : '((?<=#)|(?<="))(#*)(")([{{u_sp}}\S]*)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“s
         3:                 invalid.illegal.position.kdl #✗”r“s
@@ -1476,7 +1476,7 @@ contexts:
         5:                 invalid.illegal.muted.position.kdl #✗”r“”3
       push                :
       - include           : pop3
-    - match               : '((?<=#)|(?<="))(#*)(")([{{b_sp}}\S]*)'
+    - match               : '((?<=#)|(?<="))(#*)(")([{{u_sp}}\S]*)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“3
         3:                 invalid.illegal.position.kdl #✗”r“3
@@ -1491,7 +1491,7 @@ contexts:
         5:                 invalid.illegal.muted.position.kdl #✗”r“”4
       push                :
       - include           : pop4
-    - match               : '((?<=#)|(?<="))(#*)(")([{{b_sp}}\S]*)'
+    - match               : '((?<=#)|(?<="))(#*)(")([{{u_sp}}\S]*)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“4
         3:                 invalid.illegal.position.kdl #✗”r“4
@@ -1499,14 +1499,14 @@ contexts:
       push                :
       - include           : pop4
 #   bare-after-string🛑: #
-#     - match               : '((?<=#)|(?<="))({{bareID}})([{{b_sp}}\S]*)'
+#     - match               : '((?<=#)|(?<="))({{bareID}})([{{u_sp}}\S]*)'
 #       captures            :
 #         2:                 invalid.illegal.position.kdl #✗”bare
 #         6:                 invalid.illegal.muted.position.kdl #✗”bare
 #       push                :
 #       - include           : pop3
 #   bare-after-string🛑4:
-#     - match               : '((?<=#)|(?<="))({{bareID}})([{{b_sp}}\S]*)'
+#     - match               : '((?<=#)|(?<="))({{bareID}})([{{u_sp}}\S]*)'
 #       captures            :
 #         2:                 invalid.illegal.position.kdl #✗”bare
 #         6:                 invalid.illegal.muted.position.kdl #✗”bare
@@ -2016,7 +2016,7 @@ contexts:
 #     - include             : ｝🛑4
 
 #   pre｝🛑:                # missing node terminator before }, requires hunting down for space before }, which nodespace or other rule can handle already
-#     - match               : '{{b_sp}}*?({{b_sp}})?(?=\})'
+#     - match               : '{{u_sp}}*?({{u_sp}})?(?=\})'
 #       captures            :
 #         1:                  invalid.illegal.kdl
 #       pop                 : 1
@@ -2326,13 +2326,6 @@ contexts:
 #   u_sps:
 #     - match               : '{{u_sp}}'
 #       #scope               : dbg✗␠s
-#   b_sp:
-#     - match               : '{{b_sp}}'
-#       #scope               : dbg✗b␠
-#       pop                 : 1
-#   b_sps:
-#     - match               : '{{b_sp}}'
-#       #scope               : dbg✗b␠s
 
 #   node␠:                 # ≝ node-space: ws* escline ws* | ws+
 #     - include             : line_continuation
@@ -2362,7 +2355,7 @@ contexts:
 #     - include             : wss
 #     - include             : pop⸙
 #     # - meta_scope          : ✗ws+⸙1
-#     # - match               : '{{b_sp}}'
+#     # - match               : '{{u_sp}}'
 #       # scope               : bsp✗ws+⸙1
 #     # - include             : comment_block∨doc
 #     # - include             : node-elements
@@ -2380,7 +2373,7 @@ contexts:
 #     - include             : line_continuation
 #     - include             : pop⸙
 #     # - meta_scope          : ✗ws-line⎋-ws⸙1
-#     # - match               : '{{b_sp}}'
+#     # - match               : '{{u_sp}}'
 #     #   scope               : bsp✗ws-line⎋-ws⸙1
 #     # - include             : comment_block∨doc
 #   ws-line⎋-ws⁄-⸙1:
@@ -2442,11 +2435,11 @@ contexts:
 #       - match             : '(\s)'
 #         scope             : invalid.illegal.muted.position.kdl #✗s🛑¹s
 #       - include           : pop # repeat 2nd space
-#   bsp🛑¹s:                  # make only the first contiguous b_sp red
-#     - match               : '({{b_sp}})'
+#   bsp🛑¹s:                  # make only the first contiguous u_sp red
+#     - match               : '({{u_sp}})'
 #       scope               : invalid.illegal.position.kdl #✗bsp🛑¹s
 #       push                :
-#       - match             : '({{b_sp}})'
+#       - match             : '({{u_sp}})'
 #         scope             : invalid.illegal.muted.position.kdl #✗bsp🛑¹s
 #       - include           : pop # repeat 2nd space
 #   s🛑s:
@@ -2464,11 +2457,11 @@ contexts:
 #       scope               : invalid.illegal.position.kdl #✗S🛑
 #       pop                 : 1
 #   S🛑pre␠:               # mark without red highlight
-#     - match               : '(\S*)(?={{b_sp}})'
+#     - match               : '(\S*)(?={{u_sp}})'
 #       captures            :
 #         2:                  invalid.illegal.muted.position.kdl #✗S🛑pre␠
   ch🛑pre␠:              # to avoid red flashes, mark last char as illegal before ␠
-    - match               : '({{charID_or_KW}}*)({{charID_or_KW}})(?={{b_sp}})'
+    - match               : '({{charID_or_KW}}*)({{charID_or_KW}})(?={{u_sp}})'
       captures            :
         1:                  invalid.illegal.muted.position.kdl #✗ch🛑pre␠
         2:                  invalid.illegal.position.kdl #✗ch🛑pre␠
@@ -2527,7 +2520,7 @@ contexts:
 #       scope               : invalid.illegal.position.kdl comment.line.slash-dash.kdl
 #       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
 #   pop_pre␠:
-#     - match               : '(?={{b_sp}})'
+#     - match               : '(?={{u_sp}})'
 #       pop                 : 1
 #   pop_pre-ch:
 #     - match               : '(?=\{)'
@@ -2551,7 +2544,7 @@ contexts:
 #     - match               : '(?=\"|r\")'
 #       pop                 :
 #   pop2_pre␠:
-#     - match               : '(?={{b_sp}})'
+#     - match               : '(?={{u_sp}})'
 #       pop                 : 2
 #   pop2_pre-ch:
 #     - match               : '(?=\{)'
