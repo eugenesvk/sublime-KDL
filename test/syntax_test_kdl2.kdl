@@ -195,9 +195,21 @@ n 10.5e+4
 //     ^                       keyword.operator.arithmetic.kdl
 
 // 3 Data: Strings
-n "\\\b\f\n\r\t\s\/ escape set"
-// ^^^^^^^^^^^^^^^                                constant.character.escape.kdl
-//                ^                              -constant.character.escape.kdl
+n "\\\b\f\n\r\t\s\"\/ escape set"
+// ^^^^^^^^^^^^^^^^^                              constant.character.escape.kdl
+//                  ^                            -constant.character.escape.kdl
+// ^                                              punctuation.definition.escape.begin.kdl
+//  ^                                            -punctuation.definition.escape.begin.kdl
+//   ^                                            punctuation.definition.escape.begin.kdl
+//    ^                                          -punctuation.definition.escape.begin.kdl
+//     ^                                          punctuation.definition.escape.begin.kdl
+//      ^                                        -punctuation.definition.escape.begin.kdl
+//       ^                                        punctuation.definition.escape.begin.kdl
+//        ^                                      -punctuation.definition.escape.begin.kdl
+//         ^                                      punctuation.definition.escape.begin.kdl
+//          ^                                    -punctuation.definition.escape.begin.kdl
+//                 ^                              punctuation.definition.escape.begin.kdl
+//                  ^                            -punctuation.definition.escape.begin.kdl
 title "Regular \b\\\/\u{10FFFF}string"
 //    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            meta.string.kdl, string.quoted.double.kdl
 //             ^^^^                               constant.character.escape.kdl
