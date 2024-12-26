@@ -978,6 +978,7 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 3
       - include           : char-escaped
+      - include           : ␤🛑¹s
   string-quoted-double3:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl
@@ -997,6 +998,7 @@ contexts:
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 3
       - include           : char-escaped⁄-
+      - include           : ␤🛑¹s
   string-quoted-double3⁄-:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1016,6 +1018,7 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : char-escaped
+      - include           : ␤🛑¹s
   strings-quoted-double3:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl
@@ -1034,6 +1037,7 @@ contexts:
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : char-escaped
+      - include           : ␤🛑¹s
   strings-quoted-double3_node-id:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl
@@ -1053,6 +1057,7 @@ contexts:
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
       - include           : char-escaped⁄-
+      - include           : ␤🛑¹s
   strings-quoted-double3⁄-:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1073,6 +1078,7 @@ contexts:
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
       - include           : char-escaped⁄-
+      - include           : ␤🛑¹s
   strings-quoted-double3⁄-_node-id:
     - match               : '"""'
       scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -1095,7 +1101,6 @@ contexts:
       - include           : char-esc-uni
       - include           : u␠␤s
       - include           : any🛑
-    - include             : ␤🛑¹s
   char-esc-uni:
     - match               : '(u)({)({{d_hex}}{1,6})(})'
       captures            :
@@ -1131,7 +1136,6 @@ contexts:
       - include           : char-esc-uni⁄-
       - include           : u␠␤s
       - include           : any🛑
-    - include             : ␤🛑¹s
   char-esc-uni⁄-:
     - match               : '(u)({)({{d_hex}}{1,6})(})'
       captures            :
