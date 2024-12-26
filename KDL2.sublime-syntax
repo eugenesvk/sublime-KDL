@@ -91,7 +91,7 @@ variables:
   esc_char:               	'\\["\\bfnrts]'                                          	#v2: +s −/   char⎋ ≝ ⧵ 〔“⧵bfnrts〕
   esc_uni:                	'\\u{{{d_hex}}{1,6}}'                                    	# uni⎋ ≝ ⧵ "u{"; uchar₁₆ "}"
   esc_ws:                 	'\\({{u_sp}}|{{newline}})+'                              	# w␠⎋ ≝ ⧵ ⦅u␠|␤⦆+
-  esc_uws:                	'{{u_sp}}|{{esc_ws}}'                                    	# w␠⎋ ≝ ⧵ ⦅u␠|␤⦆+
+  esc_uws:                	'{{u_sp}}|{{esc_ws}}'                                    	#
   esc_usv_not:            	'u{{{usv_not_hex}}}'                                     	#
   # d_hex:                	'[0-9a-fA-F]'                                            	#
   # d_hex_:               	'[0-9a-fA-F_]'                                           	#
