@@ -981,8 +981,11 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   string-quoted-double3:
-    - match               : '"""'
-      scope               : punctuation.definition.string.begin.kdl
+    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 invalid.illegal.position.kdl
+        3:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - match             : '"""'
@@ -1001,8 +1004,11 @@ contexts:
       - include           : char-escaped⁄-
       - include           : ␤🛑¹s
   string-quoted-double3⁄-:
-    - match               : '"""'
-      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
@@ -1021,8 +1027,11 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   strings-quoted-double3:
-    - match               : '"""'
-      scope               : punctuation.definition.string.begin.kdl
+    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 invalid.illegal.position.kdl
+        3:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - match             : '"""'
@@ -1040,8 +1049,11 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   strings-quoted-double3_node-id:
-    - match               : '"""'
-      scope               : punctuation.definition.string.begin.kdl
+    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 invalid.illegal.position.kdl
+        3:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.kdl
       - match             : '"""'
@@ -1060,8 +1072,11 @@ contexts:
       - include           : char-escaped⁄-
       - include           : ␤🛑¹s
   strings-quoted-double3⁄-:
-    - match               : '"""'
-      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
@@ -1081,8 +1096,11 @@ contexts:
       - include           : char-escaped⁄-
       - include           : ␤🛑¹s
   strings-quoted-double3⁄-_node-id:
-    - match               : '"""'
-      scope               : punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+    - match               : '(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
