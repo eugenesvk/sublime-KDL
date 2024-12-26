@@ -17,6 +17,14 @@ err_not_ws"""
 //<-                                            string.quoted.double.block.kdl invalid.illegal.position.kdl
  //<-                                           string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
 //^^^^^^^^                                      string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+a b="""err_not_nl
+//     ^                                        string.quoted.double.block.kdl invalid.illegal.position.kdl
+//      ^^^^^^^^^                               string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+  \ \ err_not_ws"""
+//<-                                           -invalid.illegal.position.kdl
+ //<-                                          -invalid.illegal.muted.position.kdl
+//    ^                                         invalid.illegal.position.kdl
+//     ^^^^^^^^^                                invalid.illegal.muted.position.kdl
 
 v1 r"no" "prefix in v2"
 // ^                                              invalid.illegal.position.kdl
