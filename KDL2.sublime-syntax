@@ -231,26 +231,32 @@ contexts:
   string:
     - include: string-quoted-double3
     - include: string-quoted-double
+    - include: string-quoted-double3-raw
     - include: string-quoted-double-raw
   strings:
     - include: strings-quoted-double3
     - include: strings-quoted-double
+    - include: strings-quoted-double3-raw
     - include: strings-quoted-double-raw
   strings_node-id:
     - include: strings-quoted-double3_node-id
     - include: strings-quoted-double_node-id
+    - include: strings-quoted-double3-raw_node-id
     - include: strings-quoted-double-raw_node-id
   string⁄-:
     - include: string-quoted-double3⁄-
     - include: string-quoted-double⁄-
+    - include: string-quoted-double3-raw⁄-
     - include: string-quoted-double-raw⁄-
   strings⁄-:
     - include: strings-quoted-double3⁄-
     - include: strings-quoted-double⁄-
+    - include: strings-quoted-double3-raw⁄-
     - include: strings-quoted-double-raw⁄-
   strings⁄-_node-id:
     - include: strings-quoted-double3⁄-_node-id
     - include: strings-quoted-double⁄-_node-id
+    - include: strings-quoted-double3-raw⁄-_node-id
     - include: strings-quoted-double-raw⁄-_node-id
 #   number:
 #     - include: bin¦oct¦hex-partial
@@ -1234,6 +1240,18 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 3
+  string-quoted-double3-raw:
+    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
+      - match             : '"""\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 3
   string-quoted-double-raw⁄-:
     - match               : '(#*)(")'
       captures            :
@@ -1243,6 +1261,19 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
       - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+  string-quoted-double3-raw⁄-:
+    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"""\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 3
   strings-quoted-double-raw:
@@ -1255,6 +1286,18 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
+  strings-quoted-double3-raw:
+    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
+      - match             : '"""\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
   strings-quoted-double-raw_node-id:
     - match               : '(#*)(")'
       captures            :
@@ -1263,6 +1306,18 @@ contexts:
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
       - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl
+        pop               : 1
+  strings-quoted-double3-raw_node-id:
+    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
+      - match             : '"""\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
   strings-quoted-double-raw⁄-:
@@ -1276,6 +1331,19 @@ contexts:
       - match             : '"\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
+  strings-quoted-double3-raw⁄-:
+    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"""\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
   strings-quoted-double-raw⁄-_node-id:
     - match               : '(#*)(")'
       captures            :
@@ -1285,6 +1353,19 @@ contexts:
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
       - match             : '"\1' # ↑match (#*)
+        scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+  strings-quoted-double3-raw⁄-_node-id:
+    - match               : '(#*)(""")({{nl_not}}?)({{nl_not}}*)'
+      captures            :
+        1:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
+        3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+      push                :
+      - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
+      - meta_content_scope: comment.line.slash-dash.kdl
+      - match             : '"""\1' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
 #   strings-quoted-double-consecutive🛑: #
