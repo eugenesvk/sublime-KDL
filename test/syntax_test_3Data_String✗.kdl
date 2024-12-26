@@ -6,14 +6,14 @@ a """err_not_nl
 //   ^                                          string.quoted.double.block.kdl invalid.illegal.position.kdl
 //    ^^^^^^^^^                                 string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
 x
-err_not_nl"""
+err_not_ws"""
 //<-                                            string.quoted.double.block.kdl invalid.illegal.position.kdl
  //<-                                           string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
 //^^^^^^^^                                      string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
 a b="""err_not_nl
 //     ^                                        string.quoted.double.block.kdl invalid.illegal.position.kdl
 //      ^^^^^^^^^                               string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
-err_not_nl"""
+err_not_ws"""
 //<-                                            string.quoted.double.block.kdl invalid.illegal.position.kdl
  //<-                                           string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
 //^^^^^^^^                                      string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
