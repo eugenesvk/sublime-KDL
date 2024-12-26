@@ -225,28 +225,28 @@ contexts:
 #     - include             : S🛑¹pre_s∨c∨t
 
   string:
-    - include: string-quoted-double
     - include: string-quoted-double3
+    - include: string-quoted-double
     - include: string-quoted-double-raw
   strings:
-    - include: strings-quoted-double
     - include: strings-quoted-double3
+    - include: strings-quoted-double
     - include: strings-quoted-double-raw
   strings_node-id:
-    - include: strings-quoted-double_node-id
     - include: strings-quoted-double3_node-id
+    - include: strings-quoted-double_node-id
     - include: strings-quoted-double-raw_node-id
   string⁄-:
-    - include: string-quoted-double⁄-
     - include: string-quoted-double3⁄-
+    - include: string-quoted-double⁄-
     - include: string-quoted-double-raw⁄-
   strings⁄-:
-    - include: strings-quoted-double⁄-
     - include: strings-quoted-double3⁄-
+    - include: strings-quoted-double⁄-
     - include: strings-quoted-double-raw⁄-
   strings⁄-_node-id:
-    - include: strings-quoted-double⁄-_node-id
     - include: strings-quoted-double3⁄-_node-id
+    - include: strings-quoted-double⁄-_node-id
     - include: strings-quoted-double-raw⁄-_node-id
 #   number:
 #     - include: bin¦oct¦hex-partial
