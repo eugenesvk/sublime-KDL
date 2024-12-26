@@ -256,6 +256,12 @@ n s="""
 //^                         -constant.character.escape.kdl punctuation.definition.escape.begin.kdl
 //     ^^^                   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
 
+* s="""
+  " "" consecutive double-quotes allowed in the bodies of multi-line quoted strings (no escapes)
+//^^^^                       string.quoted.double.block.kdl
+"""
+
+
 // 3 Data: Type
 ("a")a b=(#"sdf"#)1 c=(###"s"d"f"###)2 "allow strings, including raw, in annotations"
 //  ^                                              punctuation.separator.annotation.end.kdl
