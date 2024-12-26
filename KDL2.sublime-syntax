@@ -128,6 +128,7 @@ variables:
   ws:                     	 '{{u_sp}}|{{comment_block}}'                            	#
   b_sp:                   	'[{{u_sp}}]'                                        #⊎   	#
   uspnl:                  	'{{u_sp}}|{{newline}}'                              #.   	#
+  # uspnl_s:              	'[[{{u_sp}}]||[{{nl_s}}]]]                        #∪     	#?
   # bom:                  	'[\x{FEFF}]'                                             	#
   # unicode_space:        	'[[:blank:]]'                                       #⊎   	#
   # comment_line:         	'({{c_line_beg}})([^{{nl_s}}]*)({{c_line_end}})'         	#
