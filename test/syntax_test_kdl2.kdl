@@ -20,32 +20,46 @@ node_name "not a node"
 //^^^^^^^^                meta.node.kdl
 //^^^^^^^^                entity.name.tag.node.kdl
 //         ^^^^^^^^^^^^^ -entity.name.tag.node.kdl
-"node string
-//<-              punctuation.definition.string.begin.kdl
-//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
-multiline"
-//<-              meta.string.kdl string.quoted.double.kdl
-  //<-            meta.string.kdl string.quoted.double.kdl
-//^^^^^^^^        meta.string.kdl string.quoted.double.kdl
-//       ^        punctuation.definition.string.end.kdl
-#"node raw string
+
+"""
 //<-              punctuation.definition.string.begin.kdl
  //<-             punctuation.definition.string.begin.kdl
-//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-multiline"#
-//<-              meta.string.kdl string.quoted.double.raw.kdl
-  //<-            meta.string.kdl string.quoted.double.raw.kdl
-//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-//       ^        punctuation.definition.string.end.kdl
-#"node #raw string
+//^               punctuation.definition.string.begin.kdl
+node string
+//^^^^^^^^^^      entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.kdl
+multiline
+//<-              meta.string.kdl string.quoted.double.block.kdl
+  //<-            meta.string.kdl string.quoted.double.block.kdl
+//^^^^^^^         meta.string.kdl string.quoted.double.block.kdl
+"""
+//<-              punctuation.definition.string.end.kdl
+ //<-             punctuation.definition.string.end.kdl
+//^               punctuation.definition.string.end.kdl
+
+#"""
 //<-              punctuation.definition.string.begin.kdl
  //<-             punctuation.definition.string.begin.kdl
-// ^^^^^^^^^^     entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-multiline"#
-//<-              meta.string.kdl string.quoted.double.raw.kdl
-  //<-            meta.string.kdl string.quoted.double.raw.kdl
-//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-//       ^        punctuation.definition.string.end.kdl
+//^^              punctuation.definition.string.begin.kdl
+node raw string
+//^^^^^^^^^^^^^   entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
+multiline
+//^^^^^^^^        entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
+"""#
+//<-              meta.string.kdl string.quoted.double.block.raw.kdl
+  //<-            meta.string.kdl string.quoted.double.block.raw.kdl
+//^^              punctuation.definition.string.end.kdl
+
+#"""
+//<-              punctuation.definition.string.begin.kdl
+ //<-             punctuation.definition.string.begin.kdl
+node #raw string
+// ^^^^^^^^^^     entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
+multiline
+//<-              meta.string.kdl string.quoted.double.block.raw.kdl
+  //<-            meta.string.kdl string.quoted.double.block.raw.kdl
+//^^^^^^^         entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
+  """#
+//^^^^            punctuation.definition.string.end.kdl
 
 
 // 2 Node Element: 2 Argument
@@ -223,10 +237,21 @@ title #"Raw string"#
 //    ^^^^^^^^^^^^^^                              string.quoted.double.raw.kdl
 //    ^^                                          punctuation.definition.string.begin.kdl
 //                ^^                              punctuation.definition.string.end.kdl
-title  ###""""Rawest"""string""""###
-//     ^^^                                        punctuation.definition.string.begin.kdl
-//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              meta.string.kdl, string.quoted.double.raw.kdl
-//                               ^^^              punctuation.definition.string.end.kdl
+
+title  ###"""
+               　"Rawest"""string"
+               　//     ^^^                                       -punctuation.definition.string.begin.kdl
+               　//^^^^^^^^^^^^^^^                                 meta.string.kdl, string.quoted.double.block.raw.kdl
+//<-                                             -whitespace.dedent.kdl
+// <-                                            -whitespace.dedent.kdl
+//^^^^^^^^^^^^^^                                 -whitespace.dedent.kdl
+↓to↑ Dedented whitespace can NOT be supported in Sublime's syntax language
+               　"""###
+//              ^^^^^^                            punctuation.definition.string.end.kdl
+//<-                                              string.quoted.double.block.raw.kdl whitespace.dedent.kdl
+ //<-                                             string.quoted.double.block.raw.kdl whitespace.dedent.kdl
+//^^^^^^^^^^^^^^                                  string.quoted.double.block.raw.kdl whitespace.dedent.kdl
+
 nnn #"raw"#
 nnn #"multiline raw
 //  ^^^^^^^^^^^^^^^          string.quoted.double.raw.kdl
