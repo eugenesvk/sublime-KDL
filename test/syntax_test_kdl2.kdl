@@ -230,7 +230,19 @@ a "\u{000FFF} \u{0F}" !="Unicode escaped in non-canonical format with extra pref
 //    ^^^^^^                           -invalid.illegal.muted.position.kdl
 //               ^^                     constant.character.escape.utf8.hex.kdl
 //               ^^                    -invalid.illegal.muted.position.kdl
-
+n s="""
+//  ^^^                      string.quoted.double.block.kdl punctuation.definition.string.begin.kdl
+ a  xcc
+//^^^^^                      string.quoted.double.block.kdl
+  \ \  """ i="only the last whitespace escape can be matched"
+//<-                         whitespace.dedent.kdl
+ //<-                        whitespace.dedent.kdl
+//^^^^                       whitespace.dedent.kdl
+//  ^^^                      constant.character.escape.kdl
+//  ^                        punctuation.definition.escape.begin.kdl
+//   ^^                     -punctuation.definition.escape.begin.kdl
+//^                         -constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//     ^^^                   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
 
 // 3 Data: Type
 ("a")a b=(#"sdf"#)1 c=(###"s"d"f"###)2 "allow strings, including raw, in annotations"
