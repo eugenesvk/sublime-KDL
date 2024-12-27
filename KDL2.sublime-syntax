@@ -154,7 +154,7 @@ variables:
 
 contexts:
   prototype:
-    - include: ch🛑
+    - include: ch🛑s
 #     # - include: wss
 #     # - include: comment_block∨doc
 #     # - meta_include_prototype: false
@@ -2387,6 +2387,9 @@ contexts:
 
 
 # Various helpers
+  ch🛑s:
+    - match               : '{{char_illegal}}'
+      scope               : invalid.illegal.kdl
   ch🛑:
     - match               : '{{char_illegal}}'
       scope               : invalid.illegal.kdl
