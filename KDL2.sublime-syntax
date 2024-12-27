@@ -58,7 +58,7 @@ variables:
   # charWS:               	'[{{nl_s}}{{u_sp}}]'                                #∪   	#\r\n sequence not accounted for
   # charID_rec:           	'{{charID}}(?!{{linespace_re}})'                         	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
   # charID_ex09:          	'[[{{charID}}]&&[^0-9]]'                                 	#char🆔 − 〔0–9〕
-  charID_ex09sign:        	'[[{{charID_ex09}}]&&[^\.]&&[^+-]]'                      	#
+  charID_ex09sign:        	'[[{{charID_ex09}}]&&[^\.]&&[^+-]]'                      	#char🆔 − 〔0–9〕 − ± − .
   # unicode_char:         	'[\x{0021}-\x{10FFFF}]'                             #⊎   	# invalid: ≤0x20 or >0x10FFF)
   uchar:                  	'[\x{0000}-\x{D7FF}\x{E000}-\x{10FFFF}]' #⊎              	#
   # keyword:              	'{{boolean}}|{{nil}}'                                    	#
