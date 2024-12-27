@@ -2524,11 +2524,11 @@ contexts:
 #   char🆔¬:
 #     - match               : '{{charID_not}}'
 #       scope               : invalid.illegal.kdl #✗chID
-#   ID_bare¬1st🛑:
-#     # - match               : '({{charID_not1st}})'
-#     - match               : '(?<!=)({{charID_not1st}})' # K=V lookbehind prevents matching V after K fails
-#       scope               : invalid.illegal.position.kdl
-#       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
+  ID_bare¬1st🛑:
+    # - match               : '({{charID_not1st}})'
+    - match               : '(?<!=)({{charID_not1st}})' # K=V lookbehind prevents matching V after K fails
+      scope               : invalid.illegal.position.kdl
+      # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
 #   ID_bare¬1st🛑⁄-:
 #     # - match               : '({{charID_not1st}})'
 #     - match               : '(?<!=)({{charID_not1st}})' # K=V lookbehind prevents matching V after K fails
