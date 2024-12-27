@@ -55,7 +55,7 @@ variables:
   charID:                 	'[[{{uchar}}]&&[^{{charWS}}]&&[^{{charID_not}}]]'        	# char🆔 ≝ uchar − u␠ − ␤ −c har🆔¬ − char🛑
   charID_or_KW:           	'[{{charID}}\#]'                                    #⊎   	#
   charID_not:             	'[\/\\(){};\[\]=#"]'                                #⊎   	# char🆔¬ ≝ #"(;){"}[#]/=\"#
-  # charID_not1st:        	'([0-9])|([+-][0-9])'                               #.   	#
+  charID_not1st:          	'([0-9])|([+-]|[+-]?\.)([0-9])'                 #.       	#
   # charWS:               	'[{{nl_s}}{{u_sp}}]'                                #∪   	#\r\n sequence not accounted for
   # charID_rec:           	'{{charID}}(?!{{linespace_re}})'                         	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
   # charID_ex09:          	'[[{{charID}}]&&[^0-9]]'                                 	#char🆔 − 〔0–9〕
