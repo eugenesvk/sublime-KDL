@@ -24,6 +24,21 @@ n +.1n=0 -.1n=0 .1n=0 +1n=0 -1n=0 i="Confusion with numbers"
 //                     ^                            invalid.illegal.muted.position.kdl
 //                          ^                       invalid.illegal.position.kdl
 //                           ^                      invalid.illegal.muted.position.kdl
+n "Illegal due to ambiguity vs a number"\
+  11a=1 +1b=1 +b=1 +=1 +1=1
+//^^                                              invalid.illegal.position.kdl
+//      ^                                         invalid.illegal.position.kdl
+//       ^                                        invalid.illegal.muted.position.kdl
+//                     ^                          invalid.illegal.position.kdl
+//                      ^                         invalid.illegal.muted.position.kdl
+//  ^                                             entity.other.attribute-name.kdl
+//        ^                                       entity.other.attribute-name.kdl
+//            ^^                                  entity.other.attribute-name.kdl
+//                 ^                              entity.other.attribute-name.kdl
+//                        ^                       entity.other.attribute-name.kdl
+//                       ^                        meta.property.kdl
+//                        ^                       meta.property.name.kdl meta.mapping.key.kdl
+// (?<!=) prevents =1 from matching after the +1 fails ()
 
 n "Trying to ban some consecutive strings"
 "n""b"
