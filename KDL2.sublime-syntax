@@ -2531,11 +2531,11 @@ contexts:
         1:                  invalid.illegal.position.kdl
         2:                  invalid.illegal.muted.position.kdl
       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
-#   ID_bare¬1st🛑⁄-:
-#     # - match               : '({{charID_not1st}})'
-#     - match               : '(?<!=)({{charID_not1st}})' # K=V lookbehind prevents matching V after K fails
-#       scope               : invalid.illegal.position.kdl comment.line.slash-dash.kdl
-#       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
+  ID_bare¬1st🛑⁄-:
+    # - match               : '({{charID_not1st}})'
+    - match               : '(?<!=)({{charID_not1st}})' # K=V lookbehind prevents matching V after K fails
+      scope               : invalid.illegal.position.kdl comment.line.slash-dash.kdl
+      # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
 #   pop_pre␠:
 #     - match               : '(?={{u_sp}})'
 #       pop                 : 1
