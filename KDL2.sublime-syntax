@@ -418,42 +418,42 @@ contexts:
 
 
 # #——— 2 Node Element: 1 Name
-#   nodeID:                 #✗¹
-#     # - include             : keywords🛑
-#     - match               : '(?={{string_beg}})'
-#       push                : #✗²
-#       # - meta_scope        : entity.name.tag.node.kdl #✗²
-#       - include           : string-quoted-double-raw-consecutive🛑3
-#       - include           : string-quoted-double-consecutive🛑3
-#       - include           : strings_node-id # use custom strings scopes or meta_scope gets applied to "args"
-#       - include           : node-elements
-#       - include           : node_terminator3
-#     - include             : bare-after-string🛑
-#     - match               : '{{bareID}}'
-#       scope               : entity.name.tag.node.kdl
-#       push                : #✗²
-#       #- meta_scope        : dbg✗²_nodeID→node_elements
-#       - include           : node-elements
-#       - include           : node_terminator3
-#       - include           : S🛑s
-#   nodeID⁄-:               #✗¹
-#     # - include             : keywords⁄-🛑
-#     - match               : '(?={{string_beg}})'
-#       push                : #✗²
-#       # - meta_scope        : entity.name.tag.node.kdl #✗²
-#       - include           : string-quoted-double-raw-consecutive🛑3
-#       - include           : string-quoted-double-consecutive🛑3
-#       - include           : strings⁄-_node-id # use custom strings scopes or meta_scope gets applied to "args"
-#       - include           : node-elements⁄-
-#       - include           : node_terminator3⁄-
-#     - include             : bare-after-string🛑
-#     - match               : '{{bareID}}'
-#       scope               : entity.name.tag.node.kdl comment.line.slash-dash.kdl
-#       push                : #✗²
-#       #- meta_scope        : dbg✗²_nodeID→node-elements⁄–
-#       - include           : node-elements⁄-
-#       - include           : node_terminator3⁄-
-#       - include           : S🛑s
+  nodeID:                 #✗¹
+    # - include             : keywords🛑
+    - match               : '(?={{string_beg}})'
+      push                : #✗²
+      # - meta_scope        : entity.name.tag.node.kdl #✗²
+      - include           : string-quoted-double-raw-consecutive🛑3
+      - include           : string-quoted-double-consecutive🛑3
+      - include           : strings_node-id # use custom strings scopes or meta_scope gets applied to "args"
+      - include           : node-elements
+      - include           : node_terminator3
+    - include             : bare-after-string🛑
+    - match               : '{{bareID}}'
+      scope               : entity.name.tag.node.kdl
+      push                : #✗²
+      #- meta_scope        : dbg✗²_nodeID→node_elements
+      - include           : node-elements
+      - include           : node_terminator3
+      - include           : S🛑s
+  nodeID⁄-:               #✗¹
+    # - include             : keywords⁄-🛑
+    - match               : '(?={{string_beg}})'
+      push                : #✗²
+      # - meta_scope        : entity.name.tag.node.kdl #✗²
+      - include           : string-quoted-double-raw-consecutive🛑3
+      - include           : string-quoted-double-consecutive🛑3
+      - include           : strings⁄-_node-id # use custom strings scopes or meta_scope gets applied to "args"
+      - include           : node-elements⁄-
+      - include           : node_terminator3⁄-
+    - include             : bare-after-string🛑
+    - match               : '{{bareID}}'
+      scope               : entity.name.tag.node.kdl comment.line.slash-dash.kdl
+      push                : #✗²
+      #- meta_scope        : dbg✗²_nodeID→node-elements⁄–
+      - include           : node-elements⁄-
+      - include           : node_terminator3⁄-
+      - include           : S🛑s
 
 # #——— 2 Node Element: 2 Argument or 3 Property
 #   arg∨prop:               #✗³
