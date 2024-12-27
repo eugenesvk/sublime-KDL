@@ -1,12 +1,29 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 2 Node Element: 1 Node name
-.1n i="Confusion with numbers"
-//<- invalid.illegal.position.kdl
- //<- invalid.illegal.muted.position.kdl
-+.1n i="Confusion with numbers"
-//<- invalid.illegal.position.kdl
- //<- invalid.illegal.muted.position.kdl
++.1n;-.1n;.1n;+1n;-1n i="Confusion with numbers"
+//<-                                                invalid.illegal.position.kdl
+ //<-                                               invalid.illegal.position.kdl
+//^                                                 invalid.illegal.muted.position.kdl
+//   ^^                                             invalid.illegal.position.kdl
+//     ^                                            invalid.illegal.muted.position.kdl
+//        ^                                         invalid.illegal.position.kdl
+//         ^                                        invalid.illegal.muted.position.kdl
+//            ^                                     invalid.illegal.position.kdl
+//             ^                                    invalid.illegal.muted.position.kdl
+//                ^                                 invalid.illegal.position.kdl
+//                 ^                                invalid.illegal.muted.position.kdl
+n +.1n=0 -.1n=0 .1n=0 +1n=0 -1n=0 i="Confusion with numbers"
+//^^                                                invalid.illegal.position.kdl
+//  ^                                               invalid.illegal.muted.position.kdl
+//       ^^                                         invalid.illegal.position.kdl
+//         ^                                        invalid.illegal.muted.position.kdl
+//              ^                                   invalid.illegal.position.kdl
+//               ^                                  invalid.illegal.muted.position.kdl
+//                    ^                             invalid.illegal.position.kdl
+//                     ^                            invalid.illegal.muted.position.kdl
+//                          ^                       invalid.illegal.position.kdl
+//                           ^                      invalid.illegal.muted.position.kdl
 
 n "Trying to ban some consecutive strings"
 "n""b"
