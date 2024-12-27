@@ -2529,14 +2529,16 @@ contexts:
     - match               : '(?<!=){{charID_not1st}}' # K=V lookbehind prevents matching V after K fails
       captures            : # charID_not1st has 2 groups inside
         1:                  invalid.illegal.position.kdl
-        2:                  invalid.illegal.muted.position.kdl
+        2:                  invalid.illegal.position.kdl
+        3:                  invalid.illegal.muted.position.kdl
       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
   ID_bare¬1st🛑⁄-:
     # - match               : '({{charID_not1st}})'
     - match               : '(?<!=){{charID_not1st}}' # K=V lookbehind prevents matching V after K fails
       captures            :
         1:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
-        2:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        2:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        3:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
 #   pop_pre␠:
 #     - match               : '(?={{u_sp}})'
