@@ -1,0 +1,68 @@
+/-kdl-version 1
+// |OR "(group)" ignore unquoted _ ; "
+nodes "linespace* (node nodes?)? linespace*"
+node "(/-         node-space*)? type? identifier\n     \t (node-space node-space*   node-prop-or-arg    )*\n     \t            (node-space*   node-children    ws*)?\n     \t             node-space*   node-terminator\n     \t"
+node "                 (/- node␠*)?    t? ID\n     \t ((node␠ node␠*  (/- node␠*)?    t? val       )\n     \t |(node␠ node␠*  (/- node␠*)? ID=t? val      ))*\n     \t        (node␠* (/- node␠*)? { nodes }      ws*)?\n     \t         node␠*                  node-terminator\n     \t"
+node-prop-or-arg "(/- node-space*)? (prop | value)"
+node-children "(/- node-space*)? { nodes }"
+node-space " ws* escline ws* | ws+"
+ws
+bom|unicode-space|multi-line-comment
+linespace
+ws|single-line-comment|newline
+escline
+"\\ ws*"
+single-line-comment|newline
+node-terminator
+";|eof|single-line-comment|newline"
+/*                 	*/
+identifier " bare-identifier|\"string\" "
+bare-identifier " (       (identifier-char - digit - sign) identifier-char*\n                   \t  | sign ((identifier-char - digit       ) identifier-char*)?\n                   \t  ) - keyword"
+identifier-char " unicode - linespace - /\\()[]{}<>,;=\" "
+keyword boolean| #null
+prop identifier=value
+value
+type?
+string|number|keyword
+type
+(identifier)_
+/*                 	*/
+newline "See Table: White_Space Line-break"
+bom "﻿"
+unicode-space "See Table: White_Space unicode characters which are not `newline`"
+single-line-comment "// ^newline+ (newline | eof)"
+multi-line-comment "/* commented-block"
+commented-block "*/ | (multi-line-comment | * | / | [^*/]+) commented-block"
+/*                 	*/
+string
+raw-string|escaped-string
+escaped-string " \" character*  \"  "
+character " \\ escape | [^\\\"] "
+escape "[\"\\/bfnrt] | u{hex-digit × 1–6} "
+/*                 	*/
+raw-string " r raw-string-hash"
+raw-string-hash " # raw-string-hash # | raw-string-quotes"
+raw-string-quotes " \" .* \" "
+/*                 	*/
+number
+decimal|hex|octal|binary
+boolean #true #false
+/*                 	*/
+binary
+sign? "0b [0-1]     ([0-1]     | _)*"
+octal
+sign? "0o [0-7]     ([0-7]     | _)*"
+hex
+sign? "0x hex-digit (hex-digit | _)*"
+decimal
+sign? "   integer                   (. integer)? exponent?"
+integer
+digit "(digit     | _)*"
+exponent
+e|E
+sign? integer
+digit " [0-9]       "
+hex-digit " [0-9a-fA-F] "
+sign +|-
+ /*                 	*/
+//github.com/kdl-org/kdl/blob/main/SPEC_v1.md
