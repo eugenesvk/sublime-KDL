@@ -1,8 +1,19 @@
-/-kdl-version 1
+/-kdl-version 2
 // |OR "(group)" ignore unquoted _ ; "
 nodes "linespace* (node nodes?)? linespace*"
-node "(/-         node-space*)? type? identifier\n     \t (node-space node-space*   node-prop-or-arg    )*\n     \t            (node-space*   node-children    ws*)?\n     \t             node-space*   node-terminator\n     \t"
-node "                 (/- node␠*)?    t? ID\n     \t ((node␠ node␠*  (/- node␠*)?    t? val       )\n     \t |(node␠ node␠*  (/- node␠*)? ID=t? val      ))*\n     \t        (node␠* (/- node␠*)? { nodes }      ws*)?\n     \t         node␠*                  node-terminator\n     \t"
+node """
+  (/-         node-space*)? type? identifier
+  (node-space node-space*   node-prop-or-arg    )*
+             (node-space*   node-children    ws*)?
+              node-space*   node-terminator
+  """
+node """
+                    (/- node␠*)?    t? ID
+    ((node␠ node␠*  (/- node␠*)?    t? val       )
+    |(node␠ node␠*  (/- node␠*)? ID=t? val      ))*
+           (node␠* (/- node␠*)? { nodes }      ws*)?
+            node␠*                  node-terminator
+"""
 node-prop-or-arg "(/- node-space*)? (prop | value)"
 node-children "(/- node-space*)? { nodes }"
 node-space " ws* escline ws* | ws+"
@@ -17,9 +28,13 @@ node-terminator
 ";|eof|single-line-comment|newline"
 /*                 	*/
 identifier " bare-identifier|\"string\" "
-bare-identifier " (       (identifier-char - digit - sign) identifier-char*\n                   \t  | sign ((identifier-char - digit       ) identifier-char*)?\n                   \t  ) - keyword"
+bare-identifier """
+    (       (identifier-char - digit - sign) identifier-char*
+    | sign ((identifier-char - digit       ) identifier-char*)?
+    ) - keyword
+  """
 identifier-char " unicode - linespace - /\\()[]{}<>,;=\" "
-keyword boolean| #null
+keyword boolean | #null
 prop identifier=value
 value
 type?
