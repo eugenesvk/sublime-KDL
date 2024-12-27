@@ -61,6 +61,14 @@ multiline
   """#
 //^^^^            punctuation.definition.string.end.kdl
 
+  a1-+.; +a.-1; -a.-1; +.a1+-.; -.a1+-.; .a1+-.;
+//^^^^^                                             meta.node.kdl entity.name.tag.node.kdl
+//       ^^^^^                                      meta.node.kdl entity.name.tag.node.kdl
+//              ^^^^^                               meta.node.kdl entity.name.tag.node.kdl
+//                     ^^^^^^^                      meta.node.kdl entity.name.tag.node.kdl
+//                              ^^^^^^^             meta.node.kdl entity.name.tag.node.kdl
+//                                       ^^^^^^     meta.node.kdl entity.name.tag.node.kdl
+
 
 // 2 Node Element: 2 Argument
 kw   #true #false #null #inf #-inf #nan
