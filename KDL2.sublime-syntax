@@ -429,6 +429,11 @@ contexts:
       - include           : node-elements
       - include           : node_terminator3
     - include             : bare-after-string🛑
+    - match               : '([+-]|[+-]?\.)([0-9])'
+      scope               : entity.name.tag.node.kdl
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
     - match               : '{{bareID}}'
       scope               : entity.name.tag.node.kdl
       push                : #✗²
@@ -447,6 +452,11 @@ contexts:
       - include           : node-elements⁄-
       - include           : node_terminator3⁄-
     - include             : bare-after-string🛑
+    - match               : '([+-]|[+-]?\.)([0-9])'
+      scope               : entity.name.tag.node.kdl comment.line.slash-dash.kdl
+      captures            :
+        1:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
     - match               : '{{bareID}}'
       scope               : entity.name.tag.node.kdl comment.line.slash-dash.kdl
       push                : #✗²
