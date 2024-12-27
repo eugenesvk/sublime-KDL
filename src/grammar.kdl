@@ -58,6 +58,6 @@ integer          ; 	          digit    "(digit     | _)*"
 exponent         ; 	                                                 e|E; sign? "integer"
 digit              	" [0-9]       "
 hex-digit          	" [0-9a-fA-F] "
-sign               	+|-
+sign               	"+|-"
 /*                 	*/
 //github.com/kdl-org/kdl/blob/main/SPEC_v1.md
