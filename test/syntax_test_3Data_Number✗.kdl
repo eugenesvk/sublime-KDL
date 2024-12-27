@@ -1,6 +1,9 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 3 Data: Numbers
+  .1 n i="at least 1 int digit required"
+//^                           invalid.illegal.position.kdl
+// ^                          invalid.illegal.muted.position.kdl
 
 n "Glued numbers are invalid"
 nnn        0b12
