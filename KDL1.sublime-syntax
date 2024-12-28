@@ -26,14 +26,14 @@ variables:
     (?##)               	   ({{node}} {{nodes}}?)?                                	#
     (?##)               	      {{linespace_re}}*                                  	)' #
   node:                 	'(?x:                                                    	#
-    (?##)               	 (/\- {{node_space}}*)?                                  	# Slashdash comment
+    (?##)               	 (/\- {{n_sp}}*)?                                        	# Slashdash comment
     (?##)               	                       {{type}} ? {{ID}}                 	#
-    (?##)               	      ({{node_space}}+ {{node_prop_or_arg}} )*           	#
-    (?##)               	      ({{node_space}}* {{node_children}} {{ws}}*)?       	#
-    (?##)               	       {{node_space}}* {{node_terminator}}               	)' #
-  node_prop_or_arg:     	'(/\-{{node_space}}*)?({{prop}}|{{value}})'              	#
-  node_children:        	'(/\-{{node_space}}*)?{{{nodes}}}'                       	#
-  node_space:           	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                      	#
+    (?##)               	      ({{n_sp}}+ {{node_prop_or_arg}} )*                 	#
+    (?##)               	      ({{n_sp}}* {{node_children}} {{ws}}*)?             	#
+    (?##)               	       {{n_sp}}* {{node_terminator}}                     	)' #
+  node_prop_or_arg:     	'(/\-{{n_sp}}*)?({{prop}}|{{value}})'                    	#
+  node_children:        	'(/\-{{n_sp}}*)?{{{nodes}}}'                             	#
+  n_sp:                 	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                      	#
   node_sp_beg:          	'{{ws_beg}}|{{escline_beg}}'                             	#
   line_sp_beg:          	'{{ws_beg}}|{{c_line_beg}}|{{nl_s}}'                     	#
   any_sp_t_beg:         	'{{node_sp_beg}}|{{node_term_beg}}'                      	#
