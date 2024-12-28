@@ -1,0 +1,8 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// 2 Node Element: 4 Child
+n {n} a
+//    ^ invalid.illegal.position.kdl
+n a=1 /-{n} n /-{n}
+//          ^       invalid.illegal.position.kdl
+//            ^^^^^ invalid.illegal.muted.position.kdl
