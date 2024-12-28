@@ -404,7 +404,7 @@ contexts:
       - include           : strings
       - include           : pop_pre） # remove ↑
       - include           : any🛑s
-    - include             : IDs_bare
+    - include             : ID_bare_s🛑
   type-content-node⁄-:
     - include             : keyword🛑⁄-
     - match               : '(?={{string_beg}})' # string can't just use to ban "a""b"
@@ -415,7 +415,7 @@ contexts:
       - include           : strings⁄-
       - include           : pop_pre） # remove ↑
       - include           : any🛑s
-    - include             : IDs_bare
+    - include             : ID_bare_s🛑
 
 
 
@@ -753,7 +753,7 @@ contexts:
       - include           : strings
       - include           : pop_pre） # remove ↑
       - include           : any🛑s
-    - include             : IDs_bare
+    - include             : ID_bare_s🛑
   type-name⁄-:
     - include             : keyword🛑⁄-
     - match               : '(?={{string_beg}})'
@@ -764,7 +764,7 @@ contexts:
       - include           : strings⁄-
       - include           : pop_pre） # remove ↑
       - include           : any🛑s
-    - include             : IDs_bare
+    - include             : ID_bare_s🛑
 #   # type-content: # fails due to the need to mandate 1value
 #     # - include             : keyword🛑
 #     # - include             : string
