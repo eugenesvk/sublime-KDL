@@ -659,35 +659,35 @@ contexts:
       scope               : meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
       pop                 : 1
       push                : property-value⁄- # todo: set bugs to clear
-#   property-value:         #✗⁴
-#     # - meta_scope          : # gets misapplied to =
-#     # - meta_content_scope  : # gets removed from some values that pop immediately like boolean #meta.property.value.kdl meta.mapping.value.kdl ✗⁴
-#     - include             : comments
-#     - match               : (?=\()
-#       pop                 : 2 # ↑⸙ to reach ³ like arg_typed
-#       push                : #✗³
-#       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop_val_typ
-#       - include           : type-value
-#     - match               : (?!\() # required to apply proper context to value
-#       set                 : #✗⁴
-#       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
-#       - include           : value
-#       - include           : value🛑
-#     - include             : property🛑
-#   property-value⁄-:       # ✗⁴
-#     - meta_content_scope  : meta.property.value.kdl meta.mapping.value.kdl #✗⁴
-#     - include             : comments #comments⁄-
-#     - match               : (?=\()
-#       pop                 : 2 # ⚿₌v⁄-⸙2 to reach ³ like arg_typed⁄-
-#       push                : #✗³
-#       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop⁄–_typ_val
-#       - include           : type-value⁄-
-#     - match               : (?!\() # required to apply proper context to value
-#       set                 : #✗⁴
-#       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop⁄–_val_untyp
-#       - include           : value⁄-
-#       - include           : value🛑
-#     - include             : property🛑
+  property-value:         #✗⁴
+    # - meta_scope          : # gets misapplied to =
+    # - meta_content_scope  : # gets removed from some values that pop immediately like boolean #meta.property.value.kdl meta.mapping.value.kdl ✗⁴
+    - include             : comments
+    - match               : (?=\()
+      pop                 : 2 # ↑⸙ to reach ³ like arg_typed
+      push                : #✗³
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop_val_typ
+      - include           : type-value
+    - match               : (?!\() # required to apply proper context to value
+      set                 : #✗⁴
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
+      - include           : value
+      - include           : value🛑
+    - include             : property🛑
+  property-value⁄-:       # ✗⁴
+    - meta_content_scope  : meta.property.value.kdl meta.mapping.value.kdl #✗⁴
+    - include             : comments #comments⁄-
+    - match               : (?=\()
+      pop                 : 2 # ⚿₌v⁄-⸙2 to reach ³ like arg_typed⁄-
+      push                : #✗³
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop⁄–_typ_val
+      - include           : type-value⁄-
+    - match               : (?!\() # required to apply proper context to value
+      set                 : #✗⁴
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop⁄–_val_untyp
+      - include           : value⁄-
+      - include           : value🛑
+    - include             : property🛑
 #   property🛑:
 #       - include           : pop_pre␠
 #       - include           : pop_pre␤
