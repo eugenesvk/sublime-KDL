@@ -673,6 +673,7 @@ contexts:
     - match               : (?!\() # required to apply proper context to value
       set                 : #✗⁴
       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
+      - include           : ⁄-🛑
       - include           : value
       - include           : value🛑
     - include             : property🛑
@@ -2268,6 +2269,9 @@ contexts:
 #         - meta_scope      : comment.line.double-slash.kdl
 #         - match           : $
 #           pop             : 1
+  ⁄-🛑:
+    - match               : '({{c_slashdash}})'
+      scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl invalid.illegal.position.kdl
 
 # Primitives, with some ~matching KDL Spec elements
 #   linesp:                 # ≝ linespace : newline | ws | single-line-comment
