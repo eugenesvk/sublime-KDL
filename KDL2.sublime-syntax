@@ -743,28 +743,28 @@ contexts:
       - include           : type-name
       - include           : type🛑
 
-#   type-name:              #✗⁴ see type-content-node
-#     - include             : keyword🛑
-#     - match               : '(?={{string_beg}})'
-#       push                : #✗⁵
-#       # - meta_scope        : dbgtype-name✗⁵
-#       - include           : strings-quoted-double-raw-consecutive🛑
-#       - include           : strings-quoted-double-consecutive🛑
-#       - include           : strings
-#       - include           : pop_pre） # remove ↑
-#       - include           : any🛑s
-#     - include             : IDs_bare
-#   type-name⁄-:
-#     - include             : keyword🛑⁄-
-#     - match               : '(?={{string_beg}})'
-#       push                : #✗⁵
-#       # - meta_scope        : dbgtype-name⁄–✗⁵
-#       - include           : strings-quoted-double-raw-consecutive🛑
-#       - include           : strings-quoted-double-consecutive🛑
-#       - include           : strings⁄-
-#       - include           : pop_pre） # remove ↑
-#       - include           : any🛑s
-#     - include             : IDs_bare
+  type-name:              #✗⁴ see type-content-node
+    - include             : keyword🛑
+    - match               : '(?={{string_beg}})'
+      push                : #✗⁵
+      # - meta_scope        : dbgtype-name✗⁵
+      - include           : strings-quoted-double-raw-consecutive🛑
+      - include           : strings-quoted-double-consecutive🛑
+      - include           : strings
+      - include           : pop_pre） # remove ↑
+      - include           : any🛑s
+    - include             : IDs_bare
+  type-name⁄-:
+    - include             : keyword🛑⁄-
+    - match               : '(?={{string_beg}})'
+      push                : #✗⁵
+      # - meta_scope        : dbgtype-name⁄–✗⁵
+      - include           : strings-quoted-double-raw-consecutive🛑
+      - include           : strings-quoted-double-consecutive🛑
+      - include           : strings⁄-
+      - include           : pop_pre） # remove ↑
+      - include           : any🛑s
+    - include             : IDs_bare
 #   # type-content: # fails due to the need to mandate 1value
 #     # - include             : keyword🛑
 #     # - include             : string
