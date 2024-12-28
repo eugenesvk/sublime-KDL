@@ -1,6 +1,23 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 3 Data: Type
+  ( f oa1 +1 )n ( f oa1 +1 )1 k=( f oa1 +1 )1
+//^                                               meta.annotation.kdl punctuation.separator.annotation.begin.kdl
+//           ^                                    meta.annotation.kdl punctuation.separator.annotation.end.kdl
+// ^^                                             meta.annotation.kdl entity.name.type.kdl
+//    ^                                           invalid.illegal.position.kdl
+//     ^^^^^^                                     invalid.illegal.muted.position.kdl
+//              ^                                 meta.annotation.kdl punctuation.separator.annotation.begin.kdl
+//                         ^                      meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//                              ^^                meta.annotation.kdl entity.name.type.kdl
+//                                 ^              invalid.illegal.position.kdl
+//                                  ^^^^^^        invalid.illegal.muted.position.kdl
+//                             ^                  meta.annotation.kdl punctuation.separator.annotation.begin.kdl
+//                                        ^       meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//                              ^^                meta.annotation.kdl entity.name.type.kdl
+//                                 ^              invalid.illegal.position.kdl
+//                                  ^^^^^^        invalid.illegal.muted.position.kdl
+
 nn(no_space)n
 //^                                               invalid.illegal.position.kdl
 
