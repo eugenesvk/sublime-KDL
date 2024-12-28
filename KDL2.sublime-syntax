@@ -355,65 +355,65 @@ contexts:
 #       - meta_scope        : meta.node.kdl #✗¹node_name⁄–_s_b
 #       - include           : nodeID⁄-
 
-#   type-node:              #✗¹
-#     - match               : \(
-#       scope               : punctuation.separator.annotation.begin.kdl
-#       push                : #✗²
-#       - meta_scope        : meta.annotation.kdl #✗²m
-#       - meta_content_scope: entity.name.type.kdl #✗²c
-#       - match             : '(?<=\()(\))|(\))'
-#         captures          :
-#           1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
-#           2:                punctuation.separator.annotation.end.kdl #✗typenode_close
-#         pop               : 2 # remove 1st annotation, 2 fixes a bug?
-#         set               : #✗¹ # push bugs even with pop, still get meta_content
-#         - include         : bsp🛑¹s # type should be glued to its value
-#         - include         : nodeID
-#         - include         : char🆔¬
-#         - include         : any🛑s
-#       - include           : type-content-node
-#       - include           : type🛑
-#   type-node⁄-:            #✗¹
-#     - match               : \(
-#       scope               : punctuation.separator.annotation.begin.kdl comment.line.slash-dash.kdl #✗typenode⁄–open
-#       push                : #✗²
-#       - meta_scope        : meta.annotation.kdl #✗²m
-#       - meta_content_scope: entity.name.type.kdl #✗²c
-#       - match             : '(?<=\()(\))|(\))'
-#         captures          :
-#           1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
-#           2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl #✗typenode⁄–close
-#         pop               : 2 # remove 1st annotation, 2 fixes a bug?
-#         set               : #✗¹
-#         - include         : bsp🛑¹s # type should be glued to its value
-#         - include         : nodeID⁄-
-#         - include         : char🆔¬
-#         - include         : any🛑s
-#       - include           : type-content-node⁄-
-#       - include           : type🛑
+  type-node:              #✗¹
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl
+      push                : #✗²
+      - meta_scope        : meta.annotation.kdl #✗²m
+      - meta_content_scope: entity.name.type.kdl #✗²c
+      - match             : '(?<=\()(\))|(\))'
+        captures          :
+          1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
+          2:                punctuation.separator.annotation.end.kdl #✗typenode_close
+        pop               : 2 # remove 1st annotation, 2 fixes a bug?
+        set               : #✗¹ # push bugs even with pop, still get meta_content
+        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : nodeID
+        - include         : char🆔¬
+        - include         : any🛑s
+      - include           : type-content-node
+      - include           : type🛑
+  type-node⁄-:            #✗¹
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl comment.line.slash-dash.kdl #✗typenode⁄–open
+      push                : #✗²
+      - meta_scope        : meta.annotation.kdl #✗²m
+      - meta_content_scope: entity.name.type.kdl #✗²c
+      - match             : '(?<=\()(\))|(\))'
+        captures          :
+          1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
+          2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl #✗typenode⁄–close
+        pop               : 2 # remove 1st annotation, 2 fixes a bug?
+        set               : #✗¹
+        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : nodeID⁄-
+        - include         : char🆔¬
+        - include         : any🛑s
+      - include           : type-content-node⁄-
+      - include           : type🛑
 
-#   type-content-node:      #✗²
-#     - include             : keyword🛑
-#     - match               : '(?={{string_beg}})' # string can't just use to ban "a""b"
-#       push                : #✗³
-#       # - meta_scope        : dbgtype-content-node✗³
-#       - include           : strings-quoted-double-raw-consecutive🛑 # ..gs allows popping later on )
-#       - include           : strings-quoted-double-consecutive🛑
-#       - include           : strings
-#       - include           : pop_pre） # remove ↑
-#       - include           : any🛑s
-#     - include             : IDs_bare
-#   type-content-node⁄-:
-#     - include             : keyword🛑⁄-
-#     - match               : '(?={{string_beg}})' # string can't just use to ban "a""b"
-#       push                : #✗³
-#       # - meta_scope        : dbgtype-content-node✗³
-#       - include           : strings-quoted-double-raw-consecutive🛑
-#       - include           : strings-quoted-double-consecutive🛑
-#       - include           : strings⁄-
-#       - include           : pop_pre） # remove ↑
-#       - include           : any🛑s
-#     - include             : IDs_bare
+  type-content-node:      #✗²
+    - include             : keyword🛑
+    - match               : '(?={{string_beg}})' # string can't just use to ban "a""b"
+      push                : #✗³
+      # - meta_scope        : dbgtype-content-node✗³
+      - include           : strings-quoted-double-raw-consecutive🛑 # ..gs allows popping later on )
+      - include           : strings-quoted-double-consecutive🛑
+      - include           : strings
+      - include           : pop_pre） # remove ↑
+      - include           : any🛑s
+    - include             : IDs_bare
+  type-content-node⁄-:
+    - include             : keyword🛑⁄-
+    - match               : '(?={{string_beg}})' # string can't just use to ban "a""b"
+      push                : #✗³
+      # - meta_scope        : dbgtype-content-node✗³
+      - include           : strings-quoted-double-raw-consecutive🛑
+      - include           : strings-quoted-double-consecutive🛑
+      - include           : strings⁄-
+      - include           : pop_pre） # remove ↑
+      - include           : any🛑s
+    - include             : IDs_bare
 
 
 
