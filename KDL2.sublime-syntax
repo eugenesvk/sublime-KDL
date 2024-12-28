@@ -616,22 +616,22 @@ contexts:
     - include             : keyword🛑⁄-
     - include             : ID_bare¬1st🛑⁄-
     - include             : ⚿⁄-
-#   ⚿:                      #✗⁴
-#     - match               : '({{charID}}+)'
-#       scope               : entity.other.attribute-name.kdl
-#       pop                 : 1 # ↑⸙
-#       push                :
-#         - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
-#         - include         : property₌
-#         - include         : pop_pre-term # unblock errors from spoiling the whole line
-#   ⚿⁄-:                    #✗⁴
-#     - match               : '({{charID}}+)'
-#       scope               : entity.other.attribute-name.kdl comment.line.slash-dash.kdl
-#       pop                 : 1 # ↑⸙
-#       set                 :
-#         - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
-#         - include         : property₌⁄-
-#         - include         : pop_pre-term
+  ⚿:                      #✗⁴
+    - match               : '({{charID}}+)'
+      scope               : entity.other.attribute-name.kdl
+      pop                 : 1 # ↑⸙
+      push                :
+        - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
+        - include         : property₌
+        - include         : pop_pre-term # unblock errors from spoiling the whole line
+  ⚿⁄-:                    #✗⁴
+    - match               : '({{charID}}+)'
+      scope               : entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+      pop                 : 1 # ↑⸙
+      set                 :
+        - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
+        - include         : property₌⁄-
+        - include         : pop_pre-term
 
 #   “⚿”₌v-⸙1:
 #     - meta_scope          : meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
