@@ -2,27 +2,27 @@
 // |OR "(group)" ignore unquoted _ ; "
 nodes "linespace* (node nodes?)? linespace*"
 node """
-  (/-         node-space*)? type? identifier
-  (node-space node-space*   node-prop-or-arg    )*
-             (node-space*   node-children    ws*)?
-              node-space*   node-terminator
-  """
+                   (/- n␠*)? type? ID
+                   (n␠ n␠*   node-prop-or-arg    )*
+                     ( n␠*   node-children    ws*)?
+                       n␠*   node-terminator
+                  """
 node """
-                    (/- node␠*)?    t? ID
-    ((node␠ node␠*  (/- node␠*)?    t? val       )
-    |(node␠ node␠*  (/- node␠*)? ID=t? val      ))*
-           (node␠* (/- node␠*)? { nodes }      ws*)?
-            node␠*                  node-terminator
-  """
- node-prop-or-arg	"(/- node-space*)? (prop | value)"
- node-children   	"(/- node-space*)? { nodes }"
-node-space       	"ws* escline ws* | ws+"
+                   (/- n␠*)?    t? ID
+          ((n␠ n␠* (/- n␠*)?    t? val       )
+          |(n␠ n␠* (/- n␠*)? ID=t? val      ))*
+              (n␠* (/- n␠*)? { nodes }      ws*)?
+               n␠*                  node-terminator
+          """
+ node-prop-or-arg	"(/- n␠*)? (prop | value)"
+ node-children   	"(/- n␠*)? { nodes }"
+n␠               	"ws* escline ws* | ws+"
  ws              	bom|unicode-space|multi-line-comment
  linespace       	ws|single-line-comment|newline
  escline         	#"\ ws*"#; single-line-comment|newline
 node-terminator  	    ";|eof|single-line-comment|newline"
 /*               	*/
-identifier       	#"bare-identifier|"string""#
+ID               	#"bare-identifier|"string""#
 bare-identifier  	"""
   (       (identifier-char - digit - sign) identifier-char*
   | sign ((identifier-char - digit       ) identifier-char*)?
@@ -30,9 +30,9 @@ bare-identifier  	"""
   """
 identifier-char    	"unicode - linespace - /\\()[]{}<>,;=\" "
 keyword            	boolean | #null
-prop               	identifier=value
+prop               	ID=value
 value              	type? string|number|keyword
-type               	(identifier)_
+type               	(ID)_
 /*                 	*/
 newline            	"See Table: White_Space Line-break"
 bom                	"﻿"
