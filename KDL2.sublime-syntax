@@ -367,7 +367,7 @@ contexts:
           2:                punctuation.separator.annotation.end.kdl #✗typenode_close
         pop               : 2 # remove 1st annotation, 2 fixes a bug?
         set               : #✗¹ # push bugs even with pop, still get meta_content
-        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : node␠
         - include         : nodeID
         - include         : char🆔¬
         - include         : any🛑s
@@ -386,7 +386,7 @@ contexts:
           2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl #✗typenode⁄–close
         pop               : 2 # remove 1st annotation, 2 fixes a bug?
         set               : #✗¹
-        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : node␠
         - include         : nodeID⁄-
         - include         : char🆔¬
         - include         : any🛑s
@@ -715,7 +715,7 @@ contexts:
           2:                punctuation.separator.annotation.end.kdl
         pop               : 1 # remove ↑annotation
         set               : # push bugs even with pop, still get meta_content
-        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : node␠
         - include         : value
         - include         : value🛑
         - include         : pop2_pre-term # todo: sort which are best
@@ -735,7 +735,7 @@ contexts:
           2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl
         pop               : 1 # remove ↑annotation
         set               : # push bugs even with pop, still get meta_content
-        - include         : s🛑¹s
+        - include         : node␠
         - include         : value⁄-
         - include         : value🛑
         - include         : any🛑s
