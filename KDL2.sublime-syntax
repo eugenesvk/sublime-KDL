@@ -21,6 +21,7 @@ extends          : Packages/KDL/KDL1.sublime-syntax
 # \k<> named group, while \g<> is recursion!
 # include ignores meta patterns in the included contexts
 
+# not all variables have been updated to match v2
 # ident = identifier #⊎=set safe #∪ set safe with exception
 # _var = var rules can't be expressed within literal regexes, e.g., excluding keywords
 variables:
