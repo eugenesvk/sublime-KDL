@@ -514,16 +514,11 @@ node-with-slashdash-number /--1.0 +2.0 \/*
   r 1 {
 //    ^                                      punctuation.section.mapping.begin.kdl
     r 2 { r 3 { r 4 { r 5 { r 6;};};};};}
-//                             ^             punctuation.terminator.node
-//                               ^           punctuation.terminator.node
-//                                 ^         punctuation.terminator.node
-//                                   ^       punctuation.terminator.node
-//                                     ^     punctuation.terminator.node
-//                              ^            punctuation.section.mapping.end.kdl
-//                                ^          punctuation.section.mapping.end.kdl
-//                                  ^        punctuation.section.mapping.end.kdl
-//                                    ^      punctuation.section.mapping.end.kdl
-//                                      ^    punctuation.section.mapping.end.kdl
+//                             ^             punctuation.section.mapping.end.kdl, punctuation.terminator.node
+//                               ^           punctuation.section.mapping.end.kdl, punctuation.terminator.node
+//                                 ^         punctuation.section.mapping.end.kdl, punctuation.terminator.node
+//                                   ^       punctuation.section.mapping.end.kdl, punctuation.terminator.node
+//                                     ^     punctuation.section.mapping.end.kdl, punctuation.terminator.node
 }; node_post_slashdashed key=1
 //<-                                    punctuation.section.mapping.end.kdl, punctuation.definition.comment.end, punctuation.terminator.node.kdl, comment.block.kdl
  //<-                                   punctuation.terminator.node
