@@ -110,6 +110,22 @@ command "twitter" "tw" a=2 b=#true url="https://twitter.com/" {
 //                                       ^^^^^               meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 //                                                ^^^^       meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 }
+n a  =  1 "a" =  1 a /**/ = /**/ 1
+//^                                  meta.mapping.key.kdl
+//   ^                               punctuation.separator.key-value.kdl
+//      ^                            meta.mapping.value.kdl
+// ^^                               -invalid.illegal.position.kdl
+//    ^^                            -invalid.illegal.position.kdl
+//        ^^^                        meta.mapping.key.kdl
+//            ^                      punctuation.separator.key-value.kdl
+//               ^                   meta.mapping.value.kdl
+//           ^                      -invalid.illegal.position.kdl
+//             ^^                   -invalid.illegal.position.kdl
+//                 ^                 meta.mapping.key.kdl
+//                        ^          punctuation.separator.key-value.kdl
+//                                ^  meta.mapping.value.kdl
+//                  ^^^^^^          -invalid.illegal.position.kdl
+//                         ^^^^^^   -invalid.illegal.position.kdl
 
 
 // 2 Node Element: 4 Child
