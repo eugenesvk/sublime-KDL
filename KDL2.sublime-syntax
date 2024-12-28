@@ -700,44 +700,44 @@ contexts:
 #       - include           : S🛑pre␤
 #       - include           : S🛑s
 
-# #——— Type-values
-#   type-value:             #✗³
-#     - match               : \(
-#       scope               : punctuation.separator.annotation.begin.kdl
-#       push                : #✗⁴
-#       - meta_scope        : meta.annotation.kdl #✗⁴type_value
-#       - meta_content_scope: entity.name.type.kdl
-#       - match             : '(?<=\()(\))|(\))'
-#         captures          :
-#           1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
-#           2:                punctuation.separator.annotation.end.kdl
-#         pop               : 1 # remove ↑annotation
-#         set               : # push bugs even with pop, still get meta_content
-#         - include         : bsp🛑¹s # type should be glued to its value
-#         - include         : value
-#         - include         : value🛑
-#         - include         : pop2_pre-term # todo: sort which are best
-#         - include         : any🛑s
-#       - include           : type-name
-#       - include           : type🛑
-#   type-value⁄-:           #✗³
-#     - match               : \(
-#       scope               : punctuation.separator.annotation.begin.kdl comment.line.slash-dash.kdl #✗typearg⁄-
-#       push                : #✗⁴
-#       - meta_scope        : meta.annotation.kdl #✗⁴type-value⁄–
-#       - meta_content_scope: entity.name.type.kdl comment.line.slash-dash.kdl
-#       - match             : '(?<=\()(\))|(\))'
-#         captures          :
-#           1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
-#           2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl
-#         pop               : 1 # remove ↑annotation
-#         set               : # push bugs even with pop, still get meta_content
-#         - include         : s🛑¹s
-#         - include         : value⁄-
-#         - include         : value🛑
-#         - include         : any🛑s
-#       - include           : type-name
-#       - include           : type🛑
+#——— Type-values
+  type-value:             #✗³
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl
+      push                : #✗⁴
+      - meta_scope        : meta.annotation.kdl #✗⁴type_value
+      - meta_content_scope: entity.name.type.kdl
+      - match             : '(?<=\()(\))|(\))'
+        captures          :
+          1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
+          2:                punctuation.separator.annotation.end.kdl
+        pop               : 1 # remove ↑annotation
+        set               : # push bugs even with pop, still get meta_content
+        - include         : bsp🛑¹s # type should be glued to its value
+        - include         : value
+        - include         : value🛑
+        - include         : pop2_pre-term # todo: sort which are best
+        - include         : any🛑s
+      - include           : type-name
+      - include           : type🛑
+  type-value⁄-:           #✗³
+    - match               : \(
+      scope               : punctuation.separator.annotation.begin.kdl comment.line.slash-dash.kdl #✗typearg⁄-
+      push                : #✗⁴
+      - meta_scope        : meta.annotation.kdl #✗⁴type-value⁄–
+      - meta_content_scope: entity.name.type.kdl comment.line.slash-dash.kdl
+      - match             : '(?<=\()(\))|(\))'
+        captures          :
+          1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
+          2:                punctuation.separator.annotation.end.kdl comment.line.slash-dash.kdl
+        pop               : 1 # remove ↑annotation
+        set               : # push bugs even with pop, still get meta_content
+        - include         : s🛑¹s
+        - include         : value⁄-
+        - include         : value🛑
+        - include         : any🛑s
+      - include           : type-name
+      - include           : type🛑
 
 #   type-name:              #✗⁴ see type-content-node
 #     - include             : keyword🛑
