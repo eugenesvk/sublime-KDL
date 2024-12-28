@@ -2028,6 +2028,16 @@ contexts:
 #       pop                 : 4
 #     - include             : ｝🛑4
 
+  ｝3:
+    - match               : \}
+    # - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
+    # - match               : '}|(?!{{nl_s}})(?<=})' # better alternative to avoid end} breaking next }
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
 #   pre｝🛑:                # missing node terminator before }, requires hunting down for space before }, which nodespace or other rule can handle already
 #     - match               : '{{u_sp}}*?({{u_sp}})?(?=\})'
 #       captures            :
