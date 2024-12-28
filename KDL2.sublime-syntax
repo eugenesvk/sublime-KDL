@@ -513,6 +513,7 @@ contexts:
 #     - include             : pop⸙
   arg-⸙2:                 #✗⁴
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⸙2
+    - include             : node␠
     - match               : '{{prop_eq}}'
       fail                : ⸙2arg∨prop
     - match               : '(\S*)(?==)'
@@ -523,6 +524,7 @@ contexts:
     - include             : pop⸙
   arg⁄-⸙2:                #✗⁴
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⁄_⸙2
+    - include             : node␠
     - match               : '{{prop_eq}}'
       fail                : ⸙2arg∨prop⁄-
     - match               : '(\S*)(?==)'
