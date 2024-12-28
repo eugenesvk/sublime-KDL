@@ -371,6 +371,7 @@ contexts:
         - include         : nodeID
         - include         : char🆔¬
         - include         : any🛑s
+      - include           : node␠
       - include           : type-content-node
       - include           : type🛑
   type-node⁄-:            #✗¹
@@ -389,6 +390,7 @@ contexts:
         - include         : nodeID⁄-
         - include         : char🆔¬
         - include         : any🛑s
+      - include           : node␠
       - include           : type-content-node⁄-
       - include           : type🛑
 
@@ -718,6 +720,7 @@ contexts:
         - include         : value🛑
         - include         : pop2_pre-term # todo: sort which are best
         - include         : any🛑s
+      - include           : node␠
       - include           : type-name
       - include           : type🛑
   type-value⁄-:           #✗³
@@ -736,6 +739,7 @@ contexts:
         - include         : value⁄-
         - include         : value🛑
         - include         : any🛑s
+      - include           : node␠
       - include           : type-name
       - include           : type🛑
 
