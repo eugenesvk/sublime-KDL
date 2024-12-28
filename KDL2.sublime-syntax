@@ -24,9 +24,9 @@ extends          : Packages/KDL/KDL1.sublime-syntax
 # ident = identifier #⊎=set safe #∪ set safe with exception
 # _var = var rules can't be expressed within literal regexes, e.g., excluding keywords
 variables:
-  # nodes:                	'(?x: {{linespace_re}}*                                  	#
+  # nodes:                	'(?x: {{linesp_re}}*                                     	#
   #   (?##)               	   ({{node}} {{nodes}}?)?                                	#
-  #   (?##)               	      {{linespace_re}}*                                  	)' #
+  #   (?##)               	      {{linesp_re}}*                                     	)' #
   # node:                 	'(?x:                                                    	#
   #   (?##)               	 (/\- {{n_sp}}*)?                                        	# Slashdash comment
   #   (?##)               	                       {{type}} ? {{ID}}                 	#
@@ -57,7 +57,7 @@ variables:
   charID_not:             	'[\/\\(){};\[\]=#"]'                                #⊎   	# char🆔¬ ≝ #"(;){"}[#]/=\"#
   charID_not1st:          	'([0-9])|([+-]|[+-]?\.)([0-9])'                 #.       	#
   # charWS:               	'[{{nl_s}}{{u_sp}}]'                                #∪   	#\r\n sequence not accounted for
-  # charID_rec:           	'{{charID}}(?!{{linespace_re}})'                         	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
+  # charID_rec:           	'{{charID}}(?!{{linesp_re}})'                            	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
   # charID_ex09:          	'[[{{charID}}]&&[^0-9]]'                                 	#char🆔 − 〔0–9〕
   charID_ex09d:           	'[[{{charID_ex09}}]&&[^\.]]'                             	#char🆔 − 〔0–9〕     − .
   charID_ex09dsign:       	'[[{{charID_ex09}}]&&[^\.]&&[^+-]]'                      	#char🆔 − 〔0–9〕 − ± − .
@@ -123,7 +123,7 @@ variables:
   #                       	                                                         	#
   # escline:              	'\\{{ws}}*({{comment_line}}|{{nl_s}})'                   	#
   # escline_beg:          	'\\'                                                     	#
-  # linespace_re:         	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
+  # linesp_re:            	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
   # char_linesp:          	'[{{nl_s}}{{u_sp}}{{c_beg}}]'                       #∪   	# ex / but not precisely //
   # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])' #.   	# \R
   # nl_s:                 	'[\r\n\x{B}\x{C}\x{85}\x{2028}\x{2029}]'            #∪   	# not precisely ␤␊
