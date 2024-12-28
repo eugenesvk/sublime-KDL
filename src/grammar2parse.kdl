@@ -1,5 +1,11 @@
 /-kdl-version 2
-§ "KDL Grammar in a 'parser'-friendlier format" !="See symbol defs in the original grammar"
+§ "KDL Grammar in a 'syntax parser'-friendlier format" !="See symbol defs in the original grammar"\
+  "For example, if v1 keywords and numbers@first position are banned in identifiers:"\
+  clean🆔   	="⦅⦅char🆔 − 〔0–9〕⦆ char🆔*⦆ − keyword🆔🛑" !="simplified rules"\
+  keyword🆔🛑	="true | false"\
+  "In a syntax highlighter you'd still match those invalid parts, but add an 'illegal' scope"\
+  clean🆔   	="keyword🆔🛑 char🆔1st🛑 char🆔*" !="Technically matches everything"\
+  char🆔1st🛑	="〔0–9〕" !="But will be marked 'illegal', a syntax error; It has a higher matching priority"
         uchar₁₆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀🔢₁₆*1–6⠀⠀-⠀⠀codepoint₁₆¬⠀⠀-⠀⠀surrogate₁₆  !="alt repr"
         codepoint₁₆¬⠀⠀⠀⠀⠀≝⠀⠀🔢₁₆*7⠀|⠀〔2–9a–fA–F〕🔢₁₆*5⠀|⠀〔1〕〔1–9a–fA–F〕🔢₁₆*4
         surrogate₁₆⠀⠀⠀⠀⠀⠀≝⠀⠀〔0〕?〔0〕?〔dD〕〔8–9a–fA–F〕🔢₁₆*2
