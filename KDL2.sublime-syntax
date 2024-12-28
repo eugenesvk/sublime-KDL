@@ -641,9 +641,11 @@ contexts:
 #     - include             : “⚿”⁄-
   “⚿”:
     - include             : strings # allows ↓ check to go through while 2nd consecutive string not possible since it'll be treated as a second argument and there is a condition that errors that
+    - include             : node␠
     - include             : property₌
   “⚿”⁄-:
     - include             : strings⁄-
+    - include             : node␠
     - include             : property₌⁄-
 #   property₌:              #✗⁴
 #     - match               : '{{prop_eq}}'
