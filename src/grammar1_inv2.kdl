@@ -35,7 +35,7 @@ value              	type? string|number|keyword
 type               	(ID)_
 /*                 	*/
 newline            	"See Table: White_Space Line-break"
-bom                	"﻿"
+bom                	"\u{FEFF}"
 unicode-space      	"See Table: White_Space unicode characters which are not `newline`"
 single-line-comment	"// ^newline+ (newline | eof)"
 multi-line-comment 	"/* commented-block"
