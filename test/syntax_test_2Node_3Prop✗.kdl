@@ -1,6 +1,11 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 2 Node Element: 3 Property (key=value)
+n a=/-2
+//^                     meta.mapping.key.kdl entity.other.attribute-name.kdl
+// ^                    meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//  ^^                  invalid.illegal.position.kdl
+//    ^                 meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
 
 n "Values can't be repeated without a separator"
 n kkk=1 k=1 kkk=0b155
