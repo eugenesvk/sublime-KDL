@@ -7,18 +7,19 @@ document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
     node_prev⠀⠀≝⠀⠀node_base⠀node_end
     node_last⠀⠀≝⠀⠀node_base⠀node_end?
       node_base⠀≝; /-?⠀type?⠀n␠*⠀string
-        ⦅n␠+; /-?⠀node_arg∨prop⠀⠀⠀⦆*     !="Slashdashed node_children must be after props and args"
+        ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*     !="Slashdashed node_children must be after props and args"
         ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*
         ⦅n␠+⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?
         ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*
         n␠*
 
 § "Entries"
-node_arg∨prop⠀⠀≝⠀⠀prop⠀|⠀value
-  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀n␠* "="; n␠*⠀value
-  value⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀type?⠀⠀n␠*⠀⦅string⠀|⠀number⠀|⠀boolean⠀|⠀＃null⦆
-    type⠀⠀⠀⠀⠀⠀⠀≝  "(";   n␠*⠀⠀string⠀⠀n␠* ")"
-node_children⠀⠀≝  "{";   nodes⠀node_last? "}"
+node_prop∨arg⠀⠀≝⠀⠀prop⠀|⠀argument
+  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀n␠* "="; n␠*⠀type?⠀n␠*⠀value
+  argument⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀type?⠀n␠*⠀value
+    type⠀⠀⠀⠀⠀⠀⠀≝  "("; n␠*⠀string⠀n␠* ")"
+    value⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀|⠀number⠀|⠀boolean⠀|⠀＃null
+node_children⠀⠀≝  "{"; nodes⠀node_last? "}"
 node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
 
 § "Strings"
