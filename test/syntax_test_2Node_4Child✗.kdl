@@ -1,6 +1,11 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 2 Node Element: 4 Child
+// Can have only 1 child block
+n {n} {a}
+//    ^   invalid.illegal.position.kdl
+//     ^^ invalid.illegal.muted.position.kdl
+
 n {n} a
 //    ^ invalid.illegal.position.kdl
 n a=1 /-{n} n /-{n}
