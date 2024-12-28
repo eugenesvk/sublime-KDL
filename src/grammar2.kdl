@@ -7,9 +7,9 @@ document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
     node_prev⠀⠀≝⠀⠀node_base⠀node_end
     node_last⠀⠀≝⠀⠀node_base⠀node_end?
       node_base⠀≝; /-?⠀🄣?⠀n␠*⠀string
-        ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*     !="Slashdashed node_children must be after props and args"
-        ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*
-        ⦅n␠+⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?
+        ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*
+        ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*    !="Slashdashed node_children must be after props and args"
+        ⦅n␠+⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?    !="Only children may follow a slashdashed child"
         ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*
         n␠*
 
