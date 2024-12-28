@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file
   <!-- vulnerabilities -->
 
 - __Added__
+  + ✨ support for `v2`
   + support for the version marker
   + support for `kdl1` `kdl2` file extensions
 - __Changed__
