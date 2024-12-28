@@ -67,7 +67,7 @@ variables:
   # prop:                 	'{{ID}}={{value}}'                                       	#
   # prop_eq:              	'({{u_sp}}?)({{u_sp}}*)(=)({{u_sp}}?)({{u_sp}}*)'        	#
   # value:                	'{{type}}?({{string}}|{{number}}|{{keyword}})'           	#
-  # type:                 	'\({{ID}}\)'                                             	#
+  type:                   	'\({{n_sp}}*{{ID}}{{n_sp}}*\)'                           	#type ≝ "(" n␠* string n␠* ")"
   #                       	                                                         	#
   char_illegal:           	'[{{bom}}{{c0a}}{{c0b}}{{cdel}}{{usv_not}}{{cdir}}]' #⊎  	# ST doesn't allow tracking BOM@file begin, so no need to add a BOF condition
   c0a:                    	  '[\x{0000}-\x{0008}]'                            #⊎    	#
