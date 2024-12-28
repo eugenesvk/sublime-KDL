@@ -200,6 +200,7 @@ contexts:
         # - include         : S🛑¹pre_s∨c∨t
       - include           : arg∨prop
       - include           : child_block
+      - include           : ｝3
       - include           : node_terminator4  # ... but then an extra pop is needed
     - include             : child_block1
     - include             : node_terminator3
@@ -225,6 +226,7 @@ contexts:
 
       - include           : arg∨prop⁄-
       - include           : child_block⁄-
+      - include           : ｝3⁄-
       - include           : node_terminator4⁄-
     - include             : child_block1⁄-
     - include             : node_terminator3⁄-
