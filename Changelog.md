@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file
 
 - __Added__
   + support for the version marker
+  + support for `kdl1` `kdl2` file extensions
 - __Changed__
   + v1 syntax to `KDL1`
   + scope to `text.kdl1` from `source.kdl1` (the latter is for programming languages)
