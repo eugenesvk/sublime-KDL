@@ -204,7 +204,7 @@ contexts:
       - include           : ｝3
       - include           : node_terminator4  # ... but then an extra pop is needed
     - include             : child_block1
-    - include             : node_terminator3
+    - include             : nodech_terminator3
     - include             : S🛑¹pre_s∨c∨t
     # - include: comments
     # - include: char🆔¬
@@ -230,7 +230,7 @@ contexts:
       - include           : ｝3⁄-
       - include           : node_terminator4⁄-
     - include             : child_block1⁄-
-    - include             : node_terminator3⁄-
+    - include             : nodech_terminator3⁄-
     - include             : S🛑¹pre_s∨c∨t
 
   string:
