@@ -2028,15 +2028,55 @@ contexts:
 #       pop                 : 4
 #     - include             : ｝🛑4
 
-  ｝3:
+  ｝2:
     - match               : \}
     # - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
     # - match               : '}|(?!{{nl_s}})(?<=})' # better alternative to avoid end} breaking next }
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 2
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
+  ｝2⁄-:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
+      pop                 : 2
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
+  ｝3:
+    - match               : \}
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
       - include           : wss
       - include           : node_terminator3
+      - include           : S🛑¹pre␤
+  ｝3⁄-:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator3⁄-
+      - include           : S🛑¹pre␤
+  ｝3t4:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator4
+      - include           : S🛑¹pre␤
+  ｝3t4⁄-:
+    - match               : \}
+      scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator4⁄-
       - include           : S🛑¹pre␤
 #   pre｝🛑:                # missing node terminator before }, requires hunting down for space before }, which nodespace or other rule can handle already
 #     - match               : '{{u_sp}}*?({{u_sp}})?(?=\})'
