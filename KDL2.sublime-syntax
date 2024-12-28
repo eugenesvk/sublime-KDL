@@ -1872,34 +1872,34 @@ contexts:
       - include           : S🛑¹pre␤
     - match               : '(?=\S)'
       push                : nodes
-#   child_block1-body:
-#     - meta_scope          : meta.block.child.kdl
-#     - include             : wss
-#     - include             : comment_line_no␤
-#     - match               : '}'
-#     # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
-#       scope               : punctuation.section.mapping.end.kdl
-#       pop                 : 2
-#       push                :
-#       - include           : wss
-#       - include           : node_terminator3
-#       - include           : S🛑¹pre␤
-#     - match               : '(?=\S)'
-#       push                : nodes
-#   child_block4-body:
-#     - meta_scope          : meta.block.child.kdl #✗chblock4_body
-#     - include             : wss
-#     - include             : comment_line_no␤
-#     - match               : '}'
-#     # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
-#       scope               : punctuation.section.mapping.end.kdl
-#       pop                 : 3
-#       push                :
-#       - include           : wss
-#       - include           : node_terminator4
-#       - include           : S🛑¹pre␤
-#     - match               : '(?=\S)'
-#       push                : nodes
+  child_block1-body:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 2
+      push                :
+      - include           : wss
+      - include           : node_terminator3
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes
+  child_block4-body:
+    - meta_scope          : meta.block.child.kdl #✗chblock4_body
+    - include             : wss
+    - include             : comment_line_no␤
+    - match               : '}'
+    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_terminator4
+      - include           : S🛑¹pre␤
+    - match               : '(?=\S)'
+      push                : nodes
   child_block-body⁄-:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
