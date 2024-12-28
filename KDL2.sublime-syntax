@@ -2274,11 +2274,11 @@ contexts:
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl invalid.illegal.position.kdl
 
 # Primitives, with some ~matching KDL Spec elements
-#   linesp:                 # ≝ linespace : newline | ws | single-line-comment
-#     - include             : ␤
-#     - include             : ws
-#     - include             : comment_line #todo: bugs with } on a line after //
-#     # - include             : comment_line_no␤
+  linesp:                 # ≝ linespace : newline | ws | single-line-comment
+    - include             : ␤
+    - include             : ws
+    - include             : comment_line #todo: bugs with } on a line after //
+    # - include             : comment_line_no␤
   u␠␤s:   # Regular and line breaking whitespace
     - match               : '({{uspnl}})'
       scope               : whitespace.escape.kdl
