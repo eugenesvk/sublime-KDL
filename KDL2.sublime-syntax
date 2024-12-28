@@ -2544,6 +2544,18 @@ contexts:
         2:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
         3:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
+  ID_bare_s🛑: # bans anything except node␠ or closing ) after bareID has begun
+    - match               : '({{bareID}})'
+      push:
+      - match             : '(?=\))'
+        pop               : 1
+      - include           : node␠
+      - match             : '([^\)])([^\)]*)'
+        captures          :
+          1:                invalid.illegal.position.kdl
+          2:                invalid.illegal.muted.position.kdl
+        # pop               : 1
+
 #   pop_pre␠:
 #     - match               : '(?={{u_sp}})'
 #       pop                 : 1
