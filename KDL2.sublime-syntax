@@ -639,12 +639,12 @@ contexts:
 #   “⚿”₌v⁄-⸙1:
 #     - meta_scope          : meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 #     - include             : “⚿”⁄-
-#   “⚿”:
-#     - include             : strings # allows ↓ check to go through while 2nd consecutive string not possible since it'll be treated as a second argument and there is a condition that errors that
-#     - include             : property₌
-#   “⚿”⁄-:
-#     - include             : strings⁄-
-#     - include             : property₌⁄-
+  “⚿”:
+    - include             : strings # allows ↓ check to go through while 2nd consecutive string not possible since it'll be treated as a second argument and there is a condition that errors that
+    - include             : property₌
+  “⚿”⁄-:
+    - include             : strings⁄-
+    - include             : property₌⁄-
 #   property₌:              #✗⁴
 #     - match               : '{{prop_eq}}'
 #       captures            :
