@@ -649,26 +649,26 @@ contexts:
     - include             : strings⁄-
     - include             : node␠
     - include             : property₌⁄-
-#   property₌:              #✗⁴
-#     - match               : '{{prop_eq}}'
-#       captures            :
-#         1:                  invalid.illegal.position.kdl
-#         2:                  invalid.illegal.muted.position.kdl
-#         3:                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
-#         4:                  invalid.illegal.position.kdl
-#         5:                  invalid.illegal.muted.position.kdl
-#       pop                 : 1
-#       push                : property-value # todo: set bugs to clear
-#   property₌⁄-:            #✗⁴
-#     - match               : '{{prop_eq}}'
-#       captures            :
-#         1:                  invalid.illegal.position.kdl
-#         2:                  invalid.illegal.muted.position.kdl
-#         3:                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
-#         4:                  invalid.illegal.position.kdl
-#         5:                  invalid.illegal.muted.position.kdl
-#       pop                 : 1
-#       push                : property-value⁄- # todo: set bugs to clear
+  property₌:              #✗⁴
+    - match               : '{{prop_eq}}'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+        3:                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+        4:                  invalid.illegal.position.kdl
+        5:                  invalid.illegal.muted.position.kdl
+      pop                 : 1
+      push                : property-value # todo: set bugs to clear
+  property₌⁄-:            #✗⁴
+    - match               : '{{prop_eq}}'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+        3:                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
+        4:                  invalid.illegal.position.kdl
+        5:                  invalid.illegal.muted.position.kdl
+      pop                 : 1
+      push                : property-value⁄- # todo: set bugs to clear
 #   property-value:         #✗⁴
 #     # - meta_scope          : # gets misapplied to =
 #     # - meta_content_scope  : # gets removed from some values that pop immediately like boolean #meta.property.value.kdl meta.mapping.value.kdl ✗⁴
