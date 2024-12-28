@@ -77,7 +77,7 @@ char🛑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  (¬1st)"bom"; (c0a)〔u0–u8〕; (c0
 uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0–D7FF⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀E000–10FFFF〕 !="Any Unicode Scalar Value (no surrogates)"
 u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"\
                   "⭾                                                                                  　  "
-u␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="DA \r\n ␍␊ is a sequence, not a single codepoint" !="Line-breaking unicode White_Space" (🔗spec)"newline"
+u␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Comments (// /* */ after ≝ serve as definition symbols)"
 comment_line⠀⠀⠀⠀⠀⠀≝   // ¬␤* ⦅␤ | eof⦆
@@ -91,7 +91,7 @@ l_␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀n␠⠀|⠀␤⠀|⠀comment_line
   n␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀cu␠*⠀escline⠀cu␠*⠀|⠀cu␠+  !="Whitespace within nodes, where newline-ish things must be esclined"
     cu␠⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠⠀⠀|⠀⠀⠀comment_block
     escline⠀⠀⠀≝⠀⧵⠀cu␠*⠀⠀⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
-  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔D〕〔A〕⠀|⠀u␤  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
+  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔D〕〔A〕⠀|⠀u␤  !="〔D〕〔A〕 \r\n ␍␊ is a sequence, but counts as 1 newline" (🔗spec)"newline"
 
 § "Grammar language help: ABNF with some regex. Refs to rules are quoted ‘nodes’" {
   • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literals represented with unicode alts to avoid quotes"
