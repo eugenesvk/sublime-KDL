@@ -2,9 +2,8 @@
 § "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"
 document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
   version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠* "kdl-version"; u␠+⠀⦅ "1"; | "2"; ⦆⠀u␠*⠀␤
-  nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅l_␠*⠀node_prev⦆*
-                  ⠀⦅l_␠*⠀node_last⦆*⠀l_␠*
-    node_prev⠀⠀≝⠀⠀node_base⠀node_end
+  nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅l_␠*⠀node⦆*⠀l_␠*
+    node⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node_base⠀node_end
     node_last⠀⠀≝⠀⠀node_base⠀node_end?
       node_base⠀≝; /-?⠀🄣?⠀n␠*⠀string
         ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*
