@@ -320,6 +320,32 @@ a ##"""
    f"###)a
 //^^^^^^                                          meta.annotation.kdl entity.name.type.kdl meta.string.kdl
 //      ^                                         punctuation.separator.annotation.end.kdl
+  // * Between annotations and the thing they're annotating `(blah) node (thing) 1 y= (who) 2`
+  ( /**/ fo1 /**/ ) /**/ n ( /**/ fo2 /**/ ) /**/ 1 k=( /**/ fo3 /**/ ) /**/ 1
+//^                                                                            punctuation.separator.annotation.begin.kdl
+//                ^                                                            punctuation.separator.annotation.end.kdl
+//                 ^                                                          -invalid.illegal
+//                      ^                                                     -invalid.illegal
+// ^^^^^^^^^^^^^^^                                                             meta.node.kdl meta.annotation.kdl entity.name.type.kdl
+//  ^^^^                                                                       comment.block.kdl
+//           ^^^^                                                              comment.block.kdl
+//                  ^^^^                                                       comment.block.kdl
+//                         ^                                                   punctuation.separator.annotation.begin.kdl
+//                                         ^                                   punctuation.separator.annotation.end.kdl
+//                                          ^                                 -invalid.illegal
+//                                               ^                            -invalid.illegal
+//                          ^^^^^^^^^^^^^^^                                    meta.annotation.kdl entity.name.type.kdl
+//                           ^^^^                                              comment.block.kdl
+//                                    ^^^^                                     comment.block.kdl
+//                                           ^^^^                              comment.block.kdl
+//                                                    ^                        punctuation.separator.annotation.begin.kdl
+//                                                                    ^        punctuation.separator.annotation.end.kdl
+//                                                                     ^      -invalid.illegal
+//                                                                          ^ -invalid.illegal
+//                                                     ^^^^^^^^^^^^^^^         meta.annotation.kdl entity.name.type.kdl
+//                                                      ^^^^                   comment.block.kdl
+//                                                               ^^^^          comment.block.kdl
+//                                                                      ^^^^   comment.block.kdl
 
 (a)n k="a" k=1;
 (a)n k="a" k=1;
