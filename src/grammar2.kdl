@@ -6,7 +6,7 @@ document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
                   ⠀⦅l_␠*⠀node_last⦆*⠀l_␠*
     node_prev⠀⠀≝⠀⠀node_base⠀node_end
     node_last⠀⠀≝⠀⠀node_base⠀node_end?
-      node_base⠀≝; /-?⠀type?⠀n␠*⠀string
+      node_base⠀≝; /-?⠀🄣?⠀n␠*⠀string
         ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*     !="Slashdashed node_children must be after props and args"
         ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*
         ⦅n␠+⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?
@@ -15,9 +15,9 @@ document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
 
 § "Entries"
 node_prop∨arg⠀⠀≝⠀⠀prop⠀|⠀argument
-  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀n␠* "="; n␠*⠀type?⠀n␠*⠀value
-  argument⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀type?⠀n␠*⠀value
-    type⠀⠀⠀⠀⠀⠀⠀≝  "("; n␠*⠀string⠀n␠* ")"
+  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀n␠* "="; n␠*⠀🄣?⠀n␠*⠀value
+  argument⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🄣?⠀n␠*⠀value
+    🄣⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "("; n␠*⠀string⠀n␠* ")"
     value⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀|⠀number⠀|⠀boolean⠀|⠀＃null
 node_children⠀⠀≝  "{"; nodes⠀node_last? "}"
 node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
