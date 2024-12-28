@@ -1876,14 +1876,7 @@ contexts:
     - meta_scope          : meta.block.child.kdl #✗chblock4_body
     - include             : wss
     - include             : comment_line_no␤
-    - match               : '}'
-    # - match               : '}|(?!{{nl_s}})(?<=})' # alternative to hunting down space} to highlight the missing ;
-      scope               : punctuation.section.mapping.end.kdl
-      pop                 : 3
-      push                :
-      - include           : wss
-      - include           : node_terminator4
-      - include           : S🛑¹pre␤
+    - include             : ｝3t4
     - match               : '(?=\S)'
       push                : nodes
   child_block-body⁄-:
