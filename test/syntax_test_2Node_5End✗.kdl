@@ -4,3 +4,6 @@
 n /-;n "Terminators can't be slashdashed"
 //  ^                        invalid.illegal.position.kdl
 //   ^                      -invalid
+n {n} a
+//    ^ invalid.illegal.position.kdl
+! "only the last node can end without a terminator"
