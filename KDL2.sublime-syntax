@@ -622,6 +622,7 @@ contexts:
       pop                 : 1 # ↑⸙
       push                :
         - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
+        - include         : node␠
         - include         : property₌
         - include         : pop_pre-term # unblock errors from spoiling the whole line
   ⚿⁄-:                    #✗⁴
@@ -630,6 +631,7 @@ contexts:
       pop                 : 1 # ↑⸙
       set                 :
         - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
+        - include         : node␠
         - include         : property₌⁄-
         - include         : pop_pre-term
 
