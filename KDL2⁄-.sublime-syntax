@@ -1044,15 +1044,24 @@ contexts:
   #         pop             : 2
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
-  # comment_line2_term⁄-:
-  #   - match               : //
-  #     scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
-  #     push                :
-  #       - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
-  #       - match           : $({{newline}})?
-  #         pop             : 4
-  #         captures        :
-  #           1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+  comment_line_term⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 2
+          captures        :
+            1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+  comment_line2_term⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 3
+          captures        :
+            1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
   # comment_line3_term⁄-:
   #   - match               : //
   #     scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl comment.line.slash-dash.kdl
