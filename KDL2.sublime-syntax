@@ -1863,7 +1863,6 @@ contexts:
     - include             : wss
     - include             : comment_line_no␤
     - include             : ｝3
-    - match               : '}'
     - match               : '(?=\S)'
       push                : nodes
   child_block1-body:
