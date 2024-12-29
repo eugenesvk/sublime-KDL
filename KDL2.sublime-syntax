@@ -2008,7 +2008,7 @@ contexts:
       - include           : S🛑¹pre␤
   ｝2⁄-:
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
+      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 2
       push                :
       - include           : wss
@@ -2024,7 +2024,7 @@ contexts:
       - include           : S🛑¹pre␤
   ｝3⁄-:
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
+      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 3
       push                :
       - include           : wss
@@ -2040,7 +2040,7 @@ contexts:
       - include           : S🛑¹pre␤
   ｝3t4⁄-:
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
+      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 3
       push                :
       - include           : wss
