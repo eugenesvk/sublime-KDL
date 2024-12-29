@@ -328,39 +328,39 @@ contexts:
     - include             : ⁄-node
     - include             : node_name⁄-
     - include             : node_terminator⁄-
-  # ⁄-node:                #✗⁰ ≝ (/- node-space*)? type? identifier
-  #   - match               : '{{c_slashdash}}'
-  #     scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
-  #     pop                 : 1
-  #     push                : # pop+push: match gets NO meta_scope of the popped context (≈lookahead)
-  #     - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
-  #     - include           : node␠
-  #     - include           : node_name⁄-
-  # ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
-  #   - include             : ⁄-node
-  #   - include             : node_name
-  # ⁄-∨node⁄-:              #✗⁰
-  #   - include             : ⁄-node
-  #   - include             : node_name⁄-
-  # node_name:              #✗⁰
-  #   - match               : '(?=\()'
-  #     push                :
-  #     - meta_scope        : meta.node.kdl #✗¹node_name_t
-  #     - include           : type-node
-  #   - match               : '(?={{string_beg}}|{{bareID}})'
-  #     push                :
-  #     - meta_scope        : meta.node.kdl #✗¹node_name_s_b
-  #     - include           : nodeID
-  # node_name⁄-:            #✗⁰
-  #   - include             : line_continuation⁄-
-  #   - match               : '(?=\()'
-  #     push                :
-  #     - meta_scope        : meta.node.kdl #✗¹node_name⁄–_t
-  #     - include           : type-node⁄-
-  #   - match               : '(?={{string_beg}}|{{bareID}})'
-  #     push                :
-  #     - meta_scope        : meta.node.kdl #✗¹node_name⁄–_s_b
-  #     - include           : nodeID⁄-
+  ⁄-node:                #✗⁰ ≝ (/- node-space*)? type? identifier
+    - match               : '{{c_slashdash}}'
+      scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+      pop                 : 1
+      push                : # pop+push: match gets NO meta_scope of the popped context (≈lookahead)
+      - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
+      - include           : node␠
+      - include           : node_name⁄-
+  ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
+    - include             : ⁄-node
+    - include             : node_name
+  ⁄-∨node⁄-:              #✗⁰
+    - include             : ⁄-node
+    - include             : node_name⁄-
+  node_name:              #✗⁰
+    - match               : '(?=\()'
+      push                :
+      - meta_scope        : meta.node.kdl #✗¹node_name_t
+      - include           : type-node
+    - match               : '(?={{string_beg}}|{{bareID}})'
+      push                :
+      - meta_scope        : meta.node.kdl #✗¹node_name_s_b
+      - include           : nodeID
+  node_name⁄-:            #✗⁰
+    - include             : line_continuation⁄-
+    - match               : '(?=\()'
+      push                :
+      - meta_scope        : meta.node.kdl #✗¹node_name⁄–_t
+      - include           : type-node⁄-
+    - match               : '(?={{string_beg}}|{{bareID}})'
+      push                :
+      - meta_scope        : meta.node.kdl #✗¹node_name⁄–_s_b
+      - include           : nodeID⁄-
 
   type-node:              #✗¹
     - match               : \(
