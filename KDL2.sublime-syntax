@@ -1163,15 +1163,31 @@ contexts:
     - match               : ;
       scope               : punctuation.terminator.node.kdl
       pop                 : 2
+  _node_term_:
+    - include             : comment_line_term
+    - include             : ␤term
+    - include             : eof
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
+      pop                 : 1
   node_terminator3:
     - include             : _node_term3_
     - include             : ｝🛑3
   nodech_terminator3:
     - include             : _node_term3_
     - include             : pop3 # no terminator @ last child node not an error anymore
+  nodech_terminator2:
+    - include             : _node_term2_
+    - include             : ｝🛑2
   nodech_terminator2⸮:
     - include             : _node_term2_
     - include             : pop2
+  nodech_terminator⸮:
+    - include             : _node_term_
+    - include             : pop
+  nodech_terminator:
+    - include             : _node_term_
+    - include             : ｝🛑
   # node_terminator4:
   #   - include             : comment_line4_term
   #   - include             : ␤term4
@@ -1365,6 +1381,15 @@ contexts:
   #         pop             : 4
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl
+  comment_line_term:      #✗
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
+      push                :    #→✗+1
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})?
+          pop             : 2 #→✗-1
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
   # comment_line2_term:
   #   - match               : //
   #     scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
@@ -1435,6 +1460,10 @@ contexts:
   #   - match               : '{{newline}}'
   #     #scope               : dbg✗␤
   #     pop                 : 1
+  ␤term:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl #✗␤1
+      pop                 : 1
   # ␤term2:
   #   - match               : '{{newline}}'
   #     scope               : punctuation.terminator.node.kdl #✗␤2
