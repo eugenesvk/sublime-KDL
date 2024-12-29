@@ -1997,7 +1997,7 @@ contexts:
 #     - include             : ｝🛑4
 
   ｝2:
-    - match               : \}
+    - match               : '}'
     # - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
     # - match               : '}|(?!{{nl_s}})(?<=})' # better alternative to avoid end} breaking next }
       scope               : punctuation.section.mapping.end.kdl
@@ -2007,7 +2007,7 @@ contexts:
       - include           : node_terminator3
       - include           : S🛑¹pre␤
   ｝2⁄-:
-    - match               : \}
+    - match               : '}'
       scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
       pop                 : 2
       push                :
@@ -2015,7 +2015,7 @@ contexts:
       - include           : node_terminator3
       - include           : S🛑¹pre␤
   ｝3:
-    - match               : \}
+    - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
@@ -2023,7 +2023,7 @@ contexts:
       - include           : node_terminator3
       - include           : S🛑¹pre␤
   ｝3⁄-:
-    - match               : \}
+    - match               : '}'
       scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
       pop                 : 3
       push                :
@@ -2031,7 +2031,7 @@ contexts:
       - include           : node_terminator3⁄-
       - include           : S🛑¹pre␤
   ｝3t4:
-    - match               : \}
+    - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
       push                :
@@ -2039,7 +2039,7 @@ contexts:
       - include           : node_terminator4
       - include           : S🛑¹pre␤
   ｝3t4⁄-:
-    - match               : \}
+    - match               : '}'
       scope               : punctuation.section.mapping.end.kdl  comment.line.slash-dash.kdl
       pop                 : 3
       push                :
@@ -2052,15 +2052,15 @@ contexts:
 #         1:                  invalid.illegal.kdl
 #       pop                 : 1
 #   ｝🛑:
-#     - match               : \}
+#     - match               : '}'
 #       scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑
 #       pop                 : 1
 #   ｝🛑2:
-#     - match               : \}
+#     - match               : '}'
 #       scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑2
 #       pop                 : 2
 #   ｝🛑3:
-#     - match               : \}
+#     - match               : '}'
 #       scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑3
 #       pop                 : 3
 #       push                :
@@ -2069,7 +2069,7 @@ contexts:
 #       - include           : S🛑¹pre␤
 
 #   ｝🛑4:
-#     - match               : \}
+#     - match               : '}'
 #       scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑4
 #       pop                 : 4
 #       push                :
