@@ -1,5 +1,5 @@
 /-kdl-version 2
-§ "KDL Grammar" 🔗spec=(url)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"
+§ "KDL Grammar" spec=(🔗)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"
 document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
   version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠* "kdl-version"; u␠+⠀⦅ "1"; | "2"; ⦆⠀u␠*⠀␤
   nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅l_␠*⠀node⦆*⠀l_␠*
