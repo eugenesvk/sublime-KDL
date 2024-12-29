@@ -320,15 +320,13 @@ contexts:
 
 
 #——— 1 Node: \- type
-  node:                  #✗⁰ ≝ node_base node_end
-    - include             : ⁄-node
+  node:                   #✗⁰ ≝ node_base node_end
     - include             : node_base
     - include             : node_terminator
-  node⁄-:                #✗⁰ =node, but name is ⁄-scoped even without /- since e.g., parent was already ⁄-
-    - include             : ⁄-node
+  node⁄-:                 #✗⁰ =node, but name is ⁄-scoped even without /- since e.g., parent was already ⁄-
     - include             : node_base⁄-
     - include             : node_terminator⁄-
-  ⁄-node:                #✗⁰ ≝ (/- node-space*)? type? identifier
+  ⁄-node:                 #✗⁰ ≝ (/- node-space*)? type? identifier
     - match               : '{{c_slashdash}}'
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
       pop                 : 1
@@ -336,13 +334,13 @@ contexts:
       - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
       - include           : node␠
       - include           : node_base⁄-
-  ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
-    - include             : ⁄-node
-    - include             : node_base
-  ⁄-∨node⁄-:              #✗⁰
-    - include             : ⁄-node
-    - include             : node_base⁄-
   node_base:              #✗⁰
+    - include             : ⁄-node
+    - include             : nodetID
+  node_base⁄-:            #✗⁰
+    - include             : ⁄-node
+    - include             : nodetID⁄-
+  nodetID:                #✗⁰
     - match               : '(?=\()'
       push                :
       - meta_scope        : meta.node.kdl #✗¹node_base_t
@@ -351,7 +349,7 @@ contexts:
       push                :
       - meta_scope        : meta.node.kdl #✗¹node_base_s_b
       - include           : nodeID
-  node_base⁄-:            #✗⁰
+  nodetID⁄-:              #✗⁰
     - include             : line_continuation⁄-
     - match               : '(?=\()'
       push                :
