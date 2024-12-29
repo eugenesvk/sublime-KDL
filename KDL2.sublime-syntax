@@ -170,14 +170,14 @@ contexts:
       #- meta_scope        : dbg✗¹
       - include: nodes
 
-  nodes: #✗⁰ ≈ linespace* (node nodes?)? linespace*
+  nodes: #✗⁰ ≝ ⦅l_␠*⠀node⦆* l_␠*
     - include: linesp
-    - include: ⁄-∨node
+    - include: node
     - include: any🛑 # todo disable? strict mode
     # - include: any-pop
   nodes⁄-: #✗⁰
     - include: linesp
-    - include: ⁄-∨node⁄-
+    - include: node⁄-
     - include: any🛑 # todo disable? strict mode
     # - include: any-pop
 
@@ -320,6 +320,14 @@ contexts:
 
 
 #——— 1 Node: \- type
+  node:                  #✗⁰ ≝ node_base node_end
+    - include             : ⁄-node
+    - include             : node_name
+    - include             : node_terminator
+  node⁄-:                #✗⁰ =node, but name is ⁄-scoped even without /- since e.g., parent was already ⁄-
+    - include             : ⁄-node
+    - include             : node_name⁄-
+    - include             : node_terminator⁄-
   # ⁄-node:                #✗⁰ ≝ (/- node-space*)? type? identifier
   #   - match               : '{{c_slashdash}}'
   #     scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
