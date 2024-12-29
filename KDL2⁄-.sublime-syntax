@@ -843,7 +843,7 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝3⁄-
+    - include             : ｝ch3⁄-
     - match               : '(?=\S)'
       push                : nodes⁄-
   child_block1-body⁄-:
