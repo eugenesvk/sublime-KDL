@@ -1907,7 +1907,7 @@ contexts:
 
 
 #——— 2 Node Element: 5 End
-  # node_terminator:        # ≝ node-terminator : single-line-comment | newline | ";" | eof
+  # node_terminator:        # node_end ≝ comment_line | ␤ | ； | eof
   #   - include             : comment_line
   #   - include             : ␤
   #   - include             : eof
