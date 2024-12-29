@@ -436,7 +436,7 @@ contexts:
       - include           : string-quoted-double-consecutive🛑3
       - include           : strings_node-id # use custom strings scopes or meta_scope gets applied to "args"
       - include           : node-elements
-      - include           : node_terminator3
+      # - include           : node_terminator3
     - include             : bare-after-string🛑
     - match               : '([+-]|[+-]?\.)([0-9])'
       scope               : entity.name.tag.node.kdl
@@ -448,7 +448,7 @@ contexts:
       push                : #✗²
       #- meta_scope        : dbg✗²_nodeID→node_elements
       - include           : node-elements
-      - include           : node_terminator3
+      # - include           : node_terminator3
       - include           : S🛑s
   nodeID⁄-:               #✗¹
     # - include             : keywords⁄-🛑
@@ -459,7 +459,7 @@ contexts:
       - include           : string-quoted-double-consecutive🛑3
       - include           : strings⁄-_node-id # use custom strings scopes or meta_scope gets applied to "args"
       - include           : node-elements⁄-
-      - include           : node_terminator3⁄-
+      # - include           : node_terminator3⁄-
     - include             : bare-after-string🛑
     - match               : '([+-]|[+-]?\.)([0-9])'
       scope               : entity.name.tag.node.kdl comment.line.slash-dash.kdl
@@ -471,7 +471,7 @@ contexts:
       push                : #✗²
       #- meta_scope        : dbg✗²_nodeID→node-elements⁄–
       - include           : node-elements⁄-
-      - include           : node_terminator3⁄-
+      # - include           : node_terminator3⁄-
       - include           : S🛑s
 
 #——— 2 Node Element: 2 Argument or 3 Property
