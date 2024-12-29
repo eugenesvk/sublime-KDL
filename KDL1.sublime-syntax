@@ -256,7 +256,7 @@ contexts:
 
 
 #——— 1 Node: \- type
-  ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
+  ⁄-node:                #✗⁰ ≝ (/- node-space*)? type? identifier
     - match               : '{{c_slashdash}}'
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
       pop                 : 1
@@ -264,15 +264,11 @@ contexts:
       - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
       - include           : node␠
       - include           : node_name⁄-
+  ⁄-∨node:                #✗⁰ ≝ (/- node-space*)? type? identifier
+    - include             : ⁄-node
     - include             : node_name
   ⁄-∨node⁄-:              #✗⁰
-    - match               : '{{c_slashdash}}'
-      scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
-      pop                 : 1
-      push                : # pop+push: match gets NO meta_scope of the popped context (≈lookahead)
-      - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
-      - include           : node␠
-      - include           : node_name⁄-
+    - include             : ⁄-node
     - include             : node_name⁄-
   node_name:              #✗⁰
     - match               : '(?=\()'
