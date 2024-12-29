@@ -48,7 +48,7 @@ contexts:
       - include           : ｝ch3⁄-
       - include           : node_terminator4⁄-
     - include             : child_block1⁄-
-    - include             : nodech_terminator3⁄-
+    - include             : nodech_terminator3⸮⁄-
     - include             : S🛑¹pre_s∨c∨t
 
   node_ch∨argprop⁄-:     #✗³
@@ -914,7 +914,7 @@ contexts:
   node_terminator3⁄-:
     - include             : _node_term3⁄-_
     - include             : ｝🛑3
-  nodech_terminator3⁄-:
+  nodech_terminator3⸮⁄-:
     - include             : _node_term3⁄-_
     - include             : pop3
   # node_terminator4⁄-:
@@ -940,7 +940,7 @@ contexts:
       pop                 : 2
       push                :
       - include           : wss
-      - include           : nodech_terminator3⁄-
+      - include           : nodech_terminator3⸮⁄-
       - include           : S🛑¹pre␤
   ｝3⁄-:
     - match               : '}'
@@ -956,7 +956,7 @@ contexts:
       pop                 : 3
       push                :
       - include           : wss
-      - include           : nodech_terminator3⁄-
+      - include           : nodech_terminator3⸮⁄-
       - include           : S🛑¹pre␤
   ｝3t4⁄-:
     - match               : '}'
