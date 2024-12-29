@@ -164,6 +164,18 @@ n{n;n{n;n};}
 n{n;n{n;n}}
 //       ^^                            punctuation.section.mapping.end.kdl
 //        ^                           -meta.block.child.kdl
+n{n;n{n;nn}   }
+//        ^                            punctuation.section.mapping.end.kdl
+//            ^                        punctuation.section.mapping.end.kdl
+n{n;n{n;n;}   }
+//        ^                            punctuation.section.mapping.end.kdl
+//            ^                        punctuation.section.mapping.end.kdl
+n{n;n{n;n }   }
+//        ^                            punctuation.section.mapping.end.kdl
+//            ^                        punctuation.section.mapping.end.kdl
+n{n;n{n;n;} ; }
+//        ^                            punctuation.section.mapping.end.kdl
+//            ^                        punctuation.section.mapping.end.kdl
 
 
 
