@@ -4,7 +4,7 @@ document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
   version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠* "kdl-version"; u␠+⠀⦅ "1"; | "2"; ⦆⠀u␠*⠀␤
   nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅l_␠*⠀node⦆*⠀l_␠*
     node⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node_base⠀node_end
-    node_last⠀⠀≝⠀⠀node_base⠀node_end?
+    node_chlast⠀≝⠀⠀node_base⠀node_end?
       node_base⠀≝; /-?⠀🄣?⠀n␠*⠀string
         ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*
         ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*    !="Slashdashed node_children must be after props and args"
@@ -18,7 +18,7 @@ node_prop∨arg⠀⠀≝⠀⠀prop⠀|⠀argument
   argument⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🄣?⠀n␠*⠀value
     🄣⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "("; n␠*⠀string⠀n␠* ")"
     value⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀|⠀number⠀|⠀boolean⠀|⠀＃null
-node_children⠀⠀≝  "{"; nodes⠀node_last? "}"
+node_children⠀⠀≝  "{"; nodes⠀node_chlast? "}"
 node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
 
 § "Strings"
