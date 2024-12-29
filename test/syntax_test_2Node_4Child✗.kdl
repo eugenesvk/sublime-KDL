@@ -5,9 +5,11 @@
 n {n} {a}
 //    ^   invalid.illegal.position.kdl
 //     ^^ invalid.illegal.muted.position.kdl
-
 n {n} a
 //    ^ invalid.illegal.position.kdl
+n {c} /-5 //invalid
+//    ^ invalid.illegal.position.kdl
+
 n a=1 /-{n} n /-{n}
 //          ^       invalid.illegal.position.kdl
 //            ^^^^^ invalid.illegal.muted.position.kdl
