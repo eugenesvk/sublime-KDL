@@ -1209,8 +1209,6 @@ contexts:
       - include           : S🛑¹pre␤
   ｝ch2:
     - match               : '}'
-    # - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
-    # - match               : '}|(?!{{nl_s}})(?<=})' # better alternative to avoid end} breaking next }
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 2
       push                :
