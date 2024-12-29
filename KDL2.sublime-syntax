@@ -187,8 +187,7 @@ contexts:
         pop               : 1
         set               :
         #- meta_scope      : dbg✗³node␠⁄−arg∨prop∨child
-        - include         : node␠s
-        - include         : pop_pre␤
+        - include         : linesp
         - include         : node_terminator🛑3
         - include         : arg∨prop⁄-
         - include         : child_block⁄-
