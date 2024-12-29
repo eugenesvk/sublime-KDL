@@ -4,7 +4,7 @@ name             : KDL2⁄-
 file_extensions  : [kdl,kdl2]
 scope            : text.kdl2
 first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+2[[:blank:]]*$'
-# hidden           : true
+hidden           : true
 version          : 2
 extends          : Packages/KDL/KDL1.sublime-syntax
 # ⁄-Slashdashed rules only to reduce the mess of a single file and allow for an easier comparison
