@@ -1217,6 +1217,14 @@ contexts:
       - include           : wss
       - include           : nodech_terminator3
       - include           : S🛑¹pre␤
+  ｝cht2:
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 1
+      push                :
+      - include           : wss
+      - include           : nodech_terminator2⸮
+      - include           : S🛑¹pre␤
   ｝3:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
