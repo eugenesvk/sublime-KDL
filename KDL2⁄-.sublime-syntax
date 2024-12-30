@@ -851,6 +851,16 @@ contexts:
 
 
 #——— 2 Node Element: 4 Child
+  node_children⁄-s:        #✗⁴ sequence of /-{ch} blocks after {ch}, so nothing else allowed
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴node_children⁄-s
+    - match               : '({{c_slashdash}})' # repeatable /-{ch}, pop up to ✗⁴
+      scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+      push                : #✗5
+      - include           : linesp
+      - include           : child_block⁄- #✗4=@start, 🗘
+      - include           : S🛑s
+    - include             : S🛑s
+
   # child_block⁄-:
   #   - match               : '{'
   #     scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
