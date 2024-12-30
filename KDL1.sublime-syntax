@@ -1689,7 +1689,7 @@ contexts:
       push                :
         - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
         - match           : $({{newline}})?
-          pop             : 4
+          pop             : 3
           captures        :
             1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
   comment_line3_term⁄-:
