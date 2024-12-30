@@ -1088,10 +1088,10 @@ contexts:
   #   - match               : '{'
   #     scope               : punctuation.section.mapping.begin.kdl
   #     push                : child_block1-body
-  child_block4:
+  child_block6:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl #✗chblock4
-      push                : child_block4-body
+      push                : child_block6-body
   child_block-body:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
@@ -1106,7 +1106,7 @@ contexts:
     - include             : ｝ch1t3
     - match               : '(?=\S)'
       push                : nodes
-  child_block4-body:
+  child_block6-body:
     - meta_scope          : meta.block.child.kdl #✗chblock4_body
     - include             : wss
     - include             : comment_line_no␤
