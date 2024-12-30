@@ -47,7 +47,7 @@ contexts:
       - include           : child_block⁄-
       - include           : ｝ch2t3⁄-
       - include           : node_terminator4⁄-
-    - include             : child_block1⁄-
+    - include             : child_block3⁄-
     - include             : nodech_terminator3⸮⁄-
     - include             : S🛑¹pre_s∨c∨t
 
@@ -855,10 +855,10 @@ contexts:
   #   - match               : '{'
   #     scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
   #     push                : child_block-body⁄-
-  child_block1⁄-:
+  child_block3⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
-      push                : child_block1-body⁄-
+      push                : child_block3-body⁄-
   child_block6⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
@@ -870,7 +870,7 @@ contexts:
     - include             : ｝ch2t3⁄-
     - match               : '(?=\S)'
       push                : nodes⁄-
-  child_block1-body⁄-:
+  child_block3-body⁄-:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
