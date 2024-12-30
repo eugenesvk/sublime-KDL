@@ -4,15 +4,15 @@ node_parent "argument" +5 property⚿=1 p⚿=#true p⚿="www.com/?q={}" "arg3�
   terminate-node1; node2␤
   node3// line comment ; ␤ eof
 }
-"4 value⁄data types" {
-  • 1 •bool  	= #true #false
-  • 2 •null  	= #null
-  • 3 •string	="Regular with escapes \b \\ \u{FF} and multiline (escaped→)\
-      support" •raw=#"Raw \b no esc"# •rawest=##"Multiple "#" to allow " and #"## •multiline="""
-      ↓ with dedented whitespace up to the closing ""
-      """
-  • 4 •numbers	=(decimal)-3 (decimal)-1.234 (decimal)+1.234e-42\
-    (hex)0xFF (octal)0o755 (binary)0b101 with_digit_separator_=1_000_000 (float)#inf #-inf #nan
+"4 value/data types" {
+  • 1 bool    	= #true #false
+  • 2 "null"  	= #null
+  • 3 string  	="Regular with escapes \t \\ \u{FF} and multiline (escaped→)\
+      support"	multiline="""
+      ↓ with  	dedented whitespace up to the closing quotes
+      """     	raw=#"\t no esc"#   ##"Multiple "#" to allow " and #"##
+  • 4 numbers 	=(decimal)-3 (decimal)-1.234 (decimal)+1.234e-42\
+    (hex)0xFF (octal)0o755 (binary)0b101 digit_separator_=1_000_000 (float)#inf #-inf #nan
 }
 "node quoted for (arbitrary) names|!@#$@$%Q#$%~@!40" "1.2.3" "!prop quoted!"=#true
 nodeーbare𐀀ノド1~!@<>ÿ$%^‰&*.:'|?+† p⚿ーbareお名前="non-quoted names support many symbols"
@@ -25,4 +25,3 @@ nodeーbare𐀀ノド1~!@<>ÿ$%^‰&*.:'|?+† p⚿ーbareお名前="non-quoted 
 node-with-line-continuations \ // Split node into multiple lines
   +1.1 2                     \ // with multiple //single-line comments
   "After line continuation"
-
