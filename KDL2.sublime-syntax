@@ -326,6 +326,7 @@ contexts:
 #——— 2 Node Element: 1 Name
   nodeID:                 #✗¹
     # - include             : keywords🛑
+    - include             : keyword1node🛑pre␠␤
     - match               : '(?={{string_beg}})'
       push                : #✗²
       # - meta_scope        : entity.name.tag.node.kdl #✗²
