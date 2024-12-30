@@ -945,7 +945,7 @@ contexts:
     - include             : ␤term
     - include             : eof
     - match               : ;
-      scope               : punctuation.terminator.node.kdl
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
       pop                 : 1
   node_terminator3⁄-:
     - include             : node_end3⁄-
@@ -953,6 +953,12 @@ contexts:
   nodech_terminator3⸮⁄-:
     - include             : node_end3⁄-
     - include             : pop3
+  nodech_terminator2⸮⁄-:
+    - include             : node_end2⁄-
+    - include             : pop2
+  nodech_terminator⸮⁄-:
+    - include             : node_end⁄-
+    - include             : pop
   # node_terminator4⁄-:
   #   - include             : comment_line4_term⁄-
   #   - include             : ␤term4
@@ -977,6 +983,14 @@ contexts:
       push                :
       - include           : wss
       - include           : node_terminator2⁄-
+      - include           : S🛑¹pre␤
+  ｝0t2⸮⁄-:
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      pop                 : 1
+      push                :
+      - include           : wss
+      - include           : nodech_terminator2⸮⁄-
       - include           : S🛑¹pre␤
   ｝ch0t2⁄-: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
