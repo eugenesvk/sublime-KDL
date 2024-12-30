@@ -1149,21 +1149,21 @@ contexts:
   #     scope               : punctuation.terminator.node.kdl
   #     pop                 : 2
   #   - include             : ｝🛑2
-  _node_term3_:
+  node_end3:
     - include             : comment_line3_term
     - include             : ␤term3
     - include             : eof3
     - match               : ;
       scope               : punctuation.terminator.node.kdl
       pop                 : 3
-  _node_term2_:
+  node_end2:
     - include             : comment_line2_term
     - include             : ␤term2
     - include             : eof2
     - match               : ;
       scope               : punctuation.terminator.node.kdl
       pop                 : 2
-  _node_term_:
+  node_end: # node_end ≝ comment_line | ␤ | ； | eof
     - include             : comment_line_term
     - include             : ␤term
     - include             : eof
@@ -1171,22 +1171,22 @@ contexts:
       scope               : punctuation.terminator.node.kdl
       pop                 : 1
   node_terminator3:
-    - include             : _node_term3_
+    - include             : node_end3
     - include             : ｝🛑3
   nodech_terminator3⸮:
-    - include             : _node_term3_
+    - include             : node_end3
     - include             : pop3 # no terminator @ last child node not an error anymore
   nodech_terminator2:
-    - include             : _node_term2_
+    - include             : node_end2
     - include             : ｝🛑2
   nodech_terminator2⸮:
-    - include             : _node_term2_
+    - include             : node_end2
     - include             : pop2
   nodech_terminator⸮:
-    - include             : _node_term_
+    - include             : node_end
     - include             : pop
   nodech_terminator:
-    - include             : _node_term_
+    - include             : node_end
     - include             : ｝🛑
   # node_terminator4:
   #   - include             : comment_line4_term

@@ -904,7 +904,7 @@ contexts:
   #     scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
   #     pop                 : 2
   #   - include             : ｝🛑2
-  _node_term3⁄-_:
+  node_end3⁄-:
     - include             : comment_line3_term⁄-
     - include             : ␤term3
     - include             : eof3
@@ -912,10 +912,10 @@ contexts:
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗n_term3⁄–
       pop                 : 3
   node_terminator3⁄-:
-    - include             : _node_term3⁄-_
+    - include             : node_end3⁄-
     - include             : ｝🛑3
   nodech_terminator3⸮⁄-:
-    - include             : _node_term3⁄-_
+    - include             : node_end3⁄-
     - include             : pop3
   # node_terminator4⁄-:
   #   - include             : comment_line4_term⁄-
