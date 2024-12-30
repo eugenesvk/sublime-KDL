@@ -854,15 +854,15 @@ contexts:
   node_children_s⁄-⸙3:    #✗⁴⸙  Sequence of /-{children} blocks, fails if arg∨prop detected; Handle /- directly since /-{ch} must be after arg∨prop (so we can't include both at the same level and we can't pop an extra level up). Also /-{ch} can be repeated while {ch} can't
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴node_children_s⁄-⸙3
     - match               : '({{c_slashdash}})' # repeatable /-{ch}, pop up to ✗⁴
-      scope               : x1 invalid.illegal.muted comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+      scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
       # pop                 : 1
       # set                 :
       push                : #✗5
       - include           : linesp
       - include           : child_block_nofollow2⁄-
-      # - include           : S🛑s
       - match             : '\S'
         fail              : ⸙3node_ch∨argprop⁄-
+      # - include           : S🛑s
       # - include           : pop⸙ #✗4=@start, 🗘
     - include             : child_block3
     # - match               : ''
