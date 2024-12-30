@@ -147,6 +147,40 @@ nnn {//ending} doesn't break the following}
 }
 //<- meta.node.kdl punctuation.section.mapping.end.kdl
 
+n /-1  /-{ v; v } /-{ v; v } { v; v } /-{v; v } /-{ v }
+n /-1  /-{ v; v }  /-{ v; v } { v; v } /-{v; v } /-{ v }
+n /-1  /-{ v; v}  /-{ v; v}  { v; v}  /-{v; v}  /-{ v}
+n /-1  /-{ v; v } /-{ v; v } { v; v } /-{v; v } /-{ v }
+//^^                                                          meta.mapping.value.kdl comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//     ^^                                                     comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//                ^^                                          comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//                                    ^^                      comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//                                              ^^            comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//       ^                                                    punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+//                  ^                                         punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+//                                      ^                     punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+//                                                ^           punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+//              ^                                             punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//                         ^                                  punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//                                            ^               punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//                                                    ^       punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//                           ^                                punctuation.section.mapping.begin.kdl
+//                                  ^                         punctuation.section.mapping.end.kdl
+//       ^^^^^^^^                                             meta.block.child.kdl
+//                  ^^^^^^^^                                  meta.block.child.kdl
+//                           ^^^^^^^^                         meta.block.child.kdl
+//                                      ^^^^^^^               meta.block.child.kdl
+//                                                ^^^^^       meta.block.child.kdl
+
+
+n /-1  /-{}   /-{} {/-v} /-{v} /-{valid}
+//
+n /-1              {  v} /-{v} /-{valid}
+//
+n /-1              {/-v} /-{v} /-{valid}
+
+
+
 // 2 Node Element: 5 End
 nnn
 // ^                                   punctuation.terminator.node.kdl
