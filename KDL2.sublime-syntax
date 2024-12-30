@@ -196,7 +196,7 @@ contexts:
         # - include         : S🛑¹pre_s∨c∨t
       - include           : arg∨prop
       - include           : child_block
-      - include           : ｝ch3
+      - include           : ｝ch2t3
       - include           : node_terminator4  # ... but then an extra pop is needed
     - include             : child_block1
     - include             : nodech_terminator3⸮
@@ -1096,21 +1096,21 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝ch3
+    - include             : ｝ch2t3
     - match               : '(?=\S)'
       push                : nodes
   child_block1-body:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝ch2
+    - include             : ｝ch1t3
     - match               : '(?=\S)'
       push                : nodes
   child_block4-body:
     - meta_scope          : meta.block.child.kdl #✗chblock4_body
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝3t4
+    - include             : ｝2t4
     - match               : '(?=\S)'
       push                : nodes
 
@@ -1197,7 +1197,7 @@ contexts:
   #     pop                 : 4
   #   - include             : ｝🛑4
 
-  ｝2:
+  ｝1t3:
     - match               : '}'
     # - match               : '}|(?<=})' # alternative to hunting down space} to highlight the missing ;
     # - match               : '}|(?!{{nl_s}})(?<=})' # better alternative to avoid end} breaking next }
@@ -1207,7 +1207,7 @@ contexts:
       - include           : wss
       - include           : node_terminator3
       - include           : S🛑¹pre␤
-  ｝ch2: # allows /-{ch} blocks to continue after the ending
+  ｝ch1t3: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 2
@@ -1225,7 +1225,7 @@ contexts:
       - include           : wss
       - include           : nodech_terminator2⸮
       - include           : S🛑¹pre␤
-  ｝3:
+  ｝2t3:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
@@ -1233,7 +1233,7 @@ contexts:
       - include           : wss
       - include           : node_terminator3
       - include           : S🛑¹pre␤
-  ｝ch3:
+  ｝ch2t3:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
@@ -1243,7 +1243,7 @@ contexts:
       - include           : node_children⁄-s
       - include           : S🛑¹pre␤
       - include           : pop3
-  ｝3t4:
+  ｝2t4:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 3
