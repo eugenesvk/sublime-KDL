@@ -1092,10 +1092,10 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
       push                : child_block1-body
-  child_block_nofollow1:  # doesn't include following children blocks
+  child_block_nofollow2:  # doesn't include following children blocks
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
-      push                : child_block_nofollow1-body
+      push                : child_block_nofollow2-body
   child_block6:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl #✗chblock4
@@ -1122,11 +1122,11 @@ contexts:
     - match               : '(?=\S)'
       push                : nodes
     # - include             : pop2
-  child_block_nofollow1-body:
+  child_block_nofollow2-body:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝0t2⸮
+    - include             : ｝1t2⸮
     - match               : '(?=\S)'
       push                : nodes
     # - include             : pop2
@@ -1239,10 +1239,10 @@ contexts:
       - include           : wss
       - include           : node_terminator2
       - include           : S🛑¹pre␤
-  ｝0t2⸮:
+  ｝1t2⸮:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
-      pop                 : 1
+      pop                 : 2
       push                :
       - include           : wss
       - include           : nodech_terminator2⸮
