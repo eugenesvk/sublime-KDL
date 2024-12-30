@@ -877,7 +877,10 @@ contexts:
       - include           : linesp
       - include           : child_block⁄- #✗4=@start, 🗘
       - include           : S🛑s
-    - include             : S🛑s
+    - match               : '([^}])([^}]*)' # error on } err {
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
 
   # child_block⁄-:
   #   - match               : '{'
