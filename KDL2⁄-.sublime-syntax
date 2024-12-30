@@ -1136,6 +1136,25 @@ contexts:
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl invalid.illegal.position.kdl
 
 
+# Primitives, with some ~matching KDL Spec elements
+  ␤term⁄-:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤1
+      pop                 : 1
+  ␤term2⁄-:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤2
+      pop                 : 2
+  ␤term3⁄-:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤3
+      pop                 : 3
+  ␤term4⁄-:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤4
+      pop                 : 4
+
+
 # Various helpers
   ID_bare¬1st🛑⁄-:
     # - match               : '({{charID_not1st}})'
