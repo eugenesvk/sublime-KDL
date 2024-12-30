@@ -934,7 +934,25 @@ contexts:
       - include           : wss
       - include           : node_terminator3⁄-
       - include           : S🛑¹pre␤
-  ｝ch1t3⁄-: # allows /-{ch} blocks to continue after the ending
+  ｝0t2⁄-:
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      pop                 : 1 # reset meta child scope
+      push                :
+      - include           : wss
+      - include           : node_terminator2⁄-
+      - include           : S🛑¹pre␤
+  ｝ch0t2: # allows /-{ch} blocks to continue after the ending
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      pop                 : 1
+      push                :
+      - include           : wss
+      - include           : node_end2⁄-
+      - include           : node_children⁄-s
+      - include           : pop2
+      - include           : S🛑¹pre␤
+  ｝ch1t3⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 2
@@ -942,8 +960,8 @@ contexts:
       - include           : wss
       - include           : node_end3⁄-
       - include           : node_children⁄-s
-      - include           : S🛑¹pre␤
       - include           : pop3
+      - include           : S🛑¹pre␤
   ｝2t3⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
@@ -960,8 +978,8 @@ contexts:
       - include           : wss
       - include           : node_end3
       - include           : node_children⁄-s
-      - include           : S🛑¹pre␤
       - include           : pop3
+      - include           : S🛑¹pre␤
   ｝2t4⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
