@@ -987,7 +987,6 @@ contexts:
       - include           : node_end2⁄-
       - include           : node_children⁄-s
       - include           : pop2
-      - include           : S🛑¹pre␤
   ｝ch1t3⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
@@ -997,7 +996,6 @@ contexts:
       - include           : node_end3⁄-
       - include           : node_children⁄-s
       - include           : pop3
-      - include           : S🛑¹pre␤
   ｝2t3⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
@@ -1015,7 +1013,6 @@ contexts:
       - include           : node_end3
       - include           : node_children⁄-s
       - include           : pop3
-      - include           : S🛑¹pre␤
   ｝2t4⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
