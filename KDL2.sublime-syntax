@@ -1407,7 +1407,7 @@ contexts:
       push                :    #→✗+1
         - meta_scope      : comment.line.double-slash.kdl
         - match           : $({{newline}})?
-          pop             : 2 #→✗-1
+          pop             : 2 #→✗
           captures        :
             1:              punctuation.definition.comment.end.kdl
   # comment_line2_term:
