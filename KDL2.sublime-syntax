@@ -655,7 +655,7 @@ contexts:
         10:                 invalid.illegal.muted.position.kdl
         11:                 invalid.illegal.position.kdl
   keyword1node🛑pre␠；:   # to avoid red flashes, mark last char as muted before ␠ or ; (rest node)
-    - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{u_sp}}|;)'
+    - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{u_sp}}|;|})'
       captures            :
         # 1:                  entity.name.tag.node.kdl
         2:                  entity.name.tag.node.kdl
