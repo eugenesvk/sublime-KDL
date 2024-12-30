@@ -956,23 +956,30 @@ contexts:
   #     scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
   #     pop                 : 2
   #   - include             : ｝🛑2
+  node_end4⁄-:
+    - include             : comment_line4_term⁄-
+    - include             : ␤term4⁄-
+    - include             : eof4
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗node_end4⁄-
+      pop                 : 4
   node_end3⁄-:
     - include             : comment_line3_term⁄-
-    - include             : ␤term3
+    - include             : ␤term3⁄-
     - include             : eof3
     - match               : ;
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗node_end3⁄-
       pop                 : 3
   node_end2⁄-:
     - include             : comment_line2_term⁄-
-    - include             : ␤term2
+    - include             : ␤term2⁄-
     - include             : eof2
     - match               : ;
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗node_end2⁄-
       pop                 : 2
   node_end⁄-:
     - include             : comment_line_term⁄-
-    - include             : ␤term
+    - include             : ␤term⁄-
     - include             : eof
     - match               : ;
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
@@ -980,6 +987,9 @@ contexts:
   node_terminator3⁄-:
     - include             : node_end3⁄-
     - include             : ｝🛑3
+  nodech_terminator4⸮⁄-:
+    - include             : node_end4⁄-
+    - include             : pop4
   nodech_terminator3⸮⁄-:
     - include             : node_end3⁄-
     - include             : pop3
