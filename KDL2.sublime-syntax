@@ -196,7 +196,7 @@ contexts:
         # - include         : S🛑¹pre_s∨c∨t
       - include           : arg∨prop
       - include           : child_block
-      - include           : ｝ch2t3
+      - include           : ｝
       - include           : node_terminator4  # ... but then an extra pop is needed
     - include             : child_block3
     - include             : nodech_terminator3⸮

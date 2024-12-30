@@ -45,7 +45,7 @@ contexts:
 
       - include           : arg∨prop⁄-
       - include           : child_block⁄-
-      - include           : ｝ch2t3⁄-
+      - include           : ｝
       - include           : node_terminator4⁄-
     - include             : child_block3⁄-
     - include             : nodech_terminator3⸮⁄-
