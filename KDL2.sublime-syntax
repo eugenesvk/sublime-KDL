@@ -347,11 +347,11 @@ contexts:
         - ⚿₌v-⸙2
 
 #——— 2 Node Element: 2 Argument
-  # “arg”-⸙1:               #✗⁴
-  #   - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴“arg”⸙1
-  #   - include             : “arg”
-  #   - include             : “arg”🛑
-  #   - include             : pop⸙
+  “arg”-⸙1:               #✗⁴
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴“arg”⸙1
+    - include             : “arg”
+    - include             : “arg”🛑
+    - include             : pop⸙
   arg-⸙2:                 #✗⁴
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⸙2
     - include             : node␠
