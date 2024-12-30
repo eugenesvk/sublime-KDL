@@ -638,8 +638,8 @@ contexts:
         3:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
+      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)((?<!\\)""")'
+      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)((?<!\\)""")'
         captures          : # will only highlight the last \, don't know how to fix
           1:               whitespace.dedent.kdl
           3:               constant.character.escape.kdl
