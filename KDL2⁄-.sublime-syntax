@@ -925,7 +925,7 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝1t2⸮⁄-
+    - include             : ｝ch1t2nofol⸮⁄-
     - match               : '(?=\S)'
       push                : nodes⁄-
     # - include             : pop2
@@ -1024,17 +1024,18 @@ contexts:
       - include           : wss
       - include           : node_terminator2⁄-
       - include           : S🛑¹pre␤
-  ｝1t2⸮⁄-:
+  ｝ch1t2nofol⸮⁄-:
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
-      pop                 : 2
+      scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      pop                 : 2 # replacing this with term4 doesn't reset meta.block.child.kdl after }, so reset it here
       push                :
       - include           : wss
+      # - include           : nodech_terminator4⸮⁄-
       - include           : nodech_terminator2⸮⁄-
       - include           : S🛑¹pre␤
   ｝ch0t2⁄-: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 1
       push                :
       - include           : wss
@@ -1043,7 +1044,7 @@ contexts:
       - include           : pop2
   ｝ch1t3⁄-:
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 2
       push                :
       - include           : wss
