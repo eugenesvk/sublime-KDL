@@ -206,6 +206,19 @@ contexts:
     # - include: comments
     # - include: char🆔¬
 
+  str_id: # str🆔 ≝ clean🆔 | signed🆔 | dotted🆔
+    - include             : keyword1str🛑pre␠␤
+    - match               : '([+-]|[+-]?\.)([0-9])'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+    - match               : '{{bareID}}'
+      push                :
+      - meta_scope        : meta.string.kdl string.unquoted.kdl
+      - match             : '{{charID}}'
+        # scope             : string.unquoted.kdl
+      - include           : pop
+
   string:
     - include: string-quoted-double3
     - include: string-quoted-double
@@ -367,6 +380,7 @@ contexts:
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop
     - include             : value
+    - include             : str_id
     - include             : value🛑
     - include             : pop_pre␤
     - include             : pop⸙
