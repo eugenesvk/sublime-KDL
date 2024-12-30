@@ -855,10 +855,10 @@ contexts:
   #   - match               : '{'
   #     scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
   #     push                : child_block-body⁄-
-  # child_block1⁄-:
-  #   - match               : '{'
-  #     scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
-  #     push                : child_block1-body⁄-
+  child_block1⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block1-body⁄-
   child_block6⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
