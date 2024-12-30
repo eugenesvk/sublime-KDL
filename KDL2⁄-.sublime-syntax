@@ -909,8 +909,22 @@ contexts:
     - include             : ␤term3
     - include             : eof3
     - match               : ;
-      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗n_term3⁄–
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗node_end3⁄-
       pop                 : 3
+  node_end2⁄-:
+    - include             : comment_line2_term⁄-
+    - include             : ␤term2
+    - include             : eof2
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗node_end2⁄-
+      pop                 : 2
+  node_end⁄-:
+    - include             : comment_line_term⁄-
+    - include             : ␤term
+    - include             : eof
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
+      pop                 : 1
   node_terminator3⁄-:
     - include             : node_end3⁄-
     - include             : ｝🛑3
