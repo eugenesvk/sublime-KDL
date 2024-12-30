@@ -873,6 +873,10 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
       push                : child_block1-body⁄-
+  child_block_nofollow1⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block_nofollow1-body⁄-
   child_block6⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
@@ -897,7 +901,15 @@ contexts:
     - include             : comment_line_no␤
     - include             : ｝ch0t2⁄-
     - match               : '(?=\S)'
-      push                : nodes
+      push                : nodes⁄-
+    # - include             : pop2
+  child_block_nofollow1-body⁄-:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ｝0t2⁄-
+    - match               : '(?=\S)'
+      push                : nodes⁄-
     # - include             : pop2
   child_block6-body⁄-:
     - meta_scope          : meta.block.child.kdl
