@@ -107,3 +107,84 @@ n true; n false; b null; b inf; b -inf; b nan; c !="ambiguious no#keyword≠arg"
 //                                        ^^    -invalid.illegal.position.kdl
 //                                          ^    invalid.illegal.position.kdl
 //                                          ^   -invalid.illegal.muted.position.kdl
+  true;   false;   null;   inf;   -inf;   nan; c !="ambiguious no#keyword≠node_name"
+//^^^                                            meta.node.kdl entity.name.tag.node.kdl
+//   ^                                           invalid.illegal.muted.position.kdl
+//   ^                                          -invalid.illegal.position.kdl
+//        ^^^^                                   meta.node.kdl entity.name.tag.node.kdl
+//            ^                                  invalid.illegal.muted.position.kdl
+//            ^                                 -invalid.illegal.position.kdl
+//                 ^^^                           meta.node.kdl entity.name.tag.node.kdl
+//                    ^                          invalid.illegal.muted.position.kdl
+//                    ^                         -invalid.illegal.position.kdl
+//                         ^^                    meta.node.kdl entity.name.tag.node.kdl
+//                           ^                   invalid.illegal.muted.position.kdl
+//                           ^                  -invalid.illegal.position.kdl
+//                                ^^^            meta.node.kdl entity.name.tag.node.kdl
+//                                   ^           invalid.illegal.muted.position.kdl
+//                                   ^          -invalid.illegal.position.kdl
+//                                        ^^     meta.node.kdl entity.name.tag.node.kdl
+//                                          ^    invalid.illegal.muted.position.kdl
+//                                          ^   -invalid.illegal.position.kdl
+n {true;   false;   null;   inf;   -inf;   nan; c !="ambiguious no#keyword≠node_name@child"}
+// ^^^                                           meta.node.kdl entity.name.tag.node.kdl
+//    ^                                          invalid.illegal.muted.position.kdl
+//    ^                                         -invalid.illegal.position.kdl
+//          ^^^                                  meta.node.kdl entity.name.tag.node.kdl
+//             ^                                 invalid.illegal.muted.position.kdl
+//             ^                                -invalid.illegal.position.kdl
+//                  ^^^                          meta.node.kdl entity.name.tag.node.kdl
+//                     ^                         invalid.illegal.muted.position.kdl
+//                     ^                        -invalid.illegal.position.kdl
+//                          ^^                   meta.node.kdl entity.name.tag.node.kdl
+//                            ^                  invalid.illegal.muted.position.kdl
+//                            ^                 -invalid.illegal.position.kdl
+//                                 ^^^           meta.node.kdl entity.name.tag.node.kdl
+//                                    ^          invalid.illegal.muted.position.kdl
+//                                    ^         -invalid.illegal.position.kdl
+//                                         ^^    meta.node.kdl entity.name.tag.node.kdl
+//                                           ^   invalid.illegal.muted.position.kdl
+//                                           ^  -invalid.illegal.position.kdl
+n {true}
+// ^^^                                           meta.node.kdl entity.name.tag.node.kdl
+//    ^                                          invalid.illegal.muted.position.kdl
+//    ^                                         -invalid.illegal.position.kdl
+
+n !="keyword1🛑pre␠␤, to avoid flashes only before whitespace"
+n true
+//^^^^   meta.argument.value.kdl meta.mapping.value.kdl
+//^^^    meta.string.kdl string.unquoted.kdl
+//   ^   invalid.illegal.muted.position.kdl
+n false
+//^^^^   meta.argument.value.kdl meta.mapping.value.kdl
+//^^^    meta.string.kdl string.unquoted.kdl
+//    ^  invalid.illegal.muted.position.kdl
+n null
+//^^^^   meta.argument.value.kdl meta.mapping.value.kdl
+//^^^    meta.string.kdl string.unquoted.kdl
+//   ^   invalid.illegal.muted.position.kdl
+n inf
+//^^^   meta.argument.value.kdl meta.mapping.value.kdl
+//^^    meta.string.kdl string.unquoted.kdl
+//  ^   invalid.illegal.muted.position.kdl
+n -inf
+//^^^^   meta.argument.value.kdl meta.mapping.value.kdl
+//^^^    meta.string.kdl string.unquoted.kdl
+//   ^   invalid.illegal.muted.position.kdl
+n nan
+//^^^    meta.argument.value.kdl meta.mapping.value.kdl
+//^^    meta.string.kdl string.unquoted.kdl
+//  ^    invalid.illegal.muted.position.kdl
+n  true   false   null   nan  -inf   inf  2
+// ^^^                                      invalid.illegal.muted.position.kdl
+//        ^^^^                              invalid.illegal.muted.position.kdl
+//                ^^^                       invalid.illegal.muted.position.kdl
+//                       ^^                 invalid.illegal.muted.position.kdl
+//                            ^^^           invalid.illegal.muted.position.kdl
+//                                   ^^     invalid.illegal.muted.position.kdl
+//    ^                                     invalid.illegal.position.kdl
+//            ^                             invalid.illegal.position.kdl
+//                   ^                      invalid.illegal.position.kdl
+//                         ^                invalid.illegal.position.kdl
+//                               ^          invalid.illegal.position.kdl
+//                                     ^    invalid.illegal.position.kdl
