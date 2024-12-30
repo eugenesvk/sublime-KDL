@@ -859,6 +859,10 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
       push                : child_block3-body⁄-
+  child_block1⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block1-body⁄-
   child_block6⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
@@ -877,6 +881,14 @@ contexts:
     - include             : ｝ch1t3⁄-
     - match               : '(?=\S)'
       push                : nodes⁄-
+  child_block1-body⁄-:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ｝ch0t2⁄-
+    - match               : '(?=\S)'
+      push                : nodes
+    # - include             : pop2
   child_block6-body⁄-:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
@@ -956,7 +968,7 @@ contexts:
       - include           : wss
       - include           : node_terminator2⁄-
       - include           : S🛑¹pre␤
-  ｝ch0t2: # allows /-{ch} blocks to continue after the ending
+  ｝ch0t2⁄-: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 1
