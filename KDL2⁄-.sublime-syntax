@@ -934,14 +934,16 @@ contexts:
       - include           : wss
       - include           : node_terminator3⁄-
       - include           : S🛑¹pre␤
-  ｝ch1t3⁄-:
+  ｝ch1t3⁄-: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 2
       push                :
       - include           : wss
-      - include           : nodech_terminator3⸮⁄-
+      - include           : node_end3⁄-
+      - include           : node_children⁄-s
       - include           : S🛑¹pre␤
+      - include           : pop3
   ｝2t3⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
@@ -956,8 +958,10 @@ contexts:
       pop                 : 3
       push                :
       - include           : wss
-      - include           : nodech_terminator3⸮⁄-
+      - include           : node_end3
+      - include           : node_children⁄-s
       - include           : S🛑¹pre␤
+      - include           : pop3
   ｝2t4⁄-:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
