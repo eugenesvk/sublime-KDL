@@ -1,6 +1,24 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
 // 3 Data: Strings
+// Unquoted (str🆔)
+n xtrue  xfalse  xnull  xnan x-inf  xinf  2
+//^^^^^                                           meta.string.kdl string.unquoted.kdl
+//       ^^^^^^                                   meta.string.kdl string.unquoted.kdl
+//               ^^^^^                            meta.string.kdl string.unquoted.kdl
+//                      ^^^^                      meta.string.kdl string.unquoted.kdl
+//                           ^^^^^                meta.string.kdl string.unquoted.kdl
+//                                  ^^^^          meta.string.kdl string.unquoted.kdl
+n  truex  falsex  nullx  nanx -infx  infx 2
+// ^^^^^                                          meta.string.kdl string.unquoted.kdl
+//        ^^^^^^                                  meta.string.kdl string.unquoted.kdl
+//                ^^^^^                           meta.string.kdl string.unquoted.kdl
+//                       ^^^^                     meta.string.kdl string.unquoted.kdl
+//                            ^^^^^               meta.string.kdl string.unquoted.kdl
+//                                   ^^^^         meta.string.kdl string.unquoted.kdl
+n "aaa" +aadaf+3443 1
+//      ^^^^^^^^^^^                               meta.string.kdl string.unquoted.kdl
+
 a #"\
 //   ^                                          string.quoted.double.raw.kdl invalid.illegal.position.kdl
 "# i="Invalid newlines in raw strings"

@@ -216,7 +216,8 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.unquoted.kdl
       - match             : '{{charID}}'
-        # scope             : string.unquoted.kdl
+        scope             : string.unquoted.kdl
+      - include           : char🆔¬
       - include           : pop
 
   string:
