@@ -668,6 +668,9 @@ contexts:
         9:                  invalid.illegal.muted.position.kdl
         10:                 entity.name.tag.node.kdl
         11:                 invalid.illegal.muted.position.kdl
+      push                : #✗²
+      - include           : node-elements
+      - include           : S🛑s
   keyword1str🛑pre␤:      # to avoid red flashes, mark last char as illegal before ␤ or ; (rest string)
     - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{newline}})'
       captures            :
@@ -694,6 +697,9 @@ contexts:
         9:                  invalid.illegal.muted.position.kdl
         10:                 entity.name.tag.node.kdl
         11:                 invalid.illegal.muted.position.kdl
+      push                : #✗²
+      - include           : node-elements
+      - include           : S🛑s
 
 
 
