@@ -57,6 +57,8 @@ variables:
   charID_or_KW:           	'[{{charID}}\#]'                                    #⊎   	#
   charID_not:             	'[\/\\(){};\[\]=#"]'                                #⊎   	# char🆔¬ ≝ #"(;){"}[#]/=\"#
   charID_not1st:          	'([0-9])|([+-]|[+-]?\.)([0-9])'                 #.       	#
+  kw1_not:                	'(true|false|null|inf|-inf|nan)'         #.              	# keyword🆔🛑 ≝ true | false | null | inf | -inf | nan
+  # kw1_not_glast5:         	'(tru(e)|fals(e)|nul(l)|-?in(f)|na(n))'     #.           	#
   # charWS:               	'[{{nl_s}}{{u_sp}}]'                                #∪   	#\r\n sequence not accounted for
   # charID_rec:           	'{{charID}}(?!{{linesp_re}})'                            	# set-unsafe; includes recursion: linespace → ws → comment_block → commented_block🗘
   # charID_ex09:          	'[[{{charID}}]&&[^0-9]]'                                 	#char🆔 − 〔0–9〕
