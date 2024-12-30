@@ -1207,7 +1207,17 @@ contexts:
       - include           : wss
       - include           : node_terminator3
       - include           : S🛑¹pre␤
-  ｝ch1t3: # allows /-{ch} blocks to continue after the ending
+  ｝ch0t2: # allows /-{ch} blocks to continue after the ending
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl
+      pop                 : 1 # reset meta child scope
+      push                :
+      - include           : wss
+      - include           : node_end2
+      - include           : node_children⁄-s
+      - include           : S🛑¹pre␤
+      - include           : pop2
+  ｝ch1t3:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
       pop                 : 2
