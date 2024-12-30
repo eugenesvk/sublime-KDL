@@ -287,6 +287,15 @@ title  ###"""
 //<-                                              string.quoted.double.block.raw.kdl whitespace.dedent.kdl
  //<-                                             string.quoted.double.block.raw.kdl whitespace.dedent.kdl
 //^^^^^^^^^^^^^^                                  string.quoted.double.block.raw.kdl whitespace.dedent.kdl
+n a="""
+  asdf\"""
+//    ^                          constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//     ^                         constant.character.escape.kdl
+//^                             -invalid.illegal.position.kdl
+// ^^^^                         -invalid.illegal.muted.position.kdl
+//     ^^^                      -punctuation.definition.string.end.kdl
+  """
+//^^^                            punctuation.definition.string.end.kdl
 
 nnn #"raw"#
 nnn #"multiline raw
