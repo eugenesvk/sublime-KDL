@@ -1088,10 +1088,10 @@ contexts:
   #   - match               : '{'
   #     scope               : punctuation.section.mapping.begin.kdl
   #     push                : child_block1-body
-  # child_block4:
-  #   - match               : '{'
-  #     scope               : punctuation.section.mapping.begin.kdl #✗chblock4
-  #     push                : child_block4-body
+  child_block4:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl #✗chblock4
+      push                : child_block4-body
   child_block-body:
     - meta_scope          : meta.block.child.kdl
     - include             : wss

@@ -859,10 +859,10 @@ contexts:
   #   - match               : '{'
   #     scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
   #     push                : child_block1-body⁄-
-  # child_block4⁄-:
-  #   - match               : '{'
-  #     scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
-  #     push                : child_block4-body⁄-
+  child_block4⁄-:
+    - match               : '{'
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      push                : child_block4-body⁄-
   child_block-body⁄-:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
