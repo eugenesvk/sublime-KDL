@@ -1061,7 +1061,7 @@ contexts:
       - include           : S🛑¹pre␤
   ｝ch2t3⁄-:
     - match               : '}'
-      scope               : punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+      scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 3
       push                :
       - include           : wss
