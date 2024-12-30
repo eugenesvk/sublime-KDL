@@ -1126,7 +1126,7 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝0t2
+    - include             : ｝0t2⸮
     - match               : '(?=\S)'
       push                : nodes
     # - include             : pop2
