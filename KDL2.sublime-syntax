@@ -251,7 +251,12 @@ contexts:
     - include: bool-partial-ext🛑
     - include: null-partial-ext🛑
     - include: floatkw-partial-ext🛑
-
+  keyword1str🛑pre␠␤:
+    - include             : keyword1str🛑pre␠；
+    - include             : keyword1str🛑pre␤
+  keyword1node🛑pre␠␤:
+    - include             : keyword1node🛑pre␠；
+    - include             : keyword1node🛑pre␤
 
 
 #——— 1 Node: \- type
@@ -619,6 +624,62 @@ contexts:
         1:                 invalid.illegal.position.kdl
         3:                 invalid.illegal.position.kdl
         4:                 invalid.illegal.muted.position.kdl
+
+  keyword1str🛑pre␠；:    # to avoid red flashes, mark last char as illegal before ␠ or ; (rest muted)
+    - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{u_sp}}|;)'
+      captures            :
+        # 1:                  invalid.illegal.muted.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+        3:                  invalid.illegal.position.kdl
+        4:                  invalid.illegal.muted.position.kdl
+        5:                  invalid.illegal.position.kdl
+        6:                  invalid.illegal.muted.position.kdl
+        7:                  invalid.illegal.position.kdl
+        8:                  invalid.illegal.muted.position.kdl
+        9:                  invalid.illegal.position.kdl
+        10:                 invalid.illegal.muted.position.kdl
+        11:                 invalid.illegal.position.kdl
+  keyword1node🛑pre␠；:   # to avoid red flashes, mark last char as muted before ␠ or ; (rest node)
+    - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{u_sp}}|;)'
+      captures            :
+        # 1:                  entity.name.tag.node.kdl
+        2:                  entity.name.tag.node.kdl
+        3:                  invalid.illegal.muted.position.kdl
+        4:                  entity.name.tag.node.kdl
+        5:                  invalid.illegal.muted.position.kdl
+        6:                  entity.name.tag.node.kdl
+        7:                  invalid.illegal.muted.position.kdl
+        8:                  entity.name.tag.node.kdl
+        9:                  invalid.illegal.muted.position.kdl
+        10:                 entity.name.tag.node.kdl
+        11:                 invalid.illegal.muted.position.kdl
+  keyword1str🛑pre␤:      # to avoid red flashes, mark last char as illegal before ␤ or ; (rest string)
+    - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{newline}})'
+      captures            :
+        2:                  meta.string.kdl string.unquoted.kdl
+        3:                  invalid.illegal.muted.position.kdl
+        4:                  meta.string.kdl string.unquoted.kdl
+        5:                  invalid.illegal.muted.position.kdl
+        6:                  meta.string.kdl string.unquoted.kdl
+        7:                  invalid.illegal.muted.position.kdl
+        8:                  meta.string.kdl string.unquoted.kdl
+        9:                  invalid.illegal.muted.position.kdl
+        10:                 meta.string.kdl string.unquoted.kdl
+        11:                 invalid.illegal.muted.position.kdl
+  keyword1node🛑pre␤:     # to avoid red flashes, mark last char as illegal before ␤ or ; (rest node)
+    - match               : '((tru)(e)|(fals)(e)|(nul)(l)|(-?in)(f)|(na)(n))(?={{newline}})'
+      captures            :
+        2:                  entity.name.tag.node.kdl
+        3:                  invalid.illegal.muted.position.kdl
+        4:                  entity.name.tag.node.kdl
+        5:                  invalid.illegal.muted.position.kdl
+        6:                  entity.name.tag.node.kdl
+        7:                  invalid.illegal.muted.position.kdl
+        8:                  entity.name.tag.node.kdl
+        9:                  invalid.illegal.muted.position.kdl
+        10:                 entity.name.tag.node.kdl
+        11:                 invalid.illegal.muted.position.kdl
+
 
 
 #——— Values - Strings
