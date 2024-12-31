@@ -207,16 +207,18 @@ contexts:
     # - include: char🆔¬
 
   str_id: # str🆔 ≝ clean🆔 | signed🆔 | dotted🆔
+    # ✗⁴ from arg-⸙2, property-value
     - include             : keyword1str🛑pre␠␤
     - match               : '([+-]|[+-]?\.)([0-9])'
       captures            :
         1:                  invalid.illegal.position.kdl
         2:                  invalid.illegal.muted.position.kdl
     - match               : '{{bareID}}'
-      push                :
+      push                : #✗⁵
       - meta_scope        : meta.string.kdl string.unquoted.kdl
       - match             : '{{charID}}'
         scope             : string.unquoted.kdl
+      - include           : node_end
       - include           : char🆔¬
       - include           : pop
 
