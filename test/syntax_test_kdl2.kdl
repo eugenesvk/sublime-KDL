@@ -669,7 +669,7 @@ n r;
 //...
 n r//
 //^                                     meta.argument.value.kdl meta.mapping.value.kdl
-//^                                     invalid.illegal.position.kdl
+//^                                    -invalid.illegal.position.kdl
 // ^                                    comment.line.double-slash.kdl
 
 
