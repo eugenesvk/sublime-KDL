@@ -845,7 +845,7 @@ contexts:
         3:                 punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
-      - match             : '"\1' # ↑match (#*)
+      - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 3
       - include           : ␤🛑¹s
@@ -859,7 +859,7 @@ contexts:
         5:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\1)' # ↑match (#*)
+      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
       # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
         captures          : # will only highlight the last \, don't know how to fix
           1:               whitespace.dedent.kdl
@@ -878,7 +878,7 @@ contexts:
         3:                 punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
-      - match             : '"\1' # ↑match (#*)
+      - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : ␤🛑¹s
@@ -892,7 +892,7 @@ contexts:
         5:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\1)' # ↑match (#*)
+      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
       # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
         captures          : # will only highlight the last \, don't know how to fix
           1:               whitespace.dedent.kdl
@@ -911,7 +911,7 @@ contexts:
         3:                 punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
-      - match             : '"\1' # ↑match (#*)
+      - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
       - include           : ␤🛑¹s
@@ -925,7 +925,7 @@ contexts:
         5:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\1)' # ↑match (#*)
+      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
       # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
         captures          : # will only highlight the last \, don't know how to fix
           1:               whitespace.dedent.kdl
