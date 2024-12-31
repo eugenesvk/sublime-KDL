@@ -268,11 +268,11 @@ contexts:
     - include: null-partial-ext🛑
     - include: floatkw-partial-ext🛑
   keyword1str🛑pre␠␤:
-    - include             : keyword1str🛑pre␠；
-    - include             : keyword1str🛑pre␤
+    - include: keyword1str🛑pre␠；
+    - include: keyword1str🛑pre␤
   keyword1node🛑pre␠␤:
-    - include             : keyword1node🛑pre␠；
-    - include             : keyword1node🛑pre␤
+    - include: keyword1node🛑pre␠；
+    - include: keyword1node🛑pre␤
 
 
 #——— 1 Node: \- type
