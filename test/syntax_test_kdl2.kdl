@@ -641,30 +641,29 @@ n \
 //<-              -invalid.illegal.position.kdl
  //<-             -invalid.illegal.position.kdl
 // ^              -invalid.illegal.position.kdl
-n |#tru // but only when it's in a valid argument position
-//^^^^             invalid.illegal.muted.position.kdl
-//    ^            invalid.illegal.position.kdl
+n |#tru // v2 valid arg with |, but only when it's in a valid argument position
+// ^               invalid.illegal.kdl
 n |#fal //
 n a=x ;
-//  ^              invalid.illegal.position.kdl
+//  ^             -invalid.illegal.position.kdl
 //   ^            -invalid.illegal.position.kdl
 //    ^            punctuation.terminator.node.kdl
 n a=x;
-//  ^              invalid.illegal.position.kdl
+//  ^             -invalid.illegal.position.kdl
 //   ^            -invalid.illegal.position.kdl
 //   ^             punctuation.terminator.node.kdl
 n/**/k=|#tru //
-//     ^^^^        invalid.illegal.muted.position.kdl
-//         ^       invalid.illegal.position.kdl
+//     ^^^^^       meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+//      ^          invalid.illegal.kdl
 
 //Don't error incomplete invalid arguments that may turn into valid properties...
 n r
 //^                                     meta.argument.value.kdl meta.mapping.value.kdl
 //^                                    -invalid.illegal.position.kdl
-//... but do error when we expect the node is complete with an explicit terminator
+//... (v1, not bare id args are allowed)but do error when we expect the node is complete with an explicit terminator
 n r;
 //^                                     meta.argument.value.kdl meta.mapping.value.kdl
-//^                                     invalid.illegal.position.kdl
+//^                                    -invalid.illegal.position.kdl
 // ^                                    punctuation.terminator.node.kdl
 //...
 n r//
