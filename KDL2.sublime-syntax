@@ -153,8 +153,8 @@ variables:
   # comment_block_doc_end:	'{{comment_block_end}}' 	#
   u_sp_not:               	'[^{{u_sp}}]'         #⊎	#
   # u_sp: '[\x{9}\x{20}\x{A0}\x{1680}\x{2000}\x{2001}\x{2002}\x{2003}\x{2004}\x{2005}\x{2006}\x{2007}\x{2008}\x{2009}\x{200A}\x{202F}\x{205F}\x{3000}]' #⊎ #
-  ID: '{{string}}|((?!({{keyword}})[^{{charID}}])({{bareID_ex09dsign}}|{{bareID_ex09d}}|{{bareID_ex09}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
-  bareID:        '((?!({{keyword}})[^{{charID}}])({{bareID_ex09dsign}}|{{bareID_ex09d}}|{{bareID_ex09}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
+  ID: '{{string}}|((?!({{keyword}})[^{{charID}}])({{bareID_ex09}}|{{bareID_ex09d}}|{{bareID_ex09dsign}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
+  bareID:        '((?!({{keyword}})[^{{charID}}])({{bareID_ex09}}|{{bareID_ex09d}}|{{bareID_ex09dsign}}))' # bugs as 'recursive' if replace inlined vars with the same combo var
   # ↑ excludes keywords, but string would be a pain to style
 
 contexts:
