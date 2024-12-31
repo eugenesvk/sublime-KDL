@@ -51,6 +51,21 @@ contexts:
     - include             : nodech_terminator3⸮⁄-
     - include             : S🛑¹pre_s∨c∨t
 
+  str_id⁄-:               # ✗⁴ from arg-⸙2, property-value
+    - include             : keyword1str🛑pre␠␤
+    - match               : '([+-]|[+-]?\.)([0-9])'
+      captures            :
+        1:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+    - match               : '{{bareID}}'
+      push                : #✗⁵
+      - meta_scope        : meta.string.kdl string.unquoted.kdl comment.line.slash-dash.kdl
+      - match             : '{{charID}}'
+        scope             : string.unquoted.kdl comment.line.slash-dash.kdl
+      - include           : node_end⁄-
+      - include           : char🆔¬⁄-
+      - include           : pop
+
   node_ch∨argprop⁄-:     #✗³
     - match               : '(?={{c_slashdash}})'
       branch_point        : ⸙3node_ch∨argprop⁄-
@@ -239,6 +254,7 @@ contexts:
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop⁄-
     - include             : value⁄-
+    - include             : str_id⁄-
     - include             : value🛑⁄-
     - include             : pop_pre␤
     - include             : pop⸙
