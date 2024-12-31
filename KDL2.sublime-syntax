@@ -1306,16 +1306,19 @@ contexts:
     - include             : ｝🛑3
   nodech_terminator3⸮:
     - include             : node_end3
-    - include             : pop3 # no terminator @ last child node not an error anymore
+    - include             : ｝3 # don't error on } at last child
+    - include             : ｝🛑3
   nodech_terminator2:
     - include             : node_end2
     - include             : ｝🛑2
   nodech_terminator2⸮:
     - include             : node_end2
-    - include             : pop2
+    - include             : ｝2
+    - include             : ｝🛑2
   nodech_terminator⸮:
     - include             : node_end
-    - include             : pop
+    - include             : ｝
+    - include             : ｝🛑2
   nodech_terminator:
     - include             : node_end
     - include             : ｝🛑

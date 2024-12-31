@@ -992,16 +992,20 @@ contexts:
     - include             : ｝🛑3
   nodech_terminator4⸮⁄-:
     - include             : node_end4⁄-
-    - include             : pop4
+    - include             : ｝4
+    - include             : ｝🛑4
   nodech_terminator3⸮⁄-:
     - include             : node_end3⁄-
-    - include             : pop3
+    - include             : ｝3
+    - include             : ｝🛑3
   nodech_terminator2⸮⁄-:
     - include             : node_end2⁄-
-    - include             : pop2
+    - include             : ｝2
+    - include             : ｝🛑2
   nodech_terminator⸮⁄-:
     - include             : node_end⁄-
-    - include             : pop
+    - include             : ｝
+    - include             : ｝🛑
   # node_terminator4⁄-:
   #   - include             : comment_line4_term⁄-
   #   - include             : ␤term4
