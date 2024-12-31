@@ -706,8 +706,10 @@ contexts:
 
 #——— Values - Strings
   string-quoted-double:
-    - match               : '"'
-      scope               : punctuation.definition.string.begin.kdl
+    - match               : '(r?)(")'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.kdl
       - match             : '"'
@@ -716,11 +718,12 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   string-quoted-double3:
-    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
-        2:                 invalid.illegal.position.kdl
-        3:                 invalid.illegal.muted.position.kdl
+        1:                  invalid.illegal.position.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)((?<!\\)""")'
@@ -735,8 +738,10 @@ contexts:
         pop               : 3
       - include           : char-escaped
   strings-quoted-double:
-    - match               : '"'
-      scope               : punctuation.definition.string.begin.kdl
+    - match               : '(r?)(")'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.kdl
       - match             : '"'
@@ -745,11 +750,12 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   strings-quoted-double3:
-    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
-        2:                 invalid.illegal.position.kdl
-        3:                 invalid.illegal.muted.position.kdl
+        1:                 invalid.illegal.position.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
@@ -764,8 +770,10 @@ contexts:
         pop               : 1
       - include           : char-escaped
   strings-quoted-double_node-id:
-    - match               : '"'
-      scope               : punctuation.definition.string.begin.kdl
+    - match               : '(r?)(")'
+      captures            :
+        1:                  invalid.illegal.position.kdl
+        2:                  punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.kdl
       - match             : '"'
@@ -774,11 +782,12 @@ contexts:
       - include           : char-escaped
       - include           : ␤🛑¹s
   strings-quoted-double3_node-id:
-    - match               : '(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
-        2:                 invalid.illegal.position.kdl
-        3:                 invalid.illegal.muted.position.kdl
+        1:                 invalid.illegal.position.kdl
+        2:                 punctuation.definition.string.begin.kdl
+        3:                 invalid.illegal.position.kdl
+        4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.kdl
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
@@ -829,10 +838,11 @@ contexts:
         pop               : 1
 
   string-quoted-double-raw:
-    - match               : '(#*)(")'
+    - match               : '(r?)(#*)(")'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
+        3:                 punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
       - match             : '"\1' # ↑match (#*)
@@ -840,12 +850,13 @@ contexts:
         pop               : 3
       - include           : ␤🛑¹s
   string-quoted-double3-raw:
-    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
-        3:                 invalid.illegal.position.kdl
-        4:                 invalid.illegal.muted.position.kdl
+        3:                 punctuation.definition.string.begin.kdl
+        4:                 invalid.illegal.position.kdl
+        5:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\1)' # ↑match (#*)
@@ -860,10 +871,11 @@ contexts:
           9:               punctuation.definition.string.end.kdl
         pop               : 3
   strings-quoted-double-raw:
-    - match               : '(#*)(")'
+    - match               : '(r?)(#*)(")'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
+        3:                 punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.raw.kdl
       - match             : '"\1' # ↑match (#*)
@@ -871,12 +883,13 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw:
-    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
-        3:                 invalid.illegal.position.kdl
-        4:                 invalid.illegal.muted.position.kdl
+        3:                 punctuation.definition.string.begin.kdl
+        4:                 invalid.illegal.position.kdl
+        5:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\1)' # ↑match (#*)
@@ -891,10 +904,11 @@ contexts:
           9:               punctuation.definition.string.end.kdl
         pop               : 1
   strings-quoted-double-raw_node-id:
-    - match               : '(#*)(")'
+    - match               : '(r?)(#*)(")'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
+        3:                 punctuation.definition.string.begin.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.raw.kdl
       - match             : '"\1' # ↑match (#*)
@@ -902,12 +916,13 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw_node-id:
-    - match               : '(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                 punctuation.definition.string.begin.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
-        3:                 invalid.illegal.position.kdl
-        4:                 invalid.illegal.muted.position.kdl
+        3:                 punctuation.definition.string.begin.kdl
+        4:                 invalid.illegal.position.kdl
+        5:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\1)' # ↑match (#*)
