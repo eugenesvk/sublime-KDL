@@ -468,6 +468,11 @@ contexts:
       push                : #✗³
       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop_val_typ
       - include           : type-value
+    - match               : (?={{charID}})
+      push                : #✗³
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
+      - include           : str_id
+      - include           : pop
     - match               : (?!\() # required to apply proper context to value
       set                 : #✗⁴
       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
