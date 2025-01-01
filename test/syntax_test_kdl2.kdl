@@ -127,6 +127,14 @@ n a  =  1 "a" =  1 a /**/ = /**/ 1
 //                  ^^^^^^          -invalid.illegal.position.kdl
 //                         ^^^^^^   -invalid.illegal.position.kdl
 
+a p = "val"; a p = val;  a p=val;
+//     ^^^^                         meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl
+//                 ^^^              meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+//                           ^^^    meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+//         ^                        punctuation.terminator.node.kdl
+//                    ^             punctuation.terminator.node.kdl
+//                              ^   punctuation.terminator.node.kdl
+
 
 // 2 Node Element: 4 Child
 node-outer {
