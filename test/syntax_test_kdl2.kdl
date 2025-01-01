@@ -148,6 +148,19 @@ n k = 1 ; n k =111; n k ="1"; n k = a ; n k =aaa; n k ="a"
 //                                  ^                       meta.property.value.kdl meta.mapping.value.kdl
 //                                            ^^^           meta.property.value.kdl meta.mapping.value.kdl
 //                                                     ^^^  meta.property.value.kdl meta.mapping.value.kdl
+/-n k = 1 ; /-n k =111; /-n k ="1"; /-n k = a ; /-n k =aaa; /-n k ="a"
+//  ^                                                                   meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//              ^                                                       meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                          ^                                           meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                                      ^                               meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                                                  ^                   meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                                                              ^       meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//      ^                                                               meta.property.value.kdl meta.mapping.value.kdl comment.line.slash-dash.kdl
+//                 ^^^                                                  meta.property.value.kdl meta.mapping.value.kdl comment.line.slash-dash.kdl
+//                             ^^^                                      meta.property.value.kdl meta.mapping.value.kdl comment.line.slash-dash.kdl
+//                                          ^                           meta.property.value.kdl meta.mapping.value.kdl comment.line.slash-dash.kdl
+//                                                     ^^^              meta.property.value.kdl meta.mapping.value.kdl comment.line.slash-dash.kdl
+//                                                                 ^^^  meta.property.value.kdl meta.mapping.value.kdl comment.line.slash-dash.kdl
 
 // 2 Node Element: 4 Child
 node-outer {
