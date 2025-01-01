@@ -120,9 +120,9 @@ n b=0b k=1
 //   ^                                  invalid.illegal.position.kdl
 
 n .5; /* gently warn on illegal args */
-//^                                     invalid.illegal.muted.position.kdl
-// ^                                    invalid.illegal.position.kdl
+//^                                     invalid.illegal.position.kdl
+// ^                                    invalid.illegal.muted.position.kdl
 n .5
-//^                                    -invalid.position.kdl
-// ^                                   -invalid.illegal.position.kdl
-/*but not before whitespace as .5 can turn into a legal .5=1 property*/
+//^                                     invalid.illegal.position.kdl
+// ^                                    invalid.illegal.muted.position.kdl
+/*also before whitespace as .5 can't turn into a legal .5=1 property*/
