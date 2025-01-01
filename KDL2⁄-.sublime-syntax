@@ -323,6 +323,7 @@ contexts:
   property-value⁄-:       # ✗⁴
     - meta_content_scope  : meta.property.value.kdl meta.mapping.value.kdl #✗⁴
     - include             : comments #comments⁄-
+    - include             : node␠⁄-
     - match               : (?=\()
       pop                 : 2 # ⚿₌v⁄-⸙2 to reach ³ like arg_typed⁄-
       push                : #✗³
