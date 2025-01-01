@@ -169,7 +169,7 @@ contexts:
     - meta_include_prototype: false
     - match : ''
       push  : #✗⁰
-      #- meta_scope        : dbg✗¹
+      #- meta_scope        : dbg✗⁰
       - include: nodes
 
   nodes: #✗⁰ ≝ ⦅l_␠*⠀node⦆* l_␠*
