@@ -1362,7 +1362,7 @@ contexts:
       - include           : nodech_terminator2⸮
       - match             : '(?=/-|{)'
         pop               : 2
-      - include           : S🛑¹pre␤
+      - include           : S🛑¹pre_ws
   ｝ch0t2: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
       scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl
