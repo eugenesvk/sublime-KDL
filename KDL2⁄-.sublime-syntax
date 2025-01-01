@@ -137,7 +137,7 @@ contexts:
     - include             : ⁄-node
     - include             : nodetID⁄-
   nodetID⁄-:              #✗⁰
-    - include             : line_continuation⁄-
+    - include             : linesp⁄-
     - match               : '(?=\()'
       push                :
       - meta_scope        : meta.node.kdl #✗¹node_base⁄–_t
