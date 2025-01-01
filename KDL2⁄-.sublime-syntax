@@ -68,6 +68,7 @@ contexts:
 
   node_ch∨argprop⁄-:     #✗³
     - match               : '(?={{c_slashdash}})'
+      pop                 : 1
       branch_point        : ⸙3node_ch∨argprop⁄-
       branch              : #✗⁴⸙
         - arg∨prop⁄-⸙3
