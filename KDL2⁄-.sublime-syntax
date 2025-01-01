@@ -127,11 +127,12 @@ contexts:
   ⁄-node:                 #✗⁰ ≝ (/- node-space*)? type? identifier
     - match               : '{{c_slashdash}}'
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
-      pop                 : 1
+      pop                 : 1 # pops into main, so need to repeat main's ctx: nodes
       push                : # pop+push: match gets NO meta_scope of the popped context (≈lookahead)
       - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
       - include           : node␠
       - include           : nodetID⁄-
+      - include           : nodes
   node_base⁄-:            #✗⁰
     - include             : ⁄-node
     - include             : nodetID⁄-
