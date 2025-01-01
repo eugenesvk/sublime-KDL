@@ -1196,10 +1196,10 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
       push                : child_block1-body
-  child_block_nofollow2:  # doesn't include following children blocks
+  child_block_on_follow_pop2:  # doesn't include following children blocks, but pops on /- or { so that sibling rules can still allow 1 child or many /-children as needed
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
-      push                : child_block_nofollow2-body
+      push                : child_block_on_follow_pop2-body
   child_block6:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl #✗chblock4
@@ -1226,11 +1226,11 @@ contexts:
     - match               : '(?=\S)'
       push                : nodes
     # - include             : pop2
-  child_block_nofollow2-body:
+  child_block_on_follow_pop2-body:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝1t2nofol⸮
+    - include             : ｝1t2nofolpop1⸮
     - match               : '(?=\S)'
       push                : nodes
     # - include             : pop2
@@ -1353,13 +1353,15 @@ contexts:
       - include           : wss
       - include           : node_terminator2
       - include           : S🛑¹pre␤
-  ｝1t2nofol⸮:
+  ｝1t2nofolpop1⸮:
     - match               : '}'
       scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl
       pop                 : 2
       push                :
       - include           : wss
       - include           : nodech_terminator2⸮
+      - match             : '(?=/-|{)'
+        pop               : 2
       - include           : S🛑¹pre␤
   ｝ch0t2: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
