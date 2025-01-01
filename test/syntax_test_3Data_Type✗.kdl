@@ -33,10 +33,10 @@ n (#false)1
 
 n ()"✗← illegal empty type"
 // ^                                              invalid.illegal.muted.kdl
-n ( )"✗← illegal symbol (non-identifier)"
-// ^                                              invalid.illegal.position.kdl
-n (a) "✗← illegal separator"
-//   ^                                            invalid.illegal.position.kdl
+n ( )"✗← legal symbol (non-identifier)"
+// ^                                             -invalid.illegal.position.kdl
+n (a) "✗← legal separator"
+//   ^                                           -invalid.illegal.position.kdl
             n "a";
 yv2_<legalv2>
 //^^^^^^^^^^^                 -invalid.illegal.kdl
@@ -45,20 +45,20 @@ yv2_<legalv2>
 (aaaa)n k="a"a k=1;
 (a)(a)n k="a"a k=1;
 
-n "Illegal space between a tag and its value"
+n "legal space between a tag and its value"
    (tttt)   ##    nn k=1 "a";
-//       ^                   invalid.illegal.position.kdl
-//        ^^                 invalid.illegal.muted.position.kdl
+//       ^                  -invalid.illegal.position.kdl
+//        ^^                -invalid.illegal.muted.position.kdl
 //          ^^               invalid.illegal.kdl
-//            ^              invalid.illegal.position.kdl
-//             ^^^           invalid.illegal.muted.position.kdl
+//            ^             -invalid.illegal.position.kdl
+//             ^^^          -invalid.illegal.muted.position.kdl
 //                ^^         entity.name.tag.node.kdl
    ("tt")   ##    nn k=1 "a";
-//       ^                   invalid.illegal.position.kdl
-//        ^^                 invalid.illegal.muted.position.kdl
+//       ^                  -invalid.illegal.position.kdl
+//        ^^                -invalid.illegal.muted.position.kdl
 //          ^^               invalid.illegal.kdl
-//            ^              invalid.illegal.position.kdl
-//             ^^^           invalid.illegal.muted.position.kdl
+//            ^             -invalid.illegal.position.kdl
+//             ^^^          -invalid.illegal.muted.position.kdl
 //                ^^         entity.name.tag.node.kdl
    (ttttttt)n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
