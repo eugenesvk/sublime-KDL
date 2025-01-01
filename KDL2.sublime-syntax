@@ -172,11 +172,11 @@ contexts:
       #- meta_scope        : dbg✗¹
       - include: nodes
 
-  # nodes: #✗⁰ ≝ ⦅l_␠*⠀node⦆* l_␠*
-  #   - include: linesp
-  #   - include: node
-  #   - include: any🛑 # todo disable? strict mode
-  #   # - include: any-pop
+  nodes: #✗⁰ ≝ ⦅l_␠*⠀node⦆* l_␠*
+    - include: linesp
+    - include: node
+    - include: any🛑 # todo disable? strict mode
+    # - include: any-pop
 
 #——— 0 Groups
   node-elements:          #✗²
