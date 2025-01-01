@@ -62,7 +62,7 @@ contexts:
       - meta_scope        : meta.string.kdl string.unquoted.kdl comment.line.slash-dash.kdl
       - match             : '{{charID}}'
         scope             : string.unquoted.kdl comment.line.slash-dash.kdl
-      - include           : node_end⁄-
+      - include           : node_end5⁄-
       - include           : char🆔¬⁄-
       - include           : pop
 
@@ -329,8 +329,8 @@ contexts:
       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗³prop⁄–_typ_val
       - include           : type-value⁄-
     - match               : (?={{charID}})
-      push                : #✗³
-      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop_val_untyp
+      set                 : #✗⁴ like arg-⸙2
+      - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop⁄–_val_untyp
       - include           : str_id⁄-
       - include           : pop
     - match               : (?!\() # required to apply proper context to value
@@ -1063,6 +1063,13 @@ contexts:
   #     scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl
   #     pop                 : 2
   #   - include             : ｝🛑2
+  node_end5⁄-:
+    - include             : comment_line5_term⁄-
+    - include             : ␤term5⁄-
+    - include             : eof5
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗node_end5⁄-
+      pop                 : 5
   node_end4⁄-:
     - include             : comment_line4_term⁄-
     - include             : ␤term4⁄-
@@ -1253,6 +1260,15 @@ contexts:
   #         pop             : 5
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
+  comment_line5_term⁄-:
+    - match               : //
+      scope               : punctuation.definition.comment.begin.kdl comment.line.slash-dash.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl comment.line.slash-dash.kdl
+        - match           : $({{newline}})?
+          pop             : 6
+          captures        :
+            1:              punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
   ⁄-🛑:
     - match               : '({{c_slashdash}})'
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl invalid.illegal.position.kdl
@@ -1275,6 +1291,10 @@ contexts:
     - match               : '{{newline}}'
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤4
       pop                 : 4
+  ␤term5⁄-:
+    - match               : '{{newline}}'
+      scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤5
+      pop                 : 5
 
 
 # Various helpers
