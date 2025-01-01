@@ -14,6 +14,11 @@ n {c} /-5 //invalid
 n a=1 /-{n} n /-{n}
 //          ^        invalid.illegal.position.kdl
 //            ^^^^^ -invalid.illegal.muted.position.kdl
+n a=1 /-{n} n nnn /-{n}
+//          ^            invalid.illegal.position.kdl
+//            ^          invalid.illegal.position.kdl
+//             ^^        invalid.illegal.muted.position.kdl
+//                ^^^^^ -invalid.illegal.muted.position.kdl
 /-n{n;n{n;n;} sdf}
 //            ^   comment.block.slash-dash.kdl, meta.block.child.kdl, invalid.illegal.position.kdl
 //             ^^ comment.block.slash-dash.kdl, meta.block.child.kdl, invalid.illegal.muted.position.kdl
