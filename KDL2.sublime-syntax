@@ -977,25 +977,25 @@ contexts:
   #     push                :
   #     - include           : pop4
   strings-quoted-double-raw-consecutive🛑:
-    - match               : '((?<=#)|(?<="))((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+    - match               : '((?<=#)|(?<="))((?<h>#+)\")([\S\s]*?)(\"\k<h>)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“”s
         4:                 invalid.illegal.muted.position.kdl #✗”r“”s
         5:                 invalid.illegal.muted.position.kdl #✗”r“”s
-    - match               : '((?<=#)|(?<="))(#*)(")([{{u_sp}}\S]*)'
+    - match               : '((?<=#)|(?<="))(#+)(")([{{u_sp}}\S]*)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“s
         3:                 invalid.illegal.position.kdl #✗”r“s
         4:                 invalid.illegal.muted.position.kdl #✗”r“s
   string-quoted-double-raw-consecutive🛑3:
-    - match               : '((?<=#)|(?<="))((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+    - match               : '((?<=#)|(?<="))((?<h>#+)\")([\S\s]*?)(\"\k<h>)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“”3
         4:                 invalid.illegal.muted.position.kdl #✗”r“”3
         5:                 invalid.illegal.muted.position.kdl #✗”r“”3
       push                :
       - include           : pop3
-    - match               : '((?<=#)|(?<="))(#*)(")([{{u_sp}}\S]*)'
+    - match               : '((?<=#)|(?<="))(#+)(")([{{u_sp}}\S]*)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“3
         3:                 invalid.illegal.position.kdl #✗”r“3
@@ -1003,14 +1003,14 @@ contexts:
       push                :
       - include           : pop3
   string-quoted-double-raw-consecutive🛑4:
-    - match               : '((?<=#)|(?<="))((?<h>#*)\")([\S\s]*?)(\"\k<h>)'
+    - match               : '((?<=#)|(?<="))((?<h>#+)\")([\S\s]*?)(\"\k<h>)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“”4
         4:                 invalid.illegal.muted.position.kdl #✗”r“”4
         5:                 invalid.illegal.muted.position.kdl #✗”r“”4
       push                :
       - include           : pop4
-    - match               : '((?<=#)|(?<="))(#*)(")([{{u_sp}}\S]*)'
+    - match               : '((?<=#)|(?<="))(#+)(")([{{u_sp}}\S]*)'
       captures            :
         2:                 invalid.illegal.position.kdl #✗”r“4
         3:                 invalid.illegal.position.kdl #✗”r“4
