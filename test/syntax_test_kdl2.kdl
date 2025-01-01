@@ -631,22 +631,22 @@ n "/-Slashdashed nodes retain all the scopes of individual elements!"
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.node.kdl
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.slash-dash.kdl
 //^^^                                                 entity.name.tag.node.kdl comment.line.slash-dash.kdl
-//      ^^^                                           meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//      ^^^                                           meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 //         ^                                          meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
 //          ^^^                                       meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
-//              ^^^                                   meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//              ^^^                                   meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 //                 ^                                  meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
 //                  ^^^                               meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
 //                      ^^^^^                         meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl comment.line.slash-dash.kdl
 //                      ^                             punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
 //                          ^                         punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-//                            ^^^                     meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                            ^^^                     meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 //                               ^                    meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
 //                                ^^^                 meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
 //                                    ^^^^^           meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl comment.line.slash-dash.kdl
 //                                    ^               punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
 //                                        ^           punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-//                                          ^^^       meta.property.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
+//                                          ^^^       meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 //                                             ^      meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl comment.line.slash-dash.kdl
 //                                              ^^^   meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
 //                                                  ^ meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
