@@ -960,7 +960,7 @@ contexts:
       # set                 :
       push                : #✗5
       - include           : linesp
-      - include           : child_block_nofollow2⁄-
+      - include           : child_block_on_follow_pop2⁄-
       - match             : '\S'
         fail              : ⸙3node_ch∨argprop⁄-
       # - include           : S🛑s
@@ -995,10 +995,10 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
       push                : child_block1-body⁄-
-  child_block_nofollow2⁄-:
+  child_block_on_follow_pop2⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
-      push                : child_block_nofollow2-body⁄-
+      push                : child_block_on_follow_pop2-body⁄-
   child_block6⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
@@ -1025,11 +1025,11 @@ contexts:
     - match               : '(?=\S)'
       push                : nodes⁄-
     # - include             : pop2
-  child_block_nofollow2-body⁄-:
+  child_block_on_follow_pop2-body⁄-:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝ch1t2nofol⸮⁄-
+    - include             : ｝ch1t2nofolpop1⸮⁄-
     - match               : '(?=\S)'
       push                : nodes⁄-
     # - include             : pop2
@@ -1139,7 +1139,7 @@ contexts:
       - include           : wss
       - include           : node_terminator2⁄-
       - include           : S🛑¹pre␤
-  ｝ch1t2nofol⸮⁄-:
+  ｝ch1t2nofolpop1⸮⁄-:
     - match               : '}'
       scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 2 # replacing this with term4 doesn't reset meta.block.child.kdl after }, so reset it here
@@ -1147,6 +1147,8 @@ contexts:
       - include           : wss
       # - include           : nodech_terminator4⸮⁄-
       - include           : nodech_terminator2⸮⁄-
+      - match             : '(?=/-|{)'
+        pop               : 2
       - include           : S🛑¹pre␤
   ｝ch0t2⁄-: # allows /-{ch} blocks to continue after the ending
     - match               : '}'
