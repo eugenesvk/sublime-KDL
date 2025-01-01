@@ -12,28 +12,36 @@
 //                               ^               punctuation.section.mapping.end.kdl
 //                                ^              punctuation.terminator.node.kdl
   n  { "forgot;terminator"       };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
   n  {  forgot;terminator        };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
   n  { "forgot;terminator" /**/  };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
   n  {  forgot;terminator  /**/  };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
 /-n  { "forgot;terminator"       };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
 /-n  {  forgot;terminator        };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
 /-n  { "forgot;terminator" /**/  };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
 /-n  {  forgot;terminator  /**/  };
-//                               ^               punctuation.section.mapping.end.kdl invalid.illegal.position.kdl
+//                               ^               punctuation.section.mapping.end.kdl
+//                               ^              -invalid.illegal.position.kdl
 //                                ^              punctuation.terminator.node.kdl
 
 r 1 { r2 1; }  "🛑 child-must-be-terminated!"
