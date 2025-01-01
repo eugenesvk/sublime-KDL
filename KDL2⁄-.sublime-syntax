@@ -131,7 +131,7 @@ contexts:
       push                : # pop+push: match gets NO meta_scope of the popped context (≈lookahead)
       - meta_scope        : comment.block.slash-dash.kdl #✗⁰ # comment.line.slash-dash added last @content
       - include           : node␠
-      - include           : node_base⁄-
+      - include           : nodetID⁄-
   node_base⁄-:            #✗⁰
     - include             : ⁄-node
     - include             : nodetID⁄-
