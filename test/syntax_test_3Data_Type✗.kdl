@@ -76,5 +76,11 @@ n "legal space between a tag and its value"
    (r"t""t")n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
+//  ^                        invalid.illegal.position.kdl
+//   ^                      -invalid.illegal
+//      ^^^                  invalid.illegal.muted.position.kdl
+   ( "t""t")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
 //      ^                    invalid.illegal.position.kdl
 //       ^^                  invalid.illegal.muted.position.kdl
