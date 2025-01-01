@@ -303,7 +303,7 @@ contexts:
     - match               : '({{charID}}+)'
       scope               : entity.other.attribute-name.kdl comment.line.slash-dash.kdl
       pop                 : 1 # ↑⸙
-      set                 :
+      push                :
         - meta_scope      : meta.property.name.kdl meta.mapping.key.kdl #✗⁴
         - include         : node␠
         - include         : property₌⁄-
