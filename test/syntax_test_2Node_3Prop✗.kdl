@@ -68,6 +68,7 @@ nnn url=(a)"t"     separato
 /-n url=(a)"t"     separato
 //                ^^^^^^^^^   -invalid.illegal
 n k=1 k✗␠=  1 cc #false;
+//^^^^^^^^^^^^^^^^^^^^^^      -comment.line.slash-dash.kdl
 //    ^^^                      meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
 //       ^                     meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
 //        ^                    invalid.illegal.position.kdl
