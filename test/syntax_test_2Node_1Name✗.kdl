@@ -52,7 +52,8 @@ n "Trying to ban some consecutive strings"
 "n"r"b"
 //^               punctuation.definition.string.end.kdl
 // ^              invalid.illegal.position.kdl
-//  ^^^           invalid.illegal.muted.position.kdl
+/*  ^^^           invalid.illegal.muted.position.kdl
+new helpers point to r"a" as an error in r not a generic letter*/
 
  ##"n"###"b"#
 //     ^          punctuation.definition.string.end.kdl
