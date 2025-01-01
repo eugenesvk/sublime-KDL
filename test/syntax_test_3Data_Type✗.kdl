@@ -63,9 +63,13 @@ n "legal space between a tag and its value"
    (ttttttt)n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
+n a=r"tttt";
    (r"tttt")n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
+//  ^                        invalid.illegal.position.kdl
+//   ^                       string.quoted.double.kdl,punctuation.definition.string.begin.kdl
+//        ^                  string.quoted.double.kdl,punctuation.definition.string.end.kdl
    ("ttttt")n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
@@ -74,6 +78,17 @@ n "legal space between a tag and its value"
 //          ^                entity.name.tag.node.kdl
 //      ^^^                  invalid.illegal.position.kdl
    (r"t""t")n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+//  ^                        invalid.illegal.position.kdl
+//   ^                      -invalid.illegal
+//   ^                       string.quoted.double.kdl,punctuation.definition.string.begin.kdl
+//     ^                     string.quoted.double.kdl,punctuation.definition.string.end.kdl
+//      ^                    invalid.illegal.position.kdl
+//      ^                   -invalid.illegal.muted.position.kdl
+//       ^^                 -invalid.illegal.position.kdl
+//       ^^                  invalid.illegal.muted.position.kdl
+   ( "t""t")n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
 //      ^                    invalid.illegal.position.kdl
