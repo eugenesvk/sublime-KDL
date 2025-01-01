@@ -51,12 +51,12 @@ a=1
 
 // Match spaces as part of the key=value, but signal an error
 n k=1 k✗␠=  1 #false;
-//        ^                                       invalid.illegal.position.kdl
-//         ^                                      invalid.illegal.muted.position
+//        ^                                      -invalid.illegal.position.kdl
+//         ^                                     -invalid.illegal.muted.position
 n k=1 k✗␠  = 1 #false;
-//       ^                                        invalid.illegal.position.kdl
-//        ^                                       invalid.illegal.muted.position
-//          ^                                     invalid.illegal.position.kdl
+//       ^                                       -invalid.illegal.position.kdl
+//        ^                                      -invalid.illegal.muted.position
+//          ^                                    -invalid.illegal.position.kdl
 
 n k=1 "k"=1 "v"
 n k=1 "v"
