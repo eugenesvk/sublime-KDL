@@ -322,6 +322,7 @@ contexts:
       pop                 : 1
       push                : property-value⁄- # todo: set bugs to clear
   property-value⁄-:       # ✗⁴
+
     - meta_content_scope  : meta.property.value.kdl meta.mapping.value.kdl #✗⁴
     - include             : comments #comments⁄-
     - include             : node␠⁄-
@@ -333,6 +334,7 @@ contexts:
     - match               : (?!\() # required to apply proper context to value
       set                 : #✗⁴
       - meta_scope        : meta.property.value.kdl meta.mapping.value.kdl #✗⁴prop⁄–_val_untyp
+
       - include           : value⁄-
       - include           : str_id⁄-
       - include           : value🛑
