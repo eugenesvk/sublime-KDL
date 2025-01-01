@@ -279,6 +279,15 @@ contexts:
   node:                   #✗⁰ ≝ node_base node_end
     - include             : node_base
     # - include             : node_terminator # free-standing term isn't allowed
+
+
+
+
+
+
+
+
+
   node_base:              #✗⁰
     - include             : ⁄-node
     - include             : nodetID
