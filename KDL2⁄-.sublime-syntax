@@ -123,7 +123,7 @@ contexts:
 #——— 1 Node: \- type
   node⁄-:                 #✗⁰ =node, but name is ⁄-scoped even without /- since e.g., parent was already ⁄-
     - include             : node_base⁄-
-    - include             : node_terminator⁄-
+    # - include             : node_terminator⁄-
   ⁄-node:                 #✗⁰ ≝ (/- node-space*)? type? identifier
     - match               : '{{c_slashdash}}'
       scope               : comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
