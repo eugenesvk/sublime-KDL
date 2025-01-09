@@ -298,7 +298,7 @@ contexts:
       push                :
       - meta_scope        : meta.node.kdl #✗¹node_base_t
       - include           : type-node
-    - match               : '(?={{string_beg}}|{{bareID}})'
+    - match               : '(?={{r1string_beg}}|{{bareID}})'
       push                :
       - meta_scope        : meta.node.kdl #✗¹node_base_s_b
       - include           : nodeID
@@ -341,7 +341,7 @@ contexts:
   nodeID:                 #✗¹
     # - include             : keywords🛑
     - include             : keyword1node🛑pre␠␤
-    - match               : '(?={{string_beg}})'
+    - match               : '(?={{r1string_beg}})'
       push                : #✗²
       # - meta_scope        : entity.name.tag.node.kdl #✗²
       - include           : string-quoted-double-raw-consecutive🛑3
@@ -370,7 +370,7 @@ contexts:
   #   - include             : arg_untyped∨prop
 
   arg_untyped∨prop:       #✗³
-    - match               : '(?={{string_beg}})'
+    - match               : '(?={{r1string_beg}})'
       branch_point        : ⸙1“arg∨prop”
       branch              : #✗⁴⸙
         - “arg”-⸙1
@@ -407,7 +407,7 @@ contexts:
   #     - include           : type-value
   “arg”:                  #✗⁴
     # - include             : string  # can't use as is since branch check comes after we're inside a string!
-    - match               : '(?={{string_beg}})'
+    - match               : '(?={{r1string_beg}})'
       push                : #✗⁵
       # - meta_scope        : dbg“arg”✗⁵
       - include           : string-quoted-double-raw-consecutive🛑3
@@ -522,7 +522,7 @@ contexts:
 
   type-name:              #✗⁴ see type-content-node
     - include             : keyword🛑
-    - match               : '(?={{string_beg}})'
+    - match               : '(?={{r1string_beg}})'
       push                : #✗⁵
       # - meta_scope        : dbgtype-name✗⁵
       - include           : strings-quoted-double-raw-consecutive🛑
