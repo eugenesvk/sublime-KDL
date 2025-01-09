@@ -3,9 +3,9 @@
 Thank you for installing __KDL__!
 (switch to Markdown via Command Palette's `Set Syntax: Markdown` for better reading experience and upvote this Package Control package's [issue](https://github.com/wbond/package_control/issues/238) to make Markdown rendering the default)
 
-This package adds support for the [KDL](https://kdl.dev) document language (for files with `.kdl` extension)
+This package adds support for the [KDL](https://kdl.dev) document language both v1 and v2 (for files with `.kdl` extension, but also with a fallback support of `.kdl1` and `.kdl2`)
 
-To test it you can open any `KDL` file, for example, [syntax_example_screen.KDL](https://github.com/eugenesvk/sublime-kdl/blob/main/test/syntax_example_screen.kdl)[^1], and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped and highlighted, maybe like so (depending on your color scheme)[^2]:
+To test it you can open any `KDL` file, for example, [syntax_example_screen.KDL](https://github.com/eugenesvk/sublime-kdl/blob/main/test/syntax_example_screen2.kdl)[^1], and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped and highlighted, maybe like so (depending on your color scheme)[^2]:
 
 ![KDL syntax screenshot solarized](https://github.com/eugenesvk/sublime-KDL/blob/main/doc/KDL_syntax_dark.png?raw=true "Custom solarized scheme")
 
