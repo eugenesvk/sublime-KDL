@@ -1,3 +1,4 @@
+/-kdl-version 1
 node_parent "argument" +5 property⚿=1 p⚿=true p⚿="www.com/?q={}" "arg3😁utf8"  {
   node_child p⚿=(type_annotation)"query" // intersperse arguments and properties
   terminate-node1; node2␤
