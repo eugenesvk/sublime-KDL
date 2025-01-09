@@ -118,3 +118,23 @@ b "\sab\
                 　cdefg\ssbz
 //                         ^             invalid.illegal.position.kdl
 "
+
+  r"nn" r"arg" p=r"val"
+//^                       invalid.illegal.position.kdl
+// ^^^                   -invalid.illegal.position.kdl
+//^^^^^                   string.quoted.double.kdl
+//  ^^^                   entity.name.tag.node.kdl
+// ^                      punctuation.definition.string.begin.kdl
+//    ^                   punctuation.definition.string.end.kdl
+//      ^                 invalid.illegal.position.kdl
+//       ^^^^^           -invalid.illegal.position.kdl
+//       ^^^^^            string.quoted.double.kdl
+//         ^^^            meta.argument.value.kdl meta.mapping.value.kdl
+//       ^                punctuation.definition.string.begin.kdl
+//           ^            punctuation.definition.string.end.kdl
+//               ^        invalid.illegal.position.kdl
+//                ^^^^^  -invalid.illegal.position.kdl
+//                ^^^^^   string.quoted.double.kdl
+//                  ^^^   meta.property.value.kdl meta.mapping.value.kdl
+//                ^       punctuation.definition.string.begin.kdl
+//                    ^   punctuation.definition.string.end.kdl
