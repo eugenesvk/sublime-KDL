@@ -112,6 +112,7 @@ variables:
   # raw_string_hash_re:   	'#{{raw_string_hash_re}}#|{{raw_string_quotes}}'         	#🗘
   # raw_string_quotes:    	'".*"'                                                   	#
   string_beg:             	'"|#*"'                                                  	# or (?!r)"|#*"
+  r1string_beg:           	'r?"|r?#*"'                                              	#
   # string_end:           	'"#*'                                                    	# or (?!r)"|#*"
   #    ↓number            	                                                         	#
   floatkw:                	'(\#inf|\#-inf|\#nan)'                     #.            	# ? not uncapturing like nil?
@@ -324,7 +325,7 @@ contexts:
 
   type-content-node:      #✗²
     - include             : keyword🛑
-    - match               : '(?={{string_beg}})' # string can't just use to ban "a""b"
+    - match               : '(?={{r1string_beg}})' # string: must push to ban "a""b"
       push                : #✗³
       # - meta_scope        : dbgtype-content-node✗³
       - include           : strings-quoted-double-raw-consecutive🛑 # ..gs allows popping later on )
