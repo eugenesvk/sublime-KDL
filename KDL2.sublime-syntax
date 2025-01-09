@@ -405,17 +405,17 @@ contexts:
   #     set                 :
   #     - meta_scope        : meta.argument.value.kdl meta.mapping.value.kdl #✗³typed
   #     - include           : type-value
-  # “arg”:                  #✗⁴
-  #   # - include             : string  # can't use as is since branch check comes after we're inside a string!
-  #   - match               : '(?={{string_beg}})'
-  #     push                : #✗⁵
-  #     # - meta_scope        : dbg“arg”✗⁵
-  #     - include           : string-quoted-double-raw-consecutive🛑3
-  #     - include           : string-quoted-double-consecutive🛑3
-  #     - include           : strings
-  #     - match             : '{{prop_eq}}'
-  #       fail              : ⸙1“arg∨prop”
-  #     - include           : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
+  “arg”:                  #✗⁴
+    # - include             : string  # can't use as is since branch check comes after we're inside a string!
+    - match               : '(?={{string_beg}})'
+      push                : #✗⁵
+      # - meta_scope        : dbg“arg”✗⁵
+      - include           : string-quoted-double-raw-consecutive🛑3
+      - include           : string-quoted-double-consecutive🛑3
+      - include           : strings
+      - match             : '{{prop_eq}}'
+        fail              : ⸙1“arg∨prop”
+      - include           : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
 
   ## arg:                    #✗⁴
   ##   - include             : type-value
