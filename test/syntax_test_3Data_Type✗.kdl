@@ -77,6 +77,14 @@ n a=r"tttt";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
 //      ^^^                  invalid.illegal.position.kdl
+   (r#"tt"#)n k=1 "a";
+//         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
+//          ^                entity.name.tag.node.kdl
+//  ^                        invalid.illegal.position.kdl
+//   ^^                     -invalid.illegal
+//   ^^                      string.quoted.double.kdl,punctuation.definition.string.begin.kdl
+//       ^^                  string.quoted.double.kdl,punctuation.definition.string.end.kdl
+//   ^^^^^^                 -invalid.illegal
    (r"t""t")n k=1 "a";
 //         ^                 meta.annotation.kdl punctuation.separator.annotation.end.kdl
 //          ^                entity.name.tag.node.kdl
