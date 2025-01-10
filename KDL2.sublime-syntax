@@ -389,9 +389,12 @@ contexts:
     - include             : pop⸙
   arg-⸙2:                 #✗⁴
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⸙2
-    - include             : node␠
-    - match               : '{{prop_eq}}'
-      fail                : ⸙2arg∨prop
+    - match               : (?={{node_sp_beg}}) # limit node␠ to pre= only otherwise 'a p=1' fails due to '(\S*)(?==)'
+      push                : #✗⁵
+      - include           : node␠
+      - match             : '{{prop_eq}}'
+        fail              : ⸙2arg∨prop
+      - include           : pop2 #✗³
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop
     - include             : value
