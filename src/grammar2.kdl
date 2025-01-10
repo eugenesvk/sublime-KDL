@@ -80,13 +80,6 @@ u␠    	=  〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀20
 u␤    	=  〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Comments (// /* */ after = serve as definition symbols)" \
-  comment_line     	 =≝   // ¬␤* ⦅␤ | eof⦆ 	 \
-_ comment_block    	 =≝  /* commented_block	 \
-    commented_block	 =   */                	 \
-                   	|= ⦅comment_block | * | ⁄ | 〔¬*⁄〕+⦆  🗘
-/-                 	  ≝ /- l_␠*
-
-§ "Comments (// /* */ after = serve as definition symbols)" \
 /-               	  ≝  /- l_␠* \
 comment_block    	 =≝  /* commented_block  \
   commented_block	 =   */                  \
