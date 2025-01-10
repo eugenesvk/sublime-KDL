@@ -1,104 +1,111 @@
 /-kdl-version 2
-§ "KDL Grammar" spec=(🔗)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"
-document⠀⠀⠀⠀⠀⠀⠀≝⠀bom?⠀⠀version?⠀⠀nodes
-  version⠀⠀⠀⠀⠀⠀≝;	 /-⠀u␠* "kdl-version"; u␠+⠀⦅ "1"; | "2"; ⦆⠀u␠*⠀␤
-  nodes⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⦅l_␠*⠀node⦆*⠀l_␠*
-    node⠀⠀⠀⠀⠀⠀⠀≝⠀⠀node_base⠀node_end
-    node_chlast⠀≝⠀⠀node_base⠀node_end?
-      node_base⠀≝; /-?⠀🄣?⠀n␠*⠀string
-        ⦅n␠+; /-?⠀node_prop∨arg⠀⠀⠀⦆*
-        ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*    !="Slashdashed node_children must be after props and args"
-        ⦅n␠+⠀⠀⠀⠀⠀⠀node_children⠀⠀⠀⦆?    !="Only children may follow a slashdashed child"
-        ⦅n␠+; /-⠀⠀node_children⠀⠀⠀⦆*
+§ "KDL Grammar" spec=(🔗)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"\
+document       	= bom? version? nodes                          	\
+  version      	=≝ /- u␠* "kdl-version" u␠+ ⦅ "1" | "2" ⦆ u␠* ␤	\
+  nodes        	=  ⦅l_␠* node⦆* l_␠*                           	\
+    node       	=  node_base node_end                          	\
+    node_chlast	=  node_base node_end?                         	\
+      node_base	=≝ /-? 🄣? n␠* string                           	\
+        ⦅n␠+   	/-? node_prop∨arg  ⦆*                          	\
+        ⦅n␠+   	/-  node_children  ⦆*   !="Slashdashed node_children must be after props and args" \
+        ⦅n␠+   	    node_children  ⦆?   !="Only children may follow a slashdashed child"           \
+        ⦅n␠+   	/-  node_children  ⦆*
         n␠*
 
-§ "Entries"
-node_prop∨arg⠀⠀≝⠀⠀prop⠀|⠀argument
-  prop⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀n␠* "="; n␠*⠀🄣?⠀n␠*⠀value
-  argument⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🄣?⠀n␠*⠀value
-    🄣⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "("; n␠*⠀string⠀n␠* ")"
-    value⠀⠀⠀⠀⠀⠀≝⠀⠀string⠀|⠀number⠀|⠀boolean⠀|⠀＃null
-node_children⠀⠀≝  "{"; nodes⠀node_chlast? "}"
-node_end⠀⠀⠀⠀⠀⠀⠀≝⠀⠀comment_line⠀|⠀␤⠀|⠀；⠀|⠀eof
+§ "Entries"  	\
+node_prop∨arg	=  prop | argument                  	\
+  prop       	=  string n␠* "=" n␠* 🄣? n␠* value  	\
+  argument   	=                     🄣? n␠* value  	\
+    🄣        	=  "(" n␠* string n␠* ")"           	\
+    value    	=  string | number | boolean | #null	\
+node_children	=  "{" nodes node_chlast? "}"       	\
+node_end     	=  comment_line | ␤ | ； | eof
 
-§ "Strings"
-string⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀str🆔⠀|⠀string''⠀|⠀string_raw⠀⠀¶
-  str🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀clean🆔⠀|⠀signed🆔⠀|⠀dotted🆔
-    clean🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⦅⦅char🆔⠀−⠀〔0–9〕⠀−⠀±⠀−⠀.⦆⠀char🆔*⦆⠀−⠀keyword🆔🛑
-    signed🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀±⠀⠀⠀⠀⦅⦅char🆔⠀−⠀〔0–9〕⠀⠀⠀⠀⠀−⠀.⦆⠀char🆔*⦆?
-    dotted🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀±?⠀.⠀⦅⦅char🆔⠀−⠀〔0–9〕⠀⠀⠀⠀⠀⠀⠀⠀⦆⠀char🆔*⦆?
-      char🆔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀uchar⠀−⠀u␠⠀−⠀␤⠀−⠀char🆔¬⠀−⠀char🛑
-      char🆔¬⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  #"(;){"}[#]/=\"#
-    keyword🆔🛑⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan
-  string''⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀“⠀⠀⠀⠀string_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”
-                         |⠀“““⠀⠀␤⠀string_body☰line⠀⠀⠀⠀⠀␤⠀dedent␠e*⠀”””
-    string_body_line⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⦅⠀⠀⠀⠀⠀⠀char_str⠀−⠀␤⦆*
-    string_body☰line⠀⠀⠀⠀⠀≝⠀⠀dedent␠e≡⠀⦅⦅“|““⦆?⠀char_str⠀⠀⠀⦆* !="←dedent␠e must exactly match ≡↑"
-    char_str⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀char⎋⠀|⠀uni⎋⠀|⠀w␠⎋⠀|⠀〔¬⧵“〕⠀−⠀char🛑
-      char⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀〔“⧵bfnrts〕
-      uni⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵ "u{"; uchar₁₆ "}"
-        uchar₁₆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0–10FFFF〕⠀−; (surrogate)〔D800–DFFF〕 !="ranges in \u{F} format, but represented as hex₁₆, not actual symbols, so \u{B0} is 'B0', not '°', can be 0-padded up to max len of 6"
-      w␠⎋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⧵⠀⦅u␠|␤⦆+
-    dedent␠e⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠|w␠⎋
-  string_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀＃⠀string_raw_quoted⠀＃
-                        ⠀⠀|⠀⠀＃⠀⠀⠀⠀⠀⠀⠀⠀🗘⠀⠀⠀⠀⠀⠀⠀⠀＃
-    string_raw_quoted⠀⠀⠀⠀⠀≝⠀⠀“⠀⠀⠀⠀⠀string_raw_body_line⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀”
-                           |⠀⠀“““⠀␤⠀string_raw_body☰line⠀␤⠀dedentu␠*⠀”””
-      string_raw_body_line⠀≝ ""
-                           |⠀⠀⠀⠀⠀⠀⦅char_raw⠀−⠀”⦆⠀char_raw*?
-                           |⠀“⠀⠀⠀⠀⦅char_raw⠀−⠀”⦆⠀char_raw*?
-        char_raw⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀uchar⠀−⠀␤⠀−⠀char🛑
-      string_raw_body☰line⠀≝⠀⠀dedentu␠≡⠀⦅uchar⠀⠀⠀⠀⠀−⠀char🛑⦆*? !="←dedentu␠ must exactly match ≡↑"
-    dedentu␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠
+§ "Strings"               	                                                     	\
+string                    	 =  str🆔 | string'' | string_raw  ¶                  	\
+  str🆔                    	 =  clean🆔 | signed🆔 | dotted🆔                       	\
+    clean🆔                	 =       ⦅⦅char🆔 − 〔0–9〕 − ± − .⦆ char🆔*⦆ − keyword🆔🛑	\
+    signed🆔               	 =  ±    ⦅⦅char🆔 − 〔0–9〕     − .⦆ char🆔*⦆?           	\
+    dotted🆔               	 =  ±? . ⦅⦅char🆔 − 〔0–9〕        ⦆ char🆔*⦆?           	\
+      char🆔               	 =  uchar − u␠ − ␤ − char🆔¬ − char🛑                  	\
+      char🆔¬              	 =  #"(;){"}[#]/=\"#                                 	\
+    keyword🆔🛑             	=  true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan            	\
+  string''                	 = “      string_body_line                  ” \
+                          	|= “““  ␤ string_body☰line     ␤ dedent␠e* ”””                          	\
+    string_body_line      	 =           ⦅      char_str − ␤⦆*                                      	\
+    string_body☰line      	 =  dedent␠e≡ ⦅⦅“|““⦆? char_str   ⦆* !="←dedent␠e must exactly match ≡↑"	\
+    char_str              	 =  char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 − char🛑                                  	\
+      char⎋               	 =  ⧵ 〔“⧵bfnrts〕                                                        	\
+      uni⎋                	 =  ⧵ "u{" uchar₁₆ "}"                                                  	\
+        uchar₁₆           	 =  〔0–10FFFF〕 − (surrogate)〔D800–DFFF〕 !="ranges in \u{F} format, but represented as hex₁₆, not actual symbols, so \u{B0} is 'B0', not '°', can be 0-padded up to max len of 6"\
+      w␠⎋                 	 =  ⧵ ⦅u␠|␤⦆+                                                          	\
+    dedent␠e              	 =  u␠|w␠⎋                                                             	\
+  string_raw              	 =  ＃ string_raw_quoted ＃                                              	\
+                          	|=  ＃        🗘         ＃                                               	\
+    string_raw_quoted     	 =  “     string_raw_body_line             ”                           	\
+                          	|=  “““ ␤ string_raw_body☰line ␤ dedentu␠* ”””                         	\
+      string_raw_body_line	 = ""                                                                  	\
+                          	|=      ⦅char_raw − ”⦆ char_raw*?                                      	\
+                          	|= “    ⦅char_raw − ”⦆ char_raw*?                                      	\
+        char_raw          	 =            uchar − ␤ − char🛑                                        	\
+      string_raw_body☰line	 =  dedentu␠≡ ⦅uchar     − char🛑⦆*? !="←dedentu␠ must exactly match ≡↑"	\
+    dedentu␠              	 =  u␠
 
-§ "Numbers (space in 〔〕 is ignored)"
-number⠀⠀⠀⠀⠀⠀⠀≝⠀⠀float_keyword⠀|⠀hex⠀|⠀octal⠀|⠀binary⠀|⠀decimal
-  hex⠀⠀⠀⠀⠀⠀⠀⠀≝;       ±?⠀0x⠀🔢₁₆⠀⦅_⠀|⠀🔢₁₆⦆*
-  octal⠀⠀⠀⠀⠀⠀≝;       ±?⠀0o⠀〔0–7〕⠀⠀⠀⠀⠀〔0–7_〕*
-  binary⠀⠀⠀⠀⠀≝;       ±?⠀0b⠀〔0⠀1〕⠀⠀⠀⠀⠀〔0⠀1_〕*
-  decimal⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀±?⠀integer⠀⦅.⠀integer⦆?⠀ℯ?
-    integer⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0–9〕⠀⠀⠀⠀⠀〔0–9_〕*
-    ℯ⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔eE〕⠀±?⠀integer
+§ "Numbers (space in 〔〕 is ignored)" \
+number      =  float_keyword | hex | octal | binary | decimal \
+  hex       =        ±?⠀0x 🔢₁₆ ⦅_ | 🔢₁₆⦆*                     \
+  octal     =        ±?⠀0o 〔0–7〕     〔0–7_〕*                  \
+  binary    =        ±?⠀0b 〔0⠀1〕     〔0⠀1_〕*                  \
+  decimal   =        ±? integer ⦅. integer⦆? ℯ?               \
+    integer =              〔0–9〕     〔0–9_〕*                   \
+    ℯ       =  〔eE〕 ±? integer                                \
+                                                              \
+  ±         =      〔+-〕                                       \
+  🔢₁₆       =             〔0–9a–fA–F〕                         \
+  🔢₁₀       =             〔0–9 〕                              \
+  🔢₁₀_      =             〔0–9_〕
 
-  ±⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀〔+-〕
-  🔢₁₆⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0–9a–fA–F〕
-  🔢₁₀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0–9⠀〕
-  🔢₁₀_⠀⠀⠀⠀⠀⠀≝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀〔0–9_〕
+§ "Keywords and booleans" \
+keyword      	= boolean | #null       	\
+float_keyword	= #inf    | #-inf | #nan	\
+boolean      	= #true   | #false
 
-§ "Keywords and booleans"
-keyword⠀⠀⠀⠀⠀⠀≝⠀boolean⠀|⠀＃null
-float_keyword⠀≝⠀⠀＃inf⠀⠀⠀|⠀＃-inf⠀|⠀＃nan
-boolean⠀⠀⠀⠀⠀⠀≝⠀＃true⠀⠀⠀|⠀＃false
+§ "Specific code points" !="\u{0} unicode format is implied: 〔u0〕=〔\u{0}〕 〔A–F〕=〔\u{A}–\u{F}〕 (range)" \
+bom   	=  "\u{FEFF}" \
+char🛑 	=  (¬1st)"bom" (c0a)〔u0–u8〕 (c0b)〔E–1F〕 (cdel)〔7F〕 (c_dir)〔200E–200F⠀202A–202E⠀2066–2069〕 usv¬ (🔗spec)"disallowed-literal-code-points" \
+  usv¬	=(surrogate)≝ (high)〔D800–DBFF〕 (low)〔DC00–DFFF〕 !="valid c0: 〔u9–uD〕 9␉\t A␊\n B␋\\v C␌\f D␍\r" \
+uchar 	=  〔0–D7FF⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀E000–10FFFF〕 !="Any Unicode Scalar Value (no surrogates)" \
+u␠    	=  〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"\
+      	"⭾                                                                                  　  "\
+u␤    	=  〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
-§ "Specific code points" !="\u{0} unicode format is implied: 〔u0〕=〔\u{0}〕 〔A–F〕=〔\u{A}–\u{F}〕 (range)"
-bom⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  "\u{FEFF}"
-char🛑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝  (¬1st)"bom"; (c0a)〔u0–u8〕; (c0b)〔E–1F〕; (cdel)〔7F〕; (c_dir)〔200E–200F⠀202A–202E⠀2066–2069〕; usv¬ (🔗spec)"disallowed-literal-code-points"
- (surrogate)usv¬⠀≝; (high)〔D800–DBFF〕; (low)〔DC00–DFFF〕 !="valid c0: 〔u9–uD〕 9␉\t A␊\n B␋\\v C␌\f D␍\r"
-uchar⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔0–D7FF⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀E000–10FFFF〕 !="Any Unicode Scalar Value (no surrogates)"
-u␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"\
-                  "⭾                                                                                  　  "
-u␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
+§ "Comments (// /* */ after = serve as definition symbols)" \
+  comment_line     	 =≝   // ¬␤* ⦅␤ | eof⦆ 	 \
+_ comment_block    	 =≝  /* commented_block	 \
+    commented_block	 =   */                	 \
+                   	|= ⦅comment_block | * | ⁄ | 〔¬*⁄〕+⦆  🗘
+/-                 	  ≝ /- l_␠*
 
-§ "Comments (// /* */ after ≝ serve as definition symbols)"
-comment_line⠀⠀⠀⠀⠀⠀≝   // ¬␤* ⦅␤ | eof⦆
-comment_block⠀⠀⠀⠀⠀≝;  /* commented_block
-  commented_block⠀≝   */
-                  |⠀⦅comment_block⠀|⠀*⠀|⠀⁄⠀|⠀〔¬*⁄〕+⦆⠀⠀🗘
-/-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝;  /-⠀l_␠*
+§ "Comments (// /* */ after = serve as definition symbols)" \
+/-               	  ≝  /- l_␠* \
+comment_block    	 =≝  /* commented_block  \
+  commented_block	 =   */                  \
+                 	|= ⦅comment_block | * | ⁄ | 〔¬*⁄〕+⦆  🗘 \
+comment_line     	 =≝   // ¬␤* ⦅␤ | eof⦆
 
-§ "Whitespace" !="\u{F} unicode format is implied in 〔F〕 and ommited for brevity"
-l_␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀n␠⠀|⠀␤⠀|⠀comment_line  !="Whitespace               where newlines are allowed"
-  n␠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀cu␠*⠀escline⠀cu␠*⠀|⠀cu␠+  !="Whitespace within nodes, where newline-ish things must be esclined"
-    cu␠⠀⠀⠀⠀⠀⠀⠀≝⠀⠀u␠⠀⠀|⠀⠀⠀comment_block
-    escline⠀⠀⠀≝⠀⧵⠀cu␠*⠀⠀⠀⠀⦅comment_line⠀|⠀␤⠀|⠀eof⦆
-  ␤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀≝⠀⠀〔D〕〔A〕⠀|⠀u␤  !="〔D〕〔A〕 \r\n ␍␊ is a sequence, but counts as 1 newline" (🔗spec)"newline"
+§ "Whitespace" !="\u{F} unicode format is implied in 〔F〕 and ommited for brevity" \
+l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where newlines are allowed" \
+  n␠       	=  cu␠* escline cu␠* | cu␠+  !="Whitespace within nodes, where newline-ish things must be esclined" \
+    cu␠    	=  u␠  |    comment_block           	\
+    escline	= ⧵ cu␠*    ⦅comment_line | ␤ | eof⦆	\
+  ␤        	=  〔D〕〔A〕 | u␤  !="〔D〕〔A〕 \r\n ␍␊ is a sequence, but counts as 1 newline" (🔗spec)"newline"
 
 § "Grammar language help: ABNF with some regex. Refs to rules are quoted ‘nodes’" {
   • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literals represented with unicode alts to avoid quotes"
   • #"\  "    ; = "#="regular KDL syntax, not grammar"\
     #"  "x" "#="double quotes for literals" ∅=(empty)"" #"\"#=(text)"escape \" \\ or add ‘uchar’ in hex \u{FEFF}"\
-    keys=(and_types)"extra group info"
-  • |="logical OR"  !="tip/comment"  §="section marker"  🗘="refers to self (rule name left of ≝)"
+    keys=(and_types)"extra group info" ≝="filler to allow /-comments in prop values"
+  • |="logical OR"  !="tip/comment"  §="section marker"  🗘="refers to self (rule name left of =)"
   •⠀Regex⠀matches                                                                                     	\
     ?⠀="0|1 zero or one"                                                                              	\
     +⠀="1+  one  or more (    greedy)"                                                                	\
