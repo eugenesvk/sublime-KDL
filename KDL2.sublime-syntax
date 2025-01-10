@@ -37,13 +37,13 @@ variables:
   # node_prop_or_arg:     	'(/\-{{n_sp}}*)?({{prop}}|{{value}})'                    	#
   # node_children:        	'(/\-{{n_sp}}*)?{{{nodes}}}'                             	#
   # n_sp:                 	'{{ws}}*{{escline}}{{ws}}*|{{ws}}+'                      	#
-  # node_sp_beg:          	'{{ws_beg}}|{{escline_beg}}'                             	#
+  # node_sp_beg:          	'{{ws_beg}}|{{escline_beg}}'      #⊎                     	#
   # line_sp_beg:          	'{{ws_beg}}|{{c_line_beg}}|{{nl_s}}'                     	#
   # any_sp_t_beg:         	'{{node_sp_beg}}|{{node_term_beg}}'                      	#
   # node_sp_end:          	'{{ws_end}}' #|{{escline_end}} ✗ needs previous line     	#
   # pre_val:              	'^|\=|\)|{{node_sp_end}}'                                	# line begin^ as line-cont surrogate
-  # ws_beg:               	'{{u_sp}}|{{comment_block_beg}}'                         	#
-  # ws_end:               	'{{u_sp}}|{{comment_block_end}}'                         	#
+  # ws_beg:               	'{{u_sp}}|{{comment_block_beg}}'   #⊎                    	#
+  # ws_end:               	'{{u_sp}}|{{comment_block_end}}'   #⊎                    	#
   # node_terminator:      	'{{comment_line}}|{{newline}}|;|{{eof}}'                 	#
   # node_term_beg:        	'{{c_line_beg}}|;|{{eof}}|{{nl_s}}'                      	#
   # node_term_beg_no_nl:  	'{{c_line_beg}}|;|{{eof}}'                               	#
@@ -126,7 +126,7 @@ variables:
   # binary:               	'([+-])?(0b)([0-1][0-7_]*)'                              	#
   #                       	                                                         	#
   # escline:              	'\\{{ws}}*({{comment_line}}|{{nl_s}})'                   	#
-  # escline_beg:          	'\\'                                                     	#
+  # escline_beg:          	'\\'                                              #⊎     	#
   # linesp_re:            	'{{nl_s}}|{{ws}}|{{comment_line}}'                       	# set-unsafe; includes recursion: ws → comment_block → commented_block🗘
   # char_linesp:          	'[{{nl_s}}{{u_sp}}{{c_beg}}]'                       #∪   	# ex / but not precisely //
   # newline:              	'(?>\r\n?|[\x{A}\x{B}\x{C}\x{85}\x{2028}\x{2029}])' #.   	# \R
