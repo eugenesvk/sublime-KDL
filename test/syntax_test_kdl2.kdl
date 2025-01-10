@@ -556,10 +556,11 @@ n 1 "x" \
 //^           meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
 // ^          meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
 //  ^         meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
-n 1 xxx \
+n 1 xxx \/*
 //^           meta.argument.value.kdl meta.mapping.value.kdl
 //  ^^^       meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl
 //      ^     punctuation.separator.continuation.line.kdl
+*/
   a=2
 //^           meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
 // ^          meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
