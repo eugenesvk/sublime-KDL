@@ -558,7 +558,7 @@ n 1 "x" \
 //  ^         meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
 n 1 xxx \/*
 //^           meta.argument.value.kdl meta.mapping.value.kdl
-//  ^^^       meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl
+//  ^^^       meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl
 //      ^     punctuation.separator.continuation.line.kdl
 */
   a=2
