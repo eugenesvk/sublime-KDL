@@ -426,6 +426,13 @@ contexts:
   #     - include           : type-value
   “arg”:                  #✗⁴
     # - include             : string  # can't use as is since branch check comes after we're inside a string!
+    - match               : (?={{node_sp_beg}}) # limit node␠ to pre= only otherwise 'a p=1' fails due to '(\S*)(?==)'
+      pop                 : 1
+      push                : #✗⁴
+      - include           : node␠
+      - match             : '{{prop_eq}}'
+        fail              : ⸙1“arg∨prop”
+      - include           : pop #✗³
     - match               : '(?={{r1string_beg}})'
       push                : #✗⁵
       # - meta_scope        : dbg“arg”✗⁵
@@ -434,7 +441,8 @@ contexts:
       - include           : strings
       - match             : '{{prop_eq}}'
         fail              : ⸙1“arg∨prop”
-      - include           : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
+      - include           : pop # 1 to allow searching and failing on =
+      # - include           : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
 
   ## arg:                    #✗⁴
   ##   - include             : type-value
