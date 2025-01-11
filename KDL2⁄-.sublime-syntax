@@ -266,11 +266,12 @@ contexts:
   arg⁄-⸙2:                #✗⁴
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⁄_⸙2
     - match               : (?={{node_sp_beg}})
-      push                : #✗⁵
+      pop                 : 1
+      push                : #✗⁴
       - include           : node␠
       - match             : '{{prop_eq}}'
         fail              : ⸙2arg∨prop⁄-
-      - include           : pop2 #✗³
+      - include           : pop #✗³
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop⁄-
     - include             : value⁄-
