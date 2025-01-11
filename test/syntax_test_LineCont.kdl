@@ -103,3 +103,11 @@ b    "\sar\                    　
 //<-                              constant.character.escape.kdl punctuation.definition.escape.begin.kdl
  //<-                             constant.character.escape.kdl
 //^                               punctuation.definition.string.end.kdl
+
+n 1 "x" \
+//
+//^           invalid.illegal.position.kdl
+n 1 "x" \// ← line comment ends the \escape,   // ¬␤* (␤|eof) also swallowing the →␤
+  a=2
+//^          -invalid.illegal
+//^           meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
