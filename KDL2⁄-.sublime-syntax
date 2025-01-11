@@ -1302,8 +1302,8 @@ contexts:
     - include             : wss
     - include             : comment_line_no␤
     - include             : ␤🛑
-    - match               : \\                          # disallows repeated
-      scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+    # - match               : \\                          # disallows repeated
+    #   scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
     - include             : else-pop
 
 
