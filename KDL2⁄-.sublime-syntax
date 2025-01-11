@@ -359,6 +359,7 @@ contexts:
         set               : # push bugs even with pop, still get meta_content
         - include         : node␠
         - include         : value⁄-
+        - include         : str_id⁄-
         - include         : value🛑
         - include         : any🛑s
       - include           : node␠
