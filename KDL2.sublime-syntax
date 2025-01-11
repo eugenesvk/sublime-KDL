@@ -1515,15 +1515,15 @@ contexts:
   #   - match               : '({{nl_s}})'
   #     set                 : line_continuations-line_next
   #   - include             : S🛑s
-  # line_continuation-line_next:
-  #   - include             : wss
-  #   - include             : comment_line_no␤
-  #   - include             : ␤🛑
-  #   - match               : \\                          # disallows repeated
-  #     scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl
-  #     # pop                 : 1                         # disallows 2nd \, but not 3rd+
-  #   - include             : else-pop
-  #   # - include             : else-pop2                   # 2 disallows repeated \, but requires extra push before use
+  line_continuation-line_next:
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ␤🛑
+    - match               : \\                          # disallows repeated
+      scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl
+      # pop                 : 1                         # disallows 2nd \, but not 3rd+
+    - include             : else-pop
+    # - include             : else-pop2                   # 2 disallows repeated \, but requires extra push before use
   # line_continuations-line_next:
   #   - include             : wss
   #   - include             : comment_lines_no␤
