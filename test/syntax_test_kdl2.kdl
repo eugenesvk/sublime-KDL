@@ -741,8 +741,9 @@ nnn (aaaa)error_stops→;
 //  ^                    punctuation.separator.annotation.begin.kdl
 //   ^^^^                entity.name.type.kdl
 //       ^               punctuation.separator.annotation.end.kdl
-//        ^^^^^^^^^^^    invalid.illegal.muted.position.kdl
-//                   ^   invalid.illegal.position.kdl
+//        ^^^^^^^^^^^^^  meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+//        ^^^^^^^^^^^   -invalid.illegal.muted.position.kdl
+//                   ^  -invalid.illegal.position.kdl
 //                    ^ -invalid.illegal
 //                    ^  punctuation.terminator.node.kdl
 
