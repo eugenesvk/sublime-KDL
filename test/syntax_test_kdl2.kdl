@@ -481,6 +481,40 @@ a ##"""
 // ^^^                       entity.name.type.kdl
 //     ^                     entity.name.tag.node.kdl
 
+n (t)"a" /-(t)"a" (t)"a" p=(t)1
+//^^^                            meta.annotation.kdl
+//         ^^^                   meta.annotation.kdl
+//                ^^^            meta.annotation.kdl
+//                         ^^^   meta.annotation.kdl
+//^                              punctuation.separator.annotation.begin.kdl
+//         ^                     punctuation.separator.annotation.begin.kdl
+//                ^              punctuation.separator.annotation.begin.kdl
+//                         ^     punctuation.separator.annotation.begin.kdl
+//  ^                            punctuation.separator.annotation.end.kdl
+//           ^                   punctuation.separator.annotation.end.kdl
+//                  ^            punctuation.separator.annotation.end.kdl
+//                           ^   punctuation.separator.annotation.end.kdl
+// ^                             entity.name.type.kdl
+//          ^                    entity.name.type.kdl
+//                 ^             entity.name.type.kdl
+//                          ^    entity.name.type.kdl
+n (t)aaa /-(t)aaa (t)aaa p=(t)1
+//^^^                            meta.annotation.kdl
+//         ^^^                   meta.annotation.kdl, comment.line.slash-dash.kdl
+//                ^^^            meta.annotation.kdl
+//                         ^^^   meta.annotation.kdl
+//^                              punctuation.separator.annotation.begin.kdl
+//         ^                     punctuation.separator.annotation.begin.kdl, comment.line.slash-dash.kdl
+//                ^              punctuation.separator.annotation.begin.kdl
+//                         ^     punctuation.separator.annotation.begin.kdl
+//  ^                            punctuation.separator.annotation.end.kdl
+//           ^                   punctuation.separator.annotation.end.kdl, comment.line.slash-dash.kdl
+//                  ^            punctuation.separator.annotation.end.kdl
+//                           ^   punctuation.separator.annotation.end.kdl
+// ^                             entity.name.type.kdl
+//          ^                    entity.name.type.kdl
+//                 ^             entity.name.type.kdl
+//                          ^    entity.name.type.kdl
 
 
 
