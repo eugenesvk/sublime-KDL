@@ -229,6 +229,10 @@ contexts:
   #   # - include           : node␠⁄-
   #   - include             : arg_typed⁄-
   #   - include             : arg_untyped∨prop⁄-
+  arg∨prop⁄-un⁄-:          #✗³
+    # - include           : node␠⁄-
+    - include             : arg_typed⁄-
+    - include             : arg_untyped∨prop⁄-un⁄-
 
   arg_untyped∨prop⁄-:     #✗³
     - match               : '(?={{string_beg}})'
@@ -240,6 +244,17 @@ contexts:
       branch_point        : ⸙2arg∨prop⁄-
       branch              : #✗⁴⸙
         - arg⁄-⸙2
+        - ⚿₌v⁄-⸙2
+  arg_untyped∨prop⁄-un⁄-: #✗³
+    - match               : '(?={{string_beg}})'
+      branch_point        : ⸙1“arg∨prop”⁄-un⁄-
+      branch              : #✗⁴⸙
+        - “arg”⁄-⸙1un⁄-
+        - “⚿”₌v⁄-⸙1
+    - match               : '(?={{charID_or_KW}})'
+      branch_point        : ⸙2arg∨prop⁄-un⁄-
+      branch              : #✗⁴⸙
+        - arg⁄-⸙2un⁄-
         - ⚿₌v⁄-⸙2
 
   arg∨prop⁄-⸙3:          #✗⁴⸙
@@ -265,6 +280,11 @@ contexts:
   #   - include             : “arg”⁄-
   #   - include             : “arg”🛑
   #   - include             : pop⸙
+  “arg”⁄-⸙1un⁄-:          #✗⁴
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴“arg”⁄⸙1
+    - include             : “arg”⁄-un⁄-
+    - include             : “arg”🛑
+    - include             : pop⸙
   arg⁄-⸙2:                #✗⁴ continues with    ⁄- styled elements
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⁄_⸙2
     - match               : (?={{node_sp_beg}})
