@@ -65,6 +65,20 @@ contexts:
       - include           : node_end5⁄-
       - include           : char🆔¬⁄-
       - include           : pop3
+  str_ids⁄-:              # ✗⁴ from arg-⸙2, property-value
+    - include             : keyword1str🛑pre␠␤
+    - match               : '([+-]|[+-]?\.)([0-9])'
+      captures            :
+        1:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+    - match               : '{{bareID}}'
+      push                : #✗⁵
+      - meta_scope        : meta.string.kdl string.unquoted.kdl comment.line.slash-dash.kdl
+      - match             : '{{charID}}'
+        scope             : string.unquoted.kdl comment.line.slash-dash.kdl
+      - include           : node_end5⁄-
+      - include           : char🆔¬⁄-
+      - include           : pop
 
   node_ch∨argprop⁄-:     #✗³
     - match               : '(?={{c_slashdash}})'
