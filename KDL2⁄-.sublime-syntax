@@ -265,7 +265,7 @@ contexts:
   #   - include             : “arg”⁄-
   #   - include             : “arg”🛑
   #   - include             : pop⸙
-  arg⁄-⸙2:                #✗⁴
+  arg⁄-⸙2:                #✗⁴ continues with    ⁄- styled elements
     - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⁄_⸙2
     - match               : (?={{node_sp_beg}})
       pop                 : 1
@@ -273,7 +273,9 @@ contexts:
       - include           : node␠
       - match             : '{{prop_eq}}'
         fail              : ⸙2arg∨prop⁄-
-      - include           : pop #✗³
+      - match             : ''
+        pop               : 2 #✗²
+        push              : node_els⁄- #✗³
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop⁄-
     - include             : value⁄-
@@ -287,14 +289,16 @@ contexts:
   #     set                 :
   #     - meta_scope        : meta.argument.value.kdl meta.mapping.value.kdl #✗³typed⁄-
   #     - include           : type-value⁄-
-  “arg”⁄-:                #✗⁴
+  “arg”⁄-:                #✗⁴ continues with    ⁄- styled elements
     - match               : (?={{node_sp_beg}}) # limit node␠ to pre= only otherwise 'a p=1' fails due to '(\S*)(?==)'
       pop                 : 1
       push                : #✗⁴
       - include           : node␠
       - match             : '{{prop_eq}}'
         fail              : ⸙1“arg∨prop”⁄-
-      - include           : pop #✗³
+      - match             : ''
+        pop               : 2 #✗²
+        push              : node_els⁄- #✗³
     - match               : '(?={{string_beg}})'
       push                : #✗⁵
       # - meta_scope        : dbg“arg”✗⁵
