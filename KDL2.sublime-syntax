@@ -413,7 +413,7 @@ contexts:
     - match               : '(\S*)(?==)'
       fail                : ⸙2arg∨prop
     - include             : value
-    - include             : str_id
+    - include             : str_ids
     - include             : value🛑
     - include             : pop_pre␤
     - include             : pop⸙
