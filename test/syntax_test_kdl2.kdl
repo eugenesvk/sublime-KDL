@@ -515,7 +515,20 @@ n (t)aaa /-(t)aaa (t)aaa p=(t)1
 //          ^                    entity.name.type.kdl
 //                 ^             entity.name.type.kdl
 //                          ^    entity.name.type.kdl
-
+n p=1 /-"a" "a" /-"a"
+//      ^^^                      meta.argument.value.kdl meta.mapping.value.kdl
+//          ^^^                  meta.argument.value.kdl meta.mapping.value.kdl
+//                ^^^            meta.argument.value.kdl meta.mapping.value.kdl
+//    ^^^^^                      comment.line.slash-dash.kdl
+//          ^^^                 -comment.line.slash-dash.kdl
+//              ^^^^^            comment.line.slash-dash.kdl
+n p=1 /-aaa aaa /-aaa
+//      ^^^                      meta.argument.value.kdl meta.mapping.value.kdl
+//          ^^^                  meta.argument.value.kdl meta.mapping.value.kdl
+//                ^^^            meta.argument.value.kdl meta.mapping.value.kdl
+//    ^^^^^                      comment.line.slash-dash.kdl
+//          ^^^                 -comment.line.slash-dash.kdl
+//              ^^^^^            comment.line.slash-dash.kdl
 
 
 // 7. Test various
