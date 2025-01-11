@@ -1491,11 +1491,11 @@ contexts:
   #   - match               : '(?=\})'
   #     pop                 : 4
 
-  # line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
-  #                         #                  =↑single-line-comment_no_nl newline
-  #   - match               : \\
-  #     scope               : punctuation.separator.continuation.line.kdl #✗lc
-  #     push                : line_continuation-line1
+  line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
+                          #                  =↑single-line-comment_no_nl newline
+    - match               : \\
+      scope               : punctuation.separator.continuation.line.kdl #✗lc
+      push                : line_continuation-line1
   # line_continuations:
   #   - match               : \\
   #     scope               : punctuation.separator.continuation.line.kdl #✗lcs
