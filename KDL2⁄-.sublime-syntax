@@ -1298,13 +1298,13 @@ contexts:
   #   - match               : '({{nl_s}})'                # ≝ ... newline
   #     set                 : line_continuation⁄-line_next
   #   - include             : S🛑s
-  # line_continuation⁄-line_next:
-  #   - include             : wss
-  #   - include             : comment_line_no␤
-  #   - include             : ␤🛑
-  #   - match               : \\                          # disallows repeated
-  #     scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
-  #   - include             : else-pop
+  line_continuation⁄-line_next:
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ␤🛑
+    - match               : \\                          # disallows repeated
+      scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
+    - include             : else-pop
 
 
 #——— Comments
