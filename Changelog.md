@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/0.9.3...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.0...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[2.0.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.0
+## [2.0.0]
 - __Added__
   + ✨ support for `v2`
   + support for the version marker
