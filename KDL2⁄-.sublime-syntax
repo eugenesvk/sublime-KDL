@@ -64,7 +64,7 @@ contexts:
         scope             : string.unquoted.kdl comment.line.slash-dash.kdl
       - include           : node_end5⁄-
       - include           : char🆔¬⁄-
-      - include           : pop
+      - include           : pop3
 
   node_ch∨argprop⁄-:     #✗³
     - match               : '(?={{c_slashdash}})'

@@ -221,7 +221,7 @@ contexts:
         scope             : string.unquoted.kdl
       - include           : node_end5
       - include           : char🆔¬
-      - include           : pop
+      - include           : pop3
 
   string:
     - include: string-quoted-double3
