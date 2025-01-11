@@ -634,6 +634,19 @@ n "Illegal due to no ␤ after line continuation before prop"\ /*
 // ^^^ invalid.illegal.position.kdl
 k=1
 
+n p=1 \
+\
+  1
+//^  meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+n "a" \
+\
+  1
+//^  meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+n aaa \
+\
+  1
+//^  meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+
 // 9. Test Comments
 /**/ // avoid being parsed as a doc '/**' comment
 //<-   comment.block.kdl
