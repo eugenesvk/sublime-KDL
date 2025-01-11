@@ -266,7 +266,7 @@ contexts:
       #- meta_scope        : dbg✗³node␠⁄−arg∨prop (not child)
       - include           : linesp
       - include           : node_terminator🛑3
-      - include           : arg∨prop⁄-
+      - include           : arg∨prop⁄-un⁄-
       - match             : '{'
         fail              : ⸙3node_ch∨argprop⁄-
       - include           : pop⸙ # todo not style /- empty via branches above ↑
