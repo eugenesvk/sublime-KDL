@@ -283,6 +283,24 @@ contexts:
     - include             : value🛑⁄-
     - include             : pop_pre␤
     - include             : pop⸙
+  arg⁄-⸙2un⁄-:            #✗⁴ continues with non⁄- styled elements
+    - meta_scope          : meta.argument.value.kdl meta.mapping.value.kdl #✗⁴arg⁄_⸙2
+    - match               : (?={{node_sp_beg}})
+      pop                 : 1
+      push                : #✗⁴
+      - include           : node␠
+      - match             : '{{prop_eq}}'
+        fail              : ⸙2arg∨prop⁄-un⁄-
+      - match             : ''
+        pop               : 2 #✗²
+        push              : node_els   #✗³
+    - match               : '(\S*)(?==)'
+      fail                : ⸙2arg∨prop⁄-un⁄-
+    - include             : value⁄-
+    - include             : str_ids⁄-
+    - include             : value🛑⁄-
+    - include             : pop_pre␤
+    - include             : pop⸙
 
   # arg_typed⁄-:            #✗³
   #   - match               : (?=\()
@@ -307,6 +325,25 @@ contexts:
       - include           : strings⁄-
       - match             : '{{prop_eq}}'
         fail              : ⸙1“arg∨prop”⁄-
+      - include           : pop # 1 to allow searching and failing on =
+      # - include           : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
+  “arg”⁄-un⁄-:            #✗⁴ continues with  non⁄- styled elements
+    - match               : (?={{node_sp_beg}})
+      pop                 : 1
+      push                : #✗⁴
+      - include           : node␠
+      - match             : '{{prop_eq}}'
+        fail              : ⸙1“arg∨prop”⁄-un⁄-
+      - match             : ''
+        pop               : 2 #✗²
+        push              : node_els   #✗³
+    - match               : '(?={{string_beg}})'
+      push                : #✗⁵
+      - include           : string-quoted-double-raw-consecutive🛑3
+      - include           : string-quoted-double-consecutive🛑3
+      - include           : strings⁄-
+      - match             : '{{prop_eq}}'
+        fail              : ⸙1“arg∨prop”⁄-un⁄-
       - include           : pop # 1 to allow searching and failing on =
       # - include           : pop3  # ¹arg_untyped∨prop branch ²↑ 3 exit
 
