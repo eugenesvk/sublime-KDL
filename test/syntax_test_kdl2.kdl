@@ -531,6 +531,25 @@ n p=1 /-aaa aaa /-aaa
 //              ^^^^^            comment.line.slash-dash.kdl
 
 
+nnn "aaa"/**/=1
+//  ^^^^^            meta.mapping.key.kdl entity.other.attribute-name.kdl
+//            ^      meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl
+nnn aaaaa/**/=1
+//  ^^^^^            meta.mapping.key.kdl entity.other.attribute-name.kdl
+//            ^      meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl
+nnn /-aaa/**/=1 a=2
+//    ^^^            meta.mapping.key.kdl entity.other.attribute-name.kdl, comment.line.slash-dash.kdl
+//            ^      meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl, comment.line.slash-dash.kdl
+//              ^^^ -comment.line.slash-dash.kdl
+nnn /-"a"/**/=1 a=2
+//    ^^^            meta.mapping.key.kdl entity.other.attribute-name.kdl, comment.line.slash-dash.kdl
+//            ^      meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl, comment.line.slash-dash.kdl
+//              ^^^ -comment.line.slash-dash.kdl
+/-n "aaa"/**/=1 a=2
+//  ^^^^^            meta.mapping.key.kdl entity.other.attribute-name.kdl, comment.line.slash-dash.kdl
+//            ^      meta.property.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl, comment.line.slash-dash.kdl
+//              ^^^  comment.line.slash-dash.kdl
+
 // 7. Test various
 smile "😁"  // files must be utf8 encoded
 "!@#$@$%Q#$%~@!40" "1.2.3" "!!!!!"=#true // Instead of anonymous nodes, nodes and properties can be wrapped in "" for arbitrary node names.
