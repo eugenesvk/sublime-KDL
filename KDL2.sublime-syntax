@@ -1523,7 +1523,7 @@ contexts:
       - include           : comment_line
       - include           : ␤
       - include           : eof
-      - include           : S🛑¹pre_ws1
+      - include           : S🛑¹pre_ws1 # error first invalid continuation, then pop
   line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
                           #                  =↑single-line-comment_no_nl newline
     - match               : \\
