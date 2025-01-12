@@ -456,14 +456,14 @@ contexts:
   #   - include             : keyword
   #   - include             : string
   #   - include             : number
-  # val🛑: # todo: combine?
-  #   - include             : pop2_pre␠
-  #   - include             : pop2_pre␤
-  #   - include             : pop2_pre-term
-  #   # - include             : pop2_pre-str
-  #   # - include             : char🆔¬
-  #   # - include             : pop_pre🆔¬  # let previous layers deal with invalid chars
-  #   - include             : ch🛑pre␠   # todo: or just scrap illegals? let unstyled content be the indicator
+  val🛑: # todo: combine?
+    - include             : pop2_pre␠
+    - include             : pop2_pre␤
+    - include             : pop2_pre-term
+    # - include             : pop2_pre-str
+    # - include             : char🆔¬
+    # - include             : pop_pre🆔¬  # let previous layers deal with invalid chars
+    - include             : ch🛑pre␠   # todo: or just scrap illegals? let unstyled content be the indicator
   value🛑:
     - include             : ＃maybe-keyword🛑
     - include             : val🛑
