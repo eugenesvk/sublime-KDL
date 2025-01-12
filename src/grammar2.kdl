@@ -21,49 +21,49 @@ node_prop∨arg	=  prop | argument                  	\
 node_children	=  "{" nodes node_chlast? "}"       	\
 node_end     	=  comment_line | ␤ | ； | eof
 
-§ "Strings"               	                                                     	\
-string                    	 =  str🆔 | string'' | string_raw  ¶                  	\
+§ "Strings"               	                                                     	    \
+string                    	 =  str🆔 | string'' | string_raw  ¶                  	  \
   str🆔                    	 =  clean🆔 | signed🆔 | dotted🆔                       	\
-    clean🆔                	 =       ⦅⦅char🆔 − 〔0–9〕 − ± − .⦆ char🆔*⦆ − keyword🆔🛑	\
-    signed🆔               	 =  ±    ⦅⦅char🆔 − 〔0–9〕     − .⦆ char🆔*⦆?           	\
-    dotted🆔               	 =  ±? . ⦅⦅char🆔 − 〔0–9〕        ⦆ char🆔*⦆?           	\
-      char🆔               	 =  uchar − u␠ − ␤ − char🆔¬ − char🛑                  	\
-      char🆔¬              	 =  #"(;){"}[#]/=\"#                                 	\
-    keyword🆔🛑             	=  true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan            	\
-  string''                	 = “      string_body_line                  ” \
-                          	|= “““  ␤ string_body☰line     ␤ dedent␠e* ”””                          	\
-    string_body_line      	 =           ⦅      char_str − ␤⦆*                                      	\
-    string_body☰line      	 =  dedent␠e≡ ⦅⦅“|““⦆? char_str   ⦆* !="←dedent␠e must exactly match ≡↑"	\
-    char_str              	 =  char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 − char🛑                                  	\
-      char⎋               	 =  ⧵ 〔“⧵bfnrts〕                                                        	\
-      uni⎋                	 =  ⧵ "u{" uchar₁₆ "}"                                                  	\
+    clean🆔                	 =       ⦅⦅char🆔 − 〔0–9〕 − ± − .⦆ char🆔*⦆ − keyword🆔🛑	  \
+    signed🆔               	 =  ±    ⦅⦅char🆔 − 〔0–9〕     − .⦆ char🆔*⦆?           	    \
+    dotted🆔               	 =  ±? . ⦅⦅char🆔 − 〔0–9〕        ⦆ char🆔*⦆?           	    \
+      char🆔               	 =  uchar − u␠ − ␤ − char🆔¬ − char🛑                  	  \
+      char🆔¬              	 =  #"(;){"}[#]/=\"#                                 	    \
+    keyword🆔🛑             	=  true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan            	  \
+  string''                	 = “      string_body_line                  ”             \
+                          	|= “““  ␤ string_body☰line     ␤ dedent␠e* ”””                           	  \
+    string_body_line      	 =            ⦅       char_str − ␤⦆*                                     	  \
+    string_body☰line      	 =  dedent␠e≡ ⦅⦅“|““⦆? char_str    ⦆* !="←dedent␠e must exactly match ≡↑"	    \
+    char_str              	 =  char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 − char🛑                                   	\
+      char⎋               	 =  ⧵ 〔“⧵bfnrts〕                                                         	    \
+      uni⎋                	 =  ⧵ "u{" uchar₁₆ "}"                                                   	  \
         uchar₁₆           	 =  〔0–10FFFF〕 − (surrogate)〔D800–DFFF〕 !="ranges in \u{F} format, but represented as hex₁₆, not actual symbols, so \u{B0} is 'B0', not '°', can be 0-padded up to max len of 6"\
-      w␠⎋                 	 =  ⧵ ⦅u␠|␤⦆+                                                          	\
-    dedent␠e              	 =  u␠|w␠⎋                                                             	\
+      w␠⎋                 	 =  ⧵ ⦅u␠|␤⦆+                                                          	    \
+    dedent␠e              	 =  u␠|w␠⎋                                                             	  \
   string_raw              	 =  ＃ string_raw_quoted ＃                                              	\
                           	|=  ＃        🗘         ＃                                               	\
-    string_raw_quoted     	 =  “     string_raw_body_line             ”                           	\
-                          	|=  “““ ␤ string_raw_body☰line ␤ dedentu␠* ”””                         	\
-      string_raw_body_line	 = ""                                                                  	\
-                          	|=      ⦅char_raw − ”⦆ char_raw*?                                      	\
-                          	|= “    ⦅char_raw − ”⦆ char_raw*?                                      	\
+    string_raw_quoted     	 =  “     string_raw_body_line             ”                           	  \
+                          	|=  “““ ␤ string_raw_body☰line ␤ dedentu␠* ”””                         	  \
+      string_raw_body_line	 = ""                                                                  	  \
+                          	|=      ⦅char_raw − ”⦆ char_raw*?                                      	  \
+                          	|= “    ⦅char_raw − ”⦆ char_raw*?                                      	  \
         char_raw          	 =            uchar − ␤ − char🛑                                        	\
-      string_raw_body☰line	 =  dedentu␠≡ ⦅uchar     − char🛑⦆*? !="←dedentu␠ must exactly match ≡↑"	\
+      string_raw_body☰line	 =  dedentu␠≡ ⦅uchar     − char🛑⦆*? !="←dedentu␠ must exactly match ≡↑"	  \
     dedentu␠              	 =  u␠
 
 § "Numbers (space in 〔〕 is ignored)" \
-number      =  float_keyword | hex | octal | binary | decimal \
-  hex       =        ±?⠀0x 🔢₁₆ ⦅_ | 🔢₁₆⦆*                     \
-  octal     =        ±?⠀0o 〔0–7〕     〔0–7_〕*                  \
-  binary    =        ±?⠀0b 〔0⠀1〕     〔0⠀1_〕*                  \
-  decimal   =        ±? integer ⦅. integer⦆? ℯ?               \
-    integer =              〔0–9〕     〔0–9_〕*                   \
-    ℯ       =  〔eE〕 ±? integer                                \
-                                                              \
-  ±         =      〔+-〕                                       \
-  🔢₁₆       =             〔0–9a–fA–F〕                         \
-  🔢₁₀       =             〔0–9 〕                              \
-  🔢₁₀_      =             〔0–9_〕
+number     	  =  float_keyword | hex | octal | binary | decimal	  \
+  hex      	  =      ±?⠀0x 🔢₁₆ ⦅_ | 🔢₁₆⦆*                      	\
+  octal    	  =      ±?⠀0o 〔0–7〕     〔0–7_〕*                   	  \
+  binary   	  =      ±?⠀0b 〔0⠀1〕     〔0⠀1_〕*                   	  \
+  decimal  	  =      ±? integer ⦅. integer⦆? ℯ?                	  \
+    integer	  =            〔0–9〕     〔0–9_〕*                   	  \
+    ℯ      	  = 〔eE〕 ±? integer                                	  \
+           	                                                   	  \
+  ±        	  =     〔+-〕                                       	  \
+  🔢₁₆      	=            〔0–9a–fA–F〕                           	\
+  🔢₁₀      	=            〔0–9 〕                                	\
+  🔢₁₀_     	=            〔0–9_〕
 
 § "Keywords and booleans" \
 keyword      	= boolean | #null       	\
@@ -80,11 +80,11 @@ u␠    	=  〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀20
 u␤    	=  〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline"
 
 § "Comments (// /* */ after = serve as definition symbols)" \
-/-               	  ≝  /- l_␠* \
-comment_block    	 =≝  /* commented_block  \
-  commented_block	 =   */                  \
-                 	|= ⦅comment_block | * | ⁄ | 〔¬*⁄〕+⦆  🗘 \
-comment_line     	 =≝   // ¬␤* ⦅␤ | eof⦆
+/-               	  ≝  /- l_␠*                            \
+comment_block    	 =≝  /* commented_block
+  commented_block	 =   */                               	\
+                 	|= ⦅comment_block | * | ⁄ | 〔¬*⁄〕+⦆  🗘	  \
+comment_line     	 =≝  // ¬␤* ⦅␤ | eof⦆
 
 § "Whitespace" !="\u{F} unicode format is implied in 〔F〕 and ommited for brevity" \
 l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where newlines are allowed" \
