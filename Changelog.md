@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Fixed__
+  + unhide the main `KDL` syntax to work around a `AFileIcon` bug that overrides the syntax to a plain text
+
 [2.0.0]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.0
 ## [2.0.0]
 - __Added__
