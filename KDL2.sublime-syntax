@@ -1937,6 +1937,15 @@ contexts:
   #     - include           : pop_pre␤
   #     - match             : '(\S)'
   #       scope             : invalid.illegal.muted.position.kdl #✗S🛑¹pre␤
+  S🛑¹pre_ws1:             # ... ␠ ␤ but pop at the end
+    - match               : '(\S)'
+      scope               : invalid.illegal.position.kdl #✗S🛑¹pre␤
+      push                :
+      - include           : pop2_pre␠
+      - include           : pop2_pre␤
+      - match             : '(\S+)'
+        scope             : invalid.illegal.muted.position.kdl #✗S🛑¹pre␤
+        pop               : 2
   # S🛑¹pre_s∨c∨t:          # ... child start or node terminator or ws
   #   - match               : '(\S)'
   #     scope               : invalid.illegal.position.kdl #✗S🛑¹pre_s∨c∨t
