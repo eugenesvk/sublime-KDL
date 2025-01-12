@@ -464,6 +464,7 @@ contexts:
     # - include             : char🆔¬
     # - include             : pop_pre🆔¬  # let previous layers deal with invalid chars
     - include             : ch🛑pre␠   # todo: or just scrap illegals? let unstyled content be the indicator
+    - include             : sd🛑pre␠
   value🛑:
     - include             : ＃maybe-keyword🛑
     - include             : val🛑
