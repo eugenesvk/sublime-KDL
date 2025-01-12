@@ -1096,17 +1096,17 @@ contexts:
   #   - include             : fail⸙int∨dec∨float-ℯ
   #   - include             : digit₁₀_
   #   - include             : pop3⸙
-  # decimal⸙:                                       # Floating point literal (fraction)
-  #   - meta_scope          : constant.numeric.value.kdl constant.numeric.decimal.kdl
-  #   - include             : fail⸙int∨dec∨float-ℯ
-  #   - include             : digit₁₀_
-  #   - match               : '(\.)'
-  #     scope               : punctuation.separator.decimal.kdl
-  #     push                :
-  #     - include           : fail⸙int∨dec∨float-ℯ
-  #     - include           : digit₁₀_
-  #     - include           : pop4
-  #   - include             : pop3⸙
+  decimal⸙:                                       # Floating point literal (fraction)
+    - meta_scope          : constant.numeric.value.kdl constant.numeric.decimal.kdl
+    - include             : fail⸙int∨dec∨float-ℯ
+    - include             : digit₁₀_
+    - match               : '(\.)'
+      scope               : punctuation.separator.decimal.kdl
+      push                :
+      - include           : fail⸙int∨dec∨float-ℯ
+      - include           : digit₁₀_
+      - include           : pop4
+    - include             : pop3⸙
   # float⸙:                                         # Floating point literal (exponent)
   #   - meta_scope          : constant.numeric.value.kdl constant.numeric.float.kdl constant.numeric.significand.kdl
   #   - include             : digit₁₀_
@@ -1114,12 +1114,12 @@ contexts:
   #   - include             : floatℯpartial
   #   - include             : floatℯ
   #   - include             : pop3⸙
-  # float．:
-  #   - match               : '(\.)'
-  #     scope               : punctuation.separator.decimal.kdl
-  #     push                :
-  #     - include           : digit₁₀_
-  #     - include           : pop
+  float．:
+    - match               : '(\.)'
+      scope               : punctuation.separator.decimal.kdl
+      push                :
+      - include           : digit₁₀_
+      - include           : pop
   # floatℯpartial:
   #   - match               : '([eE])([+-])?(?={{nl_s}})'
   #     captures            :
