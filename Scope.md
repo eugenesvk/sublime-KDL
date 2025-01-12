@@ -9,4 +9,4 @@
   | String       	| `meta.string` `storage.type.string` `string.quoted.double.` ` `¦`raw` <br> `punctuation.definition.string.` `begin`¦`end` `.kdl`
   | Comment      	| `comment.block` `comment.block.documentation` `comment.` `block`¦`line.` `double-slash` <br> `punctuation.definition.comment.` `begin`¦`end` `.kdl`
   | Annotation   	| `meta.annotation` `punctuation.separator.annotation.` `begin`¦`end` `.kdl`
-  | Others       	| `constant.character.` `escape`¦`escape.unicode.16-bit-hex` <br> `constant.language.` `boolean`¦`null` <br> `keyword.` `other`¦`operator.arithmetic` `punctuation.separator.continuation.line` `punctuation.terminator.node` <br> `invalid.illegal.` ` `¦`muted`¦`position`¦`muted.position` `.kdl` <br> `text` `.kdl1`¦`.kdl2` (depending on the identified version)
+  | Others       	| `constant.character.` `escape`¦`escape.unicode.16-bit-hex` <br> `constant.language.` `boolean`¦`null` <br> `keyword.` `other`¦`operator.arithmetic` `punctuation.separator.continuation.line` `punctuation.terminator.node` <br> `invalid.illegal.` ` `¦`muted`¦`position`¦`muted.position` `.kdl` <br> `text` `.kdl.1`¦`.kdl.2` (depending on the identified version)
