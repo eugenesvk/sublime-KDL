@@ -22,9 +22,18 @@ n a=1 /-{n} n nnn /-{n}
 /-n{n;n{n;n;} sdf}
 //            ^   comment.block.slash-dash.kdl, meta.block.child.kdl, invalid.illegal.position.kdl
 //             ^^ comment.block.slash-dash.kdl, meta.block.child.kdl, invalid.illegal.muted.position.kdl
+// ^                                             invalid.illegal.position.kdl
+//     ^                                         invalid.illegal.position.kdl
+  n{n;n{n;n;} sdf}
+//            ^   comment.block.slash-dash.kdl, meta.block.child.kdl, invalid.illegal.position.kdl
+//             ^^ comment.block.slash-dash.kdl, meta.block.child.kdl, invalid.illegal.muted.position.kdl
+// ^                                             invalid.illegal.position.kdl
+//     ^                                         invalid.illegal.position.kdl
 
  n{bar !="brackets_in_bare_id_fail"}
 //^                                              invalid.illegal.position.kdl
+/-n{bar}
+// ^                                             invalid.illegal.position.kdl
 n !="children must follow arg/props, only allow children after"
 n {bar}  abc
 //       ^                                       invalid.illegal.position.kdl
