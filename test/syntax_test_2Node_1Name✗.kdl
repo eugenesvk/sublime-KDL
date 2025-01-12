@@ -39,6 +39,13 @@ n "Illegal due to ambiguity vs a number"\
 //                       ^                        meta.property.kdl
 //                        ^                       meta.property.name.kdl meta.mapping.key.kdl
 // (?<!=) prevents =1 from matching after the +1 fails ()
+n .0n !="bare_ident_numeric_dot_fail"
+//^                                              invalid.illegal.position.kdl
+// ^                                             invalid.illegal.muted.position.kdl
+n 0n !="bare_ident_numeric_fail"
+// ^                                             invalid.illegal.position.kdl
+n +0n !="bare_ident_numeric_sign_fail"
+//  ^                                            invalid.illegal.position.kdl
 
 n "Trying to ban some consecutive strings"
 "n""b"
