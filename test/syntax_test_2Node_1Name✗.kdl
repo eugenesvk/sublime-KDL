@@ -71,3 +71,8 @@ new helpers point to r"a" as an error in r not a generic letter*/
 
 all_invali}#){}[]/#;=
 //        ^^^^^^^^^^^                             invalid.illegal.position.kdl
+
+foo123\bar weeee !="err_backslash_in_bare_id_fail"
+//    ^                                           punctuation.separator.continuation.line.kdl
+//     ^                                          invalid.illegal.position.kdl
+//      ^^                                        invalid.illegal.muted.position.kdl
