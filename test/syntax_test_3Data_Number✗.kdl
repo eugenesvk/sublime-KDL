@@ -126,3 +126,22 @@ n .5
 //^                                     invalid.illegal.position.kdl
 // ^                                    invalid.illegal.muted.position.kdl
 /*also before whitespace as .5 can't turn into a legal .5=1 property*/
+
+n .0 !="dot_zero_fail"
+//^                                     invalid.illegal.position.kdl
+// ^                                    invalid.illegal.muted.position.kdl
+n 1.0.0 !="dot_in_exponent_fail"
+//   ^                                  invalid.illegal.position.kdl
+//    ^                                 invalid.illegal.muted.position.kdl
+n 1.e7 !="dot_but_no_fraction_before_exponent_fail"
+// ^                                    invalid.illegal.muted.position.kdl
+n 1.1e7
+// ^                                   -invalid.illegal
+n 1. !="dot_but_no_fraction_before_exponent_fail (before space or ;)"
+// ^                                    invalid.illegal.muted.position.kdl
+n 1.;
+// ^                                    invalid.illegal.muted.position.kdl
+n 1.
+// ^                                   -punctuation.separator.decimal.kdl
+// ^                                   -invalid.illegal.position.kdl
+// not before newline to avoid flashes while typing, but also don't color it as a decimal if it's not valid
