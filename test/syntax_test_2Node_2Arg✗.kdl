@@ -58,3 +58,11 @@ n bare-identifie#"string"#
 //                      ^^              invalid.illegal.kdl
 //                ^^^^^^^               string.unquoted.kdl
 
+
+//muted since typing isn't finished yet (though in this case it shouldn't matter?)
+node "a"1
+//      ^                               invalid.illegal.muted.position.kdl
+//      ^                              -invalid.illegal.position.kdl
+node "a"1 i="zero_space_before_second_arg_fail"
+//      ^                               invalid.illegal.position.kdl
+//      ^                              -invalid.illegal.muted.position.kdl
