@@ -912,6 +912,16 @@ contexts:
     - meta_scope          : constant.numeric.value.kdl constant.numeric.decimal.kdl
     - include             : fail⸙int∨dec∨float⁄-ℯ
     - include             : digit₁₀_⁄-
+    - match               : '(\.)(?={{newline}})'
+      # scope               : punctuation.separator.decimal.kdl comment.line.slash-dash.kdl
+      pop                 : 1
+      push                :
+      - include           : pop3
+    - match               : '(\.)(?={{u_sp}}|;)'
+      scope               : invalid.illegal.muted.position.kdl
+      pop                 : 1
+      push                :
+      - include           : pop3
     - match               : '(\.)'
       scope               : punctuation.separator.decimal.kdl comment.line.slash-dash.kdl
       push                :
@@ -927,6 +937,18 @@ contexts:
   #   - include             : floatℯ⁄-
   #   - include             : pop3⸙
   float．⁄-:
+    - match               : '(\.)(?={{newline}})'
+      # scope               : punctuation.separator.decimal.kdl comment.line.slash-dash.kdl
+      pop                 : 1
+      push                :
+      - include           : pop
+    - match               : '(\.)(?={{u_sp}}|;)'
+      scope               : invalid.illegal.muted.position.kdl
+      pop                 : 1
+      push                :
+      - include           : pop
+    - match               : '(\.)(?=[^0-9])'
+      scope               : invalid.illegal.muted.position.kdl
     - match               : '(\.)'
       scope               : punctuation.separator.decimal.kdl comment.line.slash-dash.kdl
       push                :
