@@ -1523,13 +1523,13 @@ contexts:
   #   - match               : \\
   #     scope               : punctuation.separator.continuation.line.kdl #✗lcs
   #     push                : line_continuations-line1
-  # line_continuation-line1:
-  #   - include             : wss                         # ≝ ... ws*
-  #   - include             : comment_line_no␤           # ≝ ... single-line-comment (without newline, so ↓ captures)
-  #   - match               : '({{nl_s}})'                # ≝ ... newline
-  #     #scope               : dbg✗line_continuation-line1
-  #     set                 : line_continuation-line_next
-  #   - include             : S🛑s
+  line_continuation-line1:
+    - include             : wss                         # ≝ ... ws*
+    - include             : comment_line_no␤           # ≝ ... single-line-comment (without newline, so ↓ captures)
+    - match               : '({{nl_s}})'                # ≝ ... newline
+      #scope               : dbg✗line_continuation-line1
+      set                 : line_continuation-line_next
+    - include             : S🛑s
   # line_continuations-line1:
   #   #- meta_scope          : dbg✗line_continuations-line1
   #   # - include             : keyword-partial
