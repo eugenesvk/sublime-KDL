@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.0...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.1...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[2.0.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.1
+## [2.0.1]
 - __Fixed__
   + unhide the main `KDL` syntax to work around a `AFileIcon` bug that overrides the syntax to a plain text
 
