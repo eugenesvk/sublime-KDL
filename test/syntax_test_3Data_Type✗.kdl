@@ -101,3 +101,10 @@ n a=r"tttt";
 //          ^                entity.name.tag.node.kdl
 //      ^                    invalid.illegal.position.kdl
 //       ^^                  invalid.illegal.muted.position.kdl
+
+n   ()10 !="empty_arg_type_fail"
+//   ^                       invalid.illegal.muted.kdl
+    ()n !="empty_node_type_fail"
+//   ^                       invalid.illegal.muted.kdl
+n k=()#false !="empty_prop_type_fail"
+//   ^                       invalid.illegal.muted.kdl
