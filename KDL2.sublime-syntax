@@ -1761,15 +1761,15 @@ contexts:
   #   - match               : '{{u_sp}}'
   #     #scope               : dbg✗␠s
 
-  # node␠:                 # ≝ node-space: ws* escline ws* | ws+
-  #   - include             : line_continuation
-  #   - include             : ws+∨ws-line⎋-ws
-  # node␠s:
-  #   - include             : line_continuations
-  #   - include             : wss # todo: don't need branching?
-  # node␠⁄-:                #
-  #   - include             : line_continuation⁄-
-  #   - include             : ws+∨ws-line⎋-ws
+  node␠:                 # ≝ node-space: ws* escline ws* | ws+
+    - include             : line_continuation
+    - include             : ws+∨ws-line⎋-ws
+  node␠s:
+    - include             : line_continuations
+    - include             : wss # todo: don't need branching?
+  node␠⁄-:                #
+    - include             : line_continuation⁄-
+    - include             : ws+∨ws-line⎋-ws
   # ws+∨ws-line⎋-ws:
   #   - match               : '(?={{ws_beg}})'
   #     branch_point        : ⸙ws+∨ws-line⎋-ws
