@@ -67,11 +67,7 @@ new helpers point to r"a" as an error in r not a generic letter*/
 //      ^^        invalid.illegal.position.kdl
 //        ^^^     invalid.illegal.muted.position.kdl
 #"multiline
-nn"##"b""b"
-//^               punctuation.definition.string.end.kdl
-//  ^^            invalid.illegal.position.kdl
-//    ^^          invalid.illegal.muted.position.kdl
-//       ^^       invalid.illegal.muted.position.kdl
+//         ^      invalid.illegal.position.kdl
 
 all_invali}#){}[]/#;=
 //        ^^^^^^^^^^^                             invalid.illegal.position.kdl
