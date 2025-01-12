@@ -1514,6 +1514,15 @@ contexts:
   #   - match               : '(?=\})'
   #     pop                 : 4
 
+  escline:                # ≝ escline = ⧵ cu␠* ⦅comment_line | ␤ | eof⦆
+    - match               : \\
+      scope               : punctuation.separator.continuation.line.kdl
+      push                :
+      - include           : wss
+      - include           : comment_line
+      - include           : ␤
+      - include           : eof
+      - include           : S🛑¹pre_ws1
   line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
                           #                  =↑single-line-comment_no_nl newline
     - match               : \\
