@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.1...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.2...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
+## [2.0.2]
 - __Changed__
   + scope to `text.kdl.1` from `text.kdl1` (same for `2`) to allow using shared rules even in files with a single forced version
 
