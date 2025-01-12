@@ -22,6 +22,10 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Fixed__
+  + highlight misc invalid numbers with decimal separator
+  + ban children without separators
+
 [2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
 ## [2.0.2]
 - __Changed__
