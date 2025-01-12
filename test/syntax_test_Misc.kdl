@@ -63,3 +63,14 @@ n k=1 "v"
 n\
 /*illegal since WS only allows directly after \\ without any newlines*/
 b=1
+
+n "string"/-1 !="zero_space_before_slashdash_arg_fail"
+//        ^^^                                     invalid.illegal.muted.position.kdl
+n "string"/-1
+//        ^^^                                     invalid.illegal.muted.position.kdl
+n foo="value"bar=5 !="zero_space_before_prop_fail"
+//           ^                                    invalid.illegal.position.kdl
+//            ^^^^                                invalid.illegal.muted.position.kdl
+ n"string" !="zero_space_before_first_arg_fail"
+//^                                               invalid.illegal.position.kdl
+// ^^^^^^^                                        invalid.illegal.muted.position.kdl
