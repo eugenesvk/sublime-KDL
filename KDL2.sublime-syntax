@@ -2,7 +2,7 @@
 ---
 name             : KDL2
 file_extensions  : [kdl,kdl2]
-scope            : text.kdl2
+scope            : text.kdl.2
 first_line_match : '/-[[:blank:]]*kdl-version[[:blank:]]+2[[:blank:]]*$'
 version          : 2
 extends          : Packages/KDL/KDL2⁄-.sublime-syntax
