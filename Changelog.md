@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Changed__
+  + scope to `text.kdl.1` from `text.kdl1` (same for `2`) to allow using shared rules even in files with a single forced version
+
 [2.0.1]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.1
 ## [2.0.1]
 - __Fixed__
