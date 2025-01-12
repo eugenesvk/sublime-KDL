@@ -31,9 +31,9 @@ mv sublime-kdl KDL
 
 Open any `kdl` file (e.g., [syntax_example_screen.kdl](./test/syntax_example_screen.kdl)) and verify that the selected syntax is `KDL` and KDL-specific contexts are properly scoped[^1] and highlighted, maybe like so (depending on your color scheme):
 
-![KDL syntax screenshot solarized](https://github.com/eugenesvk/sublime-KDL/blob/main/doc/KDL2_syntax_dark.png?raw=true "Custom solarized scheme")
+![KDL syntax screenshot solarized](https://github.com/eugenesvk/sublime-KDL/blob/main/doc/KDL2_syntax_light.png?raw=true "Custom solarized scheme")
 
-![KDL syntax screenshot default](https://github.com/eugenesvk/sublime-KDL/blob/main/doc/KDL2_syntax_light.png?raw=true "Default color scheme")
+![KDL syntax screenshot default](https://github.com/eugenesvk/sublime-KDL/blob/main/doc/KDL2_syntax_dark.png?raw=true "Default color scheme")
 
 [^1]: scope naming is supposed to conform to [ST's scope naming guidelines](https://www.sublimetext.com/docs/scope_naming.html)
 
