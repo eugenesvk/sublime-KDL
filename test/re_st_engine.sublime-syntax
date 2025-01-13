@@ -130,10 +130,36 @@ variables:
 contexts:
   main:
     - meta_include_prototype: false
-    - match : ''
-      push  :
-      # - include: ws_line_break
-      - include: ws_no_line_break
+    - match               : '(?= |\\)'
+      push                :
+      - match : ' '
+        scope: invalid.illegal.muted ␠
+      - match : '1'
+        scope: constant.numeric.value 1
+        pop                 : 1
+      - match : 'a'
+        scope: punctuation.separator a
+        pop                 : 1
+      - match               : \\
+        scope               : e1 invalid.illegal.muted punctuation.separator.continuation.line.kdl
+        push                :
+        - match             : '\n'
+          scope               : e1 invalid.illegal.muted punctuation.separator.continuation.line.kdl
+          pop               : 1
+        - match : '\S+'
+          scope: invalid.illegal x\\
+          pop               : 1
+      # - match : ''
+      #   pop                 : 1
+      # - match : 'b'
+        # scope: punctuation.separator
+        # pop                 : 1
+    - match : '[\S\s]'
+      scope: invalid.illegal \S\s
+    # - match : ''
+    #   push  :
+    #   # - include: ws_line_break
+    #   - include: ws_no_line_break
 
   ws_line_break:
     # - include: ws_line_break_crlf

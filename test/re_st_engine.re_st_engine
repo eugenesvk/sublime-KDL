@@ -1,3 +1,24 @@
+a
+a\
+1
+ a\
+1
+ a\
+ \
+ \
+1
+a
+   a
+ a\aasd
+ a \
+ a
+aa\c
+aabc
+a\
+\
+b abc
+b ab c
+
 # Whitespace (Line breaking)
   #  Acronym  Name                          Code Pt   Oniguruma     Symbol
   #  CRLF     Carriage Return and Line Feed    D + A  \r\n          n/a
