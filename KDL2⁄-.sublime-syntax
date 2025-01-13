@@ -79,6 +79,7 @@ contexts:
       - match             : '{{charID}}'
         scope             : string.unquoted.kdl comment.line.slash-dash.kdl
       - include           : node_end5⁄-
+      - include           : pop_pre-node␠
       - include           : char🆔¬⁄-
       - include           : pop
 

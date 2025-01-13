@@ -239,6 +239,7 @@ contexts:
       - match             : '{{charID}}'
         scope             : string.unquoted.kdl
       - include           : node_end5
+      - include           : pop_pre-node␠
       - include           : char🆔¬
       - include           : pop
 
