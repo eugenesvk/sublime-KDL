@@ -130,36 +130,56 @@ variables:
 contexts:
   main:
     - meta_include_prototype: false
-    - match               : '(?= |\\)'
-      push                :
-      - match : ' '
-        scope: invalid.illegal.muted ␠
-      - match : '1'
-        scope: constant.numeric.value 1
-        pop                 : 1
-      - match : 'a'
-        scope: punctuation.separator a
-        pop                 : 1
-      - match               : \\
-        scope               : e1 invalid.illegal.muted punctuation.separator.continuation.line.kdl
-        push                :
-        - match             : '\n'
-          scope               : e1 invalid.illegal.muted punctuation.separator.continuation.line.kdl
-          pop               : 1
-        - match : '\S+'
-          scope: invalid.illegal x\\
-          pop               : 1
-      # - match : ''
-      #   pop                 : 1
-      # - match : 'b'
-        # scope: punctuation.separator
-        # pop                 : 1
-    - match : '[\S\s]'
-      scope: invalid.illegal \S\s
-    # - match : ''
-    #   push  :
-    #   # - include: ws_line_break
-    #   - include: ws_no_line_break
+  # eof:                    '$(?!{{nl_s}})'                                           #
+    # - match               : '(a$(?!\n))'
+    #   scope: invalid.illegal \eof1
+    # - match               : '(b$(?!{{nl_s}}))'
+    #   scope: invalid.illegal \eof2
+    # - match               : '(a$(?=\n))'
+    #   scope: invalid.illegal.muted \prenl1
+    # - match               : '(b$(?={{nl_s}}))'
+    #   scope: invalid.illegal.muted \prenl2
+    - match : 'a'
+      scope: punctuation.separator
+      push:
+      # - match               : '{{eof}}'
+      # - match               : '$(?!{{nl_s}})'
+      - match               : '([\S{{u_sp}}\s]+$(?!\n))'
+        scope: invalid.illegal.muted eof
+        pop: 1
+    - match : 'b'
+      scope: punctuation.separator
+
+    # - match               : '(?= |\\)'
+    #   push                :
+    #   - match : ' '
+    #     scope: invalid.illegal.muted ␠
+    #   - match : '1'
+    #     scope: constant.numeric.value 1
+    #     pop                 : 1
+    #   - match : 'a'
+    #     scope: punctuation.separator a
+    #     pop                 : 1
+    #   - match               : \\
+    #     scope               : e1 invalid.illegal.muted punctuation.separator.continuation.line.kdl
+    #     push                :
+    #     - match             : '\n'
+    #       scope               : e1 invalid.illegal.muted punctuation.separator.continuation.line.kdl
+    #       pop               : 1
+    #     # - match : '\S+'
+    #     #   scope: invalid.illegal x\\
+    #     #   pop               : 1
+    #   # - match : ''
+    #   #   pop                 : 1
+    #   # - match : 'b'
+    #     # scope: punctuation.separator
+    #     # pop                 : 1
+    # # - match : '[\S\s]'
+    #   # scope: invalid.illegal \S\s
+    # # - match : ''
+    # #   push  :
+    # #   # - include: ws_line_break
+    # #   - include: ws_no_line_break
 
   ws_line_break:
     # - include: ws_line_break_crlf
