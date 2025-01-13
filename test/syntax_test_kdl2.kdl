@@ -79,6 +79,20 @@ kw   #true #false #null #inf #-inf #nan
 //                           ^^^^^                           meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 //                                 ^^^^                      meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 
+n arg/**/ !="bare ids popping on start of non-whitespace node␠"
+//   ^^^^                                         comment.block.kdl
+//   ^^^^                                        -invalid.illegal
+/-n g/**/
+//   ^^^^                                         comment.block.kdl, comment.block.slash-dash.kdl
+//   ^^^^                                        -invalid.illegal
+n arg\//
+//   ^                                            punctuation.separator.continuation.line.kdl
+//    ^^                                          comment.line.double-slash.kdl punctuation.definition.comment.begin.kdl
+//   ^^^^                                        -invalid.illegal
+/-n g\//
+//   ^                                            punctuation.separator.continuation.line.kdl, comment.block.slash-dash.kdl
+//    ^^                                          comment.block.slash-dash.kdl, comment.line.double-slash.kdl punctuation.definition.comment.begin.kdl
+//   ^^^^                                        -invalid.illegal
 
 // 2 Node Element: 3 Property (key=value)
 command "twitter" "tw" a=2 b=#true url="https://twitter.com/" {
