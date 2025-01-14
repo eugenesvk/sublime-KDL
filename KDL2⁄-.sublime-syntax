@@ -803,16 +803,14 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
-        captures          : # will only highlight the last \, don't know how to fix
+      - match             : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
+      # - match             : '^(\s*)([^\"]?)([^\"]*)(""")'
+        captures          :
           1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
-          3:               constant.character.escape.kdl comment.line.slash-dash.kdl
-          4:               punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
-          6:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
-          7:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-          8:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          9:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          2:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
+          3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+          4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          5:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 3
   strings-quoted-double-raw⁄-:
     - match               : '(r?)(#*)(")'
@@ -838,16 +836,14 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
-        captures          : # will only highlight the last \, don't know how to fix
+      - match             : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
+      # - match             : '^(\s*)([^\"]?)([^\"]*)(""")'
+        captures          :
           1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
-          3:               constant.character.escape.kdl comment.line.slash-dash.kdl
-          4:               punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
-          6:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
-          7:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-          8:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          9:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          2:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
+          3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+          4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          5:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
   strings-quoted-double-raw⁄-_node-id:
     - match               : '(r?)(#*)(")'
@@ -873,16 +869,14 @@ contexts:
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
-        captures          : # will only highlight the last \, don't know how to fix
+      - match             : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
+      # - match             : '^(\s*)([^\"]?)([^\"]*)(""")'
+        captures          :
           1:               whitespace.dedent.kdl
-          3:               constant.character.escape.kdl
-          4:               punctuation.definition.escape.begin.kdl
-          6:               invalid.illegal.position.kdl
-          7:               invalid.illegal.muted.position.kdl
-          8:               punctuation.definition.string.end.kdl
-          9:               punctuation.definition.string.end.kdl
+          2:               invalid.illegal.position.kdl
+          3:               invalid.illegal.muted.position.kdl
+          4:               punctuation.definition.string.end.kdl
+          5:               punctuation.definition.string.end.kdl
         pop               : 1
 
 
