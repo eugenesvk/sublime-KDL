@@ -793,13 +793,13 @@ contexts:
         pop               : 3
       - include           : ␤🛑¹s
   string-quoted-double3-raw⁄-:
-    - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(#*)(""")({{nl_not_s}}?)' #({{nl_not_s}}*)
       captures            :
         1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         4:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
-        5:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        # 5:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
@@ -811,6 +811,13 @@ contexts:
           3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
           4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           5:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+      - match             : '([\S\s]?)([\S]*)(""")(\2)' # error pop
+        captures          :
+          1:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
+          2:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+          3:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 3
   strings-quoted-double-raw⁄-:
     - match               : '(r?)(#*)(")'
@@ -826,13 +833,13 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw⁄-:
-    - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(#*)(""")({{nl_not_s}}?)' #({{nl_not_s}}*)
       captures            :
         1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         3:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
         4:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
-        5:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+        # 5:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.raw.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
@@ -844,6 +851,13 @@ contexts:
           3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
           4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           5:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+      - match             : '([\S\s]?)([\S]*)(""")(\2)' # error pop
+        captures          :
+          1:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
+          2:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+          3:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
   strings-quoted-double-raw⁄-_node-id:
     - match               : '(r?)(#*)(")'
@@ -859,7 +873,7 @@ contexts:
         pop               : 1
       - include           : ␤🛑¹s
   strings-quoted-double3-raw⁄-_node-id:
-    - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
+    - match               : '(r?)(#*)(""")({{nl_not_s}}?)' #({{nl_not_s}}*)
       captures            :
         1:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
         2:                 punctuation.definition.string.begin.kdl comment.line.slash-dash.kdl
@@ -877,6 +891,13 @@ contexts:
           3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
           4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           5:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 1
+      - match             : '([\S\s]?)([\S]*)(""")(\2)' # error pop
+        captures          :
+          1:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
+          2:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+          3:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
 
 
