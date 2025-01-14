@@ -1583,6 +1583,18 @@ contexts:
   # ｝4:
   #   - match               : '(?=\})'
   #     pop                 : 4
+  ｛:
+    - match               : '(?=\{)'
+      pop                 : 1
+  ｛2:
+    - match               : '(?=\{)'
+      pop                 : 2
+  ｛3:
+    - match               : '(?=\{)'
+      pop                 : 3
+  ｛4:
+    - match               : '(?=\{)'
+      pop                 : 4
 
   escline:                # ≝ escline = ⧵ cu␠* ⦅comment_line | ␤ | eof⦆
     - match               : \\
