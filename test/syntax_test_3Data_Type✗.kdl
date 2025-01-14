@@ -121,3 +121,8 @@ n k=()#false !="empty_prop_type_fail"
 n i="not mark as illegal to avoid flashes" i=just_type_no_arg_fail
 node (type)
 //         ^ -invalid.illegal
+n i="not mark as illegal to avoid flashes" i=just_type_no_prop_fail
+node key=(type)
+//             ^ -invalid.illegal
+(just_type_no_node_id_fail)
+//                         ^ invalid.illegal.position.kdl
