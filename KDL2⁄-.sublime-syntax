@@ -1053,10 +1053,11 @@ contexts:
   #     - meta_scope        : constant.numeric.integer.octal.kdl
   #     - include           : pop5
   hexadecimal⁄-partial:
-    - match               : '(0x)(?={{nl_s}})'
-      scope               : constant.numeric.base.kdl comment.line.slash-dash.kdl
+    - match               : '(0)(x)(?={{nl_s}})'
+      captures            :
+        1:                  constant.numeric.integer.hexadecimal.kdl constant.numeric.base.kdl comment.line.slash-dash.kdl
+        # 2:                  constant.numeric.integer.hexadecimal.kdl constant.numeric.base.kdl comment.line.slash-dash.kdl
       push                :
-      - meta_scope        : constant.numeric.integer.hexadecimal.kdl
       - include           : pop5
 
   # Values - Numbers (helpers) digit₁₀_
