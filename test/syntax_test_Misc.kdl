@@ -65,7 +65,8 @@ n\
 b=1
 
 n "string"/-1 !="zero_space_before_slashdash_arg_fail"
-//        ^^^                                     invalid.illegal.muted.position.kdl
+//        ^^                                      invalid.illegal.position.kdl
+//          ^                                     invalid.illegal.muted.position.kdl
 n "string"/-1
 //        ^^^                                     invalid.illegal.muted.position.kdl
 n foo="value"bar=5 !="zero_space_before_prop_fail"
