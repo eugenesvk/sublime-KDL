@@ -785,7 +785,7 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 3
-      - include           : char-escaped
+      - include           : char-esc-multi2
   strings-quoted-double:
     - match               : '(r?)(")'
       captures            :
@@ -817,7 +817,7 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 1
-      - include           : char-escaped
+      - include           : char-esc-multi
   strings-quoted-double_node-id:
     - match               : '(r?)(")'
       captures            :
@@ -849,7 +849,7 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 1
-      - include           : char-escaped
+      - include           : char-esc-multi
   char-escaped:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
