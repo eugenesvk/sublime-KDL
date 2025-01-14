@@ -40,7 +40,7 @@ string                    	 =  str🆔 | string'' | string_raw  ¶              
         uchar₁₆           	 =  〔0–10FFFF〕 − (surrogate)〔D800–DFFF〕 !="ranges in \u{F} format, but represented as hex₁₆, not actual symbols, so \u{B0} is 'B0', not '°', can be 0-padded up to max len of 6"\
       w␠⎋                 	 =  ⧵ ⦅u␠|␤⦆+	    \
     dedent␠e              	 =  u␠ | w␠⎋ 	  \
-  string_raw              	 = ＃*ℕ   string_raw_quoted                 ＃*ℕ≡  !="ℕ=1–∞, ≡same on each side" \
+  string_raw              	 = ＃*ℕ   string_raw_quoted                 ＃*ℕ≡  !="ℕ=1–∞  ℕ≡ must match ℕ" \
     string_raw_quoted     	 =  “     string_raw_body_line             ”                           	  \
                           	|=  “““ ␤ string_raw_body☰line ␤ dedentu␠* ”””                         	  \
       string_raw_body_line	 = ""                                                                  	  \
