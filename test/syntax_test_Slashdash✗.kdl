@@ -10,9 +10,10 @@ n foo /-; m !="slashdash_before_semicolon_fail"
 n (/-bad)nope !="slashdash_inside_arg_type_fail"
 // ^                                    invalid.illegal.kdl
 n (type) /- arg1 arg2 !="slashdash_after_type_fail"
-//       ^                              invalid.illegal.position.kdl
+//       ^^                             invalid.illegal.position.kdl
 n (type)/-arg1 arg2 !="slashdash_after_arg_type_fail"
-//      ^                               invalid.illegal.position.kdl
+//      ^^                              invalid.illegal.position.kdl
+//        ^^^                           invalid.illegal.muted.position.kdl
 n key /- = value !="slashdash_after_prop_key_fail"
 //       ^                              invalid.illegal.position.kdl
 (ty)/-n !=slashdash_after_node_type_fail
