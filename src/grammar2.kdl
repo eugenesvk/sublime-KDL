@@ -95,7 +95,8 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
 § "Grammar language help: ABNF with some regex. Refs to rules are quoted ‘nodes’" {
   • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literals represented with unicode alts to avoid quotes"
   • #"\  "    ; = "#="regular KDL syntax, not grammar"\
-    #"  "x" "#="double quotes for literals" ∅=(empty)"" #"\"#=(text)"escape \" \\ or add ‘uchar’ in hex \u{FEFF}"\
+    #"  "x" "#="double quotes for literals" ##"  #"x"# "##="raw+double quotes for literals"\
+    ∅=(empty)"" #"\"#=(text)"escape \" \\ or add ‘uchar’ in hex \u{FEFF}"\
     keys=(and_types)"extra group info" ≝="filler to allow /-comments in prop values"
   • |="logical OR"  !="tip/comment"  §="section marker"  🗘="refers to self (rule name left of =)"
   •⠀Regex⠀matches                                                                                     	\
