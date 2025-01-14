@@ -156,3 +156,20 @@ node 0x10g10 i=illegal_char_in_hex_fail
 node 0o45678 i=illegal_char_in_octal_fail
 //   ^^                                 constant.numeric.integer.octal.kdl constant.numeric.base.kdl
 //         ^                            invalid.illegal.position.kdl
+
+node 1.0E10e10 i=multiple_es_in_float_fail
+//      ^                               constant.numeric.value.kdl constant.numeric.float.kdl constant.numeric.exponent.kdl punctuation.separator.exponent.kdl
+//         ^                            invalid.illegal.position.kdl
+//          ^^                          invalid.illegal.muted.position.kdl
+node 1.0.0e7 i=multiple_dots_in_float_before_exponent_fail
+//    ^                                 constant.numeric.value.kdl constant.numeric.decimal.kdl punctuation.separator.decimal.kdl
+//      ^                               invalid.illegal.position.kdl
+//       ^^^                            invalid.illegal.muted.position.kdl
+node 0xx10 i=multiple_x_in_hex_fail
+//   ^                                  constant.numeric.value.kdl constant.numeric.integer.kdl
+//    ^                                 invalid.illegal.position.kdl
+//     ^^^                              invalid.illegal.muted.position.kdl
+node 1.0.0 i=multiple_dots_in_float_fail
+//   ^^^                                constant.numeric.value.kdl constant.numeric.decimal.kdl
+//      ^                               invalid.illegal.position.kdl
+//       ^                              invalid.illegal.muted.position.kdl
