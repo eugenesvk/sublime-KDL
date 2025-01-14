@@ -1918,7 +1918,7 @@ contexts:
   sd🛑pre␠:
     - match               : '({{c_slashdash}})(\S*)(?={{u_sp}})'
       captures            :
-        1:                  invalid.illegal.muted.position.kdl
+        1:                  invalid.illegal.position.kdl
         2:                  invalid.illegal.muted.position.kdl
   # ch🛑pre-str:
   #   - match               : '({{charID}}*?)({{charID}})(?={{string_beg}})'
