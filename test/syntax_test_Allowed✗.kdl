@@ -1,0 +1,7 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+
+// Allowed illegal syntax to avoid red flashes while typing
+node 0x
+//   ^^   constant.numeric.integer.hexadecimal.kdl constant.numeric.base.kdl
+//     ^ -invalid.illegal
+// avoid flashes
