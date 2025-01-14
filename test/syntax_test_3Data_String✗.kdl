@@ -189,3 +189,21 @@ a\
 //^^^                 string.quoted.double.block.kdl
 //^                   invalid.illegal.position.kdl punctuation.definition.string.end.kdl
 // ^^                 invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+node i=multiline_string_final_whitespace_escape_fail """
+  foo
+  bar\
+  """
+//^^^                 string.quoted.double.block.kdl
+//^                   invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+// ^^                 invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+
+node i=multiline_raw_string_single_quote_err_fail \
+  #"
+//  ^      invalid.illegal.position.kdl
+hey
+// ^       invalid.illegal.position.kdl
+everyone
+//      ^  invalid.illegal.position.kdl
+how goes?
+//       ^ invalid.illegal.position.kdl
+"#
