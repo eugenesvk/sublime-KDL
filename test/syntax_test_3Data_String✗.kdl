@@ -173,3 +173,19 @@ node #"""
 \ """# i="raw multiline string's dedents can't have escaped whitespace unlike regular multiline strings"
 //<- string.quoted.double.block.raw.kdl invalid.illegal.position.kdl
  //<- invalid.illegal.muted.position.kdl
+
+n i=multiline_string_escape_newline_at_end_fail i=#"Multiline strings end in ␤""", but \ eats ␤"#
+node """
+a\
+
+  """
+//^^^                 string.quoted.double.block.kdl
+//^                   invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+// ^^                 invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+n p="""
+a\
+
+  """
+//^^^                 string.quoted.double.block.kdl
+//^                   invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+// ^^                 invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
