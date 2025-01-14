@@ -61,9 +61,7 @@ number     	  =  float_keyword | hex | octal | binary | decimal	  \
     ℯ      	  = 〔eE〕 ±? integer                                	  \
            	                                                   	  \
   ±        	  =     〔+-〕                                       	  \
-  🔢₁₆      	=            〔0–9a–fA–F〕                           	\
-  🔢₁₀      	=            〔0–9 〕                                	\
-  🔢₁₀_     	=            〔0–9_〕
+  🔢₁₆      	=            〔0–9a–fA–F〕
 
 § "Keywords and booleans" \
 keyword      	= boolean | #null       	\
