@@ -41,14 +41,14 @@ string                    	 =  str🆔 | string'' | string_raw  ¶              
       w␠⎋                 	 =  ⧵ ⦅u␠|␤⦆+	    \
     dedent␠e              	 =  u␠ | w␠⎋ 	  \
   string_raw              	 = ＃*ℕ   string_raw_quoted                 ＃*ℕ≡  !="ℕ=1–∞  ℕ≡ must match ℕ" \
-    string_raw_quoted     	 =  “     string_raw_body_line             ”                           	  \
-                          	|=  “““ ␤ string_raw_body☰line ␤ dedentu␠* ”””                         	  \
-      string_raw_body_line	 = ""                                                                  	  \
-                          	|=      ⦅char_raw − ”⦆ char_raw*?                                      	  \
-                          	|= “    ⦅char_raw − ”⦆ char_raw*?                                      	  \
-        char_raw          	 =            uchar − ␤ − char🛑                                        	\
-      string_raw_body☰line	 =  dedentu␠≡ ⦅uchar     − char🛑⦆*? !="←dedentu␠ must exactly match ≡↑"	  \
-    dedentu␠              	 =  u␠
+    string_raw_quoted     	 =  “     string_raw_body_line         ”                       	  \
+                          	|=  “““ ␤ string_raw_body☰line ␤ de␠u* ”””                     	  \
+      string_raw_body_line	 = ""                                                          	  \
+                          	|=      ⦅char_raw − ”⦆ char_raw*?                              	  \
+                          	|= “    ⦅char_raw − ”⦆ char_raw*?                              	  \
+        char_raw          	 =         uchar − ␤ − char🛑                                   	\
+      string_raw_body☰line	 =  de␠u≡ ⦅uchar     − char🛑⦆*? !="←de␠u must exactly match ≡↑"	  \
+    de␠u                  	 =  u␠
 
 § "Numbers (space in 〔〕 is ignored)" \
 number     	  =  float_keyword | hex | octal | binary | decimal	  \
