@@ -90,3 +90,9 @@ node /-{
 // ^^^^^ meta.block.child.kdl meta.node.kdl invalid.illegal.muted.position.kdl
   bar
 }
+n 11{ch i=1}
+//  ^ meta.block.child.kdl punctuation.section.mapping.begin.kdl
+//  ^ invalid.illegal.position.kdl
+n aa{ch i=1}
+//  ^ meta.block.child.kdl punctuation.section.mapping.begin.kdl
+//  ^ invalid.illegal.position.kdl
