@@ -14,3 +14,10 @@ n 1.
 // ^                                   -punctuation.separator.decimal.kdl
 // ^                                   -invalid.illegal.position.kdl
 // not before newline to avoid flashes while typing, but also don't color it as a decimal if it's not valid
+
+node {
+  child1 i=slashdash_before_children_end_fail
+  /-
+//^^  comment.block.slash-dash.kdl comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//^^ -invalid.illegal
+}
