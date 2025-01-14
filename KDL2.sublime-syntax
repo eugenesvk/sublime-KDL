@@ -226,6 +226,8 @@ contexts:
       - meta_scope        : meta.string.kdl string.unquoted.kdl
       - match             : '{{charID}}'
         scope             : string.unquoted.kdl
+      - include           : ｛3
+      - include           : ｝3
       - include           : node_end5
       - include           : char🆔¬
       - include           : pop3
@@ -241,6 +243,8 @@ contexts:
       - meta_scope        : meta.string.kdl string.unquoted.kdl
       - match             : '{{charID}}'
         scope             : string.unquoted.kdl
+      - include           : ｛3
+      - include           : ｝3
       - include           : node_end5
       - include           : pop_pre-node␠
       - include           : char🆔¬
