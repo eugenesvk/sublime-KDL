@@ -33,10 +33,19 @@ n (#false)1
 
 n ()"✗← illegal empty type"
 // ^                                              invalid.illegal.muted.kdl
-n ( )"✗← legal symbol (non-identifier)"
-// ^                                             -invalid.illegal.position.kdl
+n (                                                                                    　  )"✗← illegal blank type" i=just_space_in_arg_type_fail
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invalid.illegal.muted.kdl
 n (a) "✗← legal separator"
 //   ^                                           -invalid.illegal.position.kdl
+  ()"✗← illegal empty type"
+// ^                                              invalid.illegal.muted.kdl
+ (                                                                                    　  )"✗← illegal blank type" i=just_space_in_node_type_fail
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invalid.illegal.muted.kdl
+n p=(                                                                                    　  )"✗← illegal blank type" i=just_space_in_prop_type_fail
+//   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invalid.illegal.muted.kdl
+(a) "✗← legal separator"
+// ^                                           -invalid.illegal.position.kdl
+
             n "a";
 yv2_<legalv2>
 //^^^^^^^^^^^                 -invalid.illegal.kdl
@@ -108,3 +117,7 @@ n   ()10 !="empty_arg_type_fail"
 //   ^                       invalid.illegal.muted.kdl
 n k=()#false !="empty_prop_type_fail"
 //   ^                       invalid.illegal.muted.kdl
+
+n i="not mark as illegal to avoid flashes" i=just_type_no_arg_fail
+node (type)
+//         ^ -invalid.illegal
