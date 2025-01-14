@@ -80,6 +80,9 @@ no "\u \u{} escape"
 //  ^                                             -constant.character.escape.kdl punctuation.definition.escape.begin.kdl
 //     ^                                          -constant.character.escape.kdl punctuation.definition.escape.begin.kdl
 """###
+node r#"foo"# i=legacy_raw_string_hash_fail
+//   ^                                             string.quoted.double.raw.kdl invalid.illegal.position.kdl
+//    ^^                                           string.quoted.double.raw.kdl punctuation.definition.string.begin.kdl
 no #"Surrogates even in \u escaped form"#\
 high="\u{D800}\u{D911}\u{DABB}\u{DBFF}" low="\u{DC00}\u{DEAD}\u{DFFF}" uok="\u{0}\u{D799}"
 //    ^                                                                constant.character.escape.kdl
@@ -119,7 +122,7 @@ b "\sab\
 //                         ^             invalid.illegal.position.kdl
 "
 
-  r"nn" r"arg" p=r"val"
+  r"nn" r"arg" p=r"val" i=legacy_raw_string_fail
 //^                       invalid.illegal.position.kdl
 // ^^^                   -invalid.illegal.position.kdl
 //^^^^^                   string.quoted.double.kdl
@@ -138,3 +141,15 @@ b "\sab\
 //                  ^^^   meta.property.value.kdl meta.mapping.value.kdl
 //                ^       punctuation.definition.string.begin.kdl
 //                    ^   punctuation.definition.string.end.kdl
+
+node i=multiline_raw_string_non_matching_prefix_count_error_fail i="Sublime Text doesn't support this whitespace sensitivity" #"""
+    hey
+  everyone
+//<-  -invalid.illegal
+     how goes?
+  """# i=multiline_raw_string_non_matching_prefix_count_error_fail
+
+node #"""one line"""# i=multiline_raw_string_single_line_err_fail
+//   ^^^^             string.quoted.double.block.raw.kdl punctuation.definition.string.begin.kdl
+//       ^            invalid.illegal.position.kdl
+//        ^^^^^^^^^^^ invalid.illegal.muted.position.kdl
