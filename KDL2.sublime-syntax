@@ -919,7 +919,7 @@ contexts:
         pop               : 3
       - match             : '([\S\s]?)([\S]*)(""")(\2)' # error pop
         captures          :
-          1:               invalid.illegal.position.kdl
+          1:               invalid.illegal.muted.position.kdl #({{nl_not_s}}?) already marked as full error
           2:               invalid.illegal.muted.position.kdl
           3:               punctuation.definition.string.end.kdl
           4:               punctuation.definition.string.end.kdl
@@ -957,7 +957,7 @@ contexts:
         pop               : 1
       - match             : '([\S\s]?)([\S]*)(""")(\2)' # error pop
         captures          :
-          1:               invalid.illegal.position.kdl
+          1:               invalid.illegal.muted.position.kdl #({{nl_not_s}}?) already marked as full error
           2:               invalid.illegal.muted.position.kdl
           3:               punctuation.definition.string.end.kdl
           4:               punctuation.definition.string.end.kdl
@@ -995,7 +995,7 @@ contexts:
         pop               : 1
       - match             : '([\S\s]?)([\S]*)(""")(\2)' # error pop
         captures          :
-          1:               invalid.illegal.position.kdl
+          1:               invalid.illegal.muted.position.kdl #({{nl_not_s}}?) already marked as full error
           2:               invalid.illegal.muted.position.kdl
           3:               punctuation.definition.string.end.kdl
           4:               punctuation.definition.string.end.kdl
