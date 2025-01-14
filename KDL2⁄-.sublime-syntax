@@ -1192,7 +1192,7 @@ contexts:
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ｝ch1t2nofolpop1⸮⁄-
+    - include             : ｝ch1t5nofolpop1⸮⁄-
     - match               : '(?=\S)'
       push                : nodes⁄-
     # - include             : pop2
@@ -1261,6 +1261,10 @@ contexts:
   node_terminator3⁄-:
     - include             : node_end3⁄-
     - include             : ｝🛑3
+  nodech_terminator5⸮⁄-:
+    - include             : node_end5⁄-
+    - include             : ｝5
+    - include             : ｝🛑5
   nodech_terminator4⸮⁄-:
     - include             : node_end4⁄-
     - include             : ｝4
@@ -1302,14 +1306,13 @@ contexts:
       - include           : wss
       - include           : node_terminator2⁄-
       - include           : S🛑¹pre␤
-  ｝ch1t2nofolpop1⸮⁄-: #✗⁶
+  ｝ch1t5nofolpop1⸮⁄-: #✗⁶
     - match               : '}'
       scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 1 # replacing this with term4 doesn't reset meta.block.child.kdl after }, so reset it here
       push                : #✗⁶
       - include           : wss
-      # - include           : nodech_terminator4⸮⁄-
-      - include           : nodech_terminator2⸮⁄-
+      - include           : nodech_terminator5⸮⁄-
       - match             : '(?=/-|{)'
         pop               : 2
       - include           : S🛑¹pre_ws
