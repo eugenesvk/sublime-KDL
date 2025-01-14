@@ -645,7 +645,8 @@ n 1 xxx \/*
 
 n "Illegal due to no ␤ after line continuation before prop"\ /*
 */ k=1
-// ^^^ invalid.illegal.position.kdl
+// ^   invalid.illegal.position.kdl
+//  ^^ invalid.illegal.muted.position.kdl
 k=1
 
 n p=1 \
