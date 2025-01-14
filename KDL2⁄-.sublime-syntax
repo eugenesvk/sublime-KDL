@@ -1158,10 +1158,10 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
       push                : child_block1-body⁄-
-  child_block_on_follow_pop2⁄-:
+  child_block_on_follow_pop2⁄-: #✗⁵
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
-      push                : child_block_on_follow_pop2-body⁄-
+      push                : child_block_on_follow_pop2-body⁄- #✗⁶
   child_block6⁄-:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
@@ -1188,7 +1188,7 @@ contexts:
     - match               : '(?=\S)'
       push                : nodes⁄-
     # - include             : pop2
-  child_block_on_follow_pop2-body⁄-:
+  child_block_on_follow_pop2-body⁄-: #✗⁶
     - meta_scope          : meta.block.child.kdl
     - include             : wss
     - include             : comment_line_no␤
@@ -1302,11 +1302,11 @@ contexts:
       - include           : wss
       - include           : node_terminator2⁄-
       - include           : S🛑¹pre␤
-  ｝ch1t2nofolpop1⸮⁄-:
+  ｝ch1t2nofolpop1⸮⁄-: #✗⁶
     - match               : '}'
       scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 1 # replacing this with term4 doesn't reset meta.block.child.kdl after }, so reset it here
-      push                :
+      push                : #✗⁶
       - include           : wss
       # - include           : nodech_terminator4⸮⁄-
       - include           : nodech_terminator2⸮⁄-
