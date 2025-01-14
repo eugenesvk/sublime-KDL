@@ -175,7 +175,7 @@ n nan
 //^^^    meta.argument.value.kdl meta.mapping.value.kdl
 //^^    meta.string.kdl string.unquoted.kdl
 //  ^    invalid.illegal.muted.position.kdl
-n  true   false   null   nan  -inf   inf  2
+n  true   false   null   nan  -inf   inf  2 i=floating_point_keyword_identifier_strings_fail
 // ^^^                                      invalid.illegal.muted.position.kdl
 //        ^^^^                              invalid.illegal.muted.position.kdl
 //                ^^^                       invalid.illegal.muted.position.kdl
@@ -188,3 +188,6 @@ n  true   false   null   nan  -inf   inf  2
 //                         ^                invalid.illegal.position.kdl
 //                               ^          invalid.illegal.position.kdl
 //                                     ^    invalid.illegal.position.kdl
+node false=1 i=false_prop_key_fail
+//   ^                                      invalid.illegal.position.kdl
+//    ^^^^                                  invalid.illegal.muted.position.kdl

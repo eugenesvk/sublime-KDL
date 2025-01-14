@@ -81,3 +81,7 @@ foo123\bar weeee !="err_backslash_in_bare_id_fail"
 //    ^                                           punctuation.separator.continuation.line.kdl
 //     ^                                          invalid.illegal.position.kdl
 //      ^^                                        invalid.illegal.muted.position.kdl
+
+foo#bar weee i=hash_in_id_fail
+// ^    invalid.illegal.position.kdl
+//  ^^^ invalid.illegal.muted.position.kdl

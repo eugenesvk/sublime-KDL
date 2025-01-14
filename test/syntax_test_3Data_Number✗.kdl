@@ -145,3 +145,14 @@ n 1.
 // ^                                   -punctuation.separator.decimal.kdl
 // ^                                   -invalid.illegal.position.kdl
 // not before newline to avoid flashes while typing, but also don't color it as a decimal if it's not valid
+node 0bx01 i=illegal_char_in_binary_fail
+//   ^                                  constant.numeric.value.kdl constant.numeric.integer.kdl
+//    ^                                 invalid.illegal.position.kdl
+//     ^^^                              invalid.illegal.muted.position.kdl
+node 0x10g10 i=illegal_char_in_hex_fail
+//   ^^                                 constant.numeric.integer.hexadecimal.kdl constant.numeric.base.kdl
+//       ^                              invalid.illegal.position.kdl
+//        ^^                            invalid.illegal.muted.position.kdl
+node 0o45678 i=illegal_char_in_octal_fail
+//   ^^                                 constant.numeric.integer.octal.kdl constant.numeric.base.kdl
+//         ^                            invalid.illegal.position.kdl
