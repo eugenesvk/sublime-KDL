@@ -44,3 +44,26 @@ n {bar}; a
 //       ^                                      -invalid.illegal
 n {
 // invalid due to blank, but for syntax highlighting don't warn not to flash on every opening {
+
+node {
+  child
+} ; foo {
+//^     meta.block.child.kdl meta.node.kdl punctuation.terminator.node.kdl
+//  ^^^ meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+  bar
+}
+node {
+  child
+ }
+//^     meta.block.child.kdl meta.node.kdl punctuation.terminator.node.kdl
+   foo {
+// ^^^  meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+  bar
+}
+node {
+  child
+} foo {
+//^      meta.block.child.kdl meta.node.kdl invalid.illegal.position.kdl
+// ^^^^^ meta.block.child.kdl meta.node.kdl invalid.illegal.muted.position.kdl
+  bar
+}
