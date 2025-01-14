@@ -1242,12 +1242,12 @@ contexts:
   #     push                :
   #     - meta_scope        : constant.numeric.integer.octal.kdl
   #     - include           : pop5
-  # hexadecimal-partial:
-  #   - match               : '(0x)(?={{nl_s}})'
-  #     scope               : constant.numeric.base.kdl
-  #     push                :
-  #     - meta_scope        : constant.numeric.integer.hexadecimal.kdl
-  #     - include           : pop5
+  hexadecimal-partial:
+    - match               : '(0x)(?={{nl_s}})'
+      scope               : constant.numeric.base.kdl
+      push                :
+      - meta_scope        : constant.numeric.integer.hexadecimal.kdl
+      - include           : pop5
 
   # Values - Numbers (helpers) digit₁₀_
   # can't match repeatable group in a regex, so repeat a single digit match
