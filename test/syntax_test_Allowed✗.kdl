@@ -1,7 +1,16 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
 
-// Allowed illegal syntax to avoid red flashes while typing
+// Allowed illegal syntax to avoid red flashes while typing (mostly before newline since most new typing is at line's end)
 node 0x
-//   ^^   constant.numeric.integer.hexadecimal.kdl constant.numeric.base.kdl
-//     ^ -invalid.illegal
-// avoid flashes
+//   ^    constant.numeric.integer.hexadecimal.kdl constant.numeric.base.kdl
+//    ^  -constant.numeric.integer.hexadecimal.kdl
+//    ^^ -invalid.illegal
+// not before newline to avoid flashes while typing, but also don't color it as a hex if it's not valid
+node 0x 
+//   ^    constant.numeric.value.kdl constant.numeric.integer.kdl
+//    ^   invalid.illegal.position.kdl
+// with space it's ok
+n 1.
+// ^                                   -punctuation.separator.decimal.kdl
+// ^                                   -invalid.illegal.position.kdl
+// not before newline to avoid flashes while typing, but also don't color it as a decimal if it's not valid
