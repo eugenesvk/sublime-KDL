@@ -329,7 +329,7 @@ contexts:
       push                : #✗²
       - meta_scope        : meta.annotation.kdl #✗²m
       - meta_content_scope: entity.name.type.kdl #✗²c
-      - match             : '(?<=\()(\))|(\))'
+      - match             : '(?<=\()({{u_sp}}*\))|(\))'
         captures          :
           1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
           2:                punctuation.separator.annotation.end.kdl #✗typenode_close
@@ -538,7 +538,7 @@ contexts:
       push                : #✗⁴
       - meta_scope        : meta.annotation.kdl #✗⁴type_value
       - meta_content_scope: entity.name.type.kdl
-      - match             : '(?<=\()(\))|(\))'
+      - match             : '(?<=\()({{u_sp}}*\))|(\))'
         captures          :
           1:                invalid.illegal.muted.kdl #punctuation.separator.annotation.end.kdl invalid.illegal.position.kdl
           2:                punctuation.separator.annotation.end.kdl
