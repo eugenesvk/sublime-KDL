@@ -930,7 +930,7 @@ contexts:
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
-      - include           : ␤🛑
+      - include           : ␤🛑¹s
   strings-quoted-double3-raw:
     - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
@@ -963,7 +963,7 @@ contexts:
       - match             : '"\2' # ↑match (#*)
         scope             : punctuation.definition.string.end.kdl
         pop               : 1
-      - include           : ␤🛑
+      - include           : ␤🛑¹s
   strings-quoted-double3-raw_node-id:
     - match               : '(r?)(#*)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
