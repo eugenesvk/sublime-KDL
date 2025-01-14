@@ -30,16 +30,16 @@ string                    	 =  str🆔 | string'' | string_raw  ¶              
       char🆔               	 =  uchar − u␠ − ␤ − char🆔¬ − char🛑                  	  \
       char🆔¬              	 =  #"(;){"}[#]/=\"#                                 	    \
     keyword🆔🛑             	=  true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan            	  \
-  string''                	 = “      string_body_line                  ”             \
-                          	|= “““  ␤ string_body☰line     ␤ dedent␠e* ”””                           	  \
-    string_body_line      	 =            ⦅       char_str − ␤⦆*                                     	  \
-    string_body☰line      	 =  dedent␠e≡ ⦅⦅“|““⦆? char_str    ⦆* !="←dedent␠e must exactly match ≡↑"	    \
-    char_str              	 =  char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 − char🛑                                   	\
-      char⎋               	 =  ⧵ 〔“⧵bfnrts〕                                                         	    \
-      uni⎋                	 =  ⧵ "u{" uchar₁₆ "}"                                                   	  \
+  string''                	 = “          ⦅      char_str − ␤⦆*  ”               	  \
+                          	|= “““ ␤                                             	  \
+                          	      ⦅␤ de␠e≡ ⦅“?“? char_str − ␤⦆* ⦆*               	    \
+                          	       ␤ de␠e* ”””   !="de␠e≡ must exactly match de␠e; only required before non-whitespace" \
+    char_str              	 =  char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 − char🛑	\
+      char⎋               	 =  ⧵ 〔“⧵bfnrts〕                      	    \
+      uni⎋                	 =  ⧵ "u{" uchar₁₆ "}"                	  \
         uchar₁₆           	 =  〔0–10FFFF〕 − (surrogate)〔D800–DFFF〕 !="ranges in \u{F} format, but represented as hex₁₆, not actual symbols, so \u{B0} is 'B0', not '°', can be 0-padded up to max len of 6"\
       w␠⎋                 	 =  ⧵ ⦅u␠|␤⦆+	    \
-    dedent␠e              	 =  u␠ | w␠⎋ 	  \
+    de␠e                  	 =  u␠ | w␠⎋ 	  \
   string_raw              	 = ＃*ℕ   string_raw_quoted                 ＃*ℕ≡  !="ℕ=1–∞  ℕ≡ must match ℕ" \
     string_raw_quoted     	 =  “     string_raw_body_line         ”                       	  \
                           	|=  “““ ␤ string_raw_body☰line ␤ de␠u* ”””                     	  \
