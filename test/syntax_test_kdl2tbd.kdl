@@ -1,4 +1,12 @@
 // SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+// Can't be implemented in Sublime
+
+n i=multiline_raw_string_non_matching_prefix_character_error_fail i="can't be done in Sublime Text" #"""
+    hey
+   everyone
+    how goes?
+  """#
+
 // 11. Potential tests (unsorted dump)
 
 aa r=2;
