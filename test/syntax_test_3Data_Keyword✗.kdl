@@ -57,7 +57,7 @@ n #truee=1;n #falsee=1;b #nulle=1;b #infe=1;b #-infe=1;b #nane=1;c !="keyword≠
 //                                              ^^^^            invalid.illegal.muted.position.kdl
 //                                                       ^^     invalid.illegal.position.kdl
 //                                                         ^^^  invalid.illegal.muted.position.kdl
-n true=1;n false=1;b null=1;b inf=1;b -inf=1;b nan=1;c !="ambiguious no#keyword≠key"
+n true=1;n false=1;b null=1;b inf=1;b -inf=1;b nan=1;c !="ambiguious no#keyword≠key" i=null_prop_key_fail
 //^                                                 constant.language.boolean.kdl invalid.illegal.position.kdl
 //^                                                -invalid.illegal.muted.position.kdl
 // ^^^                                              constant.language.boolean.kdl invalid.illegal.muted.position.kdl

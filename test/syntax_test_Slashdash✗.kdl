@@ -18,3 +18,6 @@ n key /- = value !="slashdash_after_prop_key_fail"
 //       ^                              invalid.illegal.position.kdl
 (ty)/-n !=slashdash_after_node_type_fail
 //  ^                                   invalid.illegal.kdl
+ (/-ty)node i=slashdash_inside_node_type_fail
+//^^^^ entity.name.type.kdl
+//^    invalid.illegal.kdl

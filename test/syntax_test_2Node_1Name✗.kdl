@@ -85,3 +85,14 @@ foo123\bar weeee !="err_backslash_in_bare_id_fail"
 foo#bar weee i=hash_in_id_fail
 // ^    invalid.illegal.position.kdl
 //  ^^^ invalid.illegal.muted.position.kdl
+foo123/bar weeee i=slash_in_bare_id_fail
+//    ^ invalid.illegal.position.kdl
+foo123"bar weeee i=quote_in_bare_id_fail
+//    ^    invalid.illegal.position.kdl
+//     ^^^ invalid.illegal.muted.position.kdl
+foo123(bar)foo weeee i=parens_in_bare_id_fail
+//    ^        invalid.illegal.position.kdl
+//     ^^^^^^^ invalid.illegal.muted.position.kdl
+foo123[bar]foo weeee i=square_bracket_in_bare_id_fail
+//    ^        invalid.illegal.position.kdl
+//     ^^^^^^^ invalid.illegal.muted.position.kdl
