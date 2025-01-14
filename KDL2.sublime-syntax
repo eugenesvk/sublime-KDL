@@ -467,6 +467,7 @@ contexts:
     # - include             : pop_pre🆔¬  # let previous layers deal with invalid chars
     - include             : ch🛑pre␠   # todo: or just scrap illegals? let unstyled content be the indicator
     - include             : sd🛑pre␠
+    - include             : sd🛑pre␤
   value🛑:
     - include             : ＃maybe-keyword🛑
     - include             : val🛑
@@ -1964,6 +1965,11 @@ contexts:
     - match               : '({{c_slashdash}})(\S*)(?={{u_sp}})'
       captures            :
         1:                  invalid.illegal.position.kdl
+        2:                  invalid.illegal.muted.position.kdl
+  sd🛑pre␤:
+    - match               : '({{c_slashdash}})(\S*)(?={{nl_s}})'
+      captures            :
+        1:                  invalid.illegal.muted.position.kdl
         2:                  invalid.illegal.muted.position.kdl
   # ch🛑pre-str:
   #   - match               : '({{charID}}*?)({{charID}})(?={{string_beg}})'
