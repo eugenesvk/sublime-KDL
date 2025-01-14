@@ -10,12 +10,12 @@
 n \ /*sadf*/ ✗ /*
   //         ^                                  invalid.illegal.position.kdl
   *//*       ↑ illegal non-whitespace char*/
-  /*   illegal empty line with a comment ✗→*/
-  //                                         ^  invalid.illegal.position.kdl
-  /**/ //✗↓ illegal empty line ✗→
-  //                             ^              invalid.illegal.position.kdl
+  /*     legal empty line with a comment ✗→*/
+  //                                         ^ -invalid.illegal.position.kdl
+  /**/ //✗↓   legal empty line ✗→
+  //                             ^             -invalid.illegal.position.kdl
 
-//<-                                            invalid.illegal.position.kdl
+//<-                                           -invalid.illegal.position.kdl
 k=1 // ← mark non-whitespace on 2nd+ lines as legal again
 //<-                                           -invalid.illegal.position.kdl
 n \ /*sadf*/ ✗//
@@ -47,16 +47,17 @@ n \
 //          ^                                  -invalid.illegal.position.kdl
 
 n\aa k\=1
-//^^                                              invalid.illegal.position.kdl
-//   ^^^^                                         invalid.illegal.position.kdl
-
-//<-                                              invalid.illegal.position.kdl
+//^                                               invalid.illegal.position.kdl
+// ^                                              invalid.illegal.muted.position.kdl
+//     ^                                          invalid.illegal.position.kdl
+//      ^                                         invalid.illegal.muted.position.kdl
 k=1
 //<-                                             -invalid.illegal.position.kdl
 
 k=1
 n \    "only comments allowed after line⎋"
-//     ^^^^^                                      invalid.illegal.position.kdl
+//     ^                                          invalid.illegal.position.kdl
+//      ^^^^                                      invalid.illegal.muted.position.kdl
 //                                         ^     -invalid.illegal.position.kdl
 k=1
 n \ // "only comments allowed after line⎋"
@@ -80,7 +81,8 @@ n /--1.0 2 \   //f //
  k=1
 n /--1.0 2 \ /f //
 //         ^                                      punctuation.separator.continuation.line.kdl
-//           ^^                                   invalid.illegal.position.kdl
+//           ^                                    invalid.illegal.position.kdl
+//            ^                                   invalid.illegal.muted.position.kdl
   /*        */
 //^^^^^^^^^^^^                                    comment.block.kdl
  k=1
