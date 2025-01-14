@@ -862,6 +862,30 @@ contexts:
       - include           : char-esc-uni
       - include           : u␠␤s
       - include           : any🛑
+  char-esc-multi: # same as char-escaped, but error-pops on ending """ as it "eats" the ␤ that this ending requires
+    - match               : '(\\)'
+      scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+      push                :
+      - match             : '({{esc_char_s}})'
+        captures          :
+          1:               constant.character.escape.kdl
+        pop               : 1
+      - include           : char-esc-uni🛑
+      - include           : char-esc-uni
+      - include           : u␠␤s🛑”””2
+      - include           : any🛑
+  char-esc-multi2:
+    - match               : '(\\)'
+      scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+      push                :
+      - match             : '({{esc_char_s}})'
+        captures          :
+          1:               constant.character.escape.kdl
+        pop               : 1
+      - include           : char-esc-uni🛑
+      - include           : char-esc-uni
+      - include           : u␠␤s🛑”””4
+      - include           : any🛑
   char-esc-uni:
     - match               : '(u)({)({{d_hex}}{1,6})(})'
       captures            :
@@ -2007,6 +2031,30 @@ contexts:
           1:                invalid.illegal.position.kdl
           2:                invalid.illegal.muted.position.kdl
         # pop               : 1
+  u␠␤s🛑”””2:   # errors on closing multi-line """
+    - match               : '({{uspnl}})'
+      scope               : whitespace.escape.kdl
+      push                : # to "glue" contiguous spaces together with the same scope
+      - match             : '({{uspnl}})'
+        scope             : whitespace.escape.kdl
+      - match             : '(")("")'
+        captures          :
+          1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+          2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+        pop               : 3
+      - include           : else-pop2
+  u␠␤s🛑”””4:
+    - match               : '({{uspnl}})'
+      scope               : whitespace.escape.kdl
+      push                : # to "glue" contiguous spaces together with the same scope
+      - match             : '({{uspnl}})'
+        scope             : whitespace.escape.kdl
+      - match             : '(")("")'
+        captures          :
+          1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+          2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+        pop               : 5
+      - include           : else-pop2
 
   # pop_pre␠:
   #   - match               : '(?={{u_sp}})'
