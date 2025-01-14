@@ -872,11 +872,11 @@ contexts:
       - match             : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")(\2)' # ↑match (#*)
       # - match             : '^(\s*)([^\"]?)([^\"]*)(""")'
         captures          :
-          1:               whitespace.dedent.kdl
-          2:               invalid.illegal.position.kdl
-          3:               invalid.illegal.muted.position.kdl
-          4:               punctuation.definition.string.end.kdl
-          5:               punctuation.definition.string.end.kdl
+          1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
+          2:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
+          3:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+          4:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          5:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
 
 
