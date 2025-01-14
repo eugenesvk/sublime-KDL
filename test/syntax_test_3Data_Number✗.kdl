@@ -173,3 +173,6 @@ node 1.0.0 i=multiple_dots_in_float_fail
 //   ^^^                                constant.numeric.value.kdl constant.numeric.decimal.kdl
 //      ^                               invalid.illegal.position.kdl
 //       ^                              invalid.illegal.muted.position.kdl
+node .1 i=no_integer_digit_fail
+//   ^                                  invalid.illegal.position.kdl
+//    ^                                 invalid.illegal.muted.position.kdl
