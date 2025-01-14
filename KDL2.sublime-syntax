@@ -1156,7 +1156,7 @@ contexts:
       scope               : punctuation.separator.decimal.kdl
       push                :
       - include           : fail⸙int∨dec∨float-ℯ
-      - include           : digit₁₀_
+      - include           : ℤs
       - include           : pop4
     - include             : pop3⸙
   # float⸙:                                         # Floating point literal (exponent)
@@ -1257,6 +1257,11 @@ contexts:
   #     push                :
   #     - include           : digit₁₀_
   #     - include           : pop4
+  ℤs:
+    - match               : '([0-9])' # leading zeros are allowed
+      push                :
+      - include           : digit₁₀_
+      - include           : pop
   # ℤ₂:
   #   - match               : '([0-1])'
   #     push                :
