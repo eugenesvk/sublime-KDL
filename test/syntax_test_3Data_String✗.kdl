@@ -153,7 +153,6 @@ node #"""one line"""# i=multiline_raw_string_single_line_err_fail
 //   ^^^^             string.quoted.double.block.raw.kdl punctuation.definition.string.begin.kdl
 //       ^            invalid.illegal.position.kdl
 //        ^^^^^^^^^^^ invalid.illegal.muted.position.kdl
-"""#
 node  """
 \ """
 //<-  string.quoted.double.block.kdl whitespace.dedent.kdl constant.character.escape.kdl punctuation.definition.escape.begin.kdl
