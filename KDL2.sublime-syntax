@@ -769,7 +769,7 @@ contexts:
   string-quoted-double3:
     - match               : '(r?)(""")({{nl_not_s}}?)({{nl_not_s}}*)'
       captures            :
-        1:                  invalid.illegal.position.kdl
+        1:                 invalid.illegal.position.kdl
         2:                 punctuation.definition.string.begin.kdl
         3:                 invalid.illegal.position.kdl
         4:                 invalid.illegal.muted.position.kdl
