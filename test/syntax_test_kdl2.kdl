@@ -230,6 +230,14 @@ n /-1              {  v} /-{v} /-{valid}
 //
 n /-1              {/-v} /-{v} /-{valid}
 
+n   {ch i=a} ; foo {}
+//         ^  punctuation.section.mapping.end.kdl
+n /-{ch i=a} ; foo {}
+//         ^  punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+n   {ch aaa} ; foo {}
+//         ^  punctuation.section.mapping.end.kdl
+n /-{ch aaa} ; foo {}
+//         ^  punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
 
 
 // 2 Node Element: 5 End
