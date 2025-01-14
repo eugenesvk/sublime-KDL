@@ -187,7 +187,10 @@ contexts:
       #- meta_scope        : dbg✗³node␠arg∨prop∨child
       - include           : node␠s
       - include           : node_els
-    - include             : child_block3
+      - include           : child_block4
+    - match               : '{'
+      scope               : invalid.illegal.position.kdl punctuation.section.mapping.begin.kdl
+      push                : child_block3-body
     - include             : nodech_terminator3⸮
     - include             : S🛑¹pre_s∨c∨t
     # - include: comments
@@ -1305,6 +1308,9 @@ contexts:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
       push                : child_block3-body
+  child_block4:
+    - match               : '{'
+      push                : child_block4-body
   child_block1:
     - match               : '{'
       scope               : punctuation.section.mapping.begin.kdl
@@ -1329,6 +1335,13 @@ contexts:
     - include             : wss
     - include             : comment_line_no␤
     - include             : ｝ch1t3
+    - match               : '(?=\S)'
+      push                : nodes
+  child_block4-body:
+    - meta_scope          : meta.block.child.kdl
+    - include             : wss
+    - include             : comment_line_no␤
+    - include             : ｝ch1t4
     - match               : '(?=\S)'
       push                : nodes
   child_block1-body:
@@ -1494,6 +1507,15 @@ contexts:
       - include           : node_end3
       - include           : node_children⁄-s
       - include           : pop3
+  ｝ch1t4:
+    - match               : '}'
+      scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl
+      pop                 : 3
+      push                :
+      - include           : wss
+      - include           : node_end4
+      - include           : node_children⁄-s
+      - include           : pop4
   ｝2t3:
     - match               : '}'
       scope               : punctuation.section.mapping.end.kdl
