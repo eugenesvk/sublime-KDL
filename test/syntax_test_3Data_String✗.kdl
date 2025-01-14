@@ -207,3 +207,8 @@ everyone
 how goes?
 //       ^ invalid.illegal.position.kdl
 "#
+node "\/" i=no_solidus_escape_fail
+//   ^^^^                               string.quoted.double.kdl
+//    ^                                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//     ^                                invalid.illegal.position.kdl
+//      ^                               punctuation.definition.string.end.kdl
