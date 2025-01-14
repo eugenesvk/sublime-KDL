@@ -6,6 +6,15 @@ n i=multiline_raw_string_non_matching_prefix_character_error_fail i="can't be do
    everyone
     how goes?
   """#
+n i=multiline_string_non_literal_prefix_fail i="can't be done in Sublime Text" """
+\s escaped prefix
+  literal prefix
+  """
+n i=multiline_string_non_matching_prefix_count_error_fail i="can't be done in Sublime Text" """
+    hey
+ everyone
+     how goes?
+  """
 
 // 11. Potential tests (unsorted dump)
 
