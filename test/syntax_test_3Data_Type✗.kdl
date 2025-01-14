@@ -126,3 +126,5 @@ node key=(type)
 //             ^ -invalid.illegal
 (just_type_no_node_id_fail)
 //                         ^ invalid.illegal.position.kdl
+n (type)key=10 i=type_before_prop_key_fail
+//         ^ invalid.illegal.kdl

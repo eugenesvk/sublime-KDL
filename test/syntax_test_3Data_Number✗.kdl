@@ -165,6 +165,10 @@ node 1.0.0e7 i=multiple_dots_in_float_before_exponent_fail
 //    ^                                 constant.numeric.value.kdl constant.numeric.decimal.kdl punctuation.separator.decimal.kdl
 //      ^                               invalid.illegal.position.kdl
 //       ^^^                            invalid.illegal.muted.position.kdl
+/-de 1.0.0e7 i=multiple_dots_in_float_before_exponent_fail
+//    ^                                 constant.numeric.value.kdl constant.numeric.decimal.kdl punctuation.separator.decimal.kdl
+//      ^                               invalid.illegal.position.kdl
+//       ^^^                            invalid.illegal.muted.position.kdl
 node 0xx10 i=multiple_x_in_hex_fail
 //   ^                                  constant.numeric.value.kdl constant.numeric.integer.kdl
 //    ^                                 invalid.illegal.position.kdl
@@ -176,3 +180,14 @@ node 1.0.0 i=multiple_dots_in_float_fail
 node .1 i=no_integer_digit_fail
 //   ^                                  invalid.illegal.position.kdl
 //    ^                                 invalid.illegal.muted.position.kdl
+node 0x1_0 i=underscore_at_start_of_hex_fail
+//      ^  constant.numeric.value.kdl punctuation.separator.number.kdl
+node 0x_10 i=underscore_at_start_of_hex_fail
+//    ^    invalid.illegal.position.kdl
+//     ^^^ invalid.illegal.muted.position.kdl
+node 1._7 i=underscore_at_start_of_fraction_fail
+//     ^                                invalid.illegal.position.kdl
+//      ^                               invalid.illegal.muted.position.kdl
+/-de 1._7
+//     ^                                invalid.illegal.position.kdl
+//      ^                               invalid.illegal.muted.position.kdl

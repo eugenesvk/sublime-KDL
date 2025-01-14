@@ -214,3 +214,6 @@ node "\/" i=no_solidus_escape_fail
 //      ^                               punctuation.definition.string.end.kdl
 node #"""# """# i=#" """ MUST be followed by ␤ "# i=raw_string_just_quote_fail
 //       ^ string.quoted.double.block.raw.kdl invalid.illegal.position.kdl
+n ##"foo"#
+//        ^ string.quoted.double.raw.kdl invalid.illegal.position.kdl
+"## i=unbalanced_raw_hashes_fail
