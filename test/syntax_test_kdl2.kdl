@@ -1058,6 +1058,14 @@ n /-1 /-#true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
 //          ^                           punctuation.separator.number.kdl
 //                  ^                   punctuation.separator.number.kdl
 //                         ^            punctuation.separator.number.kdl
+n 1 /-
+2 3
+//<-                    constant.numeric.value.kdl constant.numeric.integer.kdl
+//<-                   -invalid.illegal
+n 1 /- // stuff
+2 3
+//<-                    constant.numeric.value.kdl constant.numeric.integer.kdl
+//<-                   -invalid.illegal
 
 
 // Test Invalid
