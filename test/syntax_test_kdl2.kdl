@@ -102,6 +102,58 @@ n1 arg;
 //^^   meta.node.kdl entity.name.tag.node.kdl
 //   ^ constant.numeric.value.kdl constant.numeric.integer.kdl
 
+nnn "r"
+node 1
+//^^ meta.node.kdl entity.name.tag.node.kdl
+nnn xxx
+node 1
+//^^ meta.node.kdl entity.name.tag.node.kdl
+nnn arg
+node 1
+//^^ meta.node.kdl entity.name.tag.node.kdl
+node   {ch rxg
+   } ; foo {bar}
+//^                     meta.block.child.kdl
+// ^                    meta.block.child.kdl punctuation.section.mapping.end.kdl
+//   ^                  punctuation.terminator.node.kdl
+//     ^^^              entity.name.tag.node.kdl
+node   {ch arg
+   } ; foo {bar}
+//^                     meta.block.child.kdl
+// ^                    meta.block.child.kdl punctuation.section.mapping.end.kdl
+//   ^                  punctuation.terminator.node.kdl
+//     ^^^              entity.name.tag.node.kdl
+node   {ch "a"
+   } ; foo {bar}
+//^                     meta.block.child.kdl
+// ^                    meta.block.child.kdl punctuation.section.mapping.end.kdl
+//   ^                  punctuation.terminator.node.kdl
+//     ^^^              entity.name.tag.node.kdl
+node   {ch aaa
+   } ; foo {bar}
+//^                     meta.block.child.kdl
+// ^                    meta.block.child.kdl punctuation.section.mapping.end.kdl
+//   ^                  punctuation.terminator.node.kdl
+//     ^^^              entity.name.tag.node.kdl
+node   {ch arg
+  a} ; foo {bar}
+//^                     meta.node.kdl meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+// ^                    meta.block.child.kdl punctuation.section.mapping.end.kdl
+//   ^                  punctuation.terminator.node.kdl
+//     ^^^              entity.name.tag.node.kdl
+node   {ch aaa
+  a} ; foo {bar}
+//^                     meta.node.kdl meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+// ^                    meta.block.child.kdl punctuation.section.mapping.end.kdl
+//   ^                  punctuation.terminator.node.kdl
+//     ^^^              entity.name.tag.node.kdl
+node   {ch aaa a} ; foo {bar}
+node   {ch arg a} ; foo {bar}
+//             ^        meta.block.child.kdl meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+//              ^       meta.block.child.kdl punctuation.section.mapping.end.kdl
+//                ^     punctuation.terminator.node.kdl
+//                  ^^^ entity.name.tag.node.kdl
+
 // 2 Node Element: 3 Property (key=value)
 command "twitter" "tw" a=2 b=#true url="https://twitter.com/" {
 //                     ^                                     meta.mapping.key.kdl
