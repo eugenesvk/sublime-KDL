@@ -1666,11 +1666,11 @@ contexts:
     #   # pop                 : 1                         # disallows 2nd \, but not 3rd+
     - include             : else-pop
     # - include             : else-pop2                   # 2 disallows repeated \, but requires extra push before use
-  # line_continuations-line_next:
-  #   - include             : wss
-  #   - include             : comment_lines_no␤
-  #   - include             : ␤🛑s # todo: change to 1
-  #   - include             : else-pop
+  line_continuations-line_next:
+    - include             : wss
+    - include             : comment_lines_no␤
+    - include             : ␤🛑s # todo: change to 1
+    - include             : else-pop
 
 
 #——— Comments
