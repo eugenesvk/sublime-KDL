@@ -240,6 +240,56 @@ n /-{ch aaa} ; foo {}
 //         ^  punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
 
 
+node   {ch
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch aaa
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch "a"
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch i=aaa
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch i="a"
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch i=1
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch i=1} ; foo {bar}
+node   {ch i=1
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch i="a"} ; foo {bar}
+//              ^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//                ^                punctuation.terminator.node.kdl
+//                  ^^^            entity.name.tag.node.kdl
+node   {ch i="a"
+  } ; foo {bar}
+//^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//  ^                punctuation.terminator.node.kdl
+//    ^^^            entity.name.tag.node.kdl
+node   {ch i=aaa} ; foo {bar}
+//              ^                  meta.block.child.kdl punctuation.section.mapping.end.kdl
+//                ^                punctuation.terminator.node.kdl
+//                  ^^^            entity.name.tag.node.kdl
+
 // 2 Node Element: 5 End
 nnn
 // ^                                   punctuation.terminator.node.kdl
