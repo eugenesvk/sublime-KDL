@@ -1028,6 +1028,16 @@ n   1   #true   "comment string"  /-#"r aww"# /-#"Raw est"s"#
 n /-1 /-#true /- "comment string" /-#"r aw"# /-#"Raw est"s"#
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 
+\
+
+//<- -invalid.illegal.position.kdl
+  node i=escline_empty_line
+//^^^^ meta.node.kdl entity.name.tag.node.kdl
+a \
+
+//<- meta.node.kdl
+//<- -invalid.illegal.position.kdl
+b i=escline_end_of_node
 
 // Test /-Slashdashed Elements
 // 4. Test Numbers

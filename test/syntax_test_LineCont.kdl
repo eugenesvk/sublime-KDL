@@ -26,21 +26,30 @@ k=1
 
 n \ //
 
-//<-                                            invalid.illegal.position.kdl
-  k=1 "✗↑illegal empty line"=1
+//<-                                           -invalid.illegal.position.kdl
+  k=1 ←="illegal since \\//␤ ended escline, next ␤ ends node, so this is a new node, not prop of old one"
+//^                                             entity.name.tag.node.kdl
 //^                                            -invalid.illegal.position.kdl
+// ^                                            invalid.illegal.position.kdl
+//  ^                                           invalid.illegal.muted.position.kdl
 n \
     
-  //^                                           invalid.illegal.position.kdl
-  "✗↑illegal empty space line"=1
+  //^                                          -invalid.illegal.position.kdl
+  k=1 ←="illegal same see above"
 //^                                            -invalid.illegal.position.kdl
+//^                                             entity.name.tag.node.kdl
+// ^                                            invalid.illegal.position.kdl
+//  ^                                           invalid.illegal.muted.position.kdl
 n \
   //✗illegal empty line with a comment→
-  //                                   ^        invalid.illegal.position.kdl
+  //                                   ^       -invalid.illegal.position.kdl
   //✗illegal empty line with a comment→
-  //                                   ^        invalid.illegal.position.kdl
+  //                                   ^       -invalid.illegal.position.kdl
   k=1//
 //^                                            -invalid.illegal.position.kdl
+//^                                             entity.name.tag.node.kdl
+// ^                                            invalid.illegal.position.kdl
+//  ^                                           invalid.illegal.muted.position.kdl
 n \
   /*legal*/ k=1
 //^                                            -invalid.illegal.position.kdl
@@ -108,7 +117,7 @@ b    "\sar\                    　
 
 n 1 "x" \
 //
-//^           invalid.illegal.position.kdl
+//^          -invalid.illegal.position.kdl
 n 1 "x" \// ← line comment ends the \escape,   // ¬␤* (␤|eof) also swallowing the →␤
   a=2
 //^          -invalid.illegal
