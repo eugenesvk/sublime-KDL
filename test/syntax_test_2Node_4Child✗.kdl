@@ -71,23 +71,23 @@ node {
 node /-{
   child i=slashdash_child_block_before_entry_err_fail
 } ; foo {
-//^     meta.block.child.kdl meta.node.kdl punctuation.terminator.node.kdl
-//  ^^^ meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+//^     punctuation.terminator.node.kdl comment.line.slash-dash.kdl
+//  ^^^ entity.name.tag.node.kdl
   bar
 }
 node /-{
   child
  }
-//^     meta.block.child.kdl meta.node.kdl punctuation.terminator.node.kdl
+//^     punctuation.terminator.node.kdl comment.line.slash-dash.kdl
    foo {
-// ^^^  meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+// ^^^  entity.name.tag.node.kdl
   bar
 }
 node /-{
   child
 } foo {
-//^      meta.block.child.kdl meta.node.kdl invalid.illegal.position.kdl
-// ^^^^^ meta.block.child.kdl meta.node.kdl invalid.illegal.muted.position.kdl
+//^      invalid.illegal.position.kdl
+// ^^    invalid.illegal.muted.position.kdl
   bar
 }
 n 11{ch i=1}
@@ -96,3 +96,7 @@ n 11{ch i=1}
 n aa{ch i=1}
 //  ^ meta.block.child.kdl punctuation.section.mapping.begin.kdl
 //  ^ invalid.illegal.position.kdl
+
+n i="Only children may follow a slashdashed child"
+n /-{child;} n
+//           ^ invalid.illegal.position.kdl
