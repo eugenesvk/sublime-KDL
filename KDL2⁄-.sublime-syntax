@@ -69,7 +69,7 @@ contexts:
         scope             : string.unquoted.kdl comment.line.slash-dash.kdl
       - include           : ｛3
       - include           : ｝3
-      - include           : node_end5⁄-
+      - include           : pop_pre_node_end
       - include           : char🆔¬⁄-
       - include           : pop3
   str_ids⁄-:              # ✗⁴ from arg-⸙2, property-value
@@ -85,7 +85,7 @@ contexts:
         scope             : string.unquoted.kdl comment.line.slash-dash.kdl
       - include           : ｛3
       - include           : ｝3
-      - include           : node_end5⁄-
+      - include           : pop_pre_node_end
       - include           : pop_pre-node␠
       - include           : char🆔¬⁄-
       - include           : pop
