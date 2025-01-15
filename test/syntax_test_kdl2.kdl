@@ -305,6 +305,18 @@ n   {ch aaa} ; foo {}
 n /-{ch aaa} ; foo {}
 //         ^  punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
 
+n 1 /-
+2 3 i=slashdash_newline_before_entry
+//<-          meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+n 1 /-
+  2 3
+//^           meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+n 1 /- // stuff
+2 3 i=slashdash_single_line_comment_entry
+//<-          meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
+n 1 /- // stuff
+  2 3
+//^           meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl comment.line.slash-dash.kdl
 
 node   {ch
   } ; foo {bar}
