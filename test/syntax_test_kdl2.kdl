@@ -168,8 +168,14 @@ n k = 1 ; n k =111; n k ="1"; n k = a ; n k =aaa; n k ="a"
 //             ^^^                                          meta.property.value.kdl meta.mapping.value.kdl
 //                       ^^^                                meta.property.value.kdl meta.mapping.value.kdl
 //                                  ^                       meta.property.value.kdl meta.mapping.value.kdl
-//                                            ^^^           meta.property.value.kdl meta.mapping.value.kdl
+//                                           ^^^            meta.property.value.kdl meta.mapping.value.kdl
+//                                              ^          -meta.property.value.kdl meta.mapping.value.kdl
 //                                                     ^^^  meta.property.value.kdl meta.mapping.value.kdl
+//      ^                                                   punctuation.terminator.node.kdl
+//                ^                                         punctuation.terminator.node.kdl
+//                          ^                               punctuation.terminator.node.kdl
+//                                    ^                     punctuation.terminator.node.kdl
+//                                              ^           punctuation.terminator.node.kdl
 /-n k = 1 ; /-n k =111; /-n k ="1"; /-n k = a ; /-n k =aaa; /-n k ="a"
 //  ^                                                                   meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
 //              ^                                                       meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl comment.line.slash-dash.kdl
@@ -892,13 +898,13 @@ n r//
 /-nn "a";  // cmd cmd aa d
 /-nn "a" ; // cmd cmd aa d
 //                ^        -invalid.illegal
-nnn (aaaa)error_stops→;
+nnn (aaaa)bare_id_end→;
 //  ^^^^^^^^^^^^^^^^^^   meta.argument.value.kdl meta.mapping.value.kdl
 //  ^^^^^^               meta.annotation.kdl
 //  ^                    punctuation.separator.annotation.begin.kdl
 //   ^^^^                entity.name.type.kdl
 //       ^               punctuation.separator.annotation.end.kdl
-//        ^^^^^^^^^^^^^  meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+//        ^^^^^^^^^^^^   meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
 //        ^^^^^^^^^^^   -invalid.illegal.muted.position.kdl
 //                   ^  -invalid.illegal.position.kdl
 //                    ^ -invalid.illegal
