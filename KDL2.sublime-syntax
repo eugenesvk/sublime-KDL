@@ -1703,6 +1703,15 @@ contexts:
   #         pop             : 2
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl
+  comment_lines:                                  # Single-line comment
+    - match               : // # better than {{comment_line}} as doesn't consume the whole line and allows embedding with early popping
+      scope               : punctuation.definition.comment.begin.kdl
+      push                :
+        - meta_scope      : comment.line.double-slash.kdl
+        - match           : $({{newline}})? # consume ␤ not to show completions when typing comments
+          pop             : 1
+          captures        :
+            1:              punctuation.definition.comment.end.kdl
   # comment_line🛑:
   #   - match               : //
   #     scope               : invalid.illegal.position.kdl
