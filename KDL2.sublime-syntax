@@ -1414,6 +1414,13 @@ contexts:
     - match               : ;
       scope               : punctuation.terminator.node.kdl
       pop                 : 5
+  node_end4:
+    - include             : comment_line4_term
+    - include             : ␤term4
+    - include             : eof4
+    - match               : ;
+      scope               : punctuation.terminator.node.kdl
+      pop                 : 4
   node_end3:
     - include             : comment_line3_term
     - include             : ␤term3
