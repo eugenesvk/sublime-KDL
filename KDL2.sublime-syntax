@@ -783,6 +783,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
+      - include           : char-esc-multi2
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)((?<!\\)""")'
       # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)((?<!\\)""")'
         captures          : # will only highlight the last \, don't know how to fix
@@ -793,7 +794,6 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 3
-      - include           : char-esc-multi2
   strings-quoted-double:
     - match               : '(r?)(")'
       captures            :
@@ -815,6 +815,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
+      - include           : char-esc-multi
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
       # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
         captures          : # will only highlight the last \, don't know how to fix
@@ -825,7 +826,6 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 1
-      - include           : char-esc-multi
   strings-quoted-double_node-id:
     - match               : '(r?)(")'
       captures            :
@@ -847,6 +847,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : entity.name.tag.node.kdl meta.string.kdl string.quoted.double.block.kdl
+      - include           : char-esc-multi
       - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
       # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
         captures          : # will only highlight the last \, don't know how to fix
@@ -857,7 +858,6 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 1
-      - include           : char-esc-multi
   char-escaped:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
