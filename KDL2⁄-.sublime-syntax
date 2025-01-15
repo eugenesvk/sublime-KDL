@@ -1400,7 +1400,7 @@ contexts:
   line_continuation⁄-line_next:
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ␤🛑
+    - include             : ␤
     # - match               : \\                          # disallows repeated
     #   scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl comment.line.slash-dash.kdl
     - include             : else-pop
