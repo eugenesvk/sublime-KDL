@@ -272,12 +272,12 @@ contexts:
       pop                 : 1
       set                 :
       #- meta_scope        : dbg✗³node␠⁄−arg∨prop (not child)
-      - include           : linesp
+      - include           : l_␠s
       - include           : node_terminator🛑3
       - include           : arg∨prop⁄-un⁄-
       - match             : '{'
         fail              : ⸙3node_ch∨argprop⁄-
-      - include           : pop⸙ # todo not style /- empty via branches above ↑
+      - include           : pop_preS⸙
     - match               : ''
       fail                : ⸙3node_ch∨argprop⁄-
       # - include           : S🛑¹pre_s∨c∨t
