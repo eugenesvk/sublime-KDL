@@ -22,9 +22,27 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Changed__
+  + slashdash error highlights
+  + raw multiline string missing newline error scoping
+  + scope only 1 sym in raw multiline as error, not 2
+  + Misc tests
+  + Don't color partial hex
 - __Fixed__
-  + highlight misc invalid numbers with decimal separator
-  + ban children without separators
+  + consuming node end after bare ids in args/props, preventing a different number of pops in/outside of children
+  + no error highlight misc invalid numbers with decimal separator
+  + no error highlight on children without separators
+  + mark glued slashdashed as illegal
+  + no error on the 1st `_` after `.` in decimals
+  + no error on empty types
+  + no error on escaped whitespace in dedentsp in raw strings
+  + eof misfiring on regular newlines due to a wrong rule
+  + bare ids not recognizing the start of non-whitespace node space
+  + bare ids treating child begin/end markers as invalid
+  + no error on ending multiline string when its newline is "eaten" by an escape-chars
+  + child node term not popping enough with `/-`
+  + child node not requiring space before it
+  + missing `node_end4` rule
 
 [2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
 ## [2.0.2]
