@@ -1442,6 +1442,21 @@ contexts:
     - match               : ;
       scope               : punctuation.terminator.node.kdl
       pop                 : 1
+  pop_pre_node_end:
+    - include             : pop_precoml
+    - include             : ␤1
+    - include             : ␃
+    - include             : ；
+  pop2_pre_node_end:
+    - include             : pop2_precoml
+    - include             : ␤2
+    - include             : ␃2
+    - include             : ；2
+  pop3_pre_node_end:
+    - include             : pop3_precoml
+    - include             : ␤3
+    - include             : ␃3
+    - include             : ；3
   node_terminator3:
     - include             : node_end3
     - include             : ｝🛑3
@@ -1751,6 +1766,15 @@ contexts:
   #         pop             : 5
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl
+  pop3_precoml:
+    - match               : (?={{c_line_beg}})
+      pop                 : 3
+  pop2_precoml:
+    - match               : (?={{c_line_beg}})
+      pop                 : 2
+  pop_precoml:
+    - match               : (?={{c_line_beg}})
+      pop                 : 1
   comment_line5_term:
     - match               : //
       scope               : punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
@@ -1843,6 +1867,24 @@ contexts:
     - match               : '{{eof}}'
       #scope               : dbg✗eof
       pop                 : 5
+  ␃3:
+    - match               : '(?={{eof}})'
+      pop                 : 3
+  ␃2:
+    - match               : '(?={{eof}})'
+      pop                 : 2
+  ␃:
+    - match               : '(?={{eof}})'
+      pop                 : 1
+  ；3:
+    - match               : '(?=;)'
+      pop                 : 3
+  ；2:
+    - match               : '(?=;)'
+      pop                 : 2
+  ；:
+    - match               : '(?=;)'
+      pop                 : 1
 
   ws:                     # ≝ unicode-space | multi-line-comment
     - include             : u_sp
@@ -2125,6 +2167,15 @@ contexts:
   # pop_pre␤:
   #   - match               : '(?={{nl_s}})'
   #     pop                 : 1
+  ␤1:
+    - match               : '(?={{nl_s}})'
+      pop                 : 1
+  ␤2:
+    - match               : '(?={{nl_s}})'
+      pop                 : 2
+  ␤3:
+    - match               : '(?={{nl_s}})'
+      pop                 : 3
   # pop_pre-node␠:
   #   - match               : '(?={{node_sp_beg}})'
   #     pop                 : 1
