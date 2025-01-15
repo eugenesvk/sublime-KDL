@@ -43,6 +43,8 @@ All notable changes to this project will be documented in this file
   + child node term not popping enough with `/-`
   + child node not requiring space before it
   + missing `node_end4` rule
+  + slashdash newline before entry failing
+  + unnecessary errors on multiple ␤ in esclines
 
 [2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
 ## [2.0.2]
