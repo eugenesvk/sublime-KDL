@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file
   + missing `node_end4` rule
   + slashdash newline before entry failing
   + unnecessary errors on multiple ␤ in esclines
+  + `char-esc` lower priority in strings over error `\"""`
 
 [2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
 ## [2.0.2]
