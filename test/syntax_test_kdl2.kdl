@@ -93,6 +93,14 @@ n arg\//
 //   ^                                            punctuation.separator.continuation.line.kdl, comment.block.slash-dash.kdl
 //    ^^                                          comment.block.slash-dash.kdl, comment.line.double-slash.kdl punctuation.definition.comment.begin.kdl
 //   ^^^^                                        -invalid.illegal
+n1 arg
+  n2 1 i="argument pops the appropriate amount at node end"
+//^^   meta.node.kdl entity.name.tag.node.kdl
+//   ^ constant.numeric.value.kdl constant.numeric.integer.kdl
+n1 arg;
+  n2 1
+//^^   meta.node.kdl entity.name.tag.node.kdl
+//   ^ constant.numeric.value.kdl constant.numeric.integer.kdl
 
 // 2 Node Element: 3 Property (key=value)
 command "twitter" "tw" a=2 b=#true url="https://twitter.com/" {
