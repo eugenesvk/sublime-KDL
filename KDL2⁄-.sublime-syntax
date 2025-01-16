@@ -683,14 +683,14 @@ contexts:
         - match           : '(""")'
           scope           : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           pop             : 4
-        - include         : S🛑¹”””p4
+        - include         : S🛑¹”””⁄-p4
       - match             : '(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
         push              :
         - include         : de␠e_s
         - match           : '(""")'
           scope           : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           pop             : 4
-        - include         : S🛑¹”””p4
+        - include         : S🛑¹”””⁄-p4
   strings-quoted-double⁄-:
     - match               : '(r?)(")'
       captures            :
@@ -1605,6 +1605,29 @@ contexts:
         2:                  invalid.illegal.position.kdl comment.line.slash-dash.kdl
         3:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
+
+  S🛑¹”””⁄-p2:              # pop 2 before """, color last char pre quotes as error, not full text
+  - match                 : '(\S)'
+    # scope                 : invalid.illegal.position.kdl #✗S🛑¹”””⁄-p2
+    push                  :
+    - match               : '(\S?)(")("")'
+      captures            :
+        1                 : invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2                 : invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        3                 : invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      pop                 : 3
+    - include             : S🛑s_mute
+  S🛑¹”””⁄-p4:              # pop 4 before """
+  - match                 : '(\S)'
+    # scope                 : invalid.illegal.muted.position.kdl #✗S🛑¹”””⁄-p
+    push                  :
+    - match               : '(\S?)(")("")'
+      captures            :
+        1                 : invalid.illegal.position.kdl comment.line.slash-dash.kdl
+        2                 : invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        3                 : invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      pop                 : 5
+    # - include             : S🛑s_mute
 
   u␠␤s🛑”””⁄-2:   # errors on closing multi-line """
     - match               : '({{uspnl}})'
