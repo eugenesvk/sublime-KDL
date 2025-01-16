@@ -2137,6 +2137,9 @@ contexts:
   # S🛑s:
   #   - match               : '(\S)'
   #     scope               : invalid.illegal.position.kdl #✗S🛑
+  S🛑s_mute:
+    - match               : '(\S)'
+      scope               : invalid.illegal.muted.position.kdl #✗S🛑smute
   # S🛑:
   #   - match               : '(\S)'
   #     scope               : invalid.illegal.position.kdl #✗S🛑
