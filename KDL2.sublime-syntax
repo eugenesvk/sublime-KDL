@@ -1910,6 +1910,12 @@ contexts:
     - include             : node␠s
     - include             : comment_lines
     # - include             : comment_line_no␤
+  w␠⎋s:
+    - match               : '(\\)'
+      scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+      push                :
+      - include           : u␠␤s
+      - include           : any🛑
   u␠␤s:   # Regular and line breaking whitespace
     - match               : '({{uspnl}})'
       scope               : whitespace.escape.kdl
