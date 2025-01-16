@@ -583,11 +583,13 @@ n s="""
   \ \  """ i="only the last whitespace escape can be matched"
 //<-                         whitespace.dedent.kdl
  //<-                        whitespace.dedent.kdl
-//^^^^                       whitespace.dedent.kdl
-//  ^^^                      constant.character.escape.kdl
-//  ^                        punctuation.definition.escape.begin.kdl
+//^^^^^                      whitespace.dedent.kdl
+//^                          constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//  ^                        constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+// ^                         whitespace.escape.kdl
+//   ^^                      whitespace.escape.kdl
+// ^                        -punctuation.definition.escape.begin.kdl
 //   ^^                     -punctuation.definition.escape.begin.kdl
-//^                         -constant.character.escape.kdl punctuation.definition.escape.begin.kdl
 //     ^^^                   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
 
 * s="""
