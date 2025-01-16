@@ -672,16 +672,34 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
       - include           : char-esc-multi⁄-2
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
-        captures          : # will only highlight the last \, don't know how to fix
-          1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
-          3:               constant.character.escape.kdl comment.line.slash-dash.kdl
-          4:               punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
-          6:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
-          7:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-          8:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-        pop               : 3
+      - match             : '^(?=([\S\s]*?"""))'
+        push              :
+        - match           : '({{u_sp}}*)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 4
+        - match           : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             invalid.illegal.position.kdl comment.line.slash-dash.kdl
+            3:             invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+            4:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 4
+      - match             : '(?=([\S\s]*?"""))'
+        push              :
+        - match           : '({{u_sp}}*)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 4
+        - match           : '({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             invalid.illegal.position.kdl comment.line.slash-dash.kdl
+            3:             invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+            4:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 4
   strings-quoted-double⁄-:
     - match               : '(r?)(")'
       captures            :
@@ -706,16 +724,35 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - meta_content_scope: comment.line.slash-dash.kdl
       - include           : char-esc-multi⁄-
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
-        captures          : # will only highlight the last \, don't know how to fix
-          1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
-          3:               constant.character.escape.kdl comment.line.slash-dash.kdl
-          4:               punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
-          6:               invalid.illegal.position.kdl comment.line.slash-dash.kdl
-          7:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-          8:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-        pop               : 1
+      - match             : '^(?=([\S\s]*?"""))' # this line has an ending, but pre""" might have non-ws errors
+        push              :
+        - match           : '({{u_sp}}*)(""")' # end pop
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 2
+        - match           : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             invalid.illegal.position.kdl comment.line.slash-dash.kdl
+            3:             invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+            4:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 2
+      # same without ^start of line since char-esc-multi can eat up all whitespace up to """, so there will be no start of line for this rule
+      - match             : '(?=([\S\s]*?"""))'
+        push              :
+        - match           : '({{u_sp}}*)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 2
+        - match           : '({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
+            2:             invalid.illegal.position.kdl comment.line.slash-dash.kdl
+            3:             invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
+            4:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 2
   strings-quoted-double⁄-_node-id:
     - match               : '(r?)(")'
       captures            :
