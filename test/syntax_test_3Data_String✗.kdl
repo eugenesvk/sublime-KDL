@@ -29,14 +29,18 @@ a #"
 
 a """
   " "" """
-//^                                          string.quoted.double.block.kdl invalid.illegal.position.kdl
-// ^^^^                                      string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+//^^^^^                                     -invalid.illegal
+//^^^^^^^^                                   string.quoted.double.block.kdl
+//     ^                                     invalid.illegal.position.kdl
+//      ^^                                   invalid.illegal.muted.position.kdl
 
 n """
 a  " """
-//<-                                         string.quoted.double.block.kdl invalid.illegal.position.kdl
- //<-                                        string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
-//^^^                                        string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+//<-                                        -invalid.illegal
+ //<-                                       -invalid.illegal
+//^^^                                       -invalid.illegal
+//   ^                                       invalid.illegal.position.kdl
+//    ^^                                     invalid.illegal.muted.position.kdl
 
 #"Multiline strings must have ␤ after the starting """ and before the ending """ "#
 a """err_not_nl
@@ -44,9 +48,9 @@ a """err_not_nl
 //    ^^^^^^^^^                                 string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
 x
 err_not_ws"""
-//<-                                            string.quoted.double.block.kdl invalid.illegal.position.kdl
- //<-                                           string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
-//^^^^^^^^                                      string.quoted.double.block.kdl invalid.illegal.muted.position.kdl
+//^^^^^^^                                      -invalid.illegal
+//       ^^                                     invalid.illegal.position.kdl
+//         ^^                                   invalid.illegal.muted.position.kdl
 
 a b="""err_not_nl
 //     ^                                        string.quoted.double.block.kdl invalid.illegal.position.kdl
@@ -251,14 +255,16 @@ n s="""
 // ^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
 n s="""
   x"""
-//^    invalid.illegal.position.kdl
-//<-   string.quoted.double.block.kdl whitespace.dedent.kdl
-// ^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+//^     -invalid.illegal
+// ^^^   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+// ^     invalid.illegal.position.kdl
+//  ^^   invalid.illegal.muted.position.kdl
 n s="""
   x """
-//^     invalid.illegal.position.kdl
-//<-   string.quoted.double.block.kdl whitespace.dedent.kdl
-//  ^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+//^      -invalid.illegal
+//  ^^^   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+//  ^     invalid.illegal.position.kdl
+//   ^^   invalid.illegal.muted.position.kdl
 n s="""
   \t """ i="treat invalid escape as whitespace escape error, so maintain ws.dedent"
 //<-     whitespace.dedent.kdl
@@ -270,8 +276,10 @@ n s="""
 n s="""
   \
   t  """
-//^      invalid.illegal.position.kdl
-//   ^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+//^       -invalid.illegal
+//   ^^^   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+//   ^     invalid.illegal.position.kdl
+//    ^^   invalid.illegal.muted.position.kdl
 /* ambiguous spec and tricky tbd to attach the last non-line ws escape to the ending instead of to the body
 <-     whitespace.dedent.kdl
  <-    whitespace.dedent.kdl
@@ -279,8 +287,11 @@ n s="""
 n s="""
   \
   t"""
-//^      invalid.illegal.position.kdl
+//^     -invalid.illegal
 // ^^^   string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+// ^     invalid.illegal.position.kdl
+//  ^^   invalid.illegal.muted.position.kdl
+
 n s="""
 //  ^^^                      string.quoted.double.block.kdl punctuation.definition.string.begin.kdl
  a  xcc
@@ -311,9 +322,10 @@ n s="""
  x\ \  """
 //     ^^^  string.quoted.double.block.kdl punctuation.definition.string.end.kdl
 //<-        whitespace.dedent.kdl
- //<-       invalid.illegal.position.kdl
-//^         invalid.illegal.position.kdl
-//  ^       invalid.illegal.position.kdl
+ //<-      -invalid.illegal
+//^^^^^    -invalid.illegal
+//     ^    invalid.illegal.position.kdl
+//      ^^  invalid.illegal.muted.position.kdl
 n s="""
 //  ^^^                      string.quoted.double.block.kdl punctuation.definition.string.begin.kdl
  a  xcc
@@ -328,7 +340,9 @@ n s="""
 n s="""
   x\txx"""
 //     ^^^  string.quoted.double.block.kdl punctuation.definition.string.end.kdl
-//^^^^^     invalid.illegal.position.kdl
+//^^^^     -invalid.illegal
+//    ^^    invalid.illegal.position.kdl
+//      ^^  invalid.illegal.muted.position.kdl
 n s="""
   x\txx
  """
