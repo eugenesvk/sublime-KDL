@@ -1936,7 +1936,7 @@ contexts:
     - include             : comment_lines
     # - include             : comment_line_no␤
   w␠⎋s:
-    - match               : '(\\)'
+    - match               : '(\\)(?={{uspnl}})'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
       push                :
       - include           : u␠␤s
