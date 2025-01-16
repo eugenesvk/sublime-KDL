@@ -670,6 +670,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
+      - include           : ch⧵“⁄-
       - include           : de␠e”””⁄-⸮
       - include           : char-escaped⁄-
       - match             : '({{u_sp}}*)(""")'
@@ -713,6 +714,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
+      - include           : ch⧵“⁄-
       - include           : de␠e”””⁄-⸮
       - include           : char-escaped⁄-
       - match             : '({{u_sp}}*)(""")'
@@ -768,6 +770,11 @@ contexts:
           7:               invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
           8:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         pop               : 1
+  ch⧵“⁄-:
+    - match               : '(\\)(")'
+      captures            :
+        1:                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+        2:                 constant.character.escape.kdl comment.line.slash-dash.kdl
   char-escaped⁄-:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
