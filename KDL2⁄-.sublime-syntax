@@ -1600,7 +1600,7 @@ contexts:
         3:                  invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       # pop                 : 1 # alternative without lookbehind, but this resets = to node, so worse?
 
-  S🛑¹”””⁄-p2:              # pop 2 before """, color last char pre quotes as error, not full text
+  S🛑¹”””⁄-p2:            # pop 2 before """, color last char pre quotes as error, not full text
   - match                 : '(\S)'
     # scope                 : invalid.illegal.position.kdl #✗S🛑¹”””⁄-p2
     push                  :
@@ -1611,7 +1611,7 @@ contexts:
         3                 : invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
       pop                 : 3
     # - include             : S🛑s_mute
-  S🛑¹”””⁄-p4:              # pop 4 before """
+  S🛑¹”””⁄-p4:            # pop 4 before """
   - match                 : '(\S)'
     # scope                 : invalid.illegal.muted.position.kdl #✗S🛑¹”””⁄-p
     push                  :
