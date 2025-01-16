@@ -561,6 +561,17 @@ n /-a="""
   """
 //^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
 
+
+node a="""
+ \
+ """ i="dedent"
+//<- whitespace.dedent.kdl whitespace.escape.kdl
+/-nd   """
+ \
+ """  i="k"
+//<- comment.block.slash-dash.kdl, whitespace.escape.kdl comment.line.slash-dash.kdl
+//<- whitespace.dedent.kdl
+
 nnn #"raw"#
 nnn #"multiline raw
 //  ^^^^^^^^^^^^^^^          string.quoted.double.raw.kdl
