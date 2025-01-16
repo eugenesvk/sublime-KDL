@@ -266,13 +266,17 @@ n s="""
 //  ^     invalid.illegal.position.kdl
 //   ^^   invalid.illegal.muted.position.kdl
 n s="""
-  \t """ i="treat invalid escape as whitespace escape error, so maintain ws.dedent"
-//<-     whitespace.dedent.kdl
- //<-    whitespace.dedent.kdl
-//^^^    whitespace.dedent.kdl
+  \t """
+//<-    -whitespace.dedent.kdl
+ //<-   -whitespace.dedent.kdl
+//^^^   -whitespace.dedent.kdl
 //   ^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
-//^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-// ^     invalid.illegal.position.kdl
+//^     -constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+// ^    -invalid.illegal.position.kdl
+//   ^^^ punctuation.definition.string.end.kdl
+//   ^   invalid.illegal.position.kdl
+//    ^^ invalid.illegal.muted.position.kdl
+
 n s="""
   \
   t  """
