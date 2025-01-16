@@ -1504,6 +1504,11 @@ contexts:
 
 
 # Primitives, with some ~matching KDL Spec elements
+  linesp⁄-:
+    - include             : ␤
+    - include             : node␠
+    - include             : comment_line⁄- #todo: bugs with } on a line after //
+    # - include             : comment_line_no␤
   ␤term⁄-:
     - match               : '{{newline}}'
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤1
