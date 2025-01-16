@@ -783,7 +783,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
-      - include           : char-escaped
+      - include           : char-escaped # tbd: attache the last w␠⎋ to the ending """ instead of the body
       - match             : '({{u_sp}}*)(""")'
         captures          :
           1:               whitespace.dedent.kdl
