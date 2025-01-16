@@ -827,39 +827,28 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
-      - include           : char-esc-multi
-      - match             : '^(?=([\S\s]*?\\"""))'  #extra handling of escape caught in \S\s
+      - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
+      - include           : char-escaped
+      - match             : '({{u_sp}}*)(""")'
+        captures          :
+          1:               whitespace.dedent.kdl
+          2:               punctuation.definition.string.end.kdl
+        pop               : 1
+      - match             : '^(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
         push              :
-        - include         : char-escaped1
-      - match             : '^(?=([\S\s]*?"""))' # this line has an ending, but pre""" might have non-ws errors
-        push              :
-        - match           : '({{u_sp}}*)(""")' # end pop
-          captures        :
-            1:             whitespace.dedent.kdl
-            2:             punctuation.definition.string.end.kdl
+        - include         : de␠e_s
+        - match           : '(""")'
+          scope           : punctuation.definition.string.end.kdl
           pop             : 2
-        - match           : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl
-            2:             invalid.illegal.position.kdl
-            3:             invalid.illegal.muted.position.kdl
-            4:             punctuation.definition.string.end.kdl
-          pop             : 2
+        - include         : S🛑¹”””p2
       # same without ^start of line since char-esc-multi can eat up all whitespace up to """, so there will be no start of line for this rule
-      - match             : '(?=([\S\s]*?"""))'
+      - match             : '(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
         push              :
-        - match           : '({{u_sp}}*)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl
-            2:             punctuation.definition.string.end.kdl
+        - include         : de␠e_s
+        - match           : '(""")'
+          scope           : punctuation.definition.string.end.kdl
           pop             : 2
-        - match           : '({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl
-            2:             invalid.illegal.position.kdl
-            3:             invalid.illegal.muted.position.kdl
-            4:             punctuation.definition.string.end.kdl
-          pop             : 2
+        - include         : S🛑¹”””p2
   strings-quoted-double_node-id:
     - match               : '(r?)(")'
       captures            :
