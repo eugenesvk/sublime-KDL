@@ -1930,6 +1930,13 @@ contexts:
       - match             : '({{uspnl}})'
         scope             : whitespace.escape.kdl
       - include           : else-pop3
+  de␠e_s: # de␠e ≝ u␠ | w␠⎋
+    - match               : '^(?={{u_sp}})'
+      push                :
+      - meta_scope        : whitespace.dedent.kdl
+      - include           : u_sps
+      - include           : w␠⎋s
+      - include           : else-pop
   # ␤s:
   #   - match               : '{{newline}}'
   #     #scope               : dbg✗␤s
