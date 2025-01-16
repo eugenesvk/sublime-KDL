@@ -493,27 +493,28 @@ n """
 """
 node """
 \\\b\f\n\r\t\s\"\/
-//<-                constant.character.escape.kdl punctuation.definition.escape.begin.kdl
- //<-               constant.character.escape.kdl
-// ^                constant.character.escape.kdl
-//   ^              constant.character.escape.kdl
-//     ^            constant.character.escape.kdl
-//       ^          constant.character.escape.kdl
-//         ^        constant.character.escape.kdl
-//           ^      constant.character.escape.kdl
-//             ^    constant.character.escape.kdl
-//               ^ -constant.character.escape.kdl
-//^                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//  ^               constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//    ^             constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//      ^           constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//        ^         constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//          ^       constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//            ^     constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//              ^   constant.character.escape.kdl punctuation.definition.escape.begin.kdl
-//<-                meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.block.kdl
- //<-               meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.block.kdl
-//^^^^^^^^^^^^^^^^  meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.block.kdl
+//<-                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+ //<-                constant.character.escape.kdl
+// ^                 constant.character.escape.kdl
+//   ^               constant.character.escape.kdl
+//     ^             constant.character.escape.kdl
+//       ^           constant.character.escape.kdl
+//         ^         constant.character.escape.kdl
+//           ^       constant.character.escape.kdl
+//             ^     constant.character.escape.kdl
+//               ^  -constant.character.escape.kdl
+//^                  constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//  ^                constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//    ^              constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//      ^            constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//        ^          constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//          ^        constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//            ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//              ^    constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//<-                 meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.block.kdl
+ //<-                meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.block.kdl
+//^^^^^^^^^^^^^^^^   meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.block.kdl
+ \\\b\f\n\r\t\s\"\/
 """
 
 title "Regular \b\\\/\u{10FFFF}string"
