@@ -783,6 +783,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
+      - include           : ch⧵“ # before ↓ to handle valid \"""
       - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
       - include           : char-escaped
       - match             : '({{u_sp}}*)(""")'
@@ -827,6 +828,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
+      - include           : ch⧵“ # before ↓ to handle valid \"""
       - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
       - include           : char-escaped
       - match             : '({{u_sp}}*)(""")'
@@ -881,6 +883,11 @@ contexts:
           7:               invalid.illegal.muted.position.kdl
           8:               punctuation.definition.string.end.kdl
         pop               : 1
+  ch⧵“:
+    - match               : '(\\)(")'
+      captures            :
+        1:                 constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+        2:                 constant.character.escape.kdl
   char-escaped:
     - match               : '(\\)'
       scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl
