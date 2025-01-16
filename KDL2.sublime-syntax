@@ -784,16 +784,39 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - include           : char-esc-multi2
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)((?<!\\)""")'
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)((?<!\\)""")'
-        captures          : # will only highlight the last \, don't know how to fix
-          1:               whitespace.dedent.kdl
-          3:               constant.character.escape.kdl
-          4:               punctuation.definition.escape.begin.kdl
-          6:               invalid.illegal.position.kdl
-          7:               invalid.illegal.muted.position.kdl
-          8:               punctuation.definition.string.end.kdl
-        pop               : 3
+      # - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)((?<!\\)""")'
+      # - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'  #can't exclude """ before """ on the same line in a single rule
+      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)((?<!\\)""")' # will only highlight the last \, don't know how to fix
+      # todo: maybe safe to use 1 rule without ^?
+      - match             : '^(?=([\S\s]*?"""))' # this line has an ending, but pre""" might have non-ws errors
+        push              :
+        - match           : '({{u_sp}}*)(""")' # end pop
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             punctuation.definition.string.end.kdl
+          pop             : 4
+        - match           : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             invalid.illegal.position.kdl
+            3:             invalid.illegal.muted.position.kdl
+            4:             punctuation.definition.string.end.kdl
+          pop             : 4
+      # same without ^start of line since char-esc-multi can eat up all whitespace up to """, so there will be no start of line for this rule
+      - match             : '(?=([\S\s]*?"""))'
+        push              :
+        - match           : '({{u_sp}}*)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             punctuation.definition.string.end.kdl
+          pop             : 4
+        - match           : '({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             invalid.illegal.position.kdl
+            3:             invalid.illegal.muted.position.kdl
+            4:             punctuation.definition.string.end.kdl
+          pop             : 4
   strings-quoted-double:
     - match               : '(r?)(")'
       captures            :
@@ -816,16 +839,35 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - include           : char-esc-multi
-      - match             : '^(({{u_sp}}|((\\)({{u_sp}}|{{newline}})+))*)({{u_sp_not}}?)([\s\S]*?)(""")'
-      # - match             : '^((\s|\\\s+)*)([^\"]?)([^\"]*)(""")'
-        captures          : # will only highlight the last \, don't know how to fix
-          1:               whitespace.dedent.kdl
-          3:               constant.character.escape.kdl
-          4:               punctuation.definition.escape.begin.kdl
-          6:               invalid.illegal.position.kdl
-          7:               invalid.illegal.muted.position.kdl
-          8:               punctuation.definition.string.end.kdl
-        pop               : 1
+      - match             : '^(?=([\S\s]*?"""))' # this line has an ending, but pre""" might have non-ws errors
+        push              :
+        - match           : '({{u_sp}}*)(""")' # end pop
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             punctuation.definition.string.end.kdl
+          pop             : 2
+        - match           : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             invalid.illegal.position.kdl
+            3:             invalid.illegal.muted.position.kdl
+            4:             punctuation.definition.string.end.kdl
+          pop             : 2
+      # same without ^start of line since char-esc-multi can eat up all whitespace up to """, so there will be no start of line for this rule
+      - match             : '(?=([\S\s]*?"""))'
+        push              :
+        - match           : '({{u_sp}}*)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             punctuation.definition.string.end.kdl
+          pop             : 2
+        - match           : '({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
+          captures        :
+            1:             whitespace.dedent.kdl
+            2:             invalid.illegal.position.kdl
+            3:             invalid.illegal.muted.position.kdl
+            4:             punctuation.definition.string.end.kdl
+          pop             : 2
   strings-quoted-double_node-id:
     - match               : '(r?)(")'
       captures            :
