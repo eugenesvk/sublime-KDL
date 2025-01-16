@@ -783,7 +783,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
-      - include           : ch⧵“ # before ↓ to handle valid \"""
+      - include           : ch⎋“s # before ↓ to handle valid \"""
       - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
       - include           : char-esc-multi2
       - match             : '({{u_sp}}*)(""")'
@@ -828,7 +828,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
-      - include           : ch⧵“ # before ↓ to handle valid \"""
+      - include           : ch⎋“s # before ↓ to handle valid \"""
       - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
       - include           : char-esc-multi
       - match             : '({{u_sp}}*)(""")'
