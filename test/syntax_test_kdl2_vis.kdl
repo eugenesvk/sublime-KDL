@@ -1,0 +1,6 @@
+// SYNTAX TEST "Packages/KDL/KDL2.sublime-syntax"
+// Visual tests, e.g., when adding and extra // test comment fails the test
+node """
+\\\b\f\n\r\t\s\"\/
+ \\\b\f\n\r\t\s\"\/
+""" i="both should be \\ escape-highlighted except for the last \\/"
