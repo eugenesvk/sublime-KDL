@@ -682,14 +682,14 @@ contexts:
         - match           : '(""")'
           scope           : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           pop             : 4
-        - include         : S🛑s
+        - include         : S🛑¹”””p4
       - match             : '(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
         push              :
         - include         : de␠e_s
         - match           : '(""")'
           scope           : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           pop             : 4
-        - include         : S🛑s
+        - include         : S🛑¹”””p4
   strings-quoted-double⁄-:
     - match               : '(r?)(")'
       captures            :
