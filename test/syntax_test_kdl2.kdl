@@ -1078,6 +1078,21 @@ nnn (aaaa)bare_id_end→;
 n k=+1{k;};
 //    ^                                        invalid.illegal.position.kdl
 
+er /-{cch1} \/*
+//          ^     punctuation.separator.continuation.line.kdl
+//           ^^   comment.block.kdl punctuation.definition.comment.begin.kdl
+//          ^     -invalid.illegal.position.kdl
+*/
+  /-{cch2} {ch max=1} /-{cch3}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
+//^^                            comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//                    ^^        comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//  ^                           meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+//       ^                      meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//                  ^           meta.block.child.kdl punctuation.section.mapping.end.kdl
+//                           ^  meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//         ^                    meta.block.child.kdl punctuation.section.mapping.begin.kdl
+//                      ^       meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
 
 
 // 8. Test Line continuation
