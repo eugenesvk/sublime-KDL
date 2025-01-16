@@ -795,7 +795,7 @@ contexts:
         - match           : '(""")'
           scope           : punctuation.definition.string.end.kdl
           pop             : 4
-        - include         : S🛑s
+        - include         : S🛑¹”””p4
       # same without ^start of line since char-esc-multi can eat up all whitespace up to """, so there will be no start of line for this rule
       # todo: maybe safe to use 1 rule without ^?
       - match             : '(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
@@ -804,7 +804,7 @@ contexts:
         - match           : '(""")'
           scope           : punctuation.definition.string.end.kdl
           pop             : 4
-        - include         : S🛑s
+        - include         : S🛑¹”””p4
   strings-quoted-double:
     - match               : '(r?)(")'
       captures            :
