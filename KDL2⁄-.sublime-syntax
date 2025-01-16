@@ -669,40 +669,27 @@ contexts:
         3:                 invalid.illegal.position.kdl comment.line.slash-dash.kdl
         4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
-      - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
-      - meta_content_scope: comment.line.slash-dash.kdl
-      - include           : char-esc-multi⁄-2
-      - match             : '^(?=([\S\s]*?\\"""))'  #extra handling of escape caught in \S\s
+      - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
+      - include           : char-escaped⁄-
+      - match             : '({{u_sp}}*)(""")'
+        captures          :
+          1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
+          2:               punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        pop               : 3
+      - match             : '^(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
         push              :
-        - include         : char-escaped⁄-1
-      - match             : '^(?=([\S\s]*?"""))'
+        - include         : de␠e_s
+        - match           : '(""")'
+          scope           : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+          pop             : 4
+        - include         : S🛑s
+      - match             : '(?={{u_sp}}*((\S[\s\S]*?[^\\])|([^\\\s]))""")'
         push              :
-        - match           : '({{u_sp}}*)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
-            2:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+        - include         : de␠e_s
+        - match           : '(""")'
+          scope           : punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
           pop             : 4
-        - match           : '^({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
-            2:             invalid.illegal.position.kdl comment.line.slash-dash.kdl
-            3:             invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-            4:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          pop             : 4
-      - match             : '(?=([\S\s]*?"""))'
-        push              :
-        - match           : '({{u_sp}}*)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
-            2:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          pop             : 4
-        - match           : '({{u_sp}}*)({{u_sp_not}}?)([\s\S]*?)(""")'
-          captures        :
-            1:             whitespace.dedent.kdl comment.line.slash-dash.kdl
-            2:             invalid.illegal.position.kdl comment.line.slash-dash.kdl
-            3:             invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
-            4:             punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          pop             : 4
+        - include         : S🛑s
   strings-quoted-double⁄-:
     - match               : '(r?)(")'
       captures            :
