@@ -670,6 +670,7 @@ contexts:
         4:                 invalid.illegal.muted.position.kdl comment.line.slash-dash.kdl
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
+      - include           : de␠e”””⁄-⸮
       - include           : char-escaped⁄-
       - match             : '({{u_sp}}*)(""")'
         captures          :
