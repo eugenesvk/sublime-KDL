@@ -1610,7 +1610,7 @@ contexts:
         2                 : invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
         3                 : invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
       pop                 : 3
-    - include             : S🛑s_mute
+    # - include             : S🛑s_mute
   S🛑¹”””⁄-p4:              # pop 4 before """
   - match                 : '(\S)'
     # scope                 : invalid.illegal.muted.position.kdl #✗S🛑¹”””⁄-p
