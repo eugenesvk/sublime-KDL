@@ -2144,17 +2144,17 @@ contexts:
           1:                invalid.illegal.position.kdl
           2:                invalid.illegal.muted.position.kdl
         # pop               : 1
-  u␠␤s🛑”””2:   # errors on closing multi-line """
+  u␠␤s🛑”””2:   # let multi-line handle errors on closing multi-line """
     - match               : '({{uspnl}})'
       scope               : whitespace.escape.kdl
       push                : # to "glue" contiguous spaces together with the same scope
       - match             : '({{uspnl}})'
         scope             : whitespace.escape.kdl
-      - match             : '(")("")'
-        captures          :
-          1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl
-          2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
-        pop               : 3
+      # - match             : '(")("")' # let multi-line handle these errors
+      #   captures          :
+      #     1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+      #     2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+      #   pop               : 3
       - include           : else-pop2
   u␠␤s🛑”””4:
     - match               : '({{uspnl}})'
@@ -2162,10 +2162,10 @@ contexts:
       push                : # to "glue" contiguous spaces together with the same scope
       - match             : '({{uspnl}})'
         scope             : whitespace.escape.kdl
-      - match             : '(")("")'
-        captures          :
-          1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl
-          2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+      # - match             : '(")("")' # let multi-line handle these errors
+        # captures          :
+        #   1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+        #   2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
         pop               : 5
       - include           : else-pop2
 

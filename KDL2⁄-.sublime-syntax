@@ -1508,11 +1508,11 @@ contexts:
       push                : # to "glue" contiguous spaces together with the same scope
       - match             : '({{uspnl}})'
         scope             : whitespace.escape.kdl comment.line.slash-dash.kdl
-      - match             : '(")("")'
-        captures          :
-          1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-        pop               : 3
+      # - match             : '(")("")'
+      #   captures          :
+      #     1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      #     2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      #   pop               : 3
       - include           : else-pop2
   u␠␤s🛑”””⁄-4:
     - match               : '({{uspnl}})'
@@ -1520,9 +1520,9 @@ contexts:
       push                : # to "glue" contiguous spaces together with the same scope
       - match             : '({{uspnl}})'
         scope             : whitespace.escape.kdl comment.line.slash-dash.kdl
-      - match             : '(")("")'
-        captures          :
-          1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-          2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
-        pop               : 5
+      # - match             : '(")("")'
+      #   captures          :
+      #     1:               invalid.illegal.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      #     2:               invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+      #   pop               : 5
       - include           : else-pop2
