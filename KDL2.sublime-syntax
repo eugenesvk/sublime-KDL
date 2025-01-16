@@ -1191,6 +1191,27 @@ contexts:
   #     push                :
   #     - include           : pop4
 
+  de␠e”””⸮:
+    - match               : '^(?={{u_sp}}*\\)'
+      branch_point        : ⸙de␠e”””⸮
+      branch              :
+        - de␠e_some⸙      # dedent spanning multiple lines ending with """ (clean, no \S errors highlighted)
+        - de␠e_none⸙      # a pop
+  de␠e_some⸙:
+    - meta_content_scope  : whitespace.dedent.kdl
+    - include             : u_sps
+    - include             : w␠⎋s
+    # - match               : '(?<!\\)(""")' # not needed since \ aren't allowed here?
+    #   fail                : ⸙de␠e”””⸮
+    - match               : '(""")'
+      scope               : punctuation.definition.string.end.kdl
+      pop                 : 2
+    - match               : '(?=\S)'
+      fail                : ⸙de␠e”””⸮
+  de␠e_none⸙:
+    - match               : ''
+      pop                 : 1
+
 
 #——— Values - Numbers
   # int∨dec∨float:
