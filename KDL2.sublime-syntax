@@ -785,7 +785,7 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - include           : ch⧵“ # before ↓ to handle valid \"""
       - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
-      - include           : char-escaped
+      - include           : char-esc-multi2
       - match             : '({{u_sp}}*)(""")'
         captures          :
           1:               whitespace.dedent.kdl
@@ -830,7 +830,7 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl
       - include           : ch⧵“ # before ↓ to handle valid \"""
       - include           : de␠e”””⸮ # attaches the last w␠⎋ to the ending """ instead of the body
-      - include           : char-escaped
+      - include           : char-esc-multi
       - match             : '({{u_sp}}*)(""")'
         captures          :
           1:               whitespace.dedent.kdl

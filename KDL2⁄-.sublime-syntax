@@ -672,7 +672,7 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
       - include           : ch⧵“⁄-
       - include           : de␠e”””⁄-⸮
-      - include           : char-escaped⁄-
+      - include           : char-esc-multi⁄-2
       - match             : '({{u_sp}}*)(""")'
         captures          :
           1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
@@ -716,7 +716,7 @@ contexts:
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
       - include           : ch⧵“⁄-
       - include           : de␠e”””⁄-⸮
-      - include           : char-escaped⁄-
+      - include           : char-esc-multi⁄-
       - match             : '({{u_sp}}*)(""")'
         captures          :
           1:               whitespace.dedent.kdl comment.line.slash-dash.kdl
