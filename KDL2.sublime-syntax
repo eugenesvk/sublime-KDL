@@ -2233,14 +2233,28 @@ contexts:
   #     - include           : pop_pre-node␠
   #     - match             : '(\S)'
   #       scope             : invalid.illegal.muted.position.kdl #✗S🛑¹pre_s∨c∨t
+  S🛑¹”””p2:              # pop 2 before """, color last char pre quotes as error, not full text
+  - match                 : '(\S)'
+    # scope                 : invalid.illegal.position.kdl #✗S🛑¹”””p2
+    push                  :
+    - match               : '(\S?)(")("")'
+      captures            :
+        1                 : invalid.illegal.position.kdl
+        2                 : invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+        3                 : invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
+      pop                 : 3
+    - include             : S🛑s_mute
   S🛑¹”””p4:              # pop 4 before """
   - match                 : '(\S)'
-    scope                 : invalid.illegal.position.kdl #✗S🛑¹pre'''
+    # scope                 : invalid.illegal.muted.position.kdl #✗S🛑¹”””p4
     push                  :
-    - match               : '(""")'
-      scope               : punctuation.definition.string.end.kdl
+    - match               : '(\S?)(")("")'
+      captures            :
+        1                 : invalid.illegal.position.kdl
+        2                 : invalid.illegal.position.kdl punctuation.definition.string.end.kdl
+        3                 : invalid.illegal.muted.position.kdl punctuation.definition.string.end.kdl
       pop                 : 5
-    - include             : S🛑s_mute
+    # - include             : S🛑s_mute
 
 
   # char🆔¬:
