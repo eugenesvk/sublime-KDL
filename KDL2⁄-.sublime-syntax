@@ -1557,6 +1557,19 @@ contexts:
     - include             : node␠
     - include             : comment_line⁄- #todo: bugs with } on a line after //
     # - include             : comment_line_no␤
+  w␠⎋s⁄-:
+    - match               : '(\\)'
+      scope               : constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+      push                :
+      - include           : u␠␤s⁄-
+      - include           : any🛑
+  u␠␤s⁄-:   # Regular and line breaking whitespace
+    - match               : '({{uspnl}})'
+      scope               : whitespace.escape.kdl comment.line.slash-dash.kdl
+      push                : # to "glue" contiguous spaces together with the same scope
+      - match             : '({{uspnl}})'
+        scope             : whitespace.escape.kdl comment.line.slash-dash.kdl
+      - include           : else-pop2
   ␤term⁄-:
     - match               : '{{newline}}'
       scope               : punctuation.terminator.node.kdl comment.line.slash-dash.kdl #✗␤1
