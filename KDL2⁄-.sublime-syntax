@@ -671,6 +671,8 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
       - include           : ch⎋“⁄-s
+      - include           : ch⎋¬“⁄-s
+      - include           : uni⎋⁄-s
       - include           : de␠e”””⁄-⸮
       - include           : char-esc-multi⁄-2
       - match             : '({{u_sp}}*)(""")'
@@ -715,6 +717,8 @@ contexts:
       push                :
       - meta_scope        : meta.string.kdl string.quoted.double.block.kdl comment.line.slash-dash.kdl
       - include           : ch⎋“⁄-s
+      - include           : ch⎋¬“⁄-s
+      - include           : uni⎋⁄-s
       - include           : de␠e”””⁄-⸮
       - include           : char-esc-multi⁄-
       - match             : '({{u_sp}}*)(""")'
