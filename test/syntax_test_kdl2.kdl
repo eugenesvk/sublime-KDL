@@ -518,6 +518,49 @@ n a="""
   """
 //^^^                            punctuation.definition.string.end.kdl
 
+n     """
+  asdf\"""
+//    ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//     ^     constant.character.escape.kdl
+//     ^^^ - punctuation.definition.string.end.kdl
+  """
+//^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+n   a="""
+  asdf\"""
+//    ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl
+//     ^     constant.character.escape.kdl
+//     ^^^ - punctuation.definition.string.end.kdl
+  """
+//^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl
+/-n   """
+  asdf\"""
+//    ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+//     ^     constant.character.escape.kdl comment.line.slash-dash.kdl
+//     ^^^ - punctuation.definition.string.end.kdl
+  """
+//^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+/-n a="""
+  asdf\"""
+//    ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+//     ^     constant.character.escape.kdl comment.line.slash-dash.kdl
+//     ^^^ - punctuation.definition.string.end.kdl
+  """
+//^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+n   /-"""
+  asdf\"""
+//    ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+//     ^     constant.character.escape.kdl comment.line.slash-dash.kdl
+//     ^^^ - punctuation.definition.string.end.kdl
+  """
+//^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+n /-a="""
+  asdf\"""
+//    ^      constant.character.escape.kdl punctuation.definition.escape.begin.kdl comment.line.slash-dash.kdl
+//     ^     constant.character.escape.kdl comment.line.slash-dash.kdl
+//     ^^^ - punctuation.definition.string.end.kdl
+  """
+//^^^ string.quoted.double.block.kdl punctuation.definition.string.end.kdl comment.line.slash-dash.kdl
+
 nnn #"raw"#
 nnn #"multiline raw
 //  ^^^^^^^^^^^^^^^          string.quoted.double.raw.kdl
