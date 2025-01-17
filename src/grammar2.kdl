@@ -32,7 +32,7 @@ string                    	 =  str🆔 | string'' | string_raw  ¶              
     keyword🆔🛑             	=  true⠀|⠀false⠀|⠀null⠀|⠀inf⠀|⠀-inf⠀|⠀nan            	  \
   string''                	 = “                              ⦅     char_str − ␤⦆* ”   \
                           	|= “““                                                    \
-                          	  ⦅␤ de␠e≡ ⦅“?“? char_str − ␤ - u␠⦆ ⦅“?“? char_str − ␤⦆* ⦆*?	\
+                          	  ⦅␤ de␠e≡ ⦅“?“? char_str − ␤ − u␠⦆ ⦅“?“? char_str − ␤⦆* ⦆*?	\
                           	  ⦅␤       ⦅                    u␠⦆*                    ⦆*? 	\
                           	   ␤ de␠e* ”””   !="de␠e≡ must exactly match de␠e; only required before non-whitespace" \
     char_str              	 =  char⎋ | uni⎋ | w␠⎋ | 〔¬⧵“〕 − char🛑	  \
