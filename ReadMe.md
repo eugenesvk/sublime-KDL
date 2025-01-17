@@ -52,6 +52,7 @@ Add `"kdl.keybind_disable":true` to your `Preferences.sublime-settings` to disab
 - Only works in Sublime Text 4 since build __4075__ (10 July 2020) since it's using [version 2](https://www.sublimetext.com/docs/syntax.html) of the syntax
 - KDL v2 `"""`multiline string`"""` dedent feature isn't supported, think it's impossible with the ST's syntax engine to use a later match of `spaces before the last """` in all earlier indentation matches
 - `/-kdl-version 1` or `2` prefix doesn't affect ST's bottom right syntax indicator, it will still be `KDL` without a version specifier due to the limitations of ST
+- `AFileIcon` extension's `Plain Text (KDL)` blank syntax may override this extension's syntax file. As far as I understand, updating to the latest versions of both packages and manually deleting the plain text variant should resolve the [issue](https://github.com/SublimeText/AFileIcon/issues/95).
 
 ## Misc
 
