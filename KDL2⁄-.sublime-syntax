@@ -1431,7 +1431,7 @@ contexts:
       scope               : meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
       pop                 : 1 # replacing this with term4 doesn't reset meta.block.child.kdl after }, so reset it here
       push                : #✗⁶
-      - include           : wss
+      - include           : node␠
       - include           : nodech_terminator5⸮⁄-
       - match             : '(?=/-|{)'
         pop               : 2
