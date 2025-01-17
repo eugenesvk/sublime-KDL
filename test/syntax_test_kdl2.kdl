@@ -1094,6 +1094,17 @@ er /-{cch1} \/*
 //         ^                    meta.block.child.kdl punctuation.section.mapping.begin.kdl
 //                      ^       meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
 
+ok /-{cch1} {ch}
+// ^^                           comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//   ^                          meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+//          ^                   meta.block.child.kdl punctuation.section.mapping.begin.kdl
+//        ^                     meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+//             ^                meta.block.child.kdl punctuation.section.mapping.end.kdl
+ok /-{cch1} \
+  {ch}
+//^                             meta.block.child.kdl punctuation.section.mapping.begin.kdl
+//   ^                          meta.block.child.kdl punctuation.section.mapping.end.kdl
+
 
 // 8. Test Line continuation
 // Various whitespace separating line continuation and arguments
