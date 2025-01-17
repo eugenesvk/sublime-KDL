@@ -51,6 +51,7 @@ All notable changes to this project will be documented in this file
   + `w␠⎋s` definition
   + handle more escaped chars in multiline str `/-`
   + handle closing multiline quotes in contiguous space rule
+  + wrong space type in sd-child after `/-`
 
 [2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
 ## [2.0.2]
