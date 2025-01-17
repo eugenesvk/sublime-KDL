@@ -4,7 +4,7 @@ A Sublime Text 4 syntax highlighting package for the <a href="https://kdl.dev"><
 
 ## Introduction
 
-This package adds support for the `KDL` document language (for files with `.kdl` extension)
+This package adds support for the `KDL` document language, both versions 1 and 2 (for files with `.kdl` extension, but also with `.kdl1`/`.kdl2` if you want to force a specific version)
 
 ## Install
 
