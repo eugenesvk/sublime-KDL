@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file
   + scope only 1 sym in raw multiline as error, not 2
   + Misc tests
   + Don't color partial hex
+  + better highlight pre-ending multiline errors `/-`
 - __Fixed__
   + consuming node end after bare ids in args/props, preventing a different number of pops in/outside of children
   + no error highlight misc invalid numbers with decimal separator
@@ -46,6 +47,10 @@ All notable changes to this project will be documented in this file
   + slashdash newline before entry failing
   + unnecessary errors on multiple ␤ in esclines
   + `char-esc` lower priority in strings over error `\"""`
+  + wrong spacing after `/-{child` preventing `\` escline from working
+  + `w␠⎋s` definition
+  + handle more escaped chars in multiline str `/-`
+  + handle closing multiline quotes in contiguous space rule
 
 [2.0.2]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.2
 ## [2.0.2]
