@@ -1125,6 +1125,14 @@ node i=slashdash_multiple_child_blocks /-{
 //  ^^^^                                    meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
 }
 
+node 1 2 i=slashdash_newline_before_children /-
+//                                           ^^ meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl
+{
+  child
+//^^^^^  meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
+}
+//<-     meta.block.child.kdl punctuation.section.mapping.end.kdl comment.line.slash-dash.kdl
+
 
 // 8. Test Line continuation
 // Various whitespace separating line continuation and arguments
