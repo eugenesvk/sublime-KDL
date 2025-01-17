@@ -1104,6 +1104,26 @@ ok /-{cch1} \
   {ch}
 //^                             meta.block.child.kdl punctuation.section.mapping.begin.kdl
 //   ^                          meta.block.child.kdl punctuation.section.mapping.end.kdl
+node i=slashdash_multiple_child_blocks /-{
+//                                       ^  meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+    one
+//  ^^^                                     meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
+} \
+  /-{
+//^^                                        comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//  ^                                       meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+    two
+//  ^^^                                     meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
+}   {
+//  ^                                       meta.block.child.kdl punctuation.section.mapping.begin.kdl
+    three
+//  ^^^^^                                   meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl
+} /-{
+//^^                                        comment.line.slash-dash.kdl punctuation.definition.comment.begin.kdl
+//  ^                                       meta.block.child.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+    four
+//  ^^^^                                    meta.block.child.kdl meta.node.kdl entity.name.tag.node.kdl comment.line.slash-dash.kdl
+}
 
 
 // 8. Test Line continuation
