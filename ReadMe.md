@@ -53,6 +53,12 @@ Add `"kdl.keybind_disable":true` to your `Preferences.sublime-settings` to disab
 - KDL v2 `"""`multiline string`"""` dedent feature isn't supported, think it's impossible with the ST's syntax engine to use a later match of `spaces before the last """` in all earlier indentation matches
 - `/-kdl-version 1` or `2` prefix doesn't affect ST's bottom right syntax indicator, it will still be `KDL` without a version specifier due to the limitations of ST
 
+## Misc
+
+As part of developing this syntax I've significantly reformatted the current grey blob of text that is Spec's grammar into a better structured KDL document with syntax highlighting, see [Grammar2.kdl](./src/grammar2.kdl)
+
+<img src="./doc/g2new.png" alt="Grammar 2 new" width="350"><img src="./doc/g2old.png" alt="Grammar 2 old" width="350">
+
 ## Credits
 
 The default packages' syntax files ([Python](https://github.com/sublimehq/Packages/blob/master/Python/Python.sublime-syntax), [Bash](https://github.com/sublimehq/Packages/blob/master/ShellScript/Bash.sublime-syntax), [PHP](https://github.com/sublimehq/Packages/blob/master/PHP/PHP.sublime-syntax)), as well as [fish](https://github.com/Phidica/sublime-fish/blob/master/fish.sublime-syntax) and [vscode-kdl](https://github.com/kdl-org/vscode-kdl)
