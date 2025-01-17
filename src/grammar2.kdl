@@ -1,7 +1,7 @@
 /-kdl-version 2
 § "KDL Grammar" spec=(🔗)"github.com/kdl-org/kdl/blob/main/SPEC.md" !="See symbol defs at the bottom"\
 document       	= bom? version? nodes                          	\
-  version      	=≝ /- u␠* "kdl-version" u␠+ ⦅ "1" | "2" ⦆ u␠* ␤	\
+  version      	=≝ /- u␠* "kdl-version" u␠+ ⦅ 1 | 2 ⦆ u␠* ␤	\
   nodes        	=  ⦅l_␠* node⦆* l_␠*                           	\
     node       	=  node_base node_end                          	\
     node_chlast	=  node_base node_end?                         	\
