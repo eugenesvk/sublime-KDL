@@ -1231,7 +1231,7 @@ contexts:
       # pop                 : 1
       # set                 :
       push                : #✗5
-      - include           : linesp
+      - include           : l_␠s
       - include           : child_block_on_follow_pop2⁄-
       - match             : '\S'
         fail              : ⸙3node_ch∨argprop⁄-
