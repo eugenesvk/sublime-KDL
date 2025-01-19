@@ -122,3 +122,44 @@ n 1 "x" \// ← line comment ends the \escape,   // ¬␤* (␤|eof) also swallo
   a=2
 //^          -invalid.illegal
 //^           meta.node.kdl meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+
+n a\
+b p=1\
+p=a
+//<-  meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+ //<- meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//^^  meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+
+n a\
+b p=a\
+p=b
+//<-  meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+ //<- meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//^^  meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+
+n a\
+b p=1\
+p=a\/*
+//<-  meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+ //<- meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//^^  meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+*/
+p=a\
+p=c
+//<-  meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+ //<- meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//^^  meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+
+n k="a"/*=dash*/ k=aaa/*=dash*/
+//^                             meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+// ^                            meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//  ^^^                         meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl
+//     ^^                       punctuation.definition.comment.begin.kdl
+//     ^^^^^^^^^                comment.block.kdl
+//            ^^                punctuation.definition.comment.end.kdl
+//               ^              meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
+//                ^             meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
+//                 ^^^          meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl
+//                    ^^        punctuation.definition.comment.begin.kdl
+//                    ^^^^^^^^^ comment.block.kdl
+//                           ^^ punctuation.definition.comment.end.kdl
