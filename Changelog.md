@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.3...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.4...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[2.0.4]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.4
+## [2.0.4]
 - __Fixed__
   +  error on bare strings ending in comment beginning symbols that can be valid linespace element
   +  error on bare strings ending in escline beginning symbols that can be valid esclines
