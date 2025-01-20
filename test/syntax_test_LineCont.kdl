@@ -150,6 +150,14 @@ p=c
  //<- meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
 //^^  meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
 
+n   "a"/*=dash*/   aaa/*=dash*/
+//     ^^                       punctuation.definition.comment.begin.kdl
+//     ^^^^^^^^^                comment.block.kdl
+//            ^^                punctuation.definition.comment.end.kdl
+//                    ^^        punctuation.definition.comment.begin.kdl
+//                    ^^^^^^^^^ comment.block.kdl
+//                           ^^ punctuation.definition.comment.end.kdl
+n k=111/*=dash*/ k=aaa/*=dash*/
 n k="a"/*=dash*/ k=aaa/*=dash*/
 //^                             meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
 // ^                            meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
@@ -159,7 +167,7 @@ n k="a"/*=dash*/ k=aaa/*=dash*/
 //            ^^                punctuation.definition.comment.end.kdl
 //               ^              meta.property.name.kdl meta.mapping.key.kdl entity.other.attribute-name.kdl
 //                ^             meta.property.separator.kdl meta.mapping.separator.kdl punctuation.separator.key-value.kdl
-//                 ^^^          meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.quoted.double.kdl
+//                 ^^^          meta.property.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
 //                    ^^        punctuation.definition.comment.begin.kdl
 //                    ^^^^^^^^^ comment.block.kdl
 //                           ^^ punctuation.definition.comment.end.kdl
