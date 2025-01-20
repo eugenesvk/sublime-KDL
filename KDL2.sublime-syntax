@@ -145,6 +145,7 @@ variables:
   # c_slashdash:          	'/-'                                                     	#
   # c_line_beg:           	'//'                                                     	#
   # c_line_end:           	'{{nl_s}}|{{eof}}'                                       	#
+  cc_beg:                 	'{{c_line_beg}}|{{comment_block_beg}}'                   	#
   # eof:                  	'$(?!{{nl_s}})'                                          	#
   eof:                    	'(?=[\S{{u_sp}}]$(?!{{nl_s}}))'                          	#
   eof_x:                  	'(?=[\S\s]{{eof}})' # when ↑ bugs                        	#
