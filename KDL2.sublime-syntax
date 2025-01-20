@@ -230,6 +230,7 @@ contexts:
       - include           : ｛3
       - include           : ｝3
       - include           : pop_pre_node_end
+      - include           : pop3_precc
       - include           : char🆔¬
       - include           : pop3
   str_ids: # allow multiple values to eg, check for '=' after unquoted 'key'
@@ -1884,6 +1885,9 @@ contexts:
   #         pop             : 5
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl
+  pop3_precc:
+    - match               : (?={{cc_beg}})
+      pop                 : 3
   pop3_precoml:
     - match               : (?={{c_line_beg}})
       pop                 : 3
