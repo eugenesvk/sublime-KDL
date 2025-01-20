@@ -230,6 +230,7 @@ contexts:
       - include           : ｛3
       - include           : ｝3
       - include           : pop_pre_node_end
+      - include           : pop3_pre_esc
       - include           : pop3_precc
       - include           : char🆔¬
       - include           : pop3
@@ -1885,6 +1886,9 @@ contexts:
   #         pop             : 5
   #         captures        :
   #           1:              punctuation.definition.comment.end.kdl
+  pop3_pre_esc:
+    - match               : (?={{escline_beg}})
+      pop                 : 3
   pop3_precc:
     - match               : (?={{cc_beg}})
       pop                 : 3
