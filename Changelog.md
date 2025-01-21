@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.4...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.5...HEAD
 ## [Unreleased]
 <!-- - __Added__ -->
   <!-- + :sparkles:  -->
@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+[2.0.5]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.5
+## [2.0.5]
 - __Fixed__
   +  v1/2 selector fallback syntax: don't use '' as it overrides the version selector string in embedded syntaxes
 
