@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Fixed__
+  +  v1/2 selector fallback syntax: don't use '' as it overrides the version selector string in embedded syntaxes
+
 [2.0.4]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.4
 ## [2.0.4]
 - __Fixed__
