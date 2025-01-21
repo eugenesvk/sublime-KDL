@@ -28,5 +28,5 @@ contexts:
         4: meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl constant.numeric.kdl-version.kdl comment.line.slash-dash.kdl
         5: punctuation.definition.comment.end.kdl comment.line.slash-dash.kdl
       set   : KDL1.sublime-syntax
-    - match : '' # default
+    - match : '(?=[\s\S])' # default
       set   : KDL2.sublime-syntax
