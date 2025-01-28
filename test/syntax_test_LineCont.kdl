@@ -96,6 +96,26 @@ n /--1.0 2 \ /f //
 //^^^^^^^^^^^^                                    comment.block.kdl
  k=1
 
+  ‘k’w  a\
+  1
+//^       meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+  ‘k’w (a)a\
+  1
+//^       meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+/-‘k’w  (a)a\
+  1
+//^       meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+/-‘k’w     a\
+  1
+//^       meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+/-‘k’w  a\
+  1
+//^       meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+/-‘k’w  (a)1\
+  1
+//^       meta.argument.value.kdl meta.mapping.value.kdl constant.numeric.value.kdl constant.numeric.integer.kdl
+
+
 illegal-multiple-terminator 1;;
 //                            ^                   invalid.illegal.position.kdl
 
