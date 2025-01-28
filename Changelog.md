@@ -22,6 +22,10 @@ All notable changes to this project will be documented in this file
   <!-- + :lock:  -->
   <!-- vulnerabilities -->
 
+- __Fixed__
+  +  error on bare /-strings ending in comment beginning symbols that can be valid linespace element
+  +  error on bare /-strings ending in escline beginning symbols that can be valid esclines
+
 [2.0.5]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.5
 ## [2.0.5]
 - __Fixed__
