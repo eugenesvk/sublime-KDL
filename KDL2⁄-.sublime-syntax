@@ -70,6 +70,8 @@ contexts:
       - include           : ｛3
       - include           : ｝3
       - include           : pop_pre_node_end
+      - include           : pop3_pre_esc
+      - include           : pop3_precc
       - include           : char🆔¬⁄-
       - include           : pop3
   str_ids⁄-:              # ✗⁴ from arg-⸙2, property-value
