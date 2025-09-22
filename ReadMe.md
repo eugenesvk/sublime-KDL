@@ -43,9 +43,9 @@ See a list of scope names in [Scope.md](./Scope.md)
 
 ### Keybindings
 
-This plugin adds two keybindings for the `kdl` scope: `"`/`'` that auto-pair double/single quotes even after string modifiers
+2 new keybindings scoped to `kdl`: `"`/`'` auto-pair double/single quotes even after string modifiers
 
-Add `"kdl.keybind_disable":true` to your `Preferences.sublime-settings` to disable
+Disable by adding `"kdl.keybind_disable":true` to your `Preferences.sublime-settings`
 
 ## Known issues
 
