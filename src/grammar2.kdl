@@ -74,7 +74,7 @@ char🛑 	=  (¬1st)"bom" (c0a)〔u0–u8〕 (c0b)〔E–1F〕 (cdel)〔7F〕 (c
   usv¬	=(surrogate)≝ (high)〔D800–DBFF〕 (low)〔DC00–DFFF〕  !="valid c0: 〔u9–uD〕 9␉\t A␊\n B␋\\v C␌\f D␍\r" \
 uchar 	=            〔0–D7FF⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀E000–10FFFF〕 !="Any Unicode Scalar Value (no surrogates)" \
 u␠    	=  〔9⠀20⠀A0⠀1680⠀2000⠀2001⠀2002⠀2003⠀2004⠀2005⠀2006⠀2007⠀2008⠀2009⠀200A⠀202F⠀205F⠀3000〕  !="Non line-breaking unicode White_Space" (🔗spec)"whitespace"\
-      	!="	                                                                                   　  "\
+      	!="	                                                                                   　  "\
 u␤    	=  〔A⠀B⠀C⠀D⠀85⠀2028⠀2029〕  !="(85NEL LS PS) Line-breaking unicode White_Space" (🔗spec)"newline" \
 “="\"" ”="\"" ⧵="\\" ；=";" ⁄="/" *="∗" ＃="#"
 
