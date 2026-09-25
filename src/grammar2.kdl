@@ -110,7 +110,7 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
     *⠀="0+  zero or more (    greedy, match as many instances as possible)"                           	\
     *?="0+  zero or more (non-greedy, match as few  instances as possible; used only in raw strings)" 	\
     *1–6="    inclusive range: at least 1 at most 6"                                                  	\
-    "0–9"="char range (inclusive)"  –="en-dash used to not blend with hyphen-minus in search"         	\
+    ⠀0–9="char range (inclusive)"  –="en-dash used to not blend with hyphen-minus in search"          	\
     ¬="not this (^ in regex)" ¬foo="must not match 'foo'"  〔¬⧵“〕=#"[^\"] any char except for \ or " "#	\
     〔set⠀〕="[a b]" #"set"#="[ab]" ≝="regex Char set matches like [], where any char will be a single match"\
     "↑ ignore ↑ contained spaces (for visual separation or groups and alignment)"
