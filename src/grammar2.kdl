@@ -99,7 +99,7 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
     #"  "x" "#="double quotes for literals" ##"  #"x"# "##="raw+double quotes for literals"\
     ∅=(empty)"" #"\"#=(text)"escape \" \\ or add ‘uchar’ in hex \u{FEFF}"\
     keys=(and_types)"extra group info" ≝="filler to allow /-comments in prop values"
-  • |="logical OR"  !="tip/comment"  §="section marker"  🗘="refers to self (rule name left of =)"
+  • |=logical⠀OR  !=tip⁄comment  §=section⠀marker  🗘="refers to self (rule name left of =)"
   •⠀Regex⠀matches                                                                                     	\
     ?⠀="0|1 zero or one"                                                                              	\
     +⠀="1+  one  or more (    greedy)"                                                                	\
