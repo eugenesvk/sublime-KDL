@@ -94,7 +94,7 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
 
 § ────────── END of KDL Grammar ──────────
 § "Grammar language help: ABNF-like with some regex in a " rule="definition" "format" {
-  • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literal chars represented with unicode chars to avoid quotes" ⠀="""
+  • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literal chars represented with unicode chars to avoid quotes" """
       ↑  "Reverse solidus" or backslash can't be used directly without quotes as it's used in KDL as a line continuation char
        ↑ "Reverse solidus operator"     can   …                        …      as a unicode replacement char
     """
@@ -104,20 +104,20 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
     ∅=(empty)"" #"\"#=(text)"escape \" \\ or add ‘uchar’ in hex \u{FEFF}"\
     keys=(and_types)"extra group info" ≝="filler to allow /-comments in prop values"
   • |=logical⠀OR  !=tip⁄comment  §=section⠀marker  🗘="refers to self (rule name left of =)"
-  •⠀Regex⠀matches                                                                                     	\
-    ?⠀="0|1 zero or one"                                                                              	\
-    +⠀="1+  one  or more (    greedy)"                                                                	\
-    *⠀="0+  zero or more (    greedy, match as many instances as possible)"                           	\
-    *?="0+  zero or more (non-greedy, match as few  instances as possible; used only in raw strings)" 	\
-    *1–6="    inclusive range: at least 1 at most 6"                                                  	\
-    ⠀0–9="char range [inclusive]"  –="en-dash used to not blend with hyphen-minus in search"          	\
-    ¬="not this (^ in regex)" ¬foo="must not match 'foo'"  〔¬⧵“〕=#"[^\"] any char except for \ or " "#	\
+  •⠀Regex⠀matches                                                                                        	\
+    ?   ="0|1 zero or one"                                                                               	\
+    +   ="1+  one  or more (    greedy)"                                                                 	\
+    *   ="0+  zero or more (    greedy, match as many instances as possible)"                            	\
+    *?  ="0+  zero or more (non-greedy, match as few  instances as possible; used only in raw strings)"  	\
+    *1–6="    inclusive range: at least 1 at most 6"                                                     	\
+    ⠀0–9="char range [inclusive]"  –="en-dash used to not blend with hyphen-minus in search"             	\
+    ¬   ="not this (^ in regex)" ¬foo="must not match 'foo'"  〔¬⧵“〕=#"[^\"] any char except for \ or " "#	\
     〔set⠀〕="[a b]" #"set"#="[ab]" ≝="regex Char set matches like [], where any char will be a single match"\
     "↑ ignore ↑ contained spaces (for visual separation or groups and alignment)"
     ⦅group⦆ "items must be matched together"\
     a|b="'a or b', whichever matches 1st. Multiple items before | are a single group" "a b c | d"="⦅a b c⦆ | d"\
-    ≡="defined to be identical to another similarly named match"
-  • −="minus sign; 'except for' whatever follows it" "uchar⠀−⠀␤"="match ‘uchar’ rule, but not ‘␤’ rule"
-  • ¶="cut point: always matches and consumes no chars, but once matched, bans backtracking past that point in the source. If a parser would rewind past ¶, it must instead fail the overall parse, as if it had run out of options (only for ‘string_raw’ to ensure the 1st instance of the appropriate closing quote sequence ends it)"
+    ≡  ="defined to be identical to another similarly named match"
+  • −  ="minus sign; 'except for' whatever follows it" "uchar⠀−⠀␤"="match ‘uchar’ rule, but not ‘␤’ rule"
+  • ¶  ="cut point: always matches and consumes no chars, but once matched, bans backtracking past that point in the source. If a parser would rewind past ¶, it must instead fail the overall parse, as if it had run out of options (only for ‘string_raw’ to ensure the 1st instance of the appropriate closing quote sequence ends it)"
   • "A single definition may be split over multiple lines. Newlines are treated as spaces"
 }
