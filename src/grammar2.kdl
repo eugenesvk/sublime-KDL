@@ -94,9 +94,13 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
 
 § ────────── END of KDL Grammar ──────────
 § "Grammar language help: ABNF-like with some regex in a " rule="definition" "format" {
-  • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literals represented with unicode alts to avoid quotes"
-  • #"\  "    ; = "#="regular KDL syntax, not grammar"\
-    #"  "x" "#="double quotes for literals" ##"  #"x"# "##="raw+double quotes for literals"\
+  • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literal chars represented with unicode chars to avoid quotes" ⠀="""
+      ↑  "Reverse solidus" or backslash can't be used directly without quotes as it's used in KDL as a line continuation char
+       ↑ "Reverse solidus operator"     can   …                        …      as a unicode replacement char
+    """
+  • #"\  "    ; = "# ="regular KDL syntax, not grammar"\
+    #"   "x"      "# ="    double quotes for literals"\
+   ##"  #"x"#     "##="raw+double quotes for literals"\
     ∅=(empty)"" #"\"#=(text)"escape \" \\ or add ‘uchar’ in hex \u{FEFF}"\
     keys=(and_types)"extra group info" ≝="filler to allow /-comments in prop values"
   • |=logical⠀OR  !=tip⁄comment  §=section⠀marker  🗘="refers to self (rule name left of =)"
