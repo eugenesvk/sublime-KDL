@@ -92,6 +92,7 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
     escline	= ⧵ cu␠*    ⦅comment_line | ␤ | eof⦆	\
   ␤        	=  〔D〕〔A〕 | u␤  !="〔D〕〔A〕 \r\n ␍␊ is a sequence, but counts as 1 newline" (🔗spec)"newline"
 
+§ ────────── END of KDL Grammar ──────────
 § "Grammar language help: ABNF-like with some regex in a " rule="definition" "format" {
   • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literals represented with unicode alts to avoid quotes"
   • #"\  "    ; = "#="regular KDL syntax, not grammar"\
