@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+- 🗑️ __Removed__
+  + rule of mandatory whitespace before slashdash
+
 [2.0.7]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.7
 ## [2.0.7]
 - ✨ __Added__
