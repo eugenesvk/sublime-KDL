@@ -27,7 +27,7 @@ contexts:
 
 #——— 0 Groups
   node-elements⁄-:        #✗²
-    - match               : (?={{node_sp_beg}}) # mandatory whitespace
+    - match               : (?=({{node_sp_beg}}|{{c_slashdash}})) # mandatory whitespace except children or ⁄-
       push                : #✗³ push to require ws before each element
       #- meta_scope        : dbg✗³node␠_arg∨prop∨child⁄-
       - include           : node␠s
