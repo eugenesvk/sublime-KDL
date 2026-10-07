@@ -6,10 +6,10 @@ document       	= bom? version? nodes                      	\
     node       	=  node_base node_end                      	\
     node_chlast	=  node_base node_end?                     	\
       node_base	=≝ /-? 🄣? n␠* string                       	\
-        ⦅n␠+ /-? node_prop∨arg  ⦆*                               \
-        ⦅n␠+ /-  node_children  ⦆*   !="Slashdashed node_children must be after props and args" \
-        ⦅n␠+     node_children  ⦆?   !="Only children may follow a slashdashed child"           \
-        ⦅n␠+ /-  node_children  ⦆*                                                              \
+        ⦅n␠* ⦅n␠ | /-⦆ node_prop∨arg  ⦆*                               \
+        ⦅n␠*       /-  node_children  ⦆*   !="Slashdashed node_children must be after props and args" \
+        ⦅n␠*           node_children  ⦆?   !="Only 1 child may follow a slashdashed child"           \
+        ⦅n␠*       /-  node_children  ⦆*   !="or other                  slashdashed children"         \
         n␠*
 
 § "Entries"  	\
@@ -97,6 +97,7 @@ l_␠        	=  n␠ | ␤ | comment_line     !="Whitespace               where
   • #"\⧵ "“ "” ;； /⁄ *∗ #＃"#="literal chars represented with unicode chars to avoid quotes" """
       ↑  "Reverse solidus" or backslash can't be used directly without quotes as it's used in KDL as a line continuation char
        ↑ "Reverse solidus operator"     can   …                        …      as a unicode replacement char
+    But if a literal is valid, it's used as is, e.g., /- represents slashdash start just like ⁄- would
     """
   • #"\  "    ; = "# ="regular KDL syntax, not grammar"\
     #"   "x"      "# ="    double quotes for literals"\
