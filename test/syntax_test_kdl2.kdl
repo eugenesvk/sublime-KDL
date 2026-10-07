@@ -1302,13 +1302,13 @@ guess∕∗1∗∕where∕🞷2🞷∕comment∕✲3✲∕starts∕✳4✳∕and
 //                                                             ^^          punctuation.definition.comment.begin.kdl
 //                                                                ^^       punctuation.definition.comment.end.kdl
 
-guess-⁄-where- /-slash-⁄-dash-is-⁄- /-1 2
-//    ^^                                        entity.name.tag.node.kdl
-//             ^^                             - entity.name.tag.node.kdl
-//                     ^^                     - punctuation.definition.comment.begin.kdl
-//                               ^^           - punctuation.definition.comment.begin.kdl
-//             ^^^^^^^^^^^^^^^^^^^^             comment.line.slash-dash.kdl
-//             ^^                               punctuation.definition.comment.begin.kdl
-//                                  ^^          punctuation.definition.comment.begin.kdl
-//                                  ^^^         comment.line.slash-dash.kdl
-//                                     ^      - comment.line.slash-dash.kdl
+guess-⁄-where-/-slash-⁄-dash-is-⁄- /-1 2
+//    ^^                                       entity.name.tag.node.kdl
+//            ^^                             - entity.name.tag.node.kdl
+//                    ^^                     - punctuation.definition.comment.begin.kdl
+//                              ^^           - punctuation.definition.comment.begin.kdl
+//            ^^^^^^^^^^^^^^^^^^^^             comment.line.slash-dash.kdl
+//            ^^                               punctuation.definition.comment.begin.kdl
+//                                 ^^          punctuation.definition.comment.begin.kdl
+//                                 ^^^         comment.line.slash-dash.kdl
+//                                    ^      - comment.line.slash-dash.kdl
