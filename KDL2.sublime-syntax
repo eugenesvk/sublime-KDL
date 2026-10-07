@@ -1778,7 +1778,7 @@ contexts:
   line_continuation-line_next:
     - include             : wss
     - include             : comment_line_no␤
-    - include             : ␤
+    - include             : ␤2
     # - match               : \\                          # disallows repeated
     #   scope               : punctuation.separator.continuation.line.kdl invalid.illegal.position.kdl
     #   # pop                 : 1                         # disallows 2nd \, but not 3rd+
@@ -1787,7 +1787,7 @@ contexts:
   line_continuations-line_next:
     - include             : wss
     - include             : comment_lines_no␤
-    - include             : ␤
+    - include             : ␤2
     - include             : else-pop
 
 
