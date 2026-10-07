@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+- 🐞 __Fixed__
+  + line continuation not stopping at next newline, allowing multiple and not exiting current node, treating next nodes as args [#2](/../../issues/2)
+
 [2.0.6]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.6
 ## [2.0.6]
 - __Fixed__
