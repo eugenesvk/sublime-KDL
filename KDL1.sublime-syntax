@@ -1520,6 +1520,10 @@ contexts:
       - include           : wss
       - include           : node_terminator3
       - include           : S🛑¹pre␤
+  ｝🛑5:
+    - match               : '}'
+      scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑5
+      pop                 : 5
   ｝:
     - match               : '(?=\})'
       pop                 : 1
@@ -1532,6 +1536,9 @@ contexts:
   ｝4:
     - match               : '(?=\})'
       pop                 : 4
+  ｝5:
+    - match               : '(?=\})'
+      pop                 : 5
 
   line_continuation:      # ≝ escline = \ ws* (single-line-comment     | newline)
                           #                  =↑single-line-comment_no_nl newline

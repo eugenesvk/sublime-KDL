@@ -1708,6 +1708,10 @@ contexts:
   #     - include           : wss
   #     - include           : node_terminator3
   #     - include           : S🛑¹pre␤
+  # ｝🛑5:
+  #   - match               : '}'
+  #     scope               : punctuation.section.mapping.end.kdl invalid.illegal.position.kdl #✗｝🛑5
+  #     pop                 : 5
   # ｝:
   #   - match               : '(?=\})'
   #     pop                 : 1
@@ -1720,6 +1724,9 @@ contexts:
   # ｝4:
   #   - match               : '(?=\})'
   #     pop                 : 4
+  # ｝5:
+  #   - match               : '(?=\})'
+  #     pop                 : 5
   ｛:
     - match               : '(?=\{)'
       pop                 : 1
