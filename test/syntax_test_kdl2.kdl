@@ -78,6 +78,12 @@ kw   #true #false #null #inf #-inf #nan
 //                      ^^^^                                 meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 //                           ^^^^^                           meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
 //                                 ^^^^                      meta.mapping.value.kdl keyword.other.kdl constant.language.float.kdl
+//   ^                                                       punctuation.definition.prefix.kdl
+//         ^                                                 punctuation.definition.prefix.kdl
+//                ^                                          punctuation.definition.prefix.kdl
+//                      ^                                    punctuation.definition.prefix.kdl
+//                           ^                               punctuation.definition.prefix.kdl
+//                                 ^                         punctuation.definition.prefix.kdl
 
 n arg/**/ !="bare ids popping on start of non-whitespace node␠"
 //   ^^^^                                         comment.block.kdl
