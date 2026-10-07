@@ -1082,7 +1082,7 @@ nnn (aaaa)bare_id_end→;
 
 // 4. Test Children −I -Invalid -Illegal
 n k=+1{k;};
-//    ^                                        invalid.illegal.position.kdl
+//    ^                                       -invalid.illegal.position.kdl
 
 er /-{cch1} \/*
 //          ^     punctuation.separator.continuation.line.kdl
@@ -1163,8 +1163,8 @@ k=1
 n { r 1 ;
 }
 //<-                                          -invalid.illegal.position.kdl
-n k=+1{"←children require space!";};
-//    ^                                        invalid.illegal.position.kdl
+n k=+1{"←children don't need space!";};
+//    ^                                       -invalid.illegal.position.kdl
 n          #true   #true   #true   #true ;
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -invalid.illegal
 n   "a"    #true   #true   #true   #true    " comment";
