@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file
 
-[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.6...HEAD
+[unreleased]: https://github.com/eugenesvk/sublime-kdl/compare/2.0.7...HEAD
 ## [Unreleased]
 <!-- - ✨ __Added__ -->
   <!-- + new features -->
@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+[2.0.7]: https://github.com/eugenesvk/sublime-kdl/releases/tag/2.0.7
+## [2.0.7]
 - ✨ __Added__
   + add keyword prefix puntcutation style marker so that `#` in `#true` can be greyed out highlighting only the actual value (`punctuation.definition.prefix.kdl`)
 - 🐞 __Fixed__
