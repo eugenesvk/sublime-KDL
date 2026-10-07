@@ -596,19 +596,27 @@ contexts:
 
 #——— Values - Keywords
   boolean:  #\b bugs with # since # isn't word border, so move # before \b
-    - match               : \#\b(true|false)\b
+    - match               : (\#)\b(true|false)\b
       scope               : keyword.other.kdl constant.language.boolean.kdl
+      captures            :
+        1:                  punctuation.definition.prefix.kdl
       pop                 : 2
   nil:
-    - match               : '\#\b(null)\b'
+    - match               : '(\#)\b(null)\b'
       scope               : keyword.other.kdl constant.language.null.kdl
+      captures            :
+        1:                  punctuation.definition.prefix.kdl
       pop                 : 2
   floatkw:  #\b bugs with -
-    - match               : \#-?\b(inf)\b
+    - match               : (\#)-?\b(inf)\b
       scope               : keyword.other.kdl constant.language.float.kdl
+      captures            :
+        1:                  punctuation.definition.prefix.kdl
       pop                 : 2
-    - match               : \#\b(nan)\b
+    - match               : (\#)\b(nan)\b
       scope               : keyword.other.kdl constant.language.float.kdl
+      captures            :
+        1:                  punctuation.definition.prefix.kdl
       pop                 : 2
 
   # before     sp begin
