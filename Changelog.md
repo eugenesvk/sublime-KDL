@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file
 <!-- - 🔒 __Security__ -->
   <!-- + vulnerabilities -->
 
+- ✨ __Added__
+  + add keyword prefix puntcutation style marker so that `#` in `#true` can be greyed out highlighting only the actual value (`punctuation.definition.prefix.kdl`)
 - 🐞 __Fixed__
   + line continuation not stopping at next newline, allowing multiple and not exiting current node, treating next nodes as args [#2](/../../issues/2)
 
