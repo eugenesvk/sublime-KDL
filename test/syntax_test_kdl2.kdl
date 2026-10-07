@@ -1278,3 +1278,26 @@ n {
 node;
 // ↑ should be commented with slashdash since node sp is allowed ws* escline ws* | ws+
 
+guess∕∕where⁄∕comment⁄⁄starts∕∕1//2∕∕3
+//   ^^                                          entity.name.tag.node.kdl
+//          ^^                                   entity.name.tag.node.kdl
+//                   ^^                          entity.name.tag.node.kdl
+//                           ^^                  entity.name.tag.node.kdl
+//                              ^^             - entity.name.tag.node.kdl
+//                              ^^               comment.line.double-slash.kdl punctuation.definition.comment.begin.kdl punctuation.terminator.node.kdl
+//                                ^^^^^          comment.line.double-slash.kdl
+
+guess∕∗1∗∕where∕🞷2🞷∕comment∕✲3✲∕starts∕✳4✳∕and/*5*/ends∕✻6✻∕and/*7*/else
+//   ^^^^^                                                                 entity.name.tag.node.kdl
+//             ^^^^^                                                       entity.name.tag.node.kdl
+//                         ^^^^^                                           entity.name.tag.node.kdl
+//                                    ^^^^^                                entity.name.tag.node.kdl
+//                                            ^^^^                       - entity.name.tag.node.kdl
+//                                                 ^^^^^^^^^^^^            meta.argument.value.kdl
+//                                                                  ^^^^   meta.argument.value.kdl
+//                                            ^^^^                         comment.block.kdl
+//                                            ^^                           punctuation.definition.comment.begin.kdl
+//                                               ^^                        punctuation.definition.comment.end.kdl
+//                                                             ^^^^        comment.block.kdl
+//                                                             ^^          punctuation.definition.comment.begin.kdl
+//                                                                ^^       punctuation.definition.comment.end.kdl
