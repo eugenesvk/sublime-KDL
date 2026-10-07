@@ -7,6 +7,17 @@
 "// single line comments can be immediately followed by a newline"
 //<-                                            meta.node.kdl entity.name.tag.node.kdl
 
+n \ /*line continuationc*/
+n
+//<-                                            meta.node.kdl meta.argument.value.kdl meta.mapping.value.kdl meta.string.kdl string.unquoted.kdl
+n \ /*line continuation only works for the next line, stops at ␤→*/
+
+n
+n \ /*line continuation only works for the next line, stops at ␤→*/
+
+n=2
+ //<-                                           invalid.illegal.position.kdl
+
 n \ /*sadf*/ ✗ /*
   //         ^                                  invalid.illegal.position.kdl
   *//*       ↑ illegal non-whitespace char*/
