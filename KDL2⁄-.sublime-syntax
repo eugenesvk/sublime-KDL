@@ -34,7 +34,7 @@ contexts:
       - include           : node_els⁄-
       - include           : child_block4⁄-
     - match               : '{'
-      scope               : invalid.illegal.position.kdl punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
+      scope               : punctuation.section.mapping.begin.kdl comment.line.slash-dash.kdl
       push                : child_block3-body⁄-
     - include             : nodech_terminator3⸮⁄-
     - include             : S🛑¹pre_s∨c∨t
